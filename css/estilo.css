@@ -1,14 +1,55 @@
-.imagenPost{
-    max-width: 800px;
-    max-height: 600px;
+/*
+ESTOS SOLO SE APLICAN CON MEDIA QUERY
+.row-centered{
+	text-align: center;
 }
 
-.avatar{
-    max-width: 100px;
-    max-height: 100px;
+.col-centered {
+    display:inline-block;
+    float:none;
+    text-align:left;
+    margin-right:-4px;
+}
+*/
+
+/*CSS PARA FOOTER*/
+
+.footerInfo{
+	padding: 10px auto;
+	color: white;
+	background-color: gray;
+}
+
+/*CSS PARA PUBLICACION INDEX*/
+
+.imagenPost{
+	max-width: 800px;
+	max-height: 600px;
+}
+
+.offsetUp{
+	margin-top: 8px;
 }
 
 .postHeader{
-    color: white;
-    background-color: purple;
+	color: white;
+	background-color: purple;
+}
+
+.postDesc{
+	background-color: #eee;
+}
+
+.postTags{
+	background-color: #ddd;
+}
+
+.avatar{
+	margin-top: 8px;
+	max-width: 100px;
+	max-height: 100px;
+}
+
+.btnFavorito{
+	margin: 10px auto;
 }
