@@ -59,17 +59,29 @@
             <section class="col-md-12">
                <form name="comentar" class="form-horizontal">
                     <div class="form-group">
+<<<<<<< HEAD
                         <label for="comentario" class="col-xs-12 col-md-8 col-md-offset-2">Escribe un comentario </label>
                     </div>
 
                     <div class="form-group">
                         <div class="col-xs-12 col-md-8 col-md-offset-2">
+=======
+                        <label for="comentario" class="col-xs-12 col-md-6 col-md-offset-3">Escribe un comentario </label>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-12 col-md-6 col-md-offset-3">
+>>>>>>> e636bb2edc46c948defd0ef392606a56fcdc2e1d
                             <textarea class="form-control" id="comentario" rows="5"></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
+<<<<<<< HEAD
                         <div class="col-xs-12 col-md-8 col-md-offset-2">
+=======
+                        <div class="col-xs-12 col-md-6 col-md-offset-3">
+>>>>>>> e636bb2edc46c948defd0ef392606a56fcdc2e1d
                             <button class="btn btn-warning">Subir comentario</button>
                         </div>
                     </div>

@@ -34,6 +34,7 @@ ESTOS SOLO SE APLICAN CON MEDIA QUERY
 
 /*CSS GENERAL*/
 
+<<<<<<< HEAD
 html, body{
 	height: 100%;
 }
@@ -41,6 +42,9 @@ html, body{
 body{
 	display: table;
 	width: 100%;
+=======
+body{
+>>>>>>> e636bb2edc46c948defd0ef392606a56fcdc2e1d
 	padding-top: 70px;
 	background-color: #FFF;
 }
@@ -56,7 +60,10 @@ a:hover{
 }
 
 .main{
+<<<<<<< HEAD
 	height: 100%;
+=======
+>>>>>>> e636bb2edc46c948defd0ef392606a56fcdc2e1d
 	padding-top: 20px;
 }
 
@@ -77,6 +84,7 @@ a:hover{
 	padding: 10px auto;
 	color: #FFF;
 	background-color: #333;
+<<<<<<< HEAD
 }
 
 /*CSS PARA EL INDEX*/
@@ -88,6 +96,8 @@ a:hover{
 .imgSlider{
 	max-width: 620px;
 	max-height: 480px;
+=======
+>>>>>>> e636bb2edc46c948defd0ef392606a56fcdc2e1d
 }
 
 /*CSS PARA PUBLICACION INDEX*/

@@ -37,7 +37,11 @@
 
     			<ul class="nav navbar-nav navbar-right">
                     <li class="activo">
+<<<<<<< HEAD
                         <a href="#">Subir imagen</a>
+=======
+                        <a href="#">Subir imágen</a>
+>>>>>>> e636bb2edc46c948defd0ef392606a56fcdc2e1d
                     </li>
     				<li class="dropdown">
 
