@@ -12,7 +12,7 @@
     </head>
 
     <body>
-        <div class="container">
+        <div class="container main">
 
             <section class="col-md-12">
                 <div class="row">
@@ -20,8 +20,10 @@
                         <img class="center-block imagenPost" src="img/Imagen.png" alt="Imagen del post">
                     </figure>
                 </div>
-                <div class="text-center btnFavorito">
-                    <button class="btn btn-warning">+Favorito</button>
+                <div class="row">
+                    <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 btnFavorito">
+                        <button class="btn btn-warning btn-block">+Favorito</button>
+                    </div>
                 </div>
 
                 <div class="panel">
@@ -57,20 +59,18 @@
             <section class="col-md-12">
                <form name="comentar" class="form-horizontal">
                     <div class="form-group">
-                        <div class="col-md-12">
-                            <label for="comentario" class="col-md-12">Escribe un comentario </label>
+                        <label for="comentario" class="col-xs-12 col-md-6 col-md-offset-3">Escribe un comentario </label>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-12 col-md-6 col-md-offset-3">
+                            <textarea class="form-control" id="comentario" rows="5"></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <div class="col-md-12">
-                            <textarea class="form-control" id="comentario"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            <button>Subir comentario</button>
+                        <div class="col-xs-12 col-md-6 col-md-offset-3">
+                            <button class="btn btn-warning">Subir comentario</button>
                         </div>
                     </div>
                 </form>
@@ -91,7 +91,7 @@
                         <p>Comentario: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, aperiam soluta excepturi necessitatibus aspernatur, sequi error tempore dolores dicta eum quaerat, itaque beatae temporibus? Veritatis blanditiis adipisci, vitae maiores fuga?</p>
                     </div>
                     <div class="panel-footer postTags">
-                        <button>Responder</button>
+                        <button class="btn btn-warning">Responder</button>
                     </div>
                 </article>
 
@@ -111,7 +111,7 @@
                         <p>Comentario: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, aperiam soluta excepturi necessitatibus aspernatur, sequi error tempore dolores dicta eum quaerat, itaque beatae temporibus? Veritatis blanditiis adipisci, vitae maiores fuga?</p>
                     </div>
                     <div class="panel-footer postTags">
-                        <button>Responder</button>
+                        <button class="btn btn-warning">Responder</button>
                     </div>
                 </article>
 
@@ -131,7 +131,7 @@
                         <p>Comentario: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, aperiam soluta excepturi necessitatibus aspernatur, sequi error tempore dolores dicta eum quaerat, itaque beatae temporibus? Veritatis blanditiis adipisci, vitae maiores fuga?</p>
                     </div>
                     <div class="panel-footer postTags">
-                        <button>Responder</button>
+                        <button class="btn btn-warning">Responder</button>
                     </div>
                 </article>
             </section>

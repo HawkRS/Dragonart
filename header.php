@@ -8,7 +8,7 @@
 </head>
 <body>
 	<header>
-		<nav class="navbar navbar-default" role="navigation">
+		<nav class="navbar colorNavbar navbar-fixed-top" role="navigation">
 
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-ex1-collapse">
@@ -26,16 +26,16 @@
                     <div class="form-group">
                         <input type="text" class="form-control" name="buscador" id="buscador" placeholder="Buscar">
                     </div>
-                    <button type="submit" class="btn btn-primary">Buscar</button>
+                    <button type="submit" class="btn btn-warning">Buscar</button>
                 </form>
 
     			<ul class="nav navbar-nav navbar-right">
-                    <li class="active">
+                    <li class="activo">
                         <a href="#">Subir imágen</a>
                     </li>
     				<li class="dropdown">
 
-    					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
+    					<a href="#" data-toggle="dropdown" role="button">
                             Nombre de usuario<span class="caret"></span>
                         </a>
 
