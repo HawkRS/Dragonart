@@ -3,12 +3,18 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/estilo.css">
+    <link href='https://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
+    <style>
+        body{
+            font-family: 'Noto Sans', sans-serif;
+        }
+    </style>
 </head>
 <body>
 	<header>
-		<nav class="navbar navbar-default" role="navigation">
+		<nav class="navbar colorNavbar navbar-fixed-top" role="navigation">
 
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-ex1-collapse">
@@ -26,16 +32,16 @@
                     <div class="form-group">
                         <input type="text" class="form-control" name="buscador" id="buscador" placeholder="Buscar">
                     </div>
-                    <button type="submit" class="btn btn-primary">Buscar</button>
+                    <button type="submit" class="btn btn-warning">Buscar</button>
                 </form>
 
     			<ul class="nav navbar-nav navbar-right">
-                    <li class="active">
-                        <a href="#">Subir imágen</a>
+                    <li class="activo">
+                        <a href="#">Subir imagen</a>
                     </li>
     				<li class="dropdown">
 
-    					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
+    					<a href="#" data-toggle="dropdown" role="button">
                             Nombre de usuario<span class="caret"></span>
                         </a>
 

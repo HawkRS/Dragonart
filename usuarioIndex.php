@@ -5,12 +5,11 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<?php
 		include 'header.php';
-		include 'footer.php';
 	?>
 	<title>Página de usuario</title>
 </head>
 <body>
-	<div>
+	<div class="container main">
 		<div>
 			<p>Aquí va el baner de usuario</p>
 		</div>
@@ -51,4 +50,7 @@
 		</section>
 	</div>
 </body>
+	<?php 
+		include 'footer.php';
+	 ?>
 </html>

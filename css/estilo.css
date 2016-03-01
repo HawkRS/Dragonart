@@ -12,12 +12,82 @@ ESTOS SOLO SE APLICAN CON MEDIA QUERY
 }
 */
 
+/* Colores morado
+
+.color-primary-0 { color: #A873D0 }
+.color-primary-1 { color: #8452B4 }
+.color-primary-2 { color: #6C35A2 }
+.color-primary-3 { color: #581994 }
+.color-primary-4 { color: #410E73 }
+
+*/
+
+/* Colores amarillos 
+
+.color-primary-0 { color: #F0AD4E }
+.color-primary-1 { color: #FFD8A0 }
+.color-primary-2 { color: #FFC675 }
+.color-primary-3 { color: #DE9226 }
+.color-primary-4 { color: #AD6D11 }
+
+*/
+
+/*CSS GENERAL*/
+
+html, body{
+	height: 100%;
+}
+
+body{
+	display: table;
+	width: 100%;
+	padding-top: 70px;
+	background-color: #FFF;
+}
+
+a{
+	color: #FFD8A0;
+	text-decoration: none;
+}
+
+a:hover{
+	color: #DE9226;
+	text-decoration: underline;
+}
+
+.main{
+	height: 100%;
+	padding-top: 20px;
+}
+
+/*CSS PARA HEADER*/
+
+.colorNavbar{
+	background-color: #581994;
+	border: none;
+}
+
+.activo{
+	background-color: #8452B4;
+}
+
 /*CSS PARA FOOTER*/
 
 .footerInfo{
 	padding: 10px auto;
-	color: white;
-	background-color: gray;
+	color: #FFF;
+	background-color: #333;
+}
+
+/*CSS PARA EL INDEX*/
+.banner{
+	color: #FFF;
+	background-color: #8452B4;
+}
+
+.imgSlider{
+	max-width: 620px;
+	max-height: 480px;
 }
 
 /*CSS PARA PUBLICACION INDEX*/
@@ -32,12 +102,16 @@ ESTOS SOLO SE APLICAN CON MEDIA QUERY
 }
 
 .postHeader{
-	color: white;
-	background-color: purple;
+	color: #FFF;
+	background-color: #6C35A2;
+}
+
+.postDesc, .postComentario{
+	background-color: #eee;
 }
 
 .postDesc{
-	background-color: #eee;
+	font-size: large;
 }
 
 .postTags{
@@ -51,5 +125,6 @@ ESTOS SOLO SE APLICAN CON MEDIA QUERY
 }
 
 .btnFavorito{
-	margin: 10px auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }

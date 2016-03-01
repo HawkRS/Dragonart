@@ -3,34 +3,93 @@
 <head>
 	<?php
 		include 'header.php';
-		include 'footer.php';
 	?>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<title>¡Bienvenido a Dragon art!</title>
+	<link type="text/css" href="css/left.css" rel="stylesheet" />
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery.jcarousel.min.js"></script>
+	<script type="text/javascript" src="js/jquery.pikachoose.min.js"></script>
+	<script type="text/javascript" src="js/jquery.touchwipe.min.js"></script>
+	<script language="javascript">
+		$(document).ready(function (){
+			$("#pikame").PikaChoose({carousel:true, carouselVertical:true});
+		});
+	</script>
 </head>
 <body>
-	<!--Aquí ponemos un DIV para centrar todo con un container-->
-	<div>
-		<!--Esta sección nomas sirve para separar el texto de bienvenida de las galerías-->
+
+	<div class="jumbotron text-center banner">
+		<div class="container">
+			<h1>Bienvenido a Dragon art</h1>
+			<p>Dragon art es una comunidad para artistas donde pueden compartir sus trabajos.<br>
+			¡Únete y comienza a explorar y compartir!</p>
+		</div>
+	</div>
+	
+	<div class="container">
 		<section>
-			<h1>Bienvenido a Dragon art.</h1>
-			<h3>Sube tus imágenes y compartelas con todos.</h3>
+				<h2>Los más populares</h2>
+				<div class="pikachoose">
+
+					<ul id="pikame" class="jcarousel-skin-pika">
+						<li>
+							<a href="publicacionIndex.php"><img src="img/Imagen.png"/></a>
+							<span>Silver Dragon por @Silverdragon94.</span>
+						</li>
+						<li>
+							<a href="publicacionIndex.php"><img src="img/Imagen2.png"/></a>
+							<span>Inflatable parade por @Silverdragon94</span>
+						</li>
+						<li>
+							<a href="publicacionIndex.php"><img src="img/Imagen3.png"/></a>
+							<span>Blue eyes toon dragon por @Dragonloco</span>
+						</li>
+						<li>
+							<a href="publicacionIndex.php"><img src="img/Imagen4.jpg"/></a>
+							<span>Plesiosaurus por @Bolt</span>
+						</li>
+						<li>
+							<a href="publicacionIndex.php"><img src="img/Imagen5.png"/></a>
+							<span>Gator nerd por @Eligecos</span>
+						</li>
+						<li>
+							<a href="publicacionIndex.php"><img src="img/Imagen6.png"/></a>
+							<span>Dino plush por @Silverdragon94</span>
+						</li>
+						<li>
+							<a href="publicacionIndex.php"><img src="img/Imagen7.png"/></a>
+							<span>Buff hyena por @Marchenko</span>
+						</li>
+						<li>
+							<a href="publicacionIndex.php"><img src="img/Imagen8.png"/></a>
+							<span>King koopa por @Teaselbone</span>
+						</li>
+						<li>
+							<a href="publicacionIndex.php"><img src="img/Imagen9.png"/></a>
+							<span>Licos aragon por @WizLicos</span>
+						</li>
+						<li>
+							<a href="publicacionIndex.php"><img src="img/Imagen10.png"/></a>
+							<span>Otter por @Maootter</span>
+						</li>
+					</ul>
+
+				</div>
 		</section>
 
-		<section>
-			<span>Los más populares</span>
-			<p>
-				Aquí pondremos la galería "Pikachoose" o alguna otra
-			</p>
-		</section>
-
-		<section>
-			<span>Los más recientes</span>
-			<p>
-				Aquí pondremos la galería "Pikachoose" o alguna otra
-			</p>
+		<section class="row">
+			<div class="col-md-12">
+				<h2>Los más recientes</h2>
+				<p>
+					Aquí pondremos la galería "Pikachoose" o alguna otra
+				</p>
+			</div>
 		</section>
 	</div>
 </body>
+	<?php
+		include 'footer.php';
+	?>
 </html>
