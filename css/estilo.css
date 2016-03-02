@@ -39,14 +39,12 @@ html, body{
 }
 
 body{
-	display: table;
 	width: 100%;
-	padding-top: 70px;
 	background-color: #FFF;
 }
 
 a{
-	color: #FFD8A0;
+	color: #FFC675;
 	text-decoration: none;
 }
 
@@ -55,28 +53,118 @@ a:hover{
 	text-decoration: underline;
 }
 
+.warp{
+	min-height: 100%;
+}
+
 .main{
-	height: 100%;
-	padding-top: 20px;
+	overflow: auto;
+	padding-bottom: 70px;
+}
+
+.main-pubIndex, .main-usrIndex{
+	padding-top: 70px;
 }
 
 /*CSS PARA HEADER*/
 
-.colorNavbar{
+.navbar-default {
 	background-color: #581994;
-	border: none;
+	border-color: #8452b4;
+}
+.navbar-default .navbar-brand {
+color: #ffd8a0;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+color: #de9226;
+}
+.navbar-default .navbar-text {
+color: #ffd8a0;
+}
+.navbar-default .navbar-nav > li > a {
+color: #ffd8a0;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+color: #de9226;
+}
+.navbar-default .navbar-nav > li > .dropdown-menu {
+background-color: #581994;
+}
+.navbar-default .navbar-nav > li > .dropdown-menu > li > a {
+color: #ffd8a0;
+}
+.navbar-default .navbar-nav > li > .dropdown-menu > li > a:hover,
+.navbar-default .navbar-nav > li > .dropdown-menu > li > a:focus {
+color: #de9226;
+background-color: #8452b4;
+}
+.navbar-default .navbar-nav > li > .dropdown-menu > li > .divider {
+background-color: #8452b4;
+}
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+color: #de9226;
+background-color: #8452b4;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+color: #de9226;
+background-color: #8452b4;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+color: #de9226;
+background-color: #8452b4;
+}
+.navbar-default .navbar-toggle {
+border-color: #8452b4;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+background-color: #8452b4;
+}
+.navbar-default .navbar-toggle .icon-bar {
+background-color: #ffd8a0;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+border-color: #ffd8a0;
+}
+.navbar-default .navbar-link {
+color: #ffd8a0;
+}
+.navbar-default .navbar-link:hover {
+color: #de9226;
 }
 
-.activo{
-	background-color: #8452B4;
+@media (max-width: 767px) {
+.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+color: #ffd8a0;
+}
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+color: #de9226;
+}
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+color: #de9226;
+background-color: #8452b4;
+}
 }
 
 /*CSS PARA FOOTER*/
 
 .footerInfo{
-	padding: 10px auto;
 	color: #FFF;
 	background-color: #333;
+	padding-top: 15px;
+	padding-bottom: 15px;
 }
 
 /*CSS PARA EL INDEX*/
@@ -90,6 +178,20 @@ a:hover{
 	max-height: 480px;
 }
 
+/*CSS PARA USUARIO INDEX*/
+
+.usrHeader, .galHeader{
+	padding: 10px;
+}
+
+.galHeaderText{
+	margin: 0 0 0 5px;
+}
+
+.usrDesc{
+	background-color: #8452B4 ;
+}
+
 /*CSS PARA PUBLICACION INDEX*/
 
 .imagenPost{
@@ -101,7 +203,7 @@ a:hover{
 	margin-top: 8px;
 }
 
-.postHeader{
+.postHeader, .usrHeader, .galHeader{
 	color: #FFF;
 	background-color: #6C35A2;
 }

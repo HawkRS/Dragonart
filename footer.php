@@ -15,6 +15,8 @@
 					<a href="#">Términos y condiciones</a>
 					<span>|</span>
 					<a href="#">Política de carga de imágenes</a>
+					<span>|</span>
+					<a href="#">Contacto</a>
 				</span>
 			</nav>
 		</div>
