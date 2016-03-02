@@ -12,7 +12,7 @@
     </head>
 
     <body>
-        <div class="container main">
+        <div class="container main-pubIndex">
 
             <section class="col-md-12">
                 <div class="row">
@@ -22,7 +22,7 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 btnFavorito">
-                        <button class="btn btn-warning btn-block">+Favorito</button>
+                        <input id="input-2" class="rating rating-loading" data-min="0" data-max="5" data-step="1">
                     </div>
                 </div>
 
@@ -30,7 +30,9 @@
                     <div class="panel-heading postHeader">
                         <div class="row row-centered">
                             <figure>
-                                <img class="col-xs-12 col-sm-4 col-md-3 col-centered avatar" src="img/avatar.png" alt="avatar">
+                                <a href="usuarioIndex.php">
+                                    <img class="col-xs-12 col-sm-4 col-md-3 col-centered avatar" src="img/avatar.png" alt="avatar">
+                                </a>
                             </figure>
                             <div class="col-xs-12 col-sm-4 col-md-6">
                                 <h2>Titulo de la imagen</h2>
@@ -59,29 +61,17 @@
             <section class="col-md-12">
                <form name="comentar" class="form-horizontal">
                     <div class="form-group">
-<<<<<<< HEAD
                         <label for="comentario" class="col-xs-12 col-md-8 col-md-offset-2">Escribe un comentario </label>
                     </div>
 
                     <div class="form-group">
                         <div class="col-xs-12 col-md-8 col-md-offset-2">
-=======
-                        <label for="comentario" class="col-xs-12 col-md-6 col-md-offset-3">Escribe un comentario </label>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-xs-12 col-md-6 col-md-offset-3">
->>>>>>> e636bb2edc46c948defd0ef392606a56fcdc2e1d
                             <textarea class="form-control" id="comentario" rows="5"></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
-<<<<<<< HEAD
                         <div class="col-xs-12 col-md-8 col-md-offset-2">
-=======
-                        <div class="col-xs-12 col-md-6 col-md-offset-3">
->>>>>>> e636bb2edc46c948defd0ef392606a56fcdc2e1d
                             <button class="btn btn-warning">Subir comentario</button>
                         </div>
                     </div>
@@ -91,7 +81,9 @@
                     <div class="panel-heading postHeader">
                         <div class="row">
                             <figure>
-                                <img class="col-md-3 avatar" src="img/avatar.png" alt="avatar">
+                                <a href="usuarioIndex.php">
+                                    <img class="col-md-3 avatar" src="img/avatar.png" alt="avatar">
+                                </a>
                             </figure>
                             <div class="col-md-9">
                                 <h2>Nombre de usuario</h2>
@@ -101,9 +93,6 @@
                     </div>
                     <div class="panel-body postComentario">
                         <p>Comentario: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, aperiam soluta excepturi necessitatibus aspernatur, sequi error tempore dolores dicta eum quaerat, itaque beatae temporibus? Veritatis blanditiis adipisci, vitae maiores fuga?</p>
-                    </div>
-                    <div class="panel-footer postTags">
-                        <button class="btn btn-warning">Responder</button>
                     </div>
                 </article>
 
@@ -111,7 +100,9 @@
                     <div class="panel-heading postHeader">
                         <div class="row">
                             <figure>
-                                <img class="col-md-3 avatar" src="img/avatar.png" alt="avatar">
+                                <a href="usuarioIndex.php">
+                                    <img class="col-md-3 avatar" src="img/avatar.png" alt="avatar">
+                                </a>
                             </figure>
                             <div class="col-md-9">
                                 <h2>Nombre de usuario</h2>
@@ -121,9 +112,6 @@
                     </div>
                     <div class="panel-body postComentario">
                         <p>Comentario: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, aperiam soluta excepturi necessitatibus aspernatur, sequi error tempore dolores dicta eum quaerat, itaque beatae temporibus? Veritatis blanditiis adipisci, vitae maiores fuga?</p>
-                    </div>
-                    <div class="panel-footer postTags">
-                        <button class="btn btn-warning">Responder</button>
                     </div>
                 </article>
 
@@ -131,7 +119,9 @@
                     <div class="panel-heading postHeader">
                         <div class="row">
                             <figure>
-                                <img class="col-md-3 avatar" src="img/avatar.png" alt="avatar">
+                                <a href="usuarioIndex.php">
+                                    <img class="col-md-3 avatar" src="img/avatar.png" alt="avatar">
+                                </a>
                             </figure>
                             <div class="col-md-9">
                                 <h2>Nombre de usuario</h2>
@@ -141,9 +131,6 @@
                     </div>
                     <div class="panel-body postComentario">
                         <p>Comentario: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, aperiam soluta excepturi necessitatibus aspernatur, sequi error tempore dolores dicta eum quaerat, itaque beatae temporibus? Veritatis blanditiis adipisci, vitae maiores fuga?</p>
-                    </div>
-                    <div class="panel-footer postTags">
-                        <button class="btn btn-warning">Responder</button>
                     </div>
                 </article>
             </section>

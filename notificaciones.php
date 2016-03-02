@@ -3,117 +3,358 @@
 <head>
 	<?php
 		include 'header.php';
-		include 'footer.php';
 	?>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<title>Notificaciones</title>
 </head>
 <body>
-	<div>
-		<h1>Notificaciones</h1>
+	<div class="container warp">
+		<div class="main main-usrIndex">
+			<h1>Notificaciones</h1>
+			
+			<div class="panel">
+				<div class="panel-header galHeader">
+					<h2 class="galHeaderText">Nuevos seguidores</h2>
+				</div>
 
-		<section>
-			<h1>Imágenes</h1>
+				<div class="panel-body postDesc">
 
-			<picture>
-				<img src="img/prueba.png" alt="Imágen de prueba">
-			</picture>
-			<input type="checkbox">
-			<span>Título de la imágen</span>
-			<span>Nombre de usuario</span>
+					<div class="row">
 
-			<picture>
-				<img src="img/prueba.png" alt="Imágen de prueba">
-			</picture>
-			<input type="checkbox">
-			<span>Título de la imágen</span>
-			<span>Nombre de usuario</span>
+						<div class="col-sm-6 col-md-3">
+							<div class="thumbnail">
+								<a href="publicacionIndex.php">
+									<img src="img/avatar.png" alt="Demostración">
+								</a>
+							</div>
+							<div class="caption text-center">
+								<input type="checkbox">
+								<span>Usuario</span>
+							</div>
+						</div>
 
-			<picture>
-				<img src="img/prueba.png" alt="Imágen de prueba">
-			</picture>
-			<input type="checkbox">
-			<span>Título de la imágen</span>
-			<span>Nombre de usuario</span>
+						<div class="col-sm-6 col-md-3">
+							<div class="thumbnail">
+								<a href="publicacionIndex.php">
+									<img src="img/avatar.png" alt="Demostración">
+								</a>
+							</div>
+							<div class="caption text-center">
+								<input type="checkbox">
+								<span>Usuario</span>
+							</div>
+						</div>
+						
+						<div class="col-sm-6 col-md-3">
+							<div class="thumbnail">
+								<a href="publicacionIndex.php">
+									<img src="img/avatar.png" alt="Demostración">
+								</a>
+							</div>
+							<div class="caption text-center">
+								<input type="checkbox">
+								<span>Usuario</span>
+							</div>
+						</div>
+						
+						<div class="col-sm-6 col-md-3">
+							<div class="thumbnail">
+								<a href="publicacionIndex.php">
+									<img src="img/avatar.png" alt="Demostración">
+								</a>
+							</div>
+							<div class="caption text-center">
+								<input type="checkbox">
+								<span>Usuario</span>
+							</div>
+						</div>
 
-			<picture>
-				<img src="img/prueba.png" alt="Imágen de prueba">
-			</picture>
-			<input type="checkbox">
-			<span>Título de la imágen</span>
-			<span>Nombre de usuario</span>
 
-			<picture>
-				<img src="img/prueba.png" alt="Imágen de prueba">
-			</picture>
-			<input type="checkbox">
-			<span>Título de la imágen</span>
-			<span>Nombre de usuario</span>
-		</section>
+					</div>
 
-		<section>
-			<h1>Nuevos seguidores</h1>
+				</div>
 
-			<picture>
-				<img src="img/prueba.png" alt="Imágen de prueba">
-			</picture>
-			<input type="checkbox">
-			<span>Nombre de usuario</span>
+				<div class="panel-footer postTags">
+					<button class="btn btn-warning" name="selTodos" id="selTodos">Seleccionar todos</button>
+					<button class="btn btn-warning" name="selTodos" id="selTodos">Invertir selección</button>
+					<button class="btn btn-warning" name="selTodos" id="selTodos">Borrar seleccionados</button>
+				</div>
+			</div>
+			
+			<div class="panel">
+				<div class="panel-header galHeader">
+					<h2 class="galHeaderText">Nuevas imágenes</h2>
+				</div>
 
-			<picture>
-				<img src="img/prueba.png" alt="Imágen de prueba">
-			</picture>
-			<input type="checkbox">
-			<span>Nombre de usuario</span>
+				<div class="panel-body postDesc">
 
-			<picture>
-				<img src="img/prueba.png" alt="Imágen de prueba">
-			</picture>
-			<input type="checkbox">
-			<span>Nombre de usuario</span>
-		</section>
+					<div class="row">
 
-		<section>
-			<h1>Comentarios</h1>
+						<div class="col-sm-6 col-md-3">
+							<div class="thumbnail">
+								<a href="publicacionIndex.php">
+									<img src="img/Imagen.png" alt="Demostración">
+								</a>
+							</div>
+							<div class="caption text-center">
+								<input type="checkbox">
+								<span>Título imagen</span><br>
+								<button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+							</div>
+						</div>
 
-			<input type="checkbox">
-			<article>
-				<section>
-					<figure>
-						<img src="img/avatar.png" alt="Avatar">
-					</figure>
-					<h1>Nombre de usuario</h1>
-					<span>Fecha: 28/febrero/2016</span>
-				</section>
-				<section>
-					<p>Comentario: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, aperiam soluta excepturi necessitatibus aspernatur, sequi error tempore dolores dicta eum quaerat, itaque beatae temporibus? Veritatis blanditiis adipisci, vitae maiores fuga?</p>
-				</section>
-				<button>Responder</button>
-			</article>
-		</section>
+						<div class="col-sm-6 col-md-3">
+							<div class="thumbnail">
+								<a href="publicacionIndex.php">
+									<img src="img/Imagen2.png" alt="Demostración">
+								</a>
+							</div>
+							<div class="caption text-center">
+								<input type="checkbox">
+								<span>Título imagen</span><br>
+								<button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+							</div>
+						</div>
 
-		<section>
-			<h1>Favoritos</h1>
+						<div class="col-sm-6 col-md-3">
+							<div class="thumbnail">
+								<a href="publicacionIndex.php">
+									<img src="img/Imagen3.png" alt="Demostración">
+								</a>
+							</div>
+							<div class="caption text-center">
+								<input type="checkbox">
+								<span>Título imagen</span><br>
+								<button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+							</div>
+						</div>
 
-			<input type="checkbox">
-			<span>Nombre de usuario</span>
-			<span> Acaba de añadir </span>
-			<span>Título de la imágen</span>
-			<span> a sus favoritos.</span>
+						<div class="col-sm-6 col-md-3">
+							<div class="thumbnail">
+								<a href="publicacionIndex.php">
+									<img src="img/Imagen4.jpg" alt="Demostración">
+								</a>
+							</div>
+							<div class="caption text-center">
+								<input type="checkbox">
+								<span>Título imagen</span><br>
+								<button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+							</div>
+						</div>
 
-			<input type="checkbox">
-			<span>Nombre de usuario</span>
-			<span> Acaba de añadir </span>
-			<span>Título de la imágen</span>
-			<span> a sus favoritos.</span>
+					</div>
+					<div class="row">
 
-			<input type="checkbox">
-			<span>Nombre de usuario</span>
-			<span> Acaba de añadir </span>
-			<span>Título de la imágen</span>
-			<span> a sus favoritos.</span>
-		</section>
+						<div class="col-sm-6 col-md-3">
+							<div class="thumbnail">
+								<a href="publicacionIndex.php">
+									<img src="img/Imagen5.png" alt="Demostración">
+								</a>
+							</div>
+							<div class="caption text-center">
+								<input type="checkbox">
+								<span>Título imagen</span><br>
+								<button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+							</div>
+						</div>
+
+						<div class="col-sm-6 col-md-3">
+							<div class="thumbnail">
+								<a href="publicacionIndex.php">
+									<img src="img/Imagen6.png" alt="Demostración">
+								</a>
+							</div>
+							<div class="caption text-center">
+								<input type="checkbox">
+								<span>Título imagen</span><br>
+								<button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+							</div>
+						</div>
+
+						<div class="col-sm-6 col-md-3">
+							<div class="thumbnail">
+								<a href="publicacionIndex.php">
+									<img src="img/Imagen7.png" alt="Demostración">
+								</a>
+							</div>
+							<div class="caption text-center">
+								<input type="checkbox">
+								<span>Título imagen</span><br>
+								<button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+							</div>
+						</div>
+
+						<div class="col-sm-6 col-md-3">
+							<div class="thumbnail">
+								<a href="publicacionIndex.php">
+									<img src="img/Imagen8.png" alt="Demostración">
+								</a>
+							</div>
+							<div class="caption text-center">
+								<input type="checkbox">
+								<span>Título imagen</span><br>
+								<button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="panel-footer postTags">
+					<button class="btn btn-warning" name="selTodos" id="selTodos">Seleccionar todos</button>
+					<button class="btn btn-warning" name="selTodos" id="selTodos">Invertir selección</button>
+					<button class="btn btn-warning" name="selTodos" id="selTodos">Borrar seleccionados</button>
+				</div>
+			</div>
+			
+			<div class="panel">
+				<div class="panel-header galHeader">
+					<h2 class="galHeaderText">Nuevos comentarios</h2>
+				</div>
+
+				<div class="panel-body postDesc">
+
+					<div class="row">
+
+						<article class="panel col-md-10 col-md-offset-1">
+		                    <div class="panel-heading postHeader">
+		                        <div class="row">
+		                            <figure>
+		                                <a href="usuarioIndex.php">
+		                                    <img class="col-md-3 avatar" src="img/avatar.png" alt="avatar">
+		                                </a>
+		                            </figure>
+		                            <div class="col-md-6">
+		                                <h2>Nombre de usuario</h2>
+		                                <span>Fecha: 28/febrero/2016</span>
+		                            </div>
+		                            <div class="col-md-3 text-center">
+		                            	<input type="checkbox">
+		                            	<a class="btn btn-warning btn-block" href="publicacionIndex.php">Ir a la publicación</a>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="panel-body postComentario">
+		                        <p>Comentario: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, aperiam soluta excepturi necessitatibus aspernatur, sequi error tempore dolores dicta eum quaerat, itaque beatae temporibus? Veritatis blanditiis adipisci, vitae maiores fuga?</p>
+		                    </div>
+		                </article>
+
+		                <article class="panel col-md-10 col-md-offset-1">
+		                    <div class="panel-heading postHeader">
+		                        <div class="row">
+		                            <figure>
+		                                <a href="usuarioIndex.php">
+		                                    <img class="col-md-3 avatar" src="img/avatar.png" alt="avatar">
+		                                </a>
+		                            </figure>
+		                            <div class="col-md-6">
+		                                <h2>Nombre de usuario</h2>
+		                                <span>Fecha: 28/febrero/2016</span>
+		                            </div>
+		                            <div class="col-md-3 text-center">
+		                            	<input type="checkbox">
+		                            	<a class="btn btn-warning btn-block" href="publicacionIndex.php">Ir a la publicación</a>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="panel-body postComentario">
+		                        <p>Comentario: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, aperiam soluta excepturi necessitatibus aspernatur, sequi error tempore dolores dicta eum quaerat, itaque beatae temporibus? Veritatis blanditiis adipisci, vitae maiores fuga?</p>
+		                    </div>
+		                </article>
+
+					</div>
+
+				</div>
+
+				<div class="panel-footer postTags">
+					<button class="btn btn-warning" name="selTodos" id="selTodos">Seleccionar todos</button>
+					<button class="btn btn-warning" name="selTodos" id="selTodos">Invertir selección</button>
+					<button class="btn btn-warning" name="selTodos" id="selTodos">Borrar seleccionados</button>
+				</div>
+			</div>
+			
+			<div class="panel">
+				<div class="panel-header galHeader">
+					<h2 class="galHeaderText">Nuevos favoritos</h2>
+				</div>
+
+				<div class="panel-body postDesc">
+
+					<div class="row">
+
+						<div class="well well-sm">
+							<div class="row">
+								<div class="col-md-1">
+									<input type="checkbox">
+								</div>
+								<div class="col-md-1">
+									<div class="thumbnail">
+										<a href="publicacionIndex.php">
+											<img src="img/avatar.png" alt="Demostración">
+										</a>
+									</div>
+								</div>
+								<span>&lt;Nombre de usuario&gt;</span>
+								<span> Acaba de añadir </span>
+								<a href="publicacionIndex.php">&lt;Título de la imágen&gt;</a>
+								<span> a sus favoritos.</span>
+							</div>
+						</div>
+
+						<div class="well well-sm">
+							<div class="row">
+								<div class="col-md-1">
+									<input type="checkbox">
+								</div>
+								<div class="col-md-1">
+									<div class="thumbnail">
+										<a href="publicacionIndex.php">
+											<img src="img/avatar.png" alt="Demostración">
+										</a>
+									</div>
+								</div>
+								<span>&lt;Nombre de usuario&gt;</span>
+								<span> Acaba de añadir </span>
+								<a href="publicacionIndex.php">&lt;Título de la imágen&gt;</a>
+								<span> a sus favoritos.</span>
+							</div>
+						</div>
+
+						<div class="well well-sm">
+							<div class="row">
+								<div class="col-md-1">
+									<input type="checkbox">
+								</div>
+								<div class="col-md-1">
+									<div class="thumbnail">
+										<a href="publicacionIndex.php">
+											<img src="img/avatar.png" alt="Demostración">
+										</a>
+									</div>
+								</div>
+								<span>&lt;Nombre de usuario&gt;</span>
+								<span> Acaba de añadir </span>
+								<a href="publicacionIndex.php">&lt;Título de la imágen&gt;</a>
+								<span> a sus favoritos.</span>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="panel-footer postTags">
+					<button class="btn btn-warning" name="selTodos" id="selTodos">Seleccionar todos</button>
+					<button class="btn btn-warning" name="selTodos" id="selTodos">Invertir selección</button>
+					<button class="btn btn-warning" name="selTodos" id="selTodos">Borrar seleccionados</button>
+				</div>
+			</div>
+
+		</div>
 	</div>
 </body>
+	<?php
+		include 'footer.php';
+	?>
 </html>
