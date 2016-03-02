@@ -72,17 +72,17 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-xs-12 col-md-4 col-md-offset-4">
+                            <div class="col-xs-12 col-md-4 col-md-offset-2">
                                 <button class="btn btn-warning btn-block">Guardar</button>
+                            </div>
+                            <div class="col-xs-12 col-md-4">
+                                <button class="btn btn-warning btn-block">Eliminar cuenta</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-
-        </div>    
-        <script src="js/jquery.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        </div>
         <script src="js/avatar.js"></script>
     </body>
     <?php

@@ -39,9 +39,11 @@
                             </div>
                         </div>
                     </form>
+                    <span><small><br>¿Aún no estás registrado en Dragonart? <a>Registrate ahora</a></small></span><br>
+                    <span><small>¿Olvidaste tu contraseña? Recupérala <a>aquí</a></small></span>
                 </div>
             </div>
-        </div>    
+        </div>  
     </body>
     <?php
     include ('footer.php');
