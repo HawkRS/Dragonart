@@ -18,150 +18,115 @@
 
     </head>
     <body>
-        <div class="container">
+        <div class="container main-pubIndex">
             <section>
-                <div class="jumbotron text-center banner">
-                    <h1>Bienvenido a Dragon art</h1>
-                    <p>Dragon art es una comunidad para artistas donde pueden compartir sus trabajos.<br>
-                        ¡Únete y comienza a explorar y compartir!</p>
-                </div>
-            </section>
-
-
-            <section>
-                <h2>Los más populares</h2>
-                <div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 800px; height: 456px; overflow: hidden; visibility: hidden; background-color: #24262e;">
-                    <!-- Loading Screen -->
-                    <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
-                        <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
-                        <div style="position:absolute;display:block;background:url('img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
-                    </div>
-                    <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 800px; height: 356px; overflow: hidden;">
-                        <div data-p="144.50" style="display: none;">
-                            <img data-u="image" src="img/Imagen.png" />
-                            <img data-u="thumb" src="img/Imagen.png" />
-                        </div>
-                        <div data-p="144.50" style="display: none;">
-                            <img data-u="image" src="img/02.jpg" />
-                            <img data-u="thumb" src="img/thumb-02.jpg" />
-                        </div>
-                        <div data-p="144.50" style="display: none;">
-                            <img data-u="image" src="img/03.jpg" />
-                            <img data-u="thumb" src="img/thumb-03.jpg" />
-                        </div>
-                        <div data-p="144.50" style="display: none;">
-                            <img data-u="image" src="img/04.jpg" />
-                            <img data-u="thumb" src="img/thumb-04.jpg" />
-                        </div>
-                        <div data-p="144.50" style="display: none;">
-                            <img data-u="image" src="img/05.jpg" />
-                            <img data-u="thumb" src="img/thumb-05.jpg" />
-                        </div>
-                        <div data-p="144.50" style="display: none;">
-                            <img data-u="image" src="img/06.jpg" />
-                            <img data-u="thumb" src="img/thumb-06.jpg" />
-                        </div>
-                        <div data-p="144.50" style="display: none;">
-                            <img data-u="image" src="img/07.jpg" />
-                            <img data-u="thumb" src="img/thumb-07.jpg" />
-                        </div>
-                        <div data-p="144.50" style="display: none;">
-                            <img data-u="image" src="img/08.jpg" />
-                            <img data-u="thumb" src="img/thumb-08.jpg" />
-                        </div>
-                        <div data-p="144.50" style="display: none;">
-                            <img data-u="image" src="img/09.jpg" />
-                            <img data-u="thumb" src="img/thumb-09.jpg" />
-                        </div>
-                        <div data-p="144.50" style="display: none;">
-                            <img data-u="image" src="img/10.jpg" />
-                            <img data-u="thumb" src="img/thumb-10.jpg" />
-                        </div>
-                        <div data-p="144.50" style="display: none;">
-                            <img data-u="image" src="img/11.jpg" />
-                            <img data-u="thumb" src="img/thumb-11.jpg" />
-                        </div>
-                        <div data-p="144.50" style="display: none;">
-                            <img data-u="image" src="img/12.jpg" />
-                            <img data-u="thumb" src="img/thumb-12.jpg" />
-                        </div>
-                    </div>
-                    <!-- Thumbnail Navigator -->
-                    <div data-u="thumbnavigator" class="jssort01" style="position:absolute;left:0px;bottom:0px;width:800px;height:100px;" data-autocenter="1">
-                        <!-- Thumbnail Item Skin Begin -->
-                        <div data-u="slides" style="cursor: default;">
-                            <div data-u="prototype" class="p">
-                                <div class="w">
-                                    <div data-u="thumbnailtemplate" class="t"></div>
+                <div class="row">
+                    <div class="col-md-7">
+                        <div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 800px; height: 456px; overflow: hidden; visibility: hidden; background-color: #24262e;">
+                            <!-- Loading Screen -->
+                            <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
+                                <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+                                <div style="position:absolute;display:block;background:url('img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
+                            </div>
+                            <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 800px; height: 356px; overflow: hidden;">
+                                <div data-p="144.50" style="display: none;">
+                                    <img data-u="image" src="img/Imagen.png" />
+                                    <img data-u="thumb" src="img/Imagen.png" />
                                 </div>
-                                <div class="c"></div>
+                                <div data-p="144.50" style="display: none;">
+                                    <img data-u="image" src="img/02.jpg" />
+                                    <img data-u="thumb" src="img/thumb-02.jpg" />
+                                </div>
+                                <div data-p="144.50" style="display: none;">
+                                    <img data-u="image" src="img/03.jpg" />
+                                    <img data-u="thumb" src="img/thumb-03.jpg" />
+                                </div>
+                                <div data-p="144.50" style="display: none;">
+                                    <img data-u="image" src="img/04.jpg" />
+                                    <img data-u="thumb" src="img/thumb-04.jpg" />
+                                </div>
+                                <div data-p="144.50" style="display: none;">
+                                    <img data-u="image" src="img/05.jpg" />
+                                    <img data-u="thumb" src="img/thumb-05.jpg" />
+                                </div>
+                                <div data-p="144.50" style="display: none;">
+                                    <img data-u="image" src="img/06.jpg" />
+                                    <img data-u="thumb" src="img/thumb-06.jpg" />
+                                </div>
+                                <div data-p="144.50" style="display: none;">
+                                    <img data-u="image" src="img/07.jpg" />
+                                    <img data-u="thumb" src="img/thumb-07.jpg" />
+                                </div>
+                                <div data-p="144.50" style="display: none;">
+                                    <img data-u="image" src="img/08.jpg" />
+                                    <img data-u="thumb" src="img/thumb-08.jpg" />
+                                </div>
+                                <div data-p="144.50" style="display: none;">
+                                    <img data-u="image" src="img/09.jpg" />
+                                    <img data-u="thumb" src="img/thumb-09.jpg" />
+                                </div>
+                                <div data-p="144.50" style="display: none;">
+                                    <img data-u="image" src="img/10.jpg" />
+                                    <img data-u="thumb" src="img/thumb-10.jpg" />
+                                </div>
+                                <div data-p="144.50" style="display: none;">
+                                    <img data-u="image" src="img/11.jpg" />
+                                    <img data-u="thumb" src="img/thumb-11.jpg" />
+                                </div>
+                                <div data-p="144.50" style="display: none;">
+                                    <img data-u="image" src="img/12.jpg" />
+                                    <img data-u="thumb" src="img/thumb-12.jpg" />
+                                </div>
                             </div>
-                        </div>
-                        <!-- Thumbnail Item Skin End -->
-                    </div>
-                    <!-- Arrow Navigator -->
-                    <span data-u="arrowleft" class="jssora05l" style="top:158px;left:8px;width:40px;height:40px;"></span>
-                    <span data-u="arrowright" class="jssora05r" style="top:158px;right:8px;width:40px;height:40px;"></span>
-                    <a href="http://www.jssor.com" style="display:none">Slideshow Maker</a>
-                </div>
-                <!-- Thumbnail Navigator -->
-                <div data-u="thumbnavigator" class="jssort01-99-66" style="position:absolute;left:0px;top:0px;width:240px;height:480px;" data-autocenter="2">
-                    <!-- Thumbnail Item Skin Begin -->
-                    <div data-u="slides" style="cursor: default;">
-                        <div data-u="prototype" class="p">
-                            <div class="w">
-                                <div data-u="thumbnailtemplate" class="t"></div>
+                            <!-- Thumbnail Navigator -->
+                            <div data-u="thumbnavigator" class="jssort01" style="position:absolute;left:0px;bottom:0px;width:800px;height:100px;" data-autocenter="1">
+                                <!-- Thumbnail Item Skin Begin -->
+                                <div data-u="slides" style="cursor: default;">
+                                    <div data-u="prototype" class="p">
+                                        <div class="w">
+                                            <div data-u="thumbnailtemplate" class="t"></div>
+                                        </div>
+                                        <div class="c"></div>
+                                    </div>
+                                </div>
+                                <!-- Thumbnail Item Skin End -->
                             </div>
-                            <div class="c"></div>
+                            <!-- Arrow Navigator -->
+                            <span data-u="arrowleft" class="jssora05l" style="top:158px;left:8px;width:40px;height:40px;"></span>
+                            <span data-u="arrowright" class="jssora05r" style="top:158px;right:8px;width:40px;height:40px;"></span>
+                            <a href="http://www.jssor.com" style="display:none">Slideshow Maker</a>
+                        </div>
+                        <!-- Thumbnail Navigator -->
+                        <div data-u="thumbnavigator" class="jssort01-99-66" style="position:absolute;left:0px;top:0px;width:240px;height:480px;" data-autocenter="2">
+                            <!-- Thumbnail Item Skin Begin -->
+                            <div data-u="slides" style="cursor: default;">
+                                <div data-u="prototype" class="p">
+                                    <div class="w">
+                                        <div data-u="thumbnailtemplate" class="t"></div>
+                                    </div>
+                                    <div class="c"></div>
+                                </div>
+                            </div>
+                            <!-- Thumbnail Item Skin End -->
+                        </div>
+                        <!-- Arrow Navigator -->
+                        <div>
+                            <a href="http://www.jssor.com" style="display:none">Slideshow Maker</a>
                         </div>
                     </div>
-                    <!-- Thumbnail Item Skin End -->
+                    <div class="col-md-4 margen-izq">
+                        <div class="text-center banner">
+                            <h1>Bienvenido a Dragon art</h1>
+                            <p>Dragon art es una comunidad para artistas donde pueden compartir sus trabajos.<br>
+                                ¡Únete y comienza a explorar y compartir!</p>
+                        </div>
+                    </div>
                 </div>
-                <!-- Arrow Navigator -->
-                <div>
-                <a href="http://www.jssor.com" style="display:none">Slideshow Maker</a>
-                </div>
-            </section>
 
-        <section>
-            <h2>Lo más recientes</h2>
-            <div id="jssor_2" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 600px; height: 300px; overflow: hidden; visibility: hidden;">
-                <!-- Loading Screen -->
-                <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
-                    <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
-                    <div style="position:absolute;display:block;background:url('img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
-                </div>
-                <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 600px; height: 300px; overflow: hidden;">
-                    <div data-p="112.50" style="display: none;">
-                        <img data-u="image" src="img/Imagen.png" />
-                    </div>
-                    <div data-p="112.50" style="display: none;">
-                        <img data-u="image" src="img/Imagen2.png" />
-                    </div>
-                    <div data-p="112.50" style="display: none;">
-                        <img data-u="image" src="img/Imagen3.png" />
-                    </div>
-                    <div data-p="112.50" style="display: none;">
-                        <img data-u="image" src="img/Imagen4.jpg" />
-                    </div>
-                    <div data-p="112.50" style="display: none;">
-                        <img data-u="image" src="img/Imagen5.png" />
-                    </div>
-                </div>
-                <!-- Bullet Navigator -->
-                <div data-u="navigator" class="jssorb05" style="bottom:16px;right:16px;" data-autocenter="1">
-                    <!-- bullet navigator item prototype -->
-                    <div data-u="prototype" style="width:16px;height:16px;"></div>
-                </div>
-                <!-- Arrow Navigator -->
-                <span data-u="arrowleft" class="jssora12l" style="top:0px;left:0px;width:30px;height:46px;" data-autocenter="2"></span>
-                <span data-u="arrowright" class="jssora12r" style="top:0px;right:0px;width:30px;height:46px;" data-autocenter="2"></span>
-                <a href="http://www.jssor.com" style="display:none">Slideshow Maker</a>
-            </div>
-        </section>
+            </section>
         </div>
     </body>
-<?php
-include 'footer.php';
-?>
+    <?php
+    include 'footer.php';
+    ?>
 </html>

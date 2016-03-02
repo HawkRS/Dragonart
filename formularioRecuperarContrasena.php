@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     </head>
     <body>
-        <div class="container main">
+        <div class="container main-pubIndex">
             <div class="panel col-md-6 col-md-offset-3">
                 <div class="panel-heading postHeader">
                     <div class="row">

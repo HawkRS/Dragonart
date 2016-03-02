@@ -2,7 +2,7 @@
 <html lang="es">
     <head>
         <?php
-            include 'header.php';
+        include 'header.php';
         ?>
 
         <meta charset="UTF-8">
@@ -15,15 +15,12 @@
         <div class="container main-pubIndex">
 
             <section class="col-md-12">
-                <div class="row">
+                <div class="row margen">
                     <figure>
-                        <img class="center-block imagenPost" src="img/Imagen.png" alt="Imagen del post">
+                        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                            <img class="center-block img-responsive" src="img/Imagen.png" alt="Imagen del post">
+                        </div>
                     </figure>
-                </div>
-                <div class="row">
-                    <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 btnFavorito">
-                        <input id="input-2" class="rating rating-loading" data-min="0" data-max="5" data-step="1">
-                    </div>
                 </div>
 
                 <div class="panel">
@@ -31,20 +28,21 @@
                         <div class="row row-centered">
                             <figure>
                                 <a href="usuarioIndex.php">
-                                    <img class="col-xs-12 col-sm-4 col-md-3 col-centered avatar" src="img/avatar.png" alt="avatar">
+                                    <img class="col-xs-12 col-sm-4 col-md-3 avatar col-centered" src="img/avatar.png" alt="avatar">
                                 </a>
                             </figure>
-                            <div class="col-xs-12 col-sm-4 col-md-6">
+                            <div class="col-xs-12 col-sm-6 col-md-6">
                                 <h2>Titulo de la imagen</h2>
                                 <span>Fecha: 28/febrero/2016</span>
                             </div>
                             <div class="col-xs-12 col-sm-4 col-md-3 pull-right offsetUp">
+                                <input id="input-2" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="sm">
                                 <button class="btn btn-warning btn-block">Editar información</button>
                                 <button class="btn btn-warning btn-block">Eliminar post</button>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="panel-body postDesc">
                         <p>Descripción de la imagen: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat ex nesciunt cum ea excepturi praesentium officia iusto neque atque perspiciatis architecto doloremque expedita odit ducimus aliquam, vero dignissimos illum, aperiam!</p>
                     </div>
@@ -55,11 +53,10 @@
                         <a href="#" class="label label-warning">nerd</a>
                     </div>
                 </div>
-
             </section>
 
             <section class="col-md-12">
-               <form name="comentar" class="form-horizontal">
+                <form name="comentar" class="form-horizontal">
                     <div class="form-group">
                         <label for="comentario" class="col-xs-12 col-md-8 col-md-offset-2">Escribe un comentario </label>
                     </div>
@@ -76,7 +73,7 @@
                         </div>
                     </div>
                 </form>
-                
+
                 <article class="panel col-md-8 col-md-offset-2">
                     <div class="panel-heading postHeader">
                         <div class="row">
@@ -138,7 +135,7 @@
     </body>
 
     <?php
-        include 'footer.php';
+    include 'footer.php';
     ?>
 
 </html>
