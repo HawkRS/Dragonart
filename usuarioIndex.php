@@ -22,6 +22,7 @@
 						<section class="text-center">
 							<h1>Nombre de usuario</h1>
 							<button class="btn btn-warning btn-lg btn-block" name="seguir" id="seguir">+Seguir</button>
+							<button class="btn btn-danger btn-lg btn-block" name="seguir" id="seguir">Bloquear usuario</button>
 						</section>
 					</div>
 

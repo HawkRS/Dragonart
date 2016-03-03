@@ -36,7 +36,7 @@
                             </div>
                             <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 800px; height: 356px; overflow: hidden;">
                                 <div data-p="144.50" style="display: none;">
-                                    <img data-u="image" src="img/Imagen.png" />
+                                    <a href="publicacionIndex.php"><img data-u="image" src="img/Imagen.png" /></a>
                                     <img data-u="thumb" src="img/Imagen.png" />
                                 </div>
                                 <div data-p="144.50" style="display: none;">

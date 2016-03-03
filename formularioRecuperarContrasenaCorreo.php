@@ -29,7 +29,7 @@
 
                         <div class="form-group">
                             <div class="col-xs-12 col-md-8 col-md-offset-2">
-                                <button class="btn btn-warning btn-block">Enviar</button>
+                                <button type="button" onclick="location.href='formularioRecuperarContrasena.php';" class="btn btn-warning btn-block">Enviar</button>
                             </div>
                         </div>
                     </form>

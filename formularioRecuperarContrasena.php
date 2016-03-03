@@ -36,7 +36,7 @@
 
                         <div class="form-group">
                             <div class="col-xs-12 col-md-8 col-md-offset-2">
-                                <button class="btn btn-warning btn-block">Aceptar</button>
+                                <button type="button" onclick="location.href='usuarioIndex.php';" class="btn btn-warning btn-block">Aceptar</button>
                             </div>
                         </div>
                     </form>

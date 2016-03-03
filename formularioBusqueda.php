@@ -45,6 +45,260 @@
                     </form>
                 </div>
             </div>
+
+            <div class="panel">
+                <div class="panel-header galHeader">
+                    <h2 class="galHeaderText">Usuarios</h2>
+                </div>
+
+                <div class="panel-body postDesc">
+
+                    <div class="row">
+
+                        <div class="col-sm-6 col-md-3">
+                            <div class="thumbnail">
+                                <a href="publicacionIndex.php">
+                                    <img src="img/avatar.png" alt="Demostración">
+                                </a>
+                            </div>
+                            <div class="caption text-center">
+                                <span>Usuario</span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-3">
+                            <div class="thumbnail">
+                                <a href="publicacionIndex.php">
+                                    <img src="img/avatar.png" alt="Demostración">
+                                </a>
+                            </div>
+                            <div class="caption text-center">
+                                <span>Usuario</span>
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-6 col-md-3">
+                            <div class="thumbnail">
+                                <a href="publicacionIndex.php">
+                                    <img src="img/avatar.png" alt="Demostración">
+                                </a>
+                            </div>
+                            <div class="caption text-center">
+                                <span>Usuario</span>
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-6 col-md-3">
+                            <div class="thumbnail">
+                                <a href="publicacionIndex.php">
+                                    <img src="img/avatar.png" alt="Demostración">
+                                </a>
+                            </div>
+                            <div class="caption text-center">
+                                <span>Usuario</span>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <div class="panel-footer postTags">
+                    <ul class="pagination">
+                        <li class="disabled">
+                            <a href="#">&laquo;</a>
+                        </li>
+                        <li class="active">
+                            <a href="#">1 <span class="sr-only">(página actual)</span></a>
+                        </li>
+                        <li>
+                            <a href="#">2</a>
+                        </li>
+                        <li>
+                            <a href="#">3</a>
+                        </li>
+                        <li>
+                            <a href="#">4</a>
+                        </li>
+                        <li>
+                            <a href="#">5</a>
+                        </li>
+                        <li>
+                            <a href="#">6</a>
+                        </li>
+                        <li>
+                            <a href="#">7</a>
+                        </li>
+                        <li>
+                            <a href="#">8</a>
+                        </li>
+                        <li>
+                            <a href="#">9</a>
+                        </li>
+                        <li>
+                            <a href="#">10</a>
+                        </li>
+                        <li>
+                            <a href="#">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header galHeader">
+                    <h2 class="galHeaderText">Imágenes</h2>
+                </div>
+
+                <div class="panel-body postDesc">
+
+                    <div class="row">
+
+                        <div class="col-sm-6 col-md-3">
+                            <div class="thumbnail">
+                                <a href="publicacionIndex.php">
+                                    <img src="img/Imagen.png" alt="Demostración">
+                                </a>
+                            </div>
+                            <div class="caption text-center">
+                                <span>Título imagen</span><br>
+                                <button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-3">
+                            <div class="thumbnail">
+                                <a href="publicacionIndex.php">
+                                    <img src="img/Imagen2.png" alt="Demostración">
+                                </a>
+                            </div>
+                            <div class="caption text-center">
+                                <span>Título imagen</span><br>
+                                <button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-3">
+                            <div class="thumbnail">
+                                <a href="publicacionIndex.php">
+                                    <img src="img/Imagen3.png" alt="Demostración">
+                                </a>
+                            </div>
+                            <div class="caption text-center">
+                                <span>Título imagen</span><br>
+                                <button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-3">
+                            <div class="thumbnail">
+                                <a href="publicacionIndex.php">
+                                    <img src="img/Imagen4.jpg" alt="Demostración">
+                                </a>
+                            </div>
+                            <div class="caption text-center">
+                                <span>Título imagen</span><br>
+                                <button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-sm-6 col-md-3">
+                            <div class="thumbnail">
+                                <a href="publicacionIndex.php">
+                                    <img src="img/Imagen5.png" alt="Demostración">
+                                </a>
+                            </div>
+                            <div class="caption text-center">
+                                <span>Título imagen</span><br>
+                                <button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-3">
+                            <div class="thumbnail">
+                                <a href="publicacionIndex.php">
+                                    <img src="img/Imagen6.png" alt="Demostración">
+                                </a>
+                            </div>
+                            <div class="caption text-center">
+                                <span>Título imagen</span><br>
+                                <button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-3">
+                            <div class="thumbnail">
+                                <a href="publicacionIndex.php">
+                                    <img src="img/Imagen7.png" alt="Demostración">
+                                </a>
+                            </div>
+                            <div class="caption text-center">
+                                <span>Título imagen</span><br>
+                                <button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-3">
+                            <div class="thumbnail">
+                                <a href="publicacionIndex.php">
+                                    <img src="img/Imagen8.png" alt="Demostración">
+                                </a>
+                            </div>
+                            <div class="caption text-center">
+                                <span>Título imagen</span><br>
+                                <button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panel-footer postTags">
+                    <ul class="pagination">
+                        <li class="disabled">
+                            <a href="#">&laquo;</a>
+                        </li>
+                        <li class="active">
+                            <a href="#">1 <span class="sr-only">(página actual)</span></a>
+                        </li>
+                        <li>
+                            <a href="#">2</a>
+                        </li>
+                        <li>
+                            <a href="#">3</a>
+                        </li>
+                        <li>
+                            <a href="#">4</a>
+                        </li>
+                        <li>
+                            <a href="#">5</a>
+                        </li>
+                        <li>
+                            <a href="#">6</a>
+                        </li>
+                        <li>
+                            <a href="#">7</a>
+                        </li>
+                        <li>
+                            <a href="#">8</a>
+                        </li>
+                        <li>
+                            <a href="#">9</a>
+                        </li>
+                        <li>
+                            <a href="#">10</a>
+                        </li>
+                        <li>
+                            <a href="#">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
         </div>   
     </body>
     <?php

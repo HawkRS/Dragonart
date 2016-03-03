@@ -37,8 +37,8 @@
                             </div>
                             <div class="col-xs-12 col-sm-4 col-md-3 pull-right offsetUp">
                                 <input id="input-2" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="sm">
-                                <button class="btn btn-warning btn-block">Editar información</button>
-                                <button class="btn btn-warning btn-block">Eliminar post</button>
+                                <button type="button" onclick="location.href='formularioImagen.php';" class="btn btn-warning btn-block">Editar información</button>
+                                <button type="button" onclick="location.href='usuarioIndex.php';" class="btn btn-danger btn-block">Eliminar post</button>
                             </div>
                         </div>
                     </div>
@@ -47,10 +47,10 @@
                         <p>Descripción de la imagen: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat ex nesciunt cum ea excepturi praesentium officia iusto neque atque perspiciatis architecto doloremque expedita odit ducimus aliquam, vero dignissimos illum, aperiam!</p>
                     </div>
                     <div class="panel-footer postTags">
-                        <a href="#" class="label label-warning">silver</a>
-                        <a href="#" class="label label-warning">dragon</a>
-                        <a href="#" class="label label-warning">toon</a>
-                        <a href="#" class="label label-warning">nerd</a>
+                        <a href="formularioBusqueda.php" class="label label-warning">silver</a>
+                        <a href="formularioBusqueda.php" class="label label-warning">dragon</a>
+                        <a href="formularioBusqueda.php" class="label label-warning">toon</a>
+                        <a href="formularioBusqueda.php" class="label label-warning">nerd</a>
                     </div>
                 </div>
             </section>

@@ -76,7 +76,7 @@
                                 <button class="btn btn-warning btn-block">Guardar</button>
                             </div>
                             <div class="col-xs-12 col-md-4">
-                                <button class="btn btn-warning btn-block">Eliminar cuenta</button>
+                                <button type="button" onclick="location.href='index.php';" class="btn btn-warning btn-block">Eliminar cuenta</button>
                             </div>
                         </div>
                     </form>

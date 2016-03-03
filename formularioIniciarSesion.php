@@ -35,12 +35,12 @@
 
                         <div class="form-group">
                             <div class="col-xs-12 col-md-8 col-md-offset-2">
-                                <button class="btn btn-warning btn-block">Iniciar sesión</button>
+                                <button type="button" onclick="location.href='usuarioIndex.php';" class="btn btn-warning btn-block">Iniciar sesión</button>
                             </div>
                         </div>
                     </form>
-                    <span><small><br>¿Aún no estás registrado en Dragonart? <a>Registrate ahora</a></small></span><br>
-                    <span><small>¿Olvidaste tu contraseña? Recupérala <a>aquí</a></small></span>
+                    <span><small><br>¿Aún no estás registrado en Dragonart? <a href="formularioRegistrarUsuario.php">Regístrate ahora</a></small></span><br>
+                    <span><small>¿Olvidaste tu contraseña? Recupérala <a href="formularioRecuperarContrasenaCorreo.php">aquí</a></small></span>
                 </div>
             </div>
         </div>  

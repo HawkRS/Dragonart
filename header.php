@@ -36,10 +36,16 @@
                         <div class="form-group">
                             <input type="text" class="form-control" name="buscador" id="buscador" placeholder="Buscar">
                         </div>
-                        <button type="submit" class="btn btn-warning">Buscar</button>
+                        <button type="button" onclick="location.href='formularioBusqueda.php';" class="btn btn-warning">Buscar</button>
                     </form>
 
         			<ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="formularioRegistrarUsuario.php">Regístrate</a>
+                        </li>
+                        <li>
+                            <a href="formularioIniciarSesion.php">Iniciar sesión</a>
+                        </li>
                         <li class="active">
                             <a href="formularioImagen.php">Subir imagen</a>
                         </li>
