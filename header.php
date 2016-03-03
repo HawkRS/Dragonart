@@ -26,7 +26,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.php">Dragon art</a>
+                    <a class="navbar-brand text-hide logo" href="index.php">
+                        Dragon art
+                        <figure>
+                            <img class="img-responsive logoImagen" src="img/logo.gif" alt="logotipo Dragon art">
+                        </figure>
+                    </a>
                     
                 </div>
 

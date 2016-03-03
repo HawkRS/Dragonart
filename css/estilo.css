@@ -94,6 +94,14 @@ a:hover{
 
 /*CSS PARA HEADER*/
 
+.logo {
+    padding: 0;
+}
+
+.logoImagen {
+    max-height: 50px;
+}
+
 .navbar-default {
     background-color: #581994;
     border-color: #8452b4;
