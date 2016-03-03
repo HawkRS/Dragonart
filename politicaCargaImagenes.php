@@ -30,7 +30,7 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12">
-						<h1>Términos y condiciones</h1>
+						<h1>Política de carga de imágenes</h1>
 						<a href="#menu-toggle" class="btn btn-warning" id="menu-toggle">Desplegar menú</a>
 						<a href="#punto1"><h2>Punto 1</h2></a>
 						<p>
