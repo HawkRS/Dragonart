@@ -1,19 +1,17 @@
-<!DOCTYPE html>
 <html lang="es">
     <head>
         <?php
-        include 'header.php';
+            include 'header.php';
         ?>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <title>¡Bienvenido a Dragon art!</title>
 
-        <link type="text/css" href="css/populares.css" rel="stylesheet" />
-        <link type="text/css" href="css/recientes.css" rel="stylesheet" />
+        <link type="text/css" href="css/jssor.css" rel="stylesheet" />
 
-        <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
-        <script type="text/javascript" src="js/jssor.slider.mini.js"></script>
-        <script type="text/javascript" src="js/populares.js"></script>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jssor.slider.min.js"></script>
+        <script type="text/javascript" src="js/jssor.js"></script>
 
     </head>
     <body class="index">
@@ -74,14 +72,6 @@
                                 <div data-p="144.50" style="display: none;">
                                     <img data-u="image" src="img/Imagen10.png" />
                                     <img data-u="thumb" src="img/Imagen10.png" />
-                                </div>
-                                <div data-p="144.50" style="display: none;">
-                                    <img data-u="image" src="img/02.jpg" />
-                                    <img data-u="thumb" src="img/thumb-08.jpg" />
-                                </div>
-                                <div data-p="144.50" style="display: none;">
-                                    <img data-u="image" src="img/03.jpg" />
-                                    <img data-u="thumb" src="img/thumb-10.jpg" />
                                 </div>
                             </div>
                             <!-- Thumbnail Navigator -->
