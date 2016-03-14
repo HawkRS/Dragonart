@@ -22,9 +22,8 @@
                 
                 <div class="col-md-12 col-slider">
                     <div class="text-center">
-                        <h1>Bienvenido a Dragon art</h1>
-                        <p>Dragon art es una comunidad para artistas donde pueden compartir sus trabajos.<br>
-                            ¡Únete y comienza a explorar y compartir!</p>
+                        <h1>Bienvenido a DragonArt</h1>
+                        <h2>Comunidad donde artistas comparten sus creaciones.<br>¡Únete y comienza a explorar y compartir!</h2>
                     </div>
                     <div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 800px; height: 456px; overflow: hidden; visibility: hidden; background-color: #24262e;">
                             <!-- Loading Screen -->
