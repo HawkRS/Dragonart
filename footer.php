@@ -4,6 +4,7 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/star-rating.js"></script>
 <script type="text/javascript" src="js/avatar.js"></script>
+<script type="text/javascript" src="js/imagen.js"></script>
 
 <footer class="footer">
     <div class="container-fluid text-center footerInfo footerInfo-sm">
