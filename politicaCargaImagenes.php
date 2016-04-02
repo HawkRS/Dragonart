@@ -9,6 +9,7 @@ require_once 'doctype.php';
     ?>
 
     <div id="wrapper" class="main-otro">
+       
         <aside id="sidebar-wrapper">
             <nav>
                 <ul class="sidebar-nav">
