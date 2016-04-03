@@ -63,10 +63,15 @@ require_once ('doctype.php');
                     <div class="form-group">
                         <label for="avatar">Avatar: </label>
                         <div>
-                           <input type="file" name="filename" class="form-control" id="avatar" accept="image/gif, image/jpeg, image/png, image/jpg" onchange="readURL(this);">
-                            <img id="blah" src="#" alt="Avatar" width="100" height="100" />
+                           <input type="file" name="filename" id="avatar" accept="image/gif, image/jpeg, image/png, image/jpg" onchange="readURL(this);">
                         </div>
                     </div>
+                    
+                     <div class="form-group">
+                        <div>
+                            <img class="center-block" id="blah" src="#" alt="Avatar" width="100" height="100" />
+                        </div>
+                     </div>
 
                     <div class="form-group">
                         <div class="col-xs-12 col-md-4 col-md-offset-2">

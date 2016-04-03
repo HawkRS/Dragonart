@@ -20,7 +20,7 @@ require_once ('doctype.php');
                     <div class="form-group">
                         <label for="imagen">Seleccionar imagen: </label>
                         <div>
-                            <input type="file" name="filename" class="form-control" id="imagen" accept="image/gif, image/jpeg, image/png image/jpg" onchange="readURL(this);">                        
+                            <input type="file" name="filename" id="imagen" accept="image/gif, image/jpeg, image/png image/jpg" onchange="readURL(this);">                        
                         </div>
                     </div>
 
