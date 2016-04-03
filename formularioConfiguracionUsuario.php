@@ -20,42 +20,42 @@ require_once ('doctype.php');
                     <div class="form-group">
                         <label for="nombre" class="col-xs-12 col-md-8 col-md-offset-2">Nombre: </label>
                         <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <input type="text" class="form-control" id="nombre" placeholder="Nombre" />
+                            <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="alias" class="col-xs-12 col-md-8 col-md-offset-2">Alias: </label>
                         <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <input type="text" class="form-control" id="alias" placeholder="Alias" />
+                            <input type="text" class="form-control" id="alias" placeholder="Alias" name="alias" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="correo" class="col-xs-12 col-md-8 col-md-offset-2">Correo: </label>
                         <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <input type="email" class="form-control" id="correo" placeholder="alguien@ejemplo.com" disabled />
+                            <input type="email" class="form-control" id="correo" placeholder="alguien@ejemplo.com" disabled name="correo" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="password" class="col-xs-12 col-md-8 col-md-offset-2">Contraseña: </label>
                         <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <input type="password" class="form-control" id="password" placeholder="Contreseña" />
+                            <input type="password" class="form-control" id="password" placeholder="Contreseña" name="password" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="passwordConfirmacion" class="col-xs-12 col-md-8 col-md-offset-2">Repetir contraseña: </label>
                         <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <input type="password" class="form-control" id="passwordConfirmacion" placeholder="Repetir contreseña" />
+                            <input type="password" class="form-control" id="passwordConfirmacion" placeholder="Repetir contreseña" name="passwordConfirmacion" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="biografia" class="col-xs-12 col-md-8 col-md-offset-2">Biografía: </label>
                         <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <textarea class="form-control" id="biografia" rows="5"></textarea>
+                            <textarea class="form-control" id="biografia" rows="5" name="biografia"></textarea>
                         </div>
                     </div>
 
@@ -71,10 +71,10 @@ require_once ('doctype.php');
 
                     <div class="form-group">
                         <div class="col-xs-12 col-md-4 col-md-offset-2">
-                            <button class="btn btn-warning btn-block">Guardar</button>
+                            <button class="btn btn-warning btn-block" type="submit">Guardar</button>
                         </div>
                         <div class="col-xs-12 col-md-4">
-                            <button type="button" onclick="location.href='index.php';" class="btn btn-warning btn-block">Eliminar cuenta</button>
+                            <button type="submit" onclick="location.href='index.php';" class="btn btn-warning btn-block">Eliminar cuenta</button>
                         </div>
                     </div>
                 </form>
