@@ -16,39 +16,39 @@ require_once ('doctype.php');
                 </div>
             </div>
             <div class="panel-body postDesc">
-                <form class="form-horizontal" enctype="multipart/form-data">
+                <form class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" enctype="multipart/form-data" action="" method="post">
                     <div class="form-group">
-                        <label for="imagen" class="col-xs-12 col-md-8 col-md-offset-2">Seleccionar imagen: </label>
-                        <div class="col-xs-12 col-md-8 col-md-offset-2">
+                        <label for="imagen">Seleccionar imagen: </label>
+                        <div>
                             <input type="file" name="filename" class="form-control" id="imagen" accept="image/gif, image/jpeg, image/png image/jpg" onchange="readURL(this);">                        
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <div class="col-xs-12 col-md-8 col-md-offset-2">
+                        <div>
                             <img class="center-block" id="blah" src="#" alt="Imagen" width="250" height="250" />
                         </div>
 
                     </div>
 
                     <div class="form-group">
-                        <label for="descripcion" class="col-xs-12 col-md-8 col-md-offset-2">Descripción: </label>
-                        <div class="ccol-xs-12 col-md-8 col-md-offset-2">
-                            <textarea class="form-control" id="descripcion" rows="5">
+                        <label for="descripcion">Descripción: </label>
+                        <div>
+                            <textarea class="form-control" id="descripcion" name="descripcion">
                             </textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="tags" class="col-xs-12 col-md-8 col-md-offset-2">Tags: </label>
-                        <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <input type="text" class="form-control" id="tags" placeholder="Tags" />
+                        <label for="tags">Tags: </label>
+                        <div>
+                            <input type="text" class="form-control" id="tags" placeholder="Tags" name="tags" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-xs-12 col-md-4 col-md-offset-4">
-                            <button type="button" onclick="location.href='publicacionIndex.php';" class="btn btn-warning btn-block">Subir</button>
+                            <button type="submit" onclick="location.href='publicacionIndex.php';" class="btn btn-warning btn-block">Subir</button>
                         </div>
                     </div>
                 </form>
