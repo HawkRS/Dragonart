@@ -18,32 +18,32 @@ require_once ('doctype.php');
             <div class="panel-body postDesc">
                 <p class="text-center">Envíanos un correo con tus dudas, quejas, aclaraciones o sugerencias.<br>Nos pondremos en contacto contigo para ayudarte.</p><br>
 
-                <form class="form-horizontal">
+                <form class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="" method="post">
 
                     <div class="form-group">
-                        <label for="nombre" class="col-xs-12 col-md-8 col-md-offset-2">Nombre: </label>
-                        <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <input type="text" class="form-control" id="nombre" placeholder="Nombre" />
+                        <label for="nombre">Nombre: </label>
+                        <div>
+                            <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="correo" class="col-xs-12 col-md-8 col-md-offset-2">Correo: </label>
-                        <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <input type="email" class="form-control" id="correo" placeholder="alguien@ejemplo.com" />
+                        <label for="correo" >Correo: </label>
+                        <div>
+                            <input type="email" class="form-control" id="correo" placeholder="alguien@ejemplo.com" name="correo" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="descripcion" class="col-xs-12 col-md-8 col-md-offset-2">Descripción: </label>
-                        <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <textarea class="form-control" id="descripcion" rows="5"></textarea>
+                        <label for="descripcion">Descripción: </label>
+                        <div>
+                            <textarea class="form-control" id="descripcion" rows="5" name="descripcion" placeholder="Escríbenos tus comentarios..."></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-xs-12 col-md-4 col-md-offset-4">
-                            <button class="btn btn-warning btn-block">Enviar</button>
+                            <button class="btn btn-warning btn-block" type="submit">Enviar</button>
                         </div>
                     </div>
                 </form>
