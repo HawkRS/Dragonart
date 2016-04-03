@@ -194,3 +194,8 @@ max-height: 600px;
 #biografia, #descripcion {
     height: 100px;
 }
+
+/*CSS PARA LOGIN CON REDES SOCIALES*/
+.sociales {
+    padding: 20px 0px 30px 0px;
+}
