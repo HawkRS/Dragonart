@@ -15,6 +15,21 @@ require_once ('doctype.php');
                     <h1 class="col-md-12">Registrar usuario</h1>
                 </div>
             </div>
+            
+            <div class="sociales col-xs-12 col-md-4 col-md-offset-4">
+                <a class="btn btn-block btn-social btn-facebook">
+                    <span class="fa fa-facebook"></span> Regístrate con Facebook
+                </a>
+
+                <a class="btn btn-block btn-social btn-twitter">
+                    <span class="fa fa-twitter"></span> Regístrate con Twitter
+                </a>
+
+                <a class="btn btn-block btn-social btn-google">
+                    <span class="fa fa-google"></span> Regístrate sesión con Google
+                </a>
+            </div>
+            
             <div class="panel-body postDesc">
                 <form class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="" method="post">
 
