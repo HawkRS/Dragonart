@@ -16,46 +16,46 @@ require_once ('doctype.php');
                 </div>
             </div>
             <div class="panel-body postDesc">
-                <form class="form-horizontal">
+                <form class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="" method="post">
 
                     <div class="form-group">
-                        <label for="nombre" class="col-xs-12 col-md-8 col-md-offset-2">Nombre: </label>
-                        <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <input type="text" class="form-control" id="nombre" placeholder="Nombre" />
+                        <label for="nombre">Nombre: </label>
+                        <div>
+                            <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="alias" class="col-xs-12 col-md-8 col-md-offset-2">Alias: </label>
-                        <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <input type="text" class="form-control" id="alias" placeholder="Alias" />
+                        <label for="alias">Alias: </label>
+                        <div>
+                            <input type="text" class="form-control" id="alias" placeholder="Alias" name="alias" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="correo" class="col-xs-12 col-md-8 col-md-offset-2">Correo: </label>
-                        <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <input type="email" class="form-control" id="correo" placeholder="alguien@ejemplo.com" />
+                        <label for="correo">Correo: </label>
+                        <div>
+                            <input type="email" class="form-control" id="correo" placeholder="alguien@ejemplo.com" name="correo" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="password" class="col-xs-12 col-md-8 col-md-offset-2">Contraseña: </label>
-                        <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <input type="password" class="form-control" id="password" placeholder="Contreseña" />
+                        <label for="password">Contraseña: </label>
+                        <div>
+                            <input type="password" class="form-control" id="password" placeholder="Contreseña" name="password" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="passwordConfirmacion" class="col-xs-12 col-md-8 col-md-offset-2">Repetir contraseña: </label>
-                        <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <input type="password" class="form-control" id="passwordConfirmacion" placeholder="Repetir contreseña" />
+                        <label for="passwordConfirmacion">Repetir contraseña: </label>
+                        <div>
+                            <input type="password" class="form-control" id="passwordConfirmacion" placeholder="Repetir contreseña" name="passwordConfirmacion" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-xs-12 col-md-4 col-md-offset-4">
-                            <button class="btn btn-warning btn-block">Enviar</button>
+                            <button type="submit" class="btn btn-warning btn-block">Enviar</button>
                         </div>
                     </div>
                 </form>
