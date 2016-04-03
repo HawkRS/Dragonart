@@ -31,13 +31,13 @@ require_once ('doctype.php');
                     <div class="form-group">
                         <label for="palabraClave" class="col-xs-12 col-md-8 col-md-offset-2">Palabra clave: </label>
                         <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <input type="text" class="form-control" id="palabraClave" placeholder="Ejemplo: dragon" />
+                            <input type="text" class="form-control" id="palabraClave" placeholder="Ejemplo: dragon" name="palabraClave"/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-xs-12 col-md-4 col-md-offset-4">
-                            <button class="btn btn-warning btn-block">Buscar</button>
+                            <button class="btn btn-warning btn-block" type="submit">Buscar</button>
                         </div>
                     </div>
                 </form>
@@ -161,7 +161,7 @@ require_once ('doctype.php');
                         </div>
                         <div class="caption text-center">
                             <span>Título imagen</span><br>
-                            <button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+                            <button class="btn btn-warning" name="favorito" id="favorito" type="button">+Favorito</button>
                         </div>
                     </div>
 
@@ -173,7 +173,7 @@ require_once ('doctype.php');
                         </div>
                         <div class="caption text-center">
                             <span>Título imagen</span><br>
-                            <button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+                            <button class="btn btn-warning" name="favorito" id="favorito" type="button">+Favorito</button>
                         </div>
                     </div>
 
@@ -185,7 +185,7 @@ require_once ('doctype.php');
                         </div>
                         <div class="caption text-center">
                             <span>Título imagen</span><br>
-                            <button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+                            <button class="btn btn-warning" name="favorito" id="favorito" type="button">+Favorito</button>
                         </div>
                     </div>
 
@@ -197,7 +197,7 @@ require_once ('doctype.php');
                         </div>
                         <div class="caption text-center">
                             <span>Título imagen</span><br>
-                            <button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+                            <button class="btn btn-warning" name="favorito" id="favorito" type="button">+Favorito</button>
                         </div>
                     </div>
 
@@ -212,7 +212,7 @@ require_once ('doctype.php');
                         </div>
                         <div class="caption text-center">
                             <span>Título imagen</span><br>
-                            <button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+                            <button class="btn btn-warning" name="favorito" id="favorito" type="button">+Favorito</button>
                         </div>
                     </div>
 
@@ -224,7 +224,7 @@ require_once ('doctype.php');
                         </div>
                         <div class="caption text-center">
                             <span>Título imagen</span><br>
-                            <button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+                            <button class="btn btn-warning" name="favorito" id="favorito" type="button">+Favorito</button>
                         </div>
                     </div>
 
@@ -236,7 +236,7 @@ require_once ('doctype.php');
                         </div>
                         <div class="caption text-center">
                             <span>Título imagen</span><br>
-                            <button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+                            <button class="btn btn-warning" name="favorito" id="favorito" type="button">+Favorito</button>
                         </div>
                     </div>
 
@@ -248,7 +248,7 @@ require_once ('doctype.php');
                         </div>
                         <div class="caption text-center">
                             <span>Título imagen</span><br>
-                            <button class="btn btn-warning" name="favorito" id="favorito">+Favorito</button>
+                            <button class="btn btn-warning" name="favorito" id="favorito" type="button">+Favorito</button>
                         </div>
                     </div>
                 </div>
