@@ -17,18 +17,18 @@ require_once ('doctype.php');
             </div>
             <div class="panel-body postDesc">
                 <p>Para restablecer tu contraseña, escribe el correo con el que te registraste.</p>
-                <form class="form-horizontal">
+                <form class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="" method="post">
 
                     <div class="form-group">
-                        <label for="correo" class="col-xs-12 col-md-8 col-md-offset-2">Correo: </label>
-                        <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <input type="email" class="form-control" id="correo" placeholder="alguien@ejemplo.com" />
+                        <label for="correo">Correo: </label>
+                        <div>
+                            <input type="email" class="form-control" id="correo" placeholder="alguien@ejemplo.com" name="correo" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <button type="button" onclick="location.href='formularioRecuperarContrasena.php';" class="btn btn-warning btn-block">Enviar</button>
+                            <button type="submit" onclick="location.href='formularioRecuperarContrasena.php';" class="btn btn-warning btn-block">Enviar</button>
                         </div>
                     </div>
                 </form>
