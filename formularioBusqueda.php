@@ -15,11 +15,11 @@ require_once ('doctype.php');
                 </div>
             </div>
             <div class="panel-body postDesc">
-                <form class="form-horizontal">
+                <form class="form-horizontal col-xs-12 col-md-8 col-md-offset-2">
 
                     <div class="form-group">
-                        <label for="buscarPor" class="col-xs-12 col-md-8 col-md-offset-2">Buscar por: </label>
-                        <div class="col-xs-12 col-md-8 col-md-offset-2">
+                        <label for="buscarPor">Buscar por: </label>
+                        <div>
                             <select class="form-control" id="buscarPor" name="buscarPor">
                                 <option value="1">Alias de usuario</option> 
                                 <option value="2">Título de la imagen</option> 
@@ -29,8 +29,8 @@ require_once ('doctype.php');
                     </div>
 
                     <div class="form-group">
-                        <label for="palabraClave" class="col-xs-12 col-md-8 col-md-offset-2">Palabra clave: </label>
-                        <div class="col-xs-12 col-md-8 col-md-offset-2">
+                        <label for="palabraClave">Palabra clave: </label>
+                        <div>
                             <input type="text" class="form-control" id="palabraClave" placeholder="Ejemplo: dragon" name="palabraClave"/>
                         </div>
                     </div>
