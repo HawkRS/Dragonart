@@ -15,7 +15,7 @@ require_once ('doctype.php');
                 </div>
             </div>
             <div class="panel-body postDesc">
-                <form class="form-horizontal col-xs-12 col-md-8 col-md-offset-2">
+                <form class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="" method="post">
 
                     <div class="form-group">
                         <label for="buscarPor">Buscar por: </label>
