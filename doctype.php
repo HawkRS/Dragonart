@@ -9,6 +9,8 @@
         <link type="text/css" rel="stylesheet" href="css/jssor.css" />
         <link type="text/css" rel="stylesheet" href="css/star-rating.css" />
         <link type="text/css" rel="stylesheet" href="css/theme-krajee-svg.css" />
+        <link type="text/css" rel="stylesheet" href="css/bootstrap-social.css" />
+        <link type="text/css" rel="stylesheet" href="css/font-awesome.css" />
         
         <link href='https://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
         <style>
