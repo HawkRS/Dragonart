@@ -21,7 +21,7 @@ require_once ('doctype.php');
                     <div class="form-group">
                         <label for="correo" class="col-xs-12 col-md-8 col-md-offset-2">Correo: </label>
                         <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <input type="email" class="form-control" id="correo" placeholder="micuenta@ejemplo.com" />
+                            <input type="email" class="form-control" id="correo" placeholder="alguien@ejemplo.com" />
                         </div>
                     </div>
 
