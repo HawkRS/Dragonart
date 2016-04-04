@@ -69,63 +69,66 @@ require_once 'doctype.php';
                     </div>
                 </div>
             </form>
-
-            <article class="panel-default col-md-8 col-md-offset-2">
-                <div class="panel-heading postHeader">
-                    <div class="row">
-                        <figure>
-                            <a href="usuarioIndex.php">
-                                <img class="col-md-3 avatar" src="img/avatar.png" alt="avatar">
-                            </a>
-                        </figure>
-                        <div class="col-md-9">
-                            <h2>Nombre de usuario</h2>
-                            <span>Fecha: 28/febrero/2016</span>
+            
+            <div class="col-md-8 col-md-offset-2">
+                <article class="panel panel-default">
+                    <div class="panel-heading postHeader">
+                        <div class="row">
+                            <figure>
+                                <a href="usuarioIndex.php">
+                                    <img class="col-md-3 avatar" src="img/avatar.png" alt="avatar">
+                                </a>
+                            </figure>
+                            <div class="col-md-9">
+                                <h2>Nombre de usuario</h2>
+                                <span>Fecha: 28/febrero/2016</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="panel-body postComentario">
-                    <p>Comentario: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, aperiam soluta excepturi necessitatibus aspernatur, sequi error tempore dolores dicta eum quaerat, itaque beatae temporibus? Veritatis blanditiis adipisci, vitae maiores fuga?</p>
-                </div>
-            </article>
+                    <div class="panel-body postComentario">
+                        <p>Comentario: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, aperiam soluta excepturi necessitatibus aspernatur, sequi error tempore dolores dicta eum quaerat, itaque beatae temporibus? Veritatis blanditiis adipisci, vitae maiores fuga?</p>
+                    </div>
+                </article>
 
-            <article class="panel-default col-md-8 col-md-offset-2">
-                <div class="panel-heading postHeader">
-                    <div class="row">
-                        <figure>
-                            <a href="usuarioIndex.php">
-                                <img class="col-md-3 avatar" src="img/avatar.png" alt="avatar">
-                            </a>
-                        </figure>
-                        <div class="col-md-9">
-                            <h2>Nombre de usuario</h2>
-                            <span>Fecha: 28/febrero/2016</span>
+                <article class="panel panel-default">
+                    <div class="panel-heading postHeader">
+                        <div class="row">
+                            <figure>
+                                <a href="usuarioIndex.php">
+                                    <img class="col-md-3 avatar" src="img/avatar.png" alt="avatar">
+                                </a>
+                            </figure>
+                            <div class="col-md-9">
+                                <h2>Nombre de usuario</h2>
+                                <span>Fecha: 28/febrero/2016</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="panel-body postComentario">
-                    <p>Comentario: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, aperiam soluta excepturi necessitatibus aspernatur, sequi error tempore dolores dicta eum quaerat, itaque beatae temporibus? Veritatis blanditiis adipisci, vitae maiores fuga?</p>
-                </div>
-            </article>
+                    <div class="panel-body postComentario">
+                        <p>Comentario: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, aperiam soluta excepturi necessitatibus aspernatur, sequi error tempore dolores dicta eum quaerat, itaque beatae temporibus? Veritatis blanditiis adipisci, vitae maiores fuga?</p>
+                    </div>
+                </article>
 
-            <article class="panel-default col-md-8 col-md-offset-2">
-                <div class="panel-heading postHeader">
-                    <div class="row">
-                        <figure>
-                            <a href="usuarioIndex.php">
-                                <img class="col-md-3 avatar" src="img/avatar.png" alt="avatar">
-                            </a>
-                        </figure>
-                        <div class="col-md-9">
-                            <h2>Nombre de usuario</h2>
-                            <span>Fecha: 28/febrero/2016</span>
+                <article class="panel panel-default">
+                    <div class="panel-heading postHeader">
+                        <div class="row">
+                            <figure>
+                                <a href="usuarioIndex.php">
+                                    <img class="col-md-3 avatar" src="img/avatar.png" alt="avatar">
+                                </a>
+                            </figure>
+                            <div class="col-md-9">
+                                <h2>Nombre de usuario</h2>
+                                <span>Fecha: 28/febrero/2016</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="panel-body postComentario">
-                    <p>Comentario: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, aperiam soluta excepturi necessitatibus aspernatur, sequi error tempore dolores dicta eum quaerat, itaque beatae temporibus? Veritatis blanditiis adipisci, vitae maiores fuga?</p>
-                </div>
-            </article>
+                    <div class="panel-body postComentario">
+                        <p>Comentario: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, aperiam soluta excepturi necessitatibus aspernatur, sequi error tempore dolores dicta eum quaerat, itaque beatae temporibus? Veritatis blanditiis adipisci, vitae maiores fuga?</p>
+                    </div>
+                </article>
+            </div>
+
         </section>
     </div>
 </body>
