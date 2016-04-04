@@ -16,7 +16,7 @@ require_once ('doctype.php');
                 </div>
             </div>
             
-            <div class="sociales col-xs-12 col-md-4 col-md-offset-4">
+            <div class="sociales col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-4">
                 <a class="btn btn-block btn-social btn-facebook">
                     <span class="fa fa-facebook"></span> Regístrate con Facebook
                 </a>
@@ -26,7 +26,7 @@ require_once ('doctype.php');
                 </a>
 
                 <a class="btn btn-block btn-social btn-google">
-                    <span class="fa fa-google"></span> Regístrate sesión con Google
+                    <span class="fa fa-google"></span> Regístrate sesión con Google+
                 </a>
             </div>
             
