@@ -9,7 +9,7 @@ require_once 'doctype.php';
     ?>
 
     <div class="container warp">
-        <div class="main main-usrIndex">
+        <div class="main-usrIndex">
             <h1>Notificaciones</h1>
 
             <div class="panel panel-default">
@@ -214,9 +214,7 @@ require_once 'doctype.php';
 
                 <div class="panel-body postDesc">
 
-                    <div class="row">
-
-                        <article class="panel col-md-10 col-md-offset-1">
+                        <article class="panel panel-default">
                             <div class="panel-heading postHeader">
                                 <div class="row">
                                     <figure>
@@ -239,7 +237,7 @@ require_once 'doctype.php';
                             </div>
                         </article>
 
-                        <article class="panel col-md-10 col-md-offset-1">
+                        <article class="panel panel-default">
                             <div class="panel-heading postHeader">
                                 <div class="row">
                                     <figure>
@@ -261,8 +259,6 @@ require_once 'doctype.php';
                                 <p>Comentario: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, aperiam soluta excepturi necessitatibus aspernatur, sequi error tempore dolores dicta eum quaerat, itaque beatae temporibus? Veritatis blanditiis adipisci, vitae maiores fuga?</p>
                             </div>
                         </article>
-
-                    </div>
 
                 </div>
 
