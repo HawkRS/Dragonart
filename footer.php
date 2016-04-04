@@ -1,8 +1,6 @@
-<script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/jssor.slider.min.js"></script>
 <script type="text/javascript" src="js/jssor.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/star-rating.js"></script>
 <script type="text/javascript" src="js/avatar.js"></script>
 <script type="text/javascript" src="js/imagen.js"></script>
 
