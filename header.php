@@ -19,12 +19,14 @@
             </div>
 
             <div class="collapse navbar-collapse" id="menuHeader">
-
+                
                 <form class="navbar-form navbar-left" action="" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="buscador" id="buscador" placeholder="Buscar">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
                     </div>
-                    <button type="button" onclick="location.href='formularioBusqueda.php';" class="btn btn-warning">Buscar</button>
                 </form>
 
                 <ul class="nav navbar-nav navbar-right">
