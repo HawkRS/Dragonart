@@ -1,70 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <?php
-        include ('header.php');
-        ?>
-        <meta charset="UTF-8">
-        <title>Registrar</title>
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    </head>
-    <body>
-        <div class="container main-pubIndex">
-            <div class="panel">
-                <div class="panel-heading postHeader">
-                    <div class="row">
-                        <h1 class="col-md-12">Registrar usuario</h1>
-                    </div>
-                </div>
-                <div class="panel-body postDesc">
-                    <form class="form-horizontal">
+<?php
+require_once ('doctype.php');
+?>
 
-                        <div class="form-group">
-                            <label for="nombre" class="col-xs-12 col-md-8 col-md-offset-2">Nombre: </label>
-                            <div class="col-xs-12 col-md-8 col-md-offset-2">
-                                <input type="text" class="form-control" id="nombre" placeholder="Nombre" />
-                            </div>
-                        </div>
+<body>
 
-                        <div class="form-group">
-                            <label for="alias" class="col-xs-12 col-md-8 col-md-offset-2">Alias: </label>
-                            <div class="col-xs-12 col-md-8 col-md-offset-2">
-                                <input type="text" class="form-control" id="alias" placeholder="Alias" />
-                            </div>
-                        </div>
+    <?php
+    require_once ('header.php');
+    ?>
 
-                        <div class="form-group">
-                            <label for="correo" class="col-xs-12 col-md-8 col-md-offset-2">Correo: </label>
-                            <div class="col-xs-12 col-md-8 col-md-offset-2">
-                                <input type="email" class="form-control" id="correo" placeholder="Correo" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password" class="col-xs-12 col-md-8 col-md-offset-2">Contraseña: </label>
-                            <div class="col-xs-12 col-md-8 col-md-offset-2">
-                                <input type="password" class="form-control" id="password" placeholder="Contreseña" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="passwordConfirmacion" class="col-xs-12 col-md-8 col-md-offset-2">Repetir contraseña: </label>
-                            <div class="col-xs-12 col-md-8 col-md-offset-2">
-                                <input type="password" class="form-control" id="passwordConfirmacion" placeholder="Repetir contreseña" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-xs-12 col-md-4 col-md-offset-4">
-                                <button class="btn btn-warning btn-block">Enviar</button>
-                            </div>
-                        </div>
-                    </form>
+    <div class="container main-pubIndex">
+        <div class="panel panel-default">
+            <div class="panel-heading postHeader">
+                <div class="row">
+                    <h1 class="col-md-12">Registrar usuario</h1>
                 </div>
             </div>
-        </div>   
-    </body>
-    <?php
-    include ('footer.php');
-    ?>
+            
+            <div class="sociales col-xs-12 col-md-4 col-md-offset-4">
+                <a class="btn btn-block btn-social btn-facebook">
+                    <span class="fa fa-facebook"></span> Regístrate con Facebook
+                </a>
+
+                <a class="btn btn-block btn-social btn-twitter">
+                    <span class="fa fa-twitter"></span> Regístrate con Twitter
+                </a>
+
+                <a class="btn btn-block btn-social btn-google">
+                    <span class="fa fa-google"></span> Regístrate sesión con Google
+                </a>
+            </div>
+            
+            <div class="panel-body postDesc">
+                <form class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="" method="post">
+
+                    <div class="form-group">
+                        <label for="nombre">Nombre: </label>
+                        <div>
+                            <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="alias">Alias: </label>
+                        <div>
+                            <input type="text" class="form-control" id="alias" placeholder="Alias" name="alias" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="correo">Correo: </label>
+                        <div>
+                            <input type="email" class="form-control" id="correo" placeholder="alguien@ejemplo.com" name="correo" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Contraseña: </label>
+                        <div>
+                            <input type="password" class="form-control" id="password" placeholder="Contreseña" name="password" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="passwordConfirmacion">Repetir contraseña: </label>
+                        <div>
+                            <input type="password" class="form-control" id="passwordConfirmacion" placeholder="Repetir contreseña" name="passwordConfirmacion" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-12 col-md-4 col-md-offset-4">
+                            <button type="submit" class="btn btn-warning btn-block">Enviar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>   
+</body>
+
+<?php
+require_once ('footer.php');
+?>
+
 </html>

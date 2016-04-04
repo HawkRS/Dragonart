@@ -107,96 +107,6 @@ a:hover{
     max-height: 50px;
 }
 
-.navbar-default {
-    background-color: #581994;
-    border-color: #8452b4;
-}
-.navbar-default .navbar-brand {
-    color: #ffd8a0;
-}
-.navbar-default .navbar-brand:hover,
-.navbar-default .navbar-brand:focus {
-    color: #de9226;
-}
-.navbar-default .navbar-text {
-    color: #ffd8a0;
-}
-.navbar-default .navbar-nav > li > a {
-    color: #ffd8a0;
-}
-.navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:focus {
-    color: #de9226;
-}
-.navbar-default .navbar-nav > li > .dropdown-menu {
-    background-color: #581994;
-}
-.navbar-default .navbar-nav > li > .dropdown-menu > li > a {
-    color: #ffd8a0;
-}
-.navbar-default .navbar-nav > li > .dropdown-menu > li > a:hover,
-.navbar-default .navbar-nav > li > .dropdown-menu > li > a:focus {
-    color: #de9226;
-    background-color: #8452b4;
-}
-.navbar-default .navbar-nav > li > .dropdown-menu > li > .divider {
-    background-color: #8452b4;
-}
-.navbar-default .navbar-nav .open .dropdown-menu > .active > a,
-.navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
-.navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-    color: #de9226;
-    background-color: #8452b4;
-}
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus {
-    color: #de9226;
-    background-color: #8452b4;
-}
-.navbar-default .navbar-nav > .open > a,
-.navbar-default .navbar-nav > .open > a:hover,
-.navbar-default .navbar-nav > .open > a:focus {
-    color: #de9226;
-    background-color: #8452b4;
-}
-.navbar-default .navbar-toggle {
-    border-color: #8452b4;
-}
-.navbar-default .navbar-toggle:hover,
-.navbar-default .navbar-toggle:focus {
-    background-color: #8452b4;
-}
-.navbar-default .navbar-toggle .icon-bar {
-    background-color: #ffd8a0;
-}
-.navbar-default .navbar-collapse,
-.navbar-default .navbar-form {
-    border-color: #ffd8a0;
-}
-.navbar-default .navbar-link {
-    color: #ffd8a0;
-}
-.navbar-default .navbar-link:hover {
-    color: #de9226;
-}
-
-@media (max-width: 767px) {
-    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
-        color: #ffd8a0;
-    }
-    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
-    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-        color: #de9226;
-    }
-    .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
-    .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
-    .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-        color: #de9226;
-        background-color: #8452b4;
-    }
-}
-
 /*CSS PARA FOOTER*/
 
 .footerInfo{
@@ -266,23 +176,14 @@ max-height: 600px;
     margin-top: 8px;
 }
 
-.postHeader, .usrHeader, .galHeader{
-    color: #FFF;
-    background-color: #6C35A2;
-}
-
-.postDesc, .postComentario{
-    background-color: #eee;
-}
-
 .postDesc{
     font-size: large;
 }
-
+/*
 .postTags{
     background-color: #ddd;
 }
-
+*/
 .avatar{
     margin-top: 8px;
     max-width: 100px;
@@ -292,4 +193,14 @@ max-height: 600px;
 .btnFavorito{
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+/*CSS PARA FORMULARIOS*/
+#biografia, #descripcion {
+    height: 100px;
+}
+
+/*CSS PARA LOGIN CON REDES SOCIALES*/
+.sociales {
+    padding: 20px 0px 30px 0px;
 }
