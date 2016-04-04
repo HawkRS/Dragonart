@@ -260,8 +260,8 @@
                 .append(self._getStars('empty')).append(self._getStars('filled'));
             self.$emptyStars = $rating.find('.empty-stars');
             self.$filledStars = $rating.find('.filled-stars');
-            //self._renderCaption();
-            //self._renderClear();
+            self._renderCaption();
+            self._renderClear();
             self._initHighlight();
             $container.append($el);
             if (self.rtl) {
