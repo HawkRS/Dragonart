@@ -30,7 +30,7 @@
 					<div class="row">
 
 						<div class="col-sm-6 col-md-2">
-							<div class="thumbnail">
+							<div class="thumbnail fixed-size">
 								<a href="publicacionIndex.php">
 									<img src="img/Imagen.png" alt="Demostración">
 								</a>
@@ -42,7 +42,7 @@
 						</div>
 						
 						<div class="col-sm-6 col-md-2">
-							<div class="thumbnail">
+							<div class="thumbnail fixed-size">
 								<img src="img/Imagen4.jpg" alt="Demostración">
 							<div class="caption">
 								<h3>Título de la imagen</h3>
@@ -52,7 +52,7 @@
 						</div>
 
 						<div class="col-sm-6 col-md-2">
-							<div class="thumbnail">
+							<div class="thumbnail fixed-size">
 								<img src="img/Imagen8.png" alt="Demostración">
 							<div class="caption">
 								<h3>Título de la imagen</h3>
@@ -62,7 +62,7 @@
 						</div>
 
 						<div class="col-sm-6 col-md-2">
-							<div class="thumbnail">
+							<div class="thumbnail fixed-size">
 								<img src="img/Imagen2.png" alt="Demostración">
 							<div class="caption">
 								<h3>Título de la imagen</h3>
