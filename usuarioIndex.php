@@ -20,8 +20,8 @@ require_once 'doctype.php';
 
                         <section class="text-center">
                             <h1>Nombre de usuario</h1>
-                            <button class="btn btn-warning btn-lg btn-block" name="seguir" id="seguir">+Seguir</button>
-                            <button class="btn btn-danger btn-lg btn-block" name="seguir" id="seguir">Bloquear usuario</button>
+                            <button class="btn btn-warning btn-lg btn-block" name="seguir" id="seguir"><span class="glyphicon glyphicon-plus-sign"></span> Seguir</button>
+                            <button class="btn btn-danger btn-lg btn-block" name="seguir" id="seguir"><span class="glyphicon glyphicon-remove-sign"></span> Bloquear usuario</button>
                         </section>
                     </div>
 
@@ -84,7 +84,7 @@ require_once 'doctype.php';
                     </div>
 
                     <div class="panel-footer postTags">
-                        <button class="btn btn-warning" name="seguidores" id="seguidores">Ver mas</button>
+                        <button class="btn btn-warning" name="seguidores" id="seguidores"><span class="glyphicon glyphicon-plus-sign"></span> Ver mas</button>
                     </div>
                 </div>
 
@@ -134,7 +134,7 @@ require_once 'doctype.php';
                     </div>
 
                     <div class="panel-footer postTags">
-                        <button class="btn btn-warning" name="seguidores" id="seguidores">Ver mas</button>
+                        <button class="btn btn-warning" name="seguidores" id="seguidores"><span class="glyphicon glyphicon-plus-sign"></span> Ver mas</button>
                     </div>
                 </div>
 
@@ -199,7 +199,7 @@ require_once 'doctype.php';
                     </div>
 
                     <div class="panel-footer postTags">
-                        <a href="galeria.php" class="btn btn-warning">Ver mas</a>
+                        <button class="btn btn-warning" name="seguidores" id="seguidores"><span class="glyphicon glyphicon-plus-sign"></span> Ver mas</button>
                     </div>
 
                 </div>
@@ -259,7 +259,7 @@ require_once 'doctype.php';
                     </div>
 
                     <div class="panel-footer postTags">
-                        <a href="galeria.php" class="btn btn-warning">Ver mas</a>
+                        <button class="btn btn-warning" name="seguidores" id="seguidores"><span class="glyphicon glyphicon-plus-sign"></span> Ver mas</button>
                     </div>
 
                 </div>
