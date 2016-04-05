@@ -36,16 +36,6 @@
 
 */
 
-/* Colores amarillos 
-
-.color-primary-0 { color: #F0AD4E }
-.color-primary-1 { color: #FFD8A0 }
-.color-primary-2 { color: #FFC675 }
-.color-primary-3 { color: #DE9226 }
-.color-primary-4 { color: #AD6D11 }
-
-*/
-
 /*CSS GENERAL*/
 
 html, body{
@@ -57,18 +47,8 @@ body{
     background-color: #FFF;
 }
 
-a{
-    color: #FFC675;
-    text-decoration: none;
-}
-
 h2 {
     margin-top: 12px;
-}
-
-a:hover{
-    color: #DE9226;
-    text-decoration: underline;
 }
 
 .warp{
