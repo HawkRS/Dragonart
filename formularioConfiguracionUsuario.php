@@ -75,10 +75,10 @@ require_once ('doctype.php');
 
                     <div class="form-group">
                         <div class="col-xs-12 col-md-4 col-md-offset-2">
-                            <button class="btn btn-warning btn-block" type="submit">Guardar</button>
+                            <button class="btn btn-warning btn-block" type="submit"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
                         </div>
                         <div class="col-xs-12 col-md-4">
-                            <button type="submit" onclick="location.href='index.php';" class="btn btn-warning btn-block">Eliminar cuenta</button>
+                            <button type="submit" onclick="location.href='index.php';" class="btn btn-danger btn-block"><span class="glyphicon glyphicon-remove-sign"></span> Eliminar cuenta</button>
                         </div>
                     </div>
                 </form>

@@ -48,7 +48,7 @@ require_once ('doctype.php');
 
                     <div class="form-group">
                         <div class="col-xs-12 col-md-4 col-md-offset-4">
-                            <button type="submit" onclick="location.href='publicacionIndex.php';" class="btn btn-warning btn-block">Subir</button>
+                            <button type="submit" onclick="location.href='publicacionIndex.php';" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-upload"></span> Subir</button>
                         </div>
                     </div>
                 </form>

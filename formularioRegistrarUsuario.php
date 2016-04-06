@@ -70,7 +70,7 @@ require_once ('doctype.php');
 
                     <div class="form-group">
                         <div class="col-xs-12 col-md-4 col-md-offset-4">
-                            <button type="submit" class="btn btn-warning btn-block">Enviar</button>
+                            <button type="submit" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-send"></span> Enviar</button>
                         </div>
                     </div>
                 </form>

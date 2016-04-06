@@ -33,8 +33,8 @@ require_once 'doctype.php';
                         </div>
                         <div class="col-xs-12 col-sm-4 col-md-3 pull-right offsetUp">
                             <input id="input-1" class="rating rating-loading" data-show-clear="false" data-show-caption="false" size="sm">
-                            <button type="button" onclick="location.href='formularioImagen.php';" class="btn btn-warning btn-block">Editar información</button>
-                            <button type="button" onclick="location.href='usuarioIndex.php';" class="btn btn-danger btn-block">Eliminar post</button>
+                            <button type="button" onclick="location.href='formularioImagen.php';" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-edit"></span> Editar información</button>
+                            <button type="button" onclick="location.href='usuarioIndex.php';" class="btn btn-danger btn-block"><span class="glyphicon glyphicon-remove"></span> Eliminar post</button>
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@ require_once 'doctype.php';
 
                 <div class="form-group">
                     <div class="col-xs-12 col-md-8 col-md-offset-2">
-                        <button class="btn btn-warning">Subir comentario</button>
+                        <button class="btn btn-warning"><span class="glyphicon glyphicon-send"></span> Subir comentario</button>
                     </div>
                 </div>
             </form>

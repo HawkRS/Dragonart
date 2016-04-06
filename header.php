@@ -31,13 +31,13 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="formularioRegistrarUsuario.php">Regístrate</a>
+                        <a href="formularioRegistrarUsuario.php"><span class="glyphicon glyphicon-pencil"></span> Regístrate</a>
                     </li>
                     <li>
-                        <a href="formularioIniciarSesion.php">Iniciar sesión</a>
+                        <a href="formularioIniciarSesion.php"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a>
                     </li>
                     <li class="active">
-                        <a href="formularioImagen.php">Subir imagen</a>
+                        <a href="formularioImagen.php"><span class="glyphicon glyphicon-upload"></span> Subir imagen</a>
                     </li>
                     <li class="dropdown">
 
@@ -47,17 +47,17 @@
 
                         <ul class="dropdown-menu submenu">
                             <li>
-                                <a href="usuarioIndex.php">Página de usuario</a>
+                                <a href="usuarioIndex.php"><span class="glyphicon glyphicon-user"></span> Página de usuario</a>
                             </li>
                             <li>
-                                <a href="notificaciones.php">Notificaciones</a>
+                                <a href="notificaciones.php"><span class="glyphicon glyphicon-comment"></span> Notificaciones</a>
                             </li>
                             <li>
-                                <a href="formularioConfiguracionUsuario.php">Editar perfil</a>
+                                <a href="formularioConfiguracionUsuario.php"><span class="glyphicon glyphicon-edit"></span> Editar perfil</a>
                             </li>
                             <li role="separator" class="divider"></li>
                             <li>
-                                <a href="index.php">Cerrar sesión</a>
+                                <a href="index.php"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a>
                             </li>
                         </ul>
 

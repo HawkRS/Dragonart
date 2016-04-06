@@ -35,7 +35,7 @@ require_once ('doctype.php');
 
                         <div class="form-group">
                             <div class="col-xs-12 col-md-8 col-md-offset-2">
-                                <button type="submit" onclick="location.href='usuarioIndex.php';" class="btn btn-warning btn-block">Iniciar sesión</button>
+                                <button type="submit" onclick="location.href='usuarioIndex.php';" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-log-in"></span>  Iniciar sesión</button>
                             </div>
                         </div>
                         <div class="form-group">

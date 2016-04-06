@@ -75,9 +75,9 @@ require_once 'doctype.php';
                 </div>
 
                 <div class="panel-footer postTags">
-                    <button class="btn btn-warning" name="selTodos" id="selTodos">Seleccionar todos</button>
-                    <button class="btn btn-warning" name="selTodos" id="selTodos">Invertir selección</button>
-                    <button class="btn btn-warning" name="selTodos" id="selTodos">Borrar seleccionados</button>
+                    <button class="btn btn-warning" name="selTodos" id="selTodos"><span class="glyphicon glyphicon-asterisk"></span> Seleccionar todos</button>
+                    <button class="btn btn-warning" name="selTodos" id="selTodos"><span class="glyphicon glyphicon-random"></span> Invertir selección</button>
+                    <button class="btn btn-warning" name="selTodos" id="selTodos"><span class="glyphicon glyphicon-remove"></span> Quitar de notificaciones</button>
                 </div>
             </div>
 
@@ -201,9 +201,9 @@ require_once 'doctype.php';
                 </div>
 
                 <div class="panel-footer postTags">
-                    <button class="btn btn-warning" name="selTodos" id="selTodos">Seleccionar todos</button>
-                    <button class="btn btn-warning" name="selTodos" id="selTodos">Invertir selección</button>
-                    <button class="btn btn-warning" name="selTodos" id="selTodos">Borrar seleccionados</button>
+                    <button class="btn btn-warning" name="selTodos" id="selTodos"><span class="glyphicon glyphicon-asterisk"></span> Seleccionar todos</button>
+                    <button class="btn btn-warning" name="selTodos" id="selTodos"><span class="glyphicon glyphicon-random"></span> Invertir selección</button>
+                    <button class="btn btn-warning" name="selTodos" id="selTodos"><span class="glyphicon glyphicon-remove"></span> Quitar de notificaciones</button>
                 </div>
             </div>
 
@@ -263,9 +263,9 @@ require_once 'doctype.php';
                 </div>
 
                 <div class="panel-footer postTags">
-                    <button class="btn btn-warning" name="selTodos" id="selTodos">Seleccionar todos</button>
-                    <button class="btn btn-warning" name="selTodos" id="selTodos">Invertir selección</button>
-                    <button class="btn btn-warning" name="selTodos" id="selTodos">Borrar seleccionados</button>
+                    <button class="btn btn-warning" name="selTodos" id="selTodos"><span class="glyphicon glyphicon-asterisk"></span> Seleccionar todos</button>
+                    <button class="btn btn-warning" name="selTodos" id="selTodos"><span class="glyphicon glyphicon-random"></span> Invertir selección</button>
+                    <button class="btn btn-warning" name="selTodos" id="selTodos"><span class="glyphicon glyphicon-remove"></span> Quitar de notificaciones</button>
                 </div>
             </div>
 
@@ -340,9 +340,9 @@ require_once 'doctype.php';
                 </div>
 
                 <div class="panel-footer postTags">
-                    <button class="btn btn-warning" name="selTodos" id="selTodos">Seleccionar todos</button>
-                    <button class="btn btn-warning" name="selTodos" id="selTodos">Invertir selección</button>
-                    <button class="btn btn-warning" name="selTodos" id="selTodos">Borrar seleccionados</button>
+                    <button class="btn btn-warning" name="selTodos" id="selTodos"><span class="glyphicon glyphicon-asterisk"></span> Seleccionar todos</button>
+                    <button class="btn btn-warning" name="selTodos" id="selTodos"><span class="glyphicon glyphicon-random"></span> Invertir selección</button>
+                    <button class="btn btn-warning" name="selTodos" id="selTodos"><span class="glyphicon glyphicon-remove"></span> Quitar de notificaciones</button>
                 </div>
             </div>
 

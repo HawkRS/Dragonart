@@ -37,7 +37,7 @@ require_once ('doctype.php');
 
                     <div class="form-group">
                         <div class="col-xs-12 col-md-4 col-md-offset-4">
-                            <button class="btn btn-warning btn-block" type="submit">Buscar</button>
+                            <button class="btn btn-warning btn-block" type="submit"><span class="glyphicon glyphicon-search"></span> Buscar</button>
                         </div>
                     </div>
                 </form>
