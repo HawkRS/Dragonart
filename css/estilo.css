@@ -133,6 +133,14 @@ h2 {
     padding: 10px;
 }
 
+.blanco {
+    color: #FFF;
+}
+
+.extra-space {
+    padding-top: 10px;
+}
+
 .galHeaderText{
     margin: 0 0 0 5px;
 }
