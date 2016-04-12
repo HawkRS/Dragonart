@@ -21,48 +21,48 @@ require_once 'doctype.php';
                     <!-- Loading Screen -->
                     <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
                         <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
-                        <div style="position:absolute;display:block;background:url('img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
+                        <div style="position:absolute;display:block;background:url('assets/img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
                     </div>
                     <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 800px; height: 356px; overflow: hidden;">
                         <div data-p="144.50" style="display: none;">
-                            <a href="publicacionIndex.php"><img data-u="image" src="img/Imagen.png" /></a>
-                            <img data-u="thumb" src="img/Imagen.png" />
+                            <a href="publicacionIndex.php"><img data-u="image" src="assets/img/Imagen.png" /></a>
+                            <img data-u="thumb" src="assets/img/Imagen.png" />
                         </div>
                         <div data-p="144.50" style="display: none;">
-                            <img data-u="image" src="img/Imagen2.png" />
-                            <img data-u="thumb" src="img/Imagen2.png" />
+                            <img data-u="image" src="assets/img/Imagen2.png" />
+                            <img data-u="thumb" src="assets/img/Imagen2.png" />
                         </div>
                         <div data-p="144.50" style="display: none;">
-                            <img data-u="image" src="img/Imagen3.png" />
-                            <img data-u="thumb" src="img/Imagen3.png" />
+                            <img data-u="image" src="assets/img/Imagen3.png" />
+                            <img data-u="thumb" src="assets/img/Imagen3.png" />
                         </div>
                         <div data-p="144.50" style="display: none;">
-                            <img data-u="image" src="img/Imagen4.jpg" />
-                            <img data-u="thumb" src="img/Imagen4.jpg" />
+                            <img data-u="image" src="assets/img/Imagen4.jpg" />
+                            <img data-u="thumb" src="assets/img/Imagen4.jpg" />
                         </div>
                         <div data-p="144.50" style="display: none;">
-                            <img data-u="image" src="img/Imagen5.png" />
-                            <img data-u="thumb" src="img/Imagen5.png" />
+                            <img data-u="image" src="assets/img/Imagen5.png" />
+                            <img data-u="thumb" src="assets/img/Imagen5.png" />
                         </div>
                         <div data-p="144.50" style="display: none;">
-                            <img data-u="image" src="img/Imagen6.png" />
-                            <img data-u="thumb" src="img/Imagen6.png" />
+                            <img data-u="image" src="assets/img/Imagen6.png" />
+                            <img data-u="thumb" src="assets/img/Imagen6.png" />
                         </div>
                         <div data-p="144.50" style="display: none;">
-                            <img data-u="image" src="img/Imagen7.png" />
-                            <img data-u="thumb" src="img/Imagen7.png" />
+                            <img data-u="image" src="assets/img/Imagen7.png" />
+                            <img data-u="thumb" src="assets/img/Imagen7.png" />
                         </div>
                         <div data-p="144.50" style="display: none;">
-                            <img data-u="image" src="img/Imagen8.png" />
-                            <img data-u="thumb" src="img/Imagen8.png" />
+                            <img data-u="image" src="assets/img/Imagen8.png" />
+                            <img data-u="thumb" src="assets/img/Imagen8.png" />
                         </div>
                         <div data-p="144.50" style="display: none;">
-                            <img data-u="image" src="img/Imagen9.png" />
-                            <img data-u="thumb" src="img/Imagen9.png" />
+                            <img data-u="image" src="assets/img/Imagen9.png" />
+                            <img data-u="thumb" src="assets/img/Imagen9.png" />
                         </div>
                         <div data-p="144.50" style="display: none;">
-                            <img data-u="image" src="img/Imagen10.png" />
-                            <img data-u="thumb" src="img/Imagen10.png" />
+                            <img data-u="image" src="assets/img/Imagen10.png" />
+                            <img data-u="thumb" src="assets/img/Imagen10.png" />
                         </div>
                     </div>
                     <!-- Thumbnail Navigator -->
