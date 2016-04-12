@@ -14,7 +14,7 @@ require_once 'doctype.php';
                 <ul class="sidebar-nav">
                     <figure>
                         <picture>
-                            <img class="center-block avatar" src="img/avatar.png" alt="Nombre de usuario">
+                            <img class="center-block avatar" src="assets/img/avatar.png" alt="Nombre de usuario">
                         </picture>
                     </figure>
                     <h2 class="text-center blanco">Nombre de usuario</h2>
@@ -48,7 +48,7 @@ require_once 'doctype.php';
                                 <div class="col-sm-6 col-md-3">
                                     <div class="thumbnail">
                                         <a href="publicacionIndex.php">
-                                            <img src="img/Imagen.png" alt="Demostración">
+                                            <img src="assets/img/Imagen.png" alt="Demostración">
                                         </a>
                                         <div class="caption">
                                             <h3>Título de la imagen</h3>
@@ -59,7 +59,7 @@ require_once 'doctype.php';
 
                                 <div class="col-sm-6 col-md-3">
                                     <div class="thumbnail">
-                                        <img src="img/Imagen4.jpg" alt="Demostración">
+                                        <img src="assets/img/Imagen4.jpg" alt="Demostración">
                                         <div class="caption">
                                             <h3>Título de la imagen</h3>
                                             <button class="btn btn-warning btn-block" name="favorito" id="favorito">+Favorito</button>
@@ -69,7 +69,7 @@ require_once 'doctype.php';
 
                                 <div class="col-sm-6 col-md-3">
                                     <div class="thumbnail">
-                                        <img src="img/Imagen8.png" alt="Demostración">
+                                        <img src="assets/img/Imagen8.png" alt="Demostración">
                                         <div class="caption">
                                             <h3>Título de la imagen</h3>
                                             <button class="btn btn-warning btn-block" name="favorito" id="favorito">+Favorito</button>
@@ -79,7 +79,7 @@ require_once 'doctype.php';
 
                                 <div class="col-sm-6 col-md-3">
                                     <div class="thumbnail">
-                                        <img src="img/Imagen7.png" alt="Demostración">
+                                        <img src="assets/img/Imagen7.png" alt="Demostración">
                                         <div class="caption">
                                             <h3>Título de la imagen</h3>
                                             <button class="btn btn-warning btn-block" name="favorito" id="favorito">+Favorito</button>
@@ -110,7 +110,7 @@ require_once 'doctype.php';
 
                             <div class="col-sm-6 col-md-3">
                                 <div class="thumbnail">
-                                    <img src="img/Imagen2.png" alt="Demostración">
+                                    <img src="assets/img/Imagen2.png" alt="Demostración">
                                     <div class="caption">
                                         <h3>Título de la imagen</h3>
                                         <button class="btn btn-warning btn-block" name="favorito" id="favorito">+Favorito</button>
@@ -120,7 +120,7 @@ require_once 'doctype.php';
 
                             <div class="col-sm-6 col-md-3">
                                 <div class="thumbnail">
-                                    <img src="img/Imagen3.png" alt="Demostración">
+                                    <img src="assets/img/Imagen3.png" alt="Demostración">
                                     <div class="caption">
                                         <h3>Título de la imagen</h3>
                                         <button class="btn btn-warning btn-block" name="favorito" id="favorito">+Favorito</button>
@@ -130,7 +130,7 @@ require_once 'doctype.php';
 
                             <div class="col-sm-6 col-md-3">
                                 <div class="thumbnail">
-                                    <img src="img/Imagen10.png" alt="Demostración">
+                                    <img src="assets/img/Imagen10.png" alt="Demostración">
                                     <div class="caption">
                                         <h3>Título de la imagen</h3>
                                         <button class="btn btn-warning btn-block" name="favorito" id="favorito">+Favorito</button>
@@ -140,7 +140,7 @@ require_once 'doctype.php';
 
                             <div class="col-sm-6 col-md-3">
                                 <div class="thumbnail">
-                                    <img src="img/Imagen5.png" alt="Demostración">
+                                    <img src="assets/img/Imagen5.png" alt="Demostración">
                                     <div class="caption">
                                         <h3>Título de la imagen</h3>
                                         <button class="btn btn-warning btn-block" name="favorito" id="favorito">+Favorito</button>
@@ -169,7 +169,7 @@ require_once 'doctype.php';
                             <div class="col-sm-6 col-md-3">
                                 <div class="thumbnail">
                                     <a href="publicacionIndex.php">
-                                        <img src="img/avatar.png" alt="Demostración">
+                                        <img src="assets/img/avatar.png" alt="Demostración">
                                     </a>
                                 </div>
                             </div>
@@ -177,7 +177,7 @@ require_once 'doctype.php';
                             <div class="col-sm-6 col-md-3">
                                 <div class="thumbnail">
                                     <a href="publicacionIndex.php">
-                                        <img src="img/avatar.png" alt="Demostración">
+                                        <img src="assets/img/avatar.png" alt="Demostración">
                                     </a>
                                 </div>
                             </div>
@@ -185,7 +185,7 @@ require_once 'doctype.php';
                             <div class="col-sm-6 col-md-3">
                                 <div class="thumbnail">
                                     <a href="publicacionIndex.php">
-                                        <img src="img/avatar.png" alt="Demostración">
+                                        <img src="assets/img/avatar.png" alt="Demostración">
                                     </a>
                                 </div>
                             </div>
@@ -193,7 +193,7 @@ require_once 'doctype.php';
                             <div class="col-sm-6 col-md-3">
                                 <div class="thumbnail">
                                     <a href="publicacionIndex.php">
-                                        <img src="img/avatar.png" alt="Demostración">
+                                        <img src="assets/img/avatar.png" alt="Demostración">
                                     </a>
                                 </div>
                             </div>
@@ -219,7 +219,7 @@ require_once 'doctype.php';
                             <div class="col-sm-6 col-md-3">
                                 <div class="thumbnail">
                                     <a href="publicacionIndex.php">
-                                        <img src="img/avatar.png" alt="Demostración">
+                                        <img src="assets/img/avatar.png" alt="Demostración">
                                     </a>
                                 </div>
                             </div>
@@ -227,7 +227,7 @@ require_once 'doctype.php';
                             <div class="col-sm-6 col-md-3">
                                 <div class="thumbnail">
                                     <a href="publicacionIndex.php">
-                                        <img src="img/avatar.png" alt="Demostración">
+                                        <img src="assets/img/avatar.png" alt="Demostración">
                                     </a>
                                 </div>
                             </div>
@@ -235,7 +235,7 @@ require_once 'doctype.php';
                             <div class="col-sm-6 col-md-3">
                                 <div class="thumbnail">
                                     <a href="publicacionIndex.php">
-                                        <img src="img/avatar.png" alt="Demostración">
+                                        <img src="assets/img/avatar.png" alt="Demostración">
                                     </a>
                                 </div>
                             </div>
@@ -243,7 +243,7 @@ require_once 'doctype.php';
                             <div class="col-sm-6 col-md-3">
                                 <div class="thumbnail">
                                     <a href="publicacionIndex.php">
-                                        <img src="img/avatar.png" alt="Demostración">
+                                        <img src="assets/img/avatar.png" alt="Demostración">
                                     </a>
                                 </div>
                             </div>
