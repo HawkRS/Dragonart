@@ -14,7 +14,7 @@ require_once 'doctype.php';
             <div class="row margen">
                 <figure>
                     <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-                        <img class="center-block img-responsive" src="img/Imagen.png" alt="Imagen del post">
+                        <img class="center-block img-responsive" src="assets/img/Imagen.png" alt="Imagen del post">
                     </div>
                 </figure>
             </div>
@@ -24,7 +24,7 @@ require_once 'doctype.php';
                     <div class="row row-centered">
                         <figure>
                             <a href="usuarioIndex.php">
-                                <img class="col-xs-12 col-sm-4 col-md-3 avatar col-centered" src="img/avatar.png" alt="avatar">
+                                <img class="col-xs-12 col-sm-4 col-md-3 avatar col-centered" src="assets/img/avatar.png" alt="avatar">
                             </a>
                         </figure>
                         <div class="col-xs-12 col-sm-6 col-md-6">
@@ -76,7 +76,7 @@ require_once 'doctype.php';
                         <div class="row">
                             <figure>
                                 <a href="usuarioIndex.php">
-                                    <img class="col-md-3 avatar" src="img/avatar.png" alt="avatar">
+                                    <img class="col-md-3 avatar" src="assets/img/avatar.png" alt="avatar">
                                 </a>
                             </figure>
                             <div class="col-md-9">
@@ -95,7 +95,7 @@ require_once 'doctype.php';
                         <div class="row">
                             <figure>
                                 <a href="usuarioIndex.php">
-                                    <img class="col-md-3 avatar" src="img/avatar.png" alt="avatar">
+                                    <img class="col-md-3 avatar" src="assets/img/avatar.png" alt="avatar">
                                 </a>
                             </figure>
                             <div class="col-md-9">
@@ -114,7 +114,7 @@ require_once 'doctype.php';
                         <div class="row">
                             <figure>
                                 <a href="usuarioIndex.php">
-                                    <img class="col-md-3 avatar" src="img/avatar.png" alt="avatar">
+                                    <img class="col-md-3 avatar" src="assets/img/avatar.png" alt="avatar">
                                 </a>
                             </figure>
                             <div class="col-md-9">
