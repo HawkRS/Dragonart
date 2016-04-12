@@ -12,7 +12,7 @@
                 <a class="navbar-brand text-hide logo" href="index.php">
                     Dragon art
                     <figure>
-                        <img class="img-responsive logoImagen" src="img/logo.gif" alt="logotipo Dragon art">
+                        <img class="img-responsive logoImagen" src="assets/img/logo.gif" alt="logotipo Dragon art">
                     </figure>
                 </a>
 
@@ -67,7 +67,7 @@
             </div>
         </div>
     </nav>
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/Validador.js"></script>
-    <script type="text/javascript" src="js/star-rating.js"></script>
+    <script type="text/javascript" src="assets/js/external/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/Validador.js"></script>
+    <script type="text/javascript" src="assets/js/external/star-rating.js"></script>
 </header>
