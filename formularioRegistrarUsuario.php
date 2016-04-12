@@ -31,7 +31,7 @@ require_once ('doctype.php');
             </div>
             
             <div class="panel-body postDesc">
-                <form class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="" method="post">
+                <form id="registroUsr" name="registroUsr" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="javascript:alert( 'success!' );" method="post">
 
                     <div class="form-group">
                         <label for="nombre">Nombre: </label>
@@ -70,7 +70,9 @@ require_once ('doctype.php');
 
                     <div class="form-group">
                         <div class="col-xs-12 col-md-4 col-md-offset-4">
-                            <button type="submit" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-send"></span> Enviar</button>
+                            <button id="btnEnviar" name="btnEnviar" type="submit" class="btn btn-warning btn-block">
+                                <span class="glyphicon glyphicon-send"></span> Enviar
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -82,5 +84,14 @@ require_once ('doctype.php');
 <?php
 require_once ('footer.php');
 ?>
+
+<script>
+    $('#registroUsr').submit(function(event){
+        var inputs = $('#registroUsr input');
+        if(!(validarInputs(inputs))){
+            event.preventDefault();
+        }   
+    });
+</script>
 
 </html>

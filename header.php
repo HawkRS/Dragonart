@@ -68,5 +68,6 @@
         </div>
     </nav>
     <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/Validador.js"></script>
     <script type="text/javascript" src="js/star-rating.js"></script>
 </header>
