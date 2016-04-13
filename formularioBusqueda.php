@@ -15,7 +15,7 @@ require_once ('doctype.php');
                 </div>
             </div>
             <div class="panel-body postDesc">
-                <form class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="" method="post">
+                <form id="busqueda" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="javascript:alert( 'success!' );" method="post">
 
                     <div class="form-group">
                         <label for="buscarPor">Buscar por: </label>
@@ -56,7 +56,7 @@ require_once ('doctype.php');
                     <div class="col-sm-6 col-md-3">
                         <div class="thumbnail">
                             <a href="publicacionIndex.php">
-                                <img src="img/avatar.png" alt="Demostración">
+                                <img src="assets/img/avatar.png" alt="Demostración">
                             </a>
                         </div>
                         <div class="caption text-center">
@@ -67,7 +67,7 @@ require_once ('doctype.php');
                     <div class="col-sm-6 col-md-3">
                         <div class="thumbnail">
                             <a href="publicacionIndex.php">
-                                <img src="img/avatar.png" alt="Demostración">
+                                <img src="assets/img/avatar.png" alt="Demostración">
                             </a>
                         </div>
                         <div class="caption text-center">
@@ -78,7 +78,7 @@ require_once ('doctype.php');
                     <div class="col-sm-6 col-md-3">
                         <div class="thumbnail">
                             <a href="publicacionIndex.php">
-                                <img src="img/avatar.png" alt="Demostración">
+                                <img src="assets/img/avatar.png" alt="Demostración">
                             </a>
                         </div>
                         <div class="caption text-center">
@@ -89,7 +89,7 @@ require_once ('doctype.php');
                     <div class="col-sm-6 col-md-3">
                         <div class="thumbnail">
                             <a href="publicacionIndex.php">
-                                <img src="img/avatar.png" alt="Demostración">
+                                <img src="assets/img/avatar.png" alt="Demostración">
                             </a>
                         </div>
                         <div class="caption text-center">
@@ -156,7 +156,7 @@ require_once ('doctype.php');
                     <div class="col-sm-6 col-md-3">
                         <div class="thumbnail">
                             <a href="publicacionIndex.php">
-                                <img src="img/Imagen.png" alt="Demostración">
+                                <img src="assets/img/Imagen.png" alt="Demostración">
                             </a>
                         </div>
                         <div class="caption text-center">
@@ -168,7 +168,7 @@ require_once ('doctype.php');
                     <div class="col-sm-6 col-md-3">
                         <div class="thumbnail">
                             <a href="publicacionIndex.php">
-                                <img src="img/Imagen2.png" alt="Demostración">
+                                <img src="assets/img/Imagen2.png" alt="Demostración">
                             </a>
                         </div>
                         <div class="caption text-center">
@@ -180,7 +180,7 @@ require_once ('doctype.php');
                     <div class="col-sm-6 col-md-3">
                         <div class="thumbnail">
                             <a href="publicacionIndex.php">
-                                <img src="img/Imagen3.png" alt="Demostración">
+                                <img src="assets/img/Imagen3.png" alt="Demostración">
                             </a>
                         </div>
                         <div class="caption text-center">
@@ -192,7 +192,7 @@ require_once ('doctype.php');
                     <div class="col-sm-6 col-md-3">
                         <div class="thumbnail">
                             <a href="publicacionIndex.php">
-                                <img src="img/Imagen4.jpg" alt="Demostración">
+                                <img src="assets/img/Imagen4.jpg" alt="Demostración">
                             </a>
                         </div>
                         <div class="caption text-center">
@@ -207,7 +207,7 @@ require_once ('doctype.php');
                     <div class="col-sm-6 col-md-3">
                         <div class="thumbnail">
                             <a href="publicacionIndex.php">
-                                <img src="img/Imagen5.png" alt="Demostración">
+                                <img src="assets/img/Imagen5.png" alt="Demostración">
                             </a>
                         </div>
                         <div class="caption text-center">
@@ -219,7 +219,7 @@ require_once ('doctype.php');
                     <div class="col-sm-6 col-md-3">
                         <div class="thumbnail">
                             <a href="publicacionIndex.php">
-                                <img src="img/Imagen6.png" alt="Demostración">
+                                <img src="assets/img/Imagen6.png" alt="Demostración">
                             </a>
                         </div>
                         <div class="caption text-center">
@@ -231,7 +231,7 @@ require_once ('doctype.php');
                     <div class="col-sm-6 col-md-3">
                         <div class="thumbnail">
                             <a href="publicacionIndex.php">
-                                <img src="img/Imagen7.png" alt="Demostración">
+                                <img src="assets/img/Imagen7.png" alt="Demostración">
                             </a>
                         </div>
                         <div class="caption text-center">
@@ -243,7 +243,7 @@ require_once ('doctype.php');
                     <div class="col-sm-6 col-md-3">
                         <div class="thumbnail">
                             <a href="publicacionIndex.php">
-                                <img src="img/Imagen8.png" alt="Demostración">
+                                <img src="assets/img/Imagen8.png" alt="Demostración">
                             </a>
                         </div>
                         <div class="caption text-center">
@@ -303,5 +303,14 @@ require_once ('doctype.php');
 <?php
 require_once ('footer.php');
 ?>
+
+<script>
+    $('#busqueda').submit(function(event){
+        var inputs = $('#busqueda input');
+        if(!(validarInputs(inputs))){
+            event.preventDefault();
+        }   
+    });
+</script>
 
 </html>

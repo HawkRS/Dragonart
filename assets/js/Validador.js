@@ -15,6 +15,13 @@ function correoValido(correo){
 	return false;
 }
 
+function contrasenaValida(pass){
+	if(!estaVacio(pass) && pass.length >= 8){
+		return true;
+	}
+	return false;
+}
+
 function contrasenasIguales(pass, otroPass){
 	if((!estaVacio(pass) && !estaVacio(otroPass)) && pass === otroPass){
 		return true;
@@ -38,7 +45,7 @@ function validarInputs(inputs){
 
 			case 'password':
 				tempPass = temp.val();
-				bandera = !(estaVacio(tempPass));
+				bandera = contrasenaValida(tempPass);
 				break;
 
 			case 'passwordConfirmacion':

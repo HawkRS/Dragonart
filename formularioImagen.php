@@ -16,7 +16,7 @@ require_once ('doctype.php');
                 </div>
             </div>
             <div class="panel-body postDesc">
-                <form class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" enctype="multipart/form-data" action="" method="post">
+                <form id="subirImagen" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" enctype="multipart/form-data" action="javascript:alert( 'success!' );" method="post">
                     <div class="form-group">
                         <label for="imagen">Seleccionar imagen: </label>
                         <div>
@@ -34,8 +34,7 @@ require_once ('doctype.php');
                     <div class="form-group">
                         <label for="descripcion">Descripción: </label>
                         <div>
-                            <textarea class="form-control" id="descripcion" name="descripcion">
-                            </textarea>
+                            <textarea class="form-control" id="descripcion" name="descripcion"></textarea>
                         </div>
                     </div>
 
@@ -48,7 +47,7 @@ require_once ('doctype.php');
 
                     <div class="form-group">
                         <div class="col-xs-12 col-md-4 col-md-offset-4">
-                            <button type="submit" onclick="location.href='publicacionIndex.php';" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-upload"></span> Subir</button>
+                            <button type="submit" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-upload"></span> Subir</button>
                         </div>
                     </div>
                 </form>
@@ -60,5 +59,15 @@ require_once ('doctype.php');
 <?php
 require_once ('footer.php');
 ?>
+
+<script>
+    $('#subirImagen').submit(function(event){
+        var inputs = $('#subirImagen input');
+        var txtArea = $('#subirImagen textarea');
+        if(!(validarInputs(inputs)) || estaVacio(txtArea.val())){
+            event.preventDefault();
+        }   
+    });
+</script>
 
 </html>

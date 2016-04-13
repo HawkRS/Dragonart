@@ -18,7 +18,7 @@ require_once ('doctype.php');
                 </div>
 
                 <div class="panel-body postDesc">
-                    <form class="form-horizontal col-xs-12 col-md-12">
+                    <form id="inicioSesion" class="form-horizontal col-xs-12 col-md-12" action="javascript:alert( 'success!' );" method="post">
                         <div class="form-group">
                             <label for="correo">Correo: </label>
                             <div>
@@ -35,7 +35,7 @@ require_once ('doctype.php');
 
                         <div class="form-group">
                             <div class="col-xs-12 col-md-8 col-md-offset-2">
-                                <button type="submit" onclick="location.href='usuarioIndex.php';" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-log-in"></span>  Iniciar sesión</button>
+                                <button type="submit" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-log-in"></span>  Iniciar sesión</button>
                             </div>
                         </div>
                         <div class="form-group">
@@ -66,5 +66,14 @@ require_once ('doctype.php');
 <?php
 require_once ('footer.php');
 ?>
+
+<script>
+    $('#inicioSesion').submit(function(event){
+        var inputs = $('#inicioSesion input');
+        if(!(validarInputs(inputs))){
+            event.preventDefault();
+        }   
+    });
+</script>
 
 </html>

@@ -18,7 +18,7 @@ require_once ('doctype.php');
             </div>
             <div class="panel-body postDesc">
                 <p>Para restablecer tu contraseña, escribe el correo con el que te registraste.</p>
-                <form class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="" method="post">
+                <form id="recContrasena" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="javascript:alert( 'success!' );" method="post">
 
                     <div class="form-group">
                         <label for="correo">Correo: </label>
@@ -29,7 +29,7 @@ require_once ('doctype.php');
 
                     <div class="form-group">
                         <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <button type="submit" onclick="location.href='formularioRecuperarContrasena.php';" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-send"></span> Enviar</button>
+                            <button type="submit" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-send"></span> Enviar</button>
                         </div>
                     </div>
                 </form>
@@ -42,5 +42,14 @@ require_once ('doctype.php');
 <?php
 require_once ('footer.php');
 ?>
+
+<script>
+    $('#recContrasena').submit(function(event){
+        var inputs = $('#recContrasena input');
+        if(!(validarInputs(inputs))){
+            event.preventDefault();
+        }   
+    });
+</script>
 
 </html>

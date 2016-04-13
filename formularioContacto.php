@@ -18,7 +18,7 @@ require_once ('doctype.php');
             <div class="panel-body postDesc">
                 <p class="text-center">Envíanos un correo con tus dudas, quejas, aclaraciones o sugerencias.<br>Nos pondremos en contacto contigo para ayudarte.</p><br>
 
-                <form class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="" method="post">
+                <form id="contacto" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="javascript:alert( 'success!' );" method="post">
 
                     <div class="form-group">
                         <label for="nombre">Nombre: </label>
@@ -55,5 +55,15 @@ require_once ('doctype.php');
 <?php
 require_once ('footer.php');
 ?>
+
+<script>
+    $('#contacto').submit(function(event){
+        var inputs = $('#contacto input');
+        var txtArea = $('#contacto textarea');
+        if(!(validarInputs(inputs)) || estaVacio(txtArea.val())){
+            event.preventDefault();
+        }   
+    });
+</script>
 
 </html>

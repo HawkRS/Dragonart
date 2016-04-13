@@ -16,7 +16,7 @@ require_once ('doctype.php');
             </div>
             
             <div class="panel-body postDesc">
-                <form class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" enctype="multipart/form-data" action="" method="post">
+                <form id="configUsuario" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" enctype="multipart/form-data" action="javascript:alert( 'success!' );" method="post">
 
                     <div class="form-group">
                         <label for="nombre">Nombre: </label>
@@ -35,7 +35,8 @@ require_once ('doctype.php');
                     <div class="form-group">
                         <label for="correo">Correo: </label>
                         <div>
-                            <input type="email" class="form-control" id="correo" placeholder="alguien@ejemplo.com" disabled name="correo" />
+                            <!--<input type="email" class="form-control" id="correo" placeholder="alguien@ejemplo.com" disabled name="correo" />-->
+                            <input type="email" class="form-control" id="correo" placeholder="alguien@ejemplo.com" name="correo" />
                         </div>
                     </div>
 
@@ -90,5 +91,15 @@ require_once ('doctype.php');
 <?php
 require_once ('footer.php');
 ?>
+
+<script>
+    $('#configUsuario').submit(function(event){
+        var inputs = $('#configUsuario input');
+        var txtArea = $('#configUsuario textarea');
+        if(!(validarInputs(inputs)) || estaVacio(txtArea.val())){
+            event.preventDefault();
+        }   
+    });
+</script>
 
 </html>

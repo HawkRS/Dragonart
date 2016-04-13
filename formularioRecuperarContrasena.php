@@ -17,7 +17,7 @@ require_once ('doctype.php');
             </div>
             <div class="panel-body postDesc">
                 <p>Ingresa tu nueva contraseña</p>
-                <form class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="" method="post">
+                <form id="nuevaContrasena" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="javascript:alert( 'success!' );" method="post">
 
                     <div class="form-group">
                         <label for="password">Contraseña: </label>
@@ -35,7 +35,7 @@ require_once ('doctype.php');
 
                     <div class="form-group">
                         <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <button type="submit" onclick="location.href='usuarioIndex.php';" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar cambios</button>
+                            <button type="submit" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar cambios</button>
                         </div>
                     </div>
                 </form>
@@ -48,5 +48,14 @@ require_once ('doctype.php');
 <?php
 require_once ('footer.php');
 ?>
+
+<script>
+    $('#nuevaContrasena').submit(function(event){
+        var inputs = $('#nuevaContrasena input');
+        if(!(validarInputs(inputs))){
+            event.preventDefault();
+        }   
+    });
+</script>
 
 </html>
