@@ -32,7 +32,7 @@ require_once 'doctype.php';
                             <span>Fecha: 28/febrero/2016</span>
                         </div>
                         <div class="col-xs-12 col-sm-4 col-md-3 pull-right offsetUp">
-                            <input id="input-1" class="rating rating-loading" data-show-clear="false" data-show-caption="false" size="sm">
+                            <input id="input-1" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="sm">
                             <button type="button" onclick="location.href='formularioImagen.php';" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-edit"></span> Editar información</button>
                             <button type="button" onclick="location.href='usuarioIndex.php';" class="btn btn-danger btn-block"><span class="glyphicon glyphicon-remove"></span> Eliminar post</button>
                         </div>
