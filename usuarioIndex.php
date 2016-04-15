@@ -168,7 +168,7 @@ require_once 'doctype.php';
 
                             <div class="col-sm-6 col-md-3">
                                 <div class="thumbnail">
-                                    <a href="publicacionIndex.php">
+                                    <a href="usuarioIndex.php">
                                         <img src="assets/img/avatar.png" alt="Demostración">
                                     </a>
                                 </div>
