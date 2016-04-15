@@ -3,86 +3,159 @@ require_once 'doctype.php';
 ?>
 
 <body>
-
-    <?php
+	
+	<?php
     require_once 'header.php';
     ?>
 
-    <div id="wrapper" class="main-otro">
-        <aside id="sidebar-wrapper">
-            <nav>
-                <ul class="sidebar-nav">
-                    <figure>
-                        <picture>
-                            <img class="center-block avatar" src="assets/img/avatar.png" alt="Nombre de usuario">
-                        </picture>
-                    </figure>
-                    <h2 class="text-center blanco">Nombre de usuario</h2>
-                    <div class="col-xs-12">
-                        <button class="btn btn-warning btn-lg btn-block" name="seguir" id="seguir"><span class="glyphicon glyphicon-plus-sign"></span> Seguir</button>
-                        <button class="btn btn-danger btn-lg btn-block" name="seguir" id="seguir"><span class="glyphicon glyphicon-remove-sign"></span> Bloquear usuario</button>
-                        <p class="extra-space text-justify blanco">
-                            Descripción del usuario: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis beatae excepturi minus incidunt, sequi odio ut veniam officia ea architecto qui sint nostrum inventore labore iure natus, vel dolor ullam.
-                        </p>
-                    </div>
-                </ul>
-            </nav>
-        </aside>
+    <div class="container main-usrIndex">
 
-        <section id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="extra-space">
-                    <a href="#menu-toggle" class="btn btn-warning" id="menu-toggle"><i class="glyphicon glyphicon-chevron-left"></i></a>
-                </div>
-                <div class="extra-space">
-                    <div class="panel panel-default">
+			<aside class="col-xs-12 col-sm-3 col-md-3">
+				
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<figure>
+							<picture>
+								<img class="center-block avatar" src="assets/img/avatar.png" alt="Nombre de usuario">
+							</picture>
+						</figure>
+
+						<h2 class="text-center">Silver Dragon</h2>
+						<div class="profile-userbuttons">
+							<button class="btn btn-warning btn-sm btn-block" name="btnSeguir" id="btnSeguir"><span class="glyphicon glyphicon-plus-sign"></span> Seguir</button>
+	                        <button class="btn btn-danger btn-sm btn-block" name="btnBloquear" id="btnBloquear"><span class="glyphicon glyphicon-ban-circle"></span> Bloquear</button>
+                        </div>
+					</div><!--Fin Panel header-->
+					<div class="panel-body">
+                    	<p>
+                    		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur maxime enim, nisi iste, vitae commodi ducimus molestias veritatis! Officiis neque facilis quaerat voluptate ab vel impedit incidunt. Eum ratione, doloremque!
+                    	</p>
+					</div>
+					<div id="menuUser" class="list-group">
+						<button id="galeria" class="list-group-item active">
+							<span class="glyphicon glyphicon-picture"></span> Galería
+						</button>
+						<button id="favoritos" class="list-group-item">
+							<span class="glyphicon glyphicon-star"></span> Favoritos
+						</button>
+						<button id="seguidores" class="list-group-item">
+							<span class="glyphicon glyphicon-eye-open"></span> Seguidores
+						</button>
+						<button id="siguiendo" class="list-group-item">
+							<span class="glyphicon glyphicon-heart-empty"></span> Siguiendo
+						</button>
+					</div>
+				</div><!--Fin Panel Usuario-->
+
+			</aside><!--Fin Aside-->
+			
+			<div class="col-xs-12 col-sm-9 col-md-9">
+				<div class="panel panel-default">
 
                         <div class="panel-heading galHeader">
                             <h2 class="galHeaderText">Galería</h2>
                         </div>
 
-                        <div class="panel-body postDesc">
+                        <div id="postDesc" class="panel-body">
 
-                            <div class="row">
+                            <div id="fila0" class="row">
 
-                                <div class="col-sm-6 col-md-3">
+                                <div id="image1" name="image1" class="col-sm-6 col-md-3">
                                     <div class="thumbnail">
                                         <a href="publicacionIndex.php">
-                                            <img src="assets/img/Imagen.png" alt="Demostración">
+                                            <img src="assets/img/Imagen8.png" alt="Demostración">
                                         </a>
                                         <div class="caption">
-                                            <h3>Título de la imagen</h3>
-                                            <button class="btn btn-warning btn-block" name="favorito" id="favorito">+Favorito</button>
+                                            <span>Título de la imagen</span>
+                                            <input id="input-1" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1">
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6 col-md-3">
+                                <div id="image2" name="image2" class="col-sm-6 col-md-3">
                                     <div class="thumbnail">
-                                        <img src="assets/img/Imagen4.jpg" alt="Demostración">
+                                    	<a href="publicacionIndex.php">
+                                        	<img src="assets/img/Imagen.png" alt="Demostración">
+                                        </a>
                                         <div class="caption">
-                                            <h3>Título de la imagen</h3>
-                                            <button class="btn btn-warning btn-block" name="favorito" id="favorito">+Favorito</button>
+                                            <span>Título de la imagen</span>
+                                            <input id="input-2" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1">
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6 col-md-3">
+                                <div id="image3" name="image3" class="col-sm-6 col-md-3">
                                     <div class="thumbnail">
-                                        <img src="assets/img/Imagen8.png" alt="Demostración">
+                                    	<a href="publicacionIndex.php">
+                                        	<img src="http://placekitten.com/g/300/200" alt="Demostración">
+                                        </a>
                                         <div class="caption">
-                                            <h3>Título de la imagen</h3>
-                                            <button class="btn btn-warning btn-block" name="favorito" id="favorito">+Favorito</button>
+                                            <span>Título de la imagen</span>
+                                            <input id="input-3" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1">
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6 col-md-3">
+                                <div id="image4" name="image4" class="col-sm-6 col-md-3">
                                     <div class="thumbnail">
-                                        <img src="assets/img/Imagen7.png" alt="Demostración">
+                                        <a href="publicacionIndex.php">
+                                        	<img src="http://placekitten.com/g/300/200" alt="Demostración">
+                                        </a>
                                         <div class="caption">
-                                            <h3>Título de la imagen</h3>
-                                            <button class="btn btn-warning btn-block" name="favorito" id="favorito">+Favorito</button>
+                                            <span>Título de la imagen</span>
+                                            <input id="input-4" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div id="fila1" class="row">
+
+                                <div id="image5" name="image5" class="col-sm-6 col-md-3">
+                                    <div class="thumbnail">
+                                        <a href="publicacionIndex.php">
+                                            <img src="http://placekitten.com/g/300/200" alt="Demostración">
+                                        </a>
+                                        <div class="caption">
+                                            <span>Título de la imagen</span>
+                                            <input id="input-5" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="image6" name="image6" class="col-sm-6 col-md-3">
+                                    <div class="thumbnail">
+                                        <a href="publicacionIndex.php">
+                                            <img src="http://placekitten.com/g/300/200" alt="Demostración">
+                                        </a>
+                                        <div class="caption">
+                                            <span>Título de la imagen</span>
+                                            <input id="input-6" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="image7" name="image7" class="col-sm-6 col-md-3">
+                                    <div class="thumbnail">
+                                        <a href="publicacionIndex.php">
+                                            <img src="http://placekitten.com/g/300/200" alt="Demostración">
+                                        </a>
+                                        <div class="caption">
+                                            <span>Título de la imagen</span>
+                                            <input id="input-7" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="image8" name="image8" class="col-sm-6 col-md-3">
+                                    <div class="thumbnail">
+                                        <a href="publicacionIndex.php">
+                                            <img src="http://placekitten.com/g/300/200" alt="Demostración">
+                                        </a>
+                                        <div class="caption">
+                                            <span>Título de la imagen</span>
+                                            <input id="input-8" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1">
                                         </div>
                                     </div>
                                 </div>
@@ -92,184 +165,20 @@ require_once 'doctype.php';
                         </div>
 
                         <div class="panel-footer postTags">
-                            <button class="btn btn-warning" name="seguidores" id="seguidores"><span class="glyphicon glyphicon-plus-sign"></span> Ver mas</button>
+                            <button class="btn btn-warning" name="btnVerMas" id="btnVerMas" onclick="verMas()"><span class="glyphicon glyphicon-plus-sign"></span> Ver mas</button>
                         </div>
 
-                    </div>
-                </div>
+                    </div><!--Fin Panel Galeria-->
+			</div>
 
-                <div class="panel panel-default">
+    </div><!--Fin Div Principal-->
 
-                    <div class="panel-heading galHeader">
-                        <h2 class="galHeaderText">Favoritos</h2>
-                    </div>
-
-                    <div class="panel-body postDesc">
-
-                        <div class="row">
-
-                            <div class="col-sm-6 col-md-3">
-                                <div class="thumbnail">
-                                    <img src="assets/img/Imagen2.png" alt="Demostración">
-                                    <div class="caption">
-                                        <h3>Título de la imagen</h3>
-                                        <button class="btn btn-warning btn-block" name="favorito" id="favorito">+Favorito</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6 col-md-3">
-                                <div class="thumbnail">
-                                    <img src="assets/img/Imagen3.png" alt="Demostración">
-                                    <div class="caption">
-                                        <h3>Título de la imagen</h3>
-                                        <button class="btn btn-warning btn-block" name="favorito" id="favorito">+Favorito</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6 col-md-3">
-                                <div class="thumbnail">
-                                    <img src="assets/img/Imagen10.png" alt="Demostración">
-                                    <div class="caption">
-                                        <h3>Título de la imagen</h3>
-                                        <button class="btn btn-warning btn-block" name="favorito" id="favorito">+Favorito</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6 col-md-3">
-                                <div class="thumbnail">
-                                    <img src="assets/img/Imagen5.png" alt="Demostración">
-                                    <div class="caption">
-                                        <h3>Título de la imagen</h3>
-                                        <button class="btn btn-warning btn-block" name="favorito" id="favorito">+Favorito</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="panel-footer postTags">
-                        <button class="btn btn-warning" name="seguidores" id="seguidores"><span class="glyphicon glyphicon-plus-sign"></span> Ver mas</button>
-                    </div>
-
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading galHeader">
-                        <h2 class="galHeaderText">Seguidores</h2>
-                    </div>
-
-                    <div class="panel-body postDesc">
-
-                        <div class="row">
-
-                            <div class="col-sm-6 col-md-3">
-                                <div class="thumbnail">
-                                    <a href="usuarioIndex.php">
-                                        <img src="assets/img/avatar.png" alt="Demostración">
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6 col-md-3">
-                                <div class="thumbnail">
-                                    <a href="publicacionIndex.php">
-                                        <img src="assets/img/avatar.png" alt="Demostración">
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6 col-md-3">
-                                <div class="thumbnail">
-                                    <a href="publicacionIndex.php">
-                                        <img src="assets/img/avatar.png" alt="Demostración">
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6 col-md-3">
-                                <div class="thumbnail">
-                                    <a href="publicacionIndex.php">
-                                        <img src="assets/img/avatar.png" alt="Demostración">
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="panel-footer postTags">
-                        <button class="btn btn-warning" name="seguidores" id="seguidores"><span class="glyphicon glyphicon-plus-sign"></span> Ver mas</button>
-                    </div>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading galHeader">
-                        <h2 class="galHeaderText">Siguiendo</h2>
-                    </div>
-
-                    <div class="panel-body postDesc">
-
-                        <div class="row">
-
-                            <div class="col-sm-6 col-md-3">
-                                <div class="thumbnail">
-                                    <a href="publicacionIndex.php">
-                                        <img src="assets/img/avatar.png" alt="Demostración">
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6 col-md-3">
-                                <div class="thumbnail">
-                                    <a href="publicacionIndex.php">
-                                        <img src="assets/img/avatar.png" alt="Demostración">
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6 col-md-3">
-                                <div class="thumbnail">
-                                    <a href="publicacionIndex.php">
-                                        <img src="assets/img/avatar.png" alt="Demostración">
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6 col-md-3">
-                                <div class="thumbnail">
-                                    <a href="publicacionIndex.php">
-                                        <img src="assets/img/avatar.png" alt="Demostración">
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="panel-footer postTags">
-                        <button class="btn btn-warning" name="seguidores" id="seguidores"><span class="glyphicon glyphicon-plus-sign"></span> Ver mas</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
 </body>
 
 <?php
 require_once 'footer.php';
 ?>
 
-<script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-</script>
+<script type="text/javascript" src="assets/js/userPage.js"></script>
 
 </html>

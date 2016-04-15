@@ -50,6 +50,9 @@ function llenarGaleria(){
 			contadorImagen++;
 		}
 
+		$('#fila' + contadorFilas).css('display', 'none');
+		$('#fila' + contadorFilas).fadeIn('slow');
+
 		limite += limite;
 		contadorFilas++;
 	}
@@ -81,25 +84,35 @@ function llenarSeguidores(){
 			contadorImagen++;
 		}
 
+		$('#fila' + contadorFilas).css('display', 'none');
+		$('#fila' + contadorFilas).fadeIn('slow');
+
 		limite += limite;
 		contadorFilas++;
 	}
 }
 
-var btnVerMas = $('#btnVerMas');
-var contadorFilas = 2;
-var contadorInputs = 9;
-btnVerMas.click(function(){
-	$('#postDesc')
-		.append(
-				$('#fila0')
-					.clone()
-						.attr('id', 'fila'+ contadorFilas)
-			);
-	$('#fila' + contadorFilas)
-		.css('display', 'none')
-	$('#fila' + contadorFilas)
-		.fadeIn('slow');
-	contadorFilas++;
+function verMas(){
+	var contadorFilas = $('#postDesc .row').length;
+	var contadorInputs = $('#postDesc .row .thumbnail').length + 1;
+	var clon = $('#fila0').clone();
 
-});
+	clon.attr('id', 'fila' + contadorFilas);
+
+	for(var i = 1; i <= 4; i++){
+		if(clon.find('#image' + i).length){
+			clon.find('#image' + i).attr('id','image' + contadorInputs);
+			clon.find('#image' + contadorInputs).attr('name','image' + contadorInputs);
+		}
+		else{
+			clon.find('#avatar' + i).attr('id','avatar' + contadorInputs);
+			clon.find('#avatar' + contadorInputs).attr('name','avatar' + contadorInputs);
+		}
+		contadorInputs++;
+	}
+
+	clon.css('display', 'none');
+	clon.fadeIn('slow');
+
+	$('#postDesc').append(clon);
+}
