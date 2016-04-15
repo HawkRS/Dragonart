@@ -36,7 +36,7 @@
                     <li>
                         <a href="formularioIniciarSesion.php"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="formularioImagen.php"><span class="glyphicon glyphicon-upload"></span> Subir imagen</a>
                     </li>
                     <li class="dropdown">
