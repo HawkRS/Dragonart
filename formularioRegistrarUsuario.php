@@ -31,41 +31,46 @@ require_once ('doctype.php');
             </div>
             
             <div class="panel-body postDesc">
-                <form id="registroUsr" name="registroUsr" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="javascript:alert( 'success!' );" method="post">
+                <form id="registroUsr" name="registroUsr" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="javascript:alert( 'success!' );" method="post" novalidate>
 
-                    <div class="form-group">
-                        <label for="nombre">Nombre: </label>
+                    <div id="div-nombre" class="form-group">
+                        <label class="control-label" for="nombre">Nombre: </label>
                         <div>
                             <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre" />
                         </div>
+                        <span id="err-nombre" class="help-inline text-danger hidden"></span>
                     </div>
 
-                    <div class="form-group">
-                        <label for="alias">Alias: </label>
+                    <div id="div-alias" class="form-group">
+                        <label class="control-label" for="alias">Alias: </label>
                         <div>
                             <input type="text" class="form-control" id="alias" placeholder="Alias" name="alias" />
                         </div>
+                        <span id="err-alias" class="help-inline text-danger hidden"></span>
                     </div>
 
-                    <div class="form-group">
-                        <label for="correo">Correo: </label>
+                    <div id="div-correo" class="form-group">
+                        <label class="control-label" for="correo">Correo: </label>
                         <div>
                             <input type="email" class="form-control" id="correo" placeholder="alguien@ejemplo.com" name="correo" />
                         </div>
+                        <span id="err-correo" class="help-inline text-danger hidden"></span>
                     </div>
 
-                    <div class="form-group">
-                        <label for="password">Contraseña: </label>
+                    <div id="div-password" class="form-group">
+                        <label class="control-label" for="password">Contraseña: </label>
                         <div>
                             <input type="password" class="form-control" id="password" placeholder="Contreseña" name="password" />
                         </div>
+                        <span id="err-password" class="help-inline text-danger hidden"></span>
                     </div>
 
-                    <div class="form-group">
-                        <label for="passwordConfirmacion">Repetir contraseña: </label>
+                    <div id="div-passwordConfirmacion" class="form-group">
+                        <label class="control-label" for="passwordConfirmacion">Repetir contraseña: </label>
                         <div>
                             <input type="password" class="form-control" id="passwordConfirmacion" placeholder="Repetir contreseña" name="passwordConfirmacion" />
                         </div>
+                        <span id="err-passwordConfirmacion" class="help-inline text-danger hidden"></span>
                     </div>
 
                     <div class="form-group">
@@ -86,10 +91,11 @@ require_once ('footer.php');
 ?>
 
 <script>
-    $('#registroUsr').submit(function(event){
+    $('#registroUsr').on('submit',function(event){
         var inputs = $('#registroUsr input');
-        if(!(validarInputs(inputs))){
-            event.preventDefault();
+        event.preventDefault();
+        if(validarInputs(inputs)){
+            this.submit();
         }   
     });
 </script>
