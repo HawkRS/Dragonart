@@ -11,6 +11,7 @@
         <link type="text/css" rel="stylesheet" href="assets/css/external/theme-krajee-svg.css" />
         <link type="text/css" rel="stylesheet" href="assets/css/external/bootstrap-social.css" />
         <link type="text/css" rel="stylesheet" href="assets/css/font-awesome.css" />
+        <link type="text/css" rel="stylesheet" href="assets/css/external/checkbox.css" />
         
         <link href='https://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
         <style>
