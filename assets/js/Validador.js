@@ -40,6 +40,30 @@ function quitarError(tempId, div){
 	$(tempId).addClass('hidden');
 }
 
+function validarTextArea(txtArea){
+	var tempId = '#err-';
+	var bandera = true;
+
+	if(estaVacio(txtArea.val())){
+		tempId = tempId + txtArea.attr('id');
+		if(tempId === '#err-descripcion'){
+			ponerError(tempId, txtArea.attr('id'), 'Debes escribir un contenido.');
+		}
+		else{
+			ponerError(tempId, txtArea.attr('id'), 'Debes escribir algo sobre tí.');
+		}
+		bandera = false;
+	}
+	else{
+		tempId = tempId + txtArea.attr('id');
+		quitarError(tempId, txtArea.attr('id'));
+		bandera = true;
+	}
+
+	return bandera;
+
+}
+
 function validarInputs(inputs){
 	
 	var bandera = true;
@@ -84,6 +108,27 @@ function validarInputs(inputs){
 					if(!bandera){
 						tempId = tempId + temp.attr('id');
 						ponerError(tempId, temp.attr('id'), 'La contraseña debe ser mínimo de 8 caracteres.');
+					}
+					else{
+						tempId = tempId + temp.attr('id');
+						quitarError(tempId, temp.attr('id'));
+					}
+				}
+				break;
+
+			case 'logPass':
+				tempPass = temp.val();
+				bandera = !(estaVacio(temp.val()));
+				if(!bandera){
+					tempId = tempId + temp.attr('id');
+					ponerError(tempId, temp.attr('id'), 'Debes escribir una contraseña.');
+				}
+				else{
+					quitarError(tempId, temp.attr('id'));
+					bandera = contrasenaValida(tempPass);
+					if(!bandera){
+						tempId = tempId + temp.attr('id');
+						ponerError(tempId, temp.attr('id'), 'La contraseña es inválida.');
 					}
 					else{
 						tempId = tempId + temp.attr('id');

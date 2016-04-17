@@ -17,20 +17,22 @@ require_once ('doctype.php');
             </div>
             <div class="panel-body postDesc">
                 <p>Ingresa tu nueva contraseña</p>
-                <form id="nuevaContrasena" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="javascript:alert( 'success!' );" method="post">
+                <form id="nuevaContrasena" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="javascript:alert( 'success!' );" method="post" novalidate>
 
-                    <div class="form-group">
-                        <label for="password">Contraseña: </label>
+                    <div id="div-password" class="form-group">
+                        <label class="control-label" for="password">Contraseña: </label>
                         <div>
                             <input type="password" class="form-control" id="password" placeholder="Contreseña" name="password" />
                         </div>
+                        <span id="err-password" class="help-inline text-danger hidden"></span>
                     </div>
 
-                    <div class="form-group">
-                        <label for="passwordConfirmacion">Repetir contraseña: </label>
+                    <div id="div-passwordConfirmacion" class="form-group">
+                        <label class="control-label" for="passwordConfirmacion">Repetir contraseña: </label>
                         <div>
                             <input type="password" class="form-control" id="passwordConfirmacion" placeholder="Repetir contreseña" name="passwordConfirmacion" />
                         </div>
+                        <span id="err-passwordConfirmacion" class="help-inline text-danger hidden"></span>
                     </div>
 
                     <div class="form-group">
@@ -50,10 +52,11 @@ require_once ('footer.php');
 ?>
 
 <script>
-    $('#nuevaContrasena').submit(function(event){
+    $('#nuevaContrasena').on('submit',function(event){
         var inputs = $('#nuevaContrasena input');
-        if(!(validarInputs(inputs))){
-            event.preventDefault();
+        event.preventDefault();
+        if(validarInputs(inputs)){
+            this.submit();
         }   
     });
 </script>

@@ -15,10 +15,10 @@ require_once ('doctype.php');
                 </div>
             </div>
             <div class="panel-body postDesc">
-                <form id="busqueda" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="javascript:alert( 'success!' );" method="post">
+                <form id="busqueda" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="javascript:buscar();" method="post" novalidate>
 
-                    <div class="form-group">
-                        <label for="buscarPor">Buscar por: </label>
+                    <div id="div-buscarPor" class="form-group">
+                        <label class="control-label" for="buscarPor">Buscar por: </label>
                         <div>
                             <select class="form-control" id="buscarPor" name="buscarPor">
                                 <option value="1">Alias de usuario</option> 
@@ -28,11 +28,12 @@ require_once ('doctype.php');
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="palabraClave">Palabra clave: </label>
+                    <div id="div-palabraClave" class="form-group">
+                        <label class="control-label" for="palabraClave">Palabra clave: </label>
                         <div>
                             <input type="text" class="form-control" id="palabraClave" placeholder="Ejemplo: dragon" name="palabraClave"/>
                         </div>
+                        <span id="err-palabraClave" class="help-inline text-danger hidden"></span>
                     </div>
 
                     <div class="form-group">
@@ -44,258 +45,117 @@ require_once ('doctype.php');
             </div>
         </div>
 
-        <div class="panel panel-default">
-            <div class="panel-heading postHeader">
+        <div id="panelResultado" class="panel panel-default hidden">
+
+            <div class="panel-heading galHeader">
                 <h2 class="galHeaderText">Usuarios</h2>
             </div>
 
-            <div class="panel-body postDesc">
+            <div id="postDesc" class="panel-body">
 
-                <div class="row">
+                <div id="fila0" class="row">
 
-                    <div class="col-sm-6 col-md-3">
+                    <div id="avatar1" name="avatar1" class="col-sm-6 col-md-3">
                         <div class="thumbnail">
-                            <a href="publicacionIndex.php">
+                            <a href="usuarioIndex.php">
                                 <img src="assets/img/avatar.png" alt="Demostración">
                             </a>
-                        </div>
-                        <div class="caption text-center">
-                            <span>Usuario</span>
+                            <div class="caption text-center">
+                                <span>Usuario</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col-sm-6 col-md-3">
+                    <div id="avatar2" name="avatar2" class="col-sm-6 col-md-3">
                         <div class="thumbnail">
-                            <a href="publicacionIndex.php">
+                            <a href="usuarioIndex.php">
                                 <img src="assets/img/avatar.png" alt="Demostración">
                             </a>
-                        </div>
-                        <div class="caption text-center">
-                            <span>Usuario</span>
+                            <div class="caption text-center">
+                                <span>Usuario</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col-sm-6 col-md-3">
+                    <div id="iavatar" name="iavatar" class="col-sm-6 col-md-3">
                         <div class="thumbnail">
-                            <a href="publicacionIndex.php">
+                            <a href="usuarioIndex.php">
                                 <img src="assets/img/avatar.png" alt="Demostración">
                             </a>
-                        </div>
-                        <div class="caption text-center">
-                            <span>Usuario</span>
+                            <div class="caption text-center">
+                                <span>Usuario</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col-sm-6 col-md-3">
+                    <div id="avatar4" name="avatar4" class="col-sm-6 col-md-3">
                         <div class="thumbnail">
-                            <a href="publicacionIndex.php">
+                            <a href="usuarioIndex.php">
                                 <img src="assets/img/avatar.png" alt="Demostración">
                             </a>
-                        </div>
-                        <div class="caption text-center">
-                            <span>Usuario</span>
+                            <div class="caption text-center">
+                                <span>Usuario</span>
+                            </div>
                         </div>
                     </div>
 
+                </div>
+
+                <div id="fila1" class="row">
+
+                    <div id="avatar5" name="avatar5" class="col-sm-6 col-md-3">
+                        <div class="thumbnail">
+                            <a href="usuarioIndex.php">
+                                <img src="assets/img/avatar.png" alt="Demostración">
+                            </a>
+                            <div class="caption text-center">
+                                <span>Usuario</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="avatar6" name="avatar6" class="col-sm-6 col-md-3">
+                        <div class="thumbnail">
+                            <a href="usuarioIndex.php">
+                                <img src="assets/img/avatar.png" alt="Demostración">
+                            </a>
+                            <div class="caption text-center">
+                                <span>Usuario</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="avatar7" name="avatar7" class="col-sm-6 col-md-3">
+                        <div class="thumbnail">
+                            <a href="usuarioIndex.php">
+                                <img src="assets/img/avatar.png" alt="Demostración">
+                            </a>
+                            <div class="caption text-center">
+                                <span>Usuario</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="avatar8" name="avatar8" class="col-sm-6 col-md-3">
+                        <div class="thumbnail">
+                            <a href="usuarioIndex.php">
+                                <img src="assets/img/avatar.png" alt="Demostración">
+                            </a>
+                            <div class="caption text-center">
+                                <span>Usuario</span>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
 
             </div>
 
             <div class="panel-footer postTags">
-                <ul class="pagination">
-                    <li class="disabled">
-                        <a href="#">&laquo;</a>
-                    </li>
-                    <li class="active">
-                        <a href="#">1 <span class="sr-only">(página actual)</span></a>
-                    </li>
-                    <li>
-                        <a href="#">2</a>
-                    </li>
-                    <li>
-                        <a href="#">3</a>
-                    </li>
-                    <li>
-                        <a href="#">4</a>
-                    </li>
-                    <li>
-                        <a href="#">5</a>
-                    </li>
-                    <li>
-                        <a href="#">6</a>
-                    </li>
-                    <li>
-                        <a href="#">7</a>
-                    </li>
-                    <li>
-                        <a href="#">8</a>
-                    </li>
-                    <li>
-                        <a href="#">9</a>
-                    </li>
-                    <li>
-                        <a href="#">10</a>
-                    </li>
-                    <li>
-                        <a href="#">&raquo;</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="panel panel-default">
-            <div class="panel-heading postHeader">
-                <h2 class="galHeaderText">Imágenes</h2>
+                <button class="btn btn-warning" name="btnVerMas" id="btnVerMas" onclick="verMas()"><span class="glyphicon glyphicon-plus-sign"></span> Ver mas</button>
             </div>
 
-            <div class="panel-body postDesc">
-
-                <div class="row">
-
-                    <div class="col-sm-6 col-md-3">
-                        <div class="thumbnail">
-                            <a href="publicacionIndex.php">
-                                <img src="assets/img/Imagen.png" alt="Demostración">
-                            </a>
-                        </div>
-                        <div class="caption text-center">
-                            <span>Título imagen</span><br>
-                            <button class="btn btn-warning" name="favorito" id="favorito" type="button">+Favorito</button>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3">
-                        <div class="thumbnail">
-                            <a href="publicacionIndex.php">
-                                <img src="assets/img/Imagen2.png" alt="Demostración">
-                            </a>
-                        </div>
-                        <div class="caption text-center">
-                            <span>Título imagen</span><br>
-                            <button class="btn btn-warning" name="favorito" id="favorito" type="button">+Favorito</button>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3">
-                        <div class="thumbnail">
-                            <a href="publicacionIndex.php">
-                                <img src="assets/img/Imagen3.png" alt="Demostración">
-                            </a>
-                        </div>
-                        <div class="caption text-center">
-                            <span>Título imagen</span><br>
-                            <button class="btn btn-warning" name="favorito" id="favorito" type="button">+Favorito</button>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3">
-                        <div class="thumbnail">
-                            <a href="publicacionIndex.php">
-                                <img src="assets/img/Imagen4.jpg" alt="Demostración">
-                            </a>
-                        </div>
-                        <div class="caption text-center">
-                            <span>Título imagen</span><br>
-                            <button class="btn btn-warning" name="favorito" id="favorito" type="button">+Favorito</button>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="row">
-
-                    <div class="col-sm-6 col-md-3">
-                        <div class="thumbnail">
-                            <a href="publicacionIndex.php">
-                                <img src="assets/img/Imagen5.png" alt="Demostración">
-                            </a>
-                        </div>
-                        <div class="caption text-center">
-                            <span>Título imagen</span><br>
-                            <button class="btn btn-warning" name="favorito" id="favorito" type="button">+Favorito</button>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3">
-                        <div class="thumbnail">
-                            <a href="publicacionIndex.php">
-                                <img src="assets/img/Imagen6.png" alt="Demostración">
-                            </a>
-                        </div>
-                        <div class="caption text-center">
-                            <span>Título imagen</span><br>
-                            <button class="btn btn-warning" name="favorito" id="favorito" type="button">+Favorito</button>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3">
-                        <div class="thumbnail">
-                            <a href="publicacionIndex.php">
-                                <img src="assets/img/Imagen7.png" alt="Demostración">
-                            </a>
-                        </div>
-                        <div class="caption text-center">
-                            <span>Título imagen</span><br>
-                            <button class="btn btn-warning" name="favorito" id="favorito" type="button">+Favorito</button>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3">
-                        <div class="thumbnail">
-                            <a href="publicacionIndex.php">
-                                <img src="assets/img/Imagen8.png" alt="Demostración">
-                            </a>
-                        </div>
-                        <div class="caption text-center">
-                            <span>Título imagen</span><br>
-                            <button class="btn btn-warning" name="favorito" id="favorito" type="button">+Favorito</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="panel-footer postTags">
-                <ul class="pagination">
-                    <li class="disabled">
-                        <a href="#">&laquo;</a>
-                    </li>
-                    <li class="active">
-                        <a href="#">1 <span class="sr-only">(página actual)</span></a>
-                    </li>
-                    <li>
-                        <a href="#">2</a>
-                    </li>
-                    <li>
-                        <a href="#">3</a>
-                    </li>
-                    <li>
-                        <a href="#">4</a>
-                    </li>
-                    <li>
-                        <a href="#">5</a>
-                    </li>
-                    <li>
-                        <a href="#">6</a>
-                    </li>
-                    <li>
-                        <a href="#">7</a>
-                    </li>
-                    <li>
-                        <a href="#">8</a>
-                    </li>
-                    <li>
-                        <a href="#">9</a>
-                    </li>
-                    <li>
-                        <a href="#">10</a>
-                    </li>
-                    <li>
-                        <a href="#">&raquo;</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        </div><!--Fin Panel Galeria-->
 
     </div>
 </body>
@@ -304,13 +164,42 @@ require_once ('doctype.php');
 require_once ('footer.php');
 ?>
 
+<script type="text/javascript" src="assets/js/userPage.js"></script>
 <script>
-    $('#busqueda').submit(function(event){
+    $('#busqueda').on('submit',function(event){
         var inputs = $('#busqueda input');
-        if(!(validarInputs(inputs))){
-            event.preventDefault();
+        event.preventDefault();
+        if(validarInputs(inputs)){
+            this.submit();
         }   
     });
+
+    function buscar(){
+
+        if($('#panelResultado').hasClass('hidden')){
+            $('#panelResultado').removeClass('hidden');
+        }
+
+        switch($('option:selected').val()){
+            case '1':
+                $('.galHeader > h2').text('Resultado de usuarios');
+                llenarSeguidores();
+                break;
+
+            case '2':
+                $('.galHeader > h2').text('Resultado de imágenes por título');
+                llenarGaleria();
+                break;
+
+            case '3':
+                $('.galHeader > h2').text('Resultado de imágenes por tag');
+                llenarGaleria();
+                break;
+
+            default:
+                break;
+        }
+    }
 </script>
 
 </html>

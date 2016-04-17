@@ -18,19 +18,21 @@ require_once ('doctype.php');
                 </div>
 
                 <div class="panel-body postDesc">
-                    <form id="inicioSesion" class="form-horizontal col-xs-12 col-md-12" action="javascript:alert( 'success!' );" method="post">
-                        <div class="form-group">
-                            <label for="correo">Correo: </label>
+                    <form id="inicioSesion" class="form-horizontal col-xs-12 col-md-12" action="javascript:alert( 'success!' );" method="post" novalidate>
+                        <div id="div-correo" class="form-group">
+                            <label class="control-label" for="correo">Correo: </label>
                             <div>
                                 <input type="email" class="form-control" id="correo" placeholder="alguien@ejemplo.com" name="correo" />
                             </div>
+                            <span id="err-correo" class="help-inline text-danger hidden"></span>
                         </div>
 
-                        <div class="form-group">
-                            <label for="password">Contraseña: </label>
+                        <div id="div-logPass" class="form-group">
+                            <label class="control-label" for="password">Contraseña: </label>
                             <div>
-                                <input type="password" class="form-control" id="password" placeholder="Contreseña" name="password" />
+                                <input type="password" class="form-control" id="logPass" placeholder="Contreseña" name="logPass" />
                             </div>
+                            <span id="err-logPass" class="help-inline text-danger hidden"></span>
                         </div>
 
                         <div class="form-group">
@@ -68,6 +70,13 @@ require_once ('footer.php');
 ?>
 
 <script>
+    $('#inicioSesion').on('submit',function(event){
+        var inputs = $('#inicioSesion input');
+        event.preventDefault();
+        if(validarInputs(inputs)){
+            this.submit();
+        }   
+    });
     $('#inicioSesion').submit(function(event){
         var inputs = $('#inicioSesion input');
         if(!(validarInputs(inputs))){

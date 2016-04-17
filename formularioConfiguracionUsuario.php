@@ -16,56 +16,63 @@ require_once ('doctype.php');
             </div>
             
             <div class="panel-body postDesc">
-                <form id="configUsuario" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" enctype="multipart/form-data" action="javascript:alert( 'success!' );" method="post">
+                <form id="configUsuario" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" enctype="multipart/form-data" action="javascript:alert( 'success!' );" method="post" novalidate>
 
-                    <div class="form-group">
-                        <label for="nombre">Nombre: </label>
+                    <div id="div-nombre" class="form-group">
+                        <label class="control-label" for="nombre">Nombre: </label>
                         <div>
                             <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre" />
                         </div>
+                        <span id="err-nombre" class="help-inline text-danger hidden"></span>
                     </div>
 
-                    <div class="form-group">
-                        <label for="alias">Alias: </label>
+                    <div id="div-alias" class="form-group">
+                        <label class="control-label" for="alias">Alias: </label>
                         <div>
                             <input type="text" class="form-control" id="alias" placeholder="Alias" name="alias" />
                         </div>
+                        <span id="err-alias" class="help-inline text-danger hidden"></span>
                     </div>
 
-                    <div class="form-group">
-                        <label for="correo">Correo: </label>
+                    <div id="div-correo" class="form-group">
+                        <label class="control-label" for="correo">Correo: </label>
                         <div>
                             <!--<input type="email" class="form-control" id="correo" placeholder="alguien@ejemplo.com" disabled name="correo" />-->
                             <input type="email" class="form-control" id="correo" placeholder="alguien@ejemplo.com" name="correo" />
                         </div>
+                        <span id="err-correo" class="help-inline text-danger hidden"></span>
                     </div>
 
-                    <div class="form-group">
-                        <label for="password">Contraseña: </label>
+                    <div id="div-password" class="form-group">
+                        <label class="control-label" for="password">Contraseña: </label>
                         <div>
                             <input type="password" class="form-control" id="password" placeholder="Contreseña" name="password" />
                         </div>
+                        <span id="err-password" class="help-inline text-danger hidden"></span>
                     </div>
 
-                    <div class="form-group">
-                        <label for="passwordConfirmacion">Repetir contraseña: </label>
+                    <div id="div-passwordConfirmacion" class="form-group">
+                        <label class="control-label" for="passwordConfirmacion">Repetir contraseña: </label>
                         <div>
                             <input type="password" class="form-control" id="passwordConfirmacion" placeholder="Repetir contreseña" name="passwordConfirmacion" />
                         </div>
+                        <span id="err-passwordConfirmacion" class="help-inline text-danger hidden"></span>
                     </div>
 
-                    <div class="form-group">
-                        <label for="biografia">Biografía: </label>
+                    <div id="div-biografia" class="form-group">
+                        <label class="control-label" for="biografia">Biografía: </label>
                         <div>
                             <textarea class="form-control col-xs-12 col-md-8" id="biografia" name="biografia"></textarea>
                         </div>
+                        <span id="err-biografia" class="help-inline text-danger hidden"></span>
                     </div>
 
-                    <div class="form-group">
-                        <label for="avatar">Avatar: </label>
+                    <div id="div-avatar" class="form-group">
+                        <label class="control-label" for="avatar">Avatar: </label>
                         <div>
                            <input type="file" name="filename" id="avatar" accept="image/gif, image/jpeg, image/png, image/jpg" onchange="readURL(this);">
                         </div>
+                        <span id="err-avatar" class="help-inline text-danger hidden"></span>
                     </div>
                     
                      <div class="form-group">
@@ -79,7 +86,7 @@ require_once ('doctype.php');
                             <button class="btn btn-warning btn-block" type="submit"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
                         </div>
                         <div class="col-xs-12 col-md-4">
-                            <button type="submit" onclick="location.href='index.php';" class="btn btn-danger btn-block"><span class="glyphicon glyphicon-remove-sign"></span> Eliminar cuenta</button>
+                            <button type="button" onclick="confirmarEliminacion();" class="btn btn-danger btn-block"><span class="glyphicon glyphicon-remove-sign"></span> Eliminar cuenta</button>
                         </div>
                     </div>
                 </form>
@@ -93,13 +100,25 @@ require_once ('footer.php');
 ?>
 
 <script>
-    $('#configUsuario').submit(function(event){
+    $('#configUsuario').on('submit',function(event){
         var inputs = $('#configUsuario input');
         var txtArea = $('#configUsuario textarea');
-        if(!(validarInputs(inputs)) || estaVacio(txtArea.val())){
-            event.preventDefault();
+        var banderaInput = true;
+        var banderaTxt = true;
+        event.preventDefault();
+        banderaInput = validarInputs(inputs);
+        banderaTxt = validarTextArea(txtArea);
+        if(banderaInput && banderaTxt){
+            this.submit();
         }   
     });
+
+    function confirmarEliminacion(){
+        var eliminar = confirm('Está seguro de que quiere eliminar su cuenta? Todos sus datos serán eliminados.');
+        if(eliminar){
+            location.href = 'index.php';
+        }
+    }
 </script>
 
 </html>

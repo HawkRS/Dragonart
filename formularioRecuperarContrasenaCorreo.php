@@ -18,13 +18,14 @@ require_once ('doctype.php');
             </div>
             <div class="panel-body postDesc">
                 <p>Para restablecer tu contraseña, escribe el correo con el que te registraste.</p>
-                <form id="recContrasena" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="javascript:alert( 'success!' );" method="post">
+                <form id="recContrasena" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="javascript:alert( 'success!' );" method="post" novalidate>
 
-                    <div class="form-group">
-                        <label for="correo">Correo: </label>
+                    <div id="div-correo" class="form-group">
+                        <label class="control-label" for="correo">Correo: </label>
                         <div>
                             <input type="email" class="form-control" id="correo" placeholder="alguien@ejemplo.com" name="correo" />
                         </div>
+                        <span id="err-correo" class="help-inline text-danger hidden"></span>
                     </div>
 
                     <div class="form-group">
@@ -44,12 +45,13 @@ require_once ('footer.php');
 ?>
 
 <script>
-    $('#recContrasena').submit(function(event){
+    $('#recContrasena').on('submit',function(event){
         var inputs = $('#recContrasena input');
-        if(!(validarInputs(inputs))){
-            event.preventDefault();
+        event.preventDefault();
+        if(validarInputs(inputs)){
+            this.submit();
         }   
-    });
+    }); 
 </script>
 
 </html>

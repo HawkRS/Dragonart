@@ -20,25 +20,28 @@ require_once ('doctype.php');
 
                 <form id="contacto" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="javascript:alert( 'success!' );" method="post">
 
-                    <div class="form-group">
-                        <label for="nombre">Nombre: </label>
+                    <div id="div-nombre" class="form-group">
+                        <label class="control-label" for="nombre">Nombre: </label>
                         <div>
                             <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre" />
                         </div>
+                        <span id="err-nombre" class="help-inline text-danger hidden"></span>
                     </div>
 
-                    <div class="form-group">
-                        <label for="correo" >Correo: </label>
+                    <div id="div-correo" class="form-group">
+                        <label class="control-label" for="correo" >Correo: </label>
                         <div>
                             <input type="email" class="form-control" id="correo" placeholder="alguien@ejemplo.com" name="correo" />
                         </div>
+                        <span id="err-correo" class="help-inline text-danger hidden"></span>
                     </div>
 
-                    <div class="form-group">
-                        <label for="descripcion">Descripción: </label>
+                    <div id="div-descripcion" class="form-group">
+                        <label class="control-label" for="descripcion">Descripción: </label>
                         <div>
                             <textarea class="form-control" id="descripcion" rows="5" name="descripcion" placeholder="Escríbenos tus comentarios..."></textarea>
                         </div>
+                        <span id="err-descripcion" class="help-inline text-danger hidden"></span>
                     </div>
 
                     <div class="form-group">
@@ -57,11 +60,16 @@ require_once ('footer.php');
 ?>
 
 <script>
-    $('#contacto').submit(function(event){
+    $('#contacto').on('submit',function(event){
         var inputs = $('#contacto input');
         var txtArea = $('#contacto textarea');
-        if(!(validarInputs(inputs)) || estaVacio(txtArea.val())){
-            event.preventDefault();
+        var banderaInput = true;
+        var banderaTxt = true;
+        event.preventDefault();
+        banderaInput = validarInputs(inputs);
+        banderaTxt = validarTextArea(txtArea);
+        if(banderaInput && banderaTxt){
+            this.submit();
         }   
     });
 </script>
