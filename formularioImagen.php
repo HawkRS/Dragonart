@@ -42,7 +42,7 @@ require_once ('doctype.php');
                     <div id="div-descripcion" class="form-group">
                         <label class="control-label" for="descripcion">Descripción: </label>
                         <div>
-                            <textarea class="form-control" id="descripcion" name="descripcion"></textarea>
+                            <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Descripción o comentario de la imagen"></textarea>
                         </div>
                         <span id="err-descripcion" class="help-inline text-danger hidden"></span>
                     </div>
