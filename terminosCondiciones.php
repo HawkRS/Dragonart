@@ -7,8 +7,8 @@ require_once 'doctype.php';
     <?php
     require_once 'header.php';
     ?>
-    <div id="wrapper" class="main-otro">
-        <section id="page-content-wrapper">
+    <div class="main-pubIndex">
+        <section>
             <div class="container-fluid">
                 <div class="col-md-10">
                     <h1>Términos y condiciones</h1>
@@ -41,12 +41,5 @@ require_once 'doctype.php';
 <?php
 require_once 'footer.php';
 ?>
-
-<script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-</script>
 
 </html>
