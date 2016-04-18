@@ -19,5 +19,7 @@
                 font-family: 'Noto Sans', sans-serif;
             }
         </style>
+
+        <link rel="icon" type="image/png" href="assets/img/icon-sm.png" />
         
     </head>
