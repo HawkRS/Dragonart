@@ -79,13 +79,6 @@ h2 {
 
 /*CSS PARA NOTIFICACIONES*/
 
-.panel-heading span
-{
-    margin-top: -26px;
-    font-size: 15px;
-    margin-right: -12px;
-}
-
 .clickable {
     display: inline-block;
     padding: 6px 12px;
