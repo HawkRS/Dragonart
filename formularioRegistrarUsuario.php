@@ -24,10 +24,6 @@ require_once ('doctype.php');
                 <a class="btn btn-block btn-social btn-twitter">
                     <span class="fa fa-twitter"></span> Regístrate con Twitter
                 </a>
-
-                <a class="btn btn-block btn-social btn-google">
-                    <span class="fa fa-google"></span> Regístrate sesión con Google+
-                </a>
             </div>
             
             <div class="panel-body postDesc">
