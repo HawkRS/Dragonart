@@ -55,10 +55,6 @@ require_once ('doctype.php');
                     <a class="btn btn-block btn-social btn-twitter">
                         <span class="fa fa-twitter"></span> Iniciar sesión con Twitter
                     </a>
-
-                    <a class="btn btn-block btn-social btn-google">
-                        <span class="fa fa-google"></span> Iniciar sesión con Google+
-                    </a>
                 </div>
             </div>
         </div>
