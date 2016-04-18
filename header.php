@@ -5,9 +5,9 @@
 
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menuHeader">
                     <span class="sr-only">Menú</span>
-                    <span class="icon-bar blanco"></span>
-                    <span class="icon-bar blanco"></span>
-                    <span class="icon-bar blanco"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand text-hide logo" href="index.php">
                     Dragon art
