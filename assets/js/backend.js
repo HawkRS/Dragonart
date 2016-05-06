@@ -5,25 +5,68 @@ menu.click(function(){
 		$(this).addClass('active');
 		if($(this).attr('id') === 'imagenes'){
 			$('.galHeader > h2').text('Imágenes');
-			$('.panel-footer > button').attr('onclick', 'verMasImagenes()');
+			$('#btnVerMas').attr('onclick', 'verMasImagenes()');
 			cargarImagenes();
 		}
 		if($(this).attr('id') === 'usuarios'){
 			$('.galHeader > h2').text('Usuarios');
-			$('.panel-footer > button').attr('onclick', 'verMasUsuarios()');
+			$('#btnVerMas').attr('onclick', 'verMasUsuarios()');
 			cargarUsuarios();
 		}
 		if($(this).attr('id') === 'comentarios'){
 			$('.galHeader > h2').text('Comentarios');
-			$('.panel-footer > button').attr('onclick', 'verMasComentarios()');
+			$('#btnVerMas').attr('onclick', 'verMasComentarios()');
 			cargarComentarios();
 		}
 	}
 });
 
+function eliminar(){
+	var contador = $('.check').length;
+	console.log(contador);
+	var lista = $('.check');
+	for(var i = contador; i > 0; i--){
+        if(lista.eq(i-1).prop('checked')){
+            $('#fila' + i).remove();
+        }
+    }
+
+    lista = $('#tablaCuerpo > tr');
+    contador = $('#tablaCuerpo > tr').length;
+    for(var i = 0; i < contador; i++){
+        lista.eq(i).attr('id','fila' + (i+1));
+    }
+}
+
+var mainCheck = $('#mainCheck');
+mainCheck.click(function(){
+	console.log(this.checked);
+	if(this.checked === false){
+		$('.check:checked').prop('checked',false);
+	}
+	else{
+		$('.check:not(:checked)').prop('checked',true);
+	}
+});
+
+function activaCheckbox(){
+	var mainCheck = $('#mainCheck');
+	mainCheck.click(function(){
+		console.log(this.checked);
+		if(this.checked === false){
+			$('.check:checked').prop('checked',false);
+		}
+		else{
+			$('.check:not(:checked)').prop('checked',true);
+		}
+	});
+}
+
 function cargarImagenes(){
 	var encabezado = $('#tablaEncabezado');
 	encabezado.empty();
+	encabezado.append('<th><input type="checkbox" id="mainCheck"></th>');
+	activaCheckbox();
 	encabezado.append('<th>ID</th>');
 	encabezado.append('<th>Imagen</th>');
 	encabezado.append('<th>Nombre</th>');
@@ -36,6 +79,7 @@ function cargarImagenes(){
 	cuerpo.empty();
 	for(var i = 1; i <= 5; i++){
 		cuerpo.append('<tr id="fila' + i + '"></tr>');
+		$('#fila' + i).append('<td><input type="checkbox" class="check"></td>');
 		$('#fila' + i).append('<td>' + i + '</td>');
 		$('#fila' + i).append('<td><img class="img-sm" src="http://placekitten.com/300/200" alt="Demostración"></td>');
 		$('#fila' + i).append('<td>Gatito</td>');
@@ -54,6 +98,7 @@ function verMasImagenes(){
 	console.log(contador);
 	for(var i = contador; i <= (contador+4); i++){
 		cuerpo.append('<tr id="fila' + i + '"></tr>');
+		$('#fila' + i).append('<td><input type="checkbox" class="check"></td>');
 		$('#fila' + i).append('<td>' + i + '</td>');
 		$('#fila' + i).append('<td><img class="img-sm" src="http://placekitten.com/300/200" alt="Demostración"></td>');
 		$('#fila' + i).append('<td>Gatito</td>');
@@ -69,6 +114,8 @@ function verMasImagenes(){
 function cargarUsuarios(){
 	var encabezado = $('#tablaEncabezado');
 	encabezado.empty();
+	encabezado.append('<th><input type="checkbox" id="mainCheck"></th>');
+	activaCheckbox();
 	encabezado.append('<th>ID</th>');
 	encabezado.append('<th>Avatar</th>');
 	encabezado.append('<th>Nombre</th>');
@@ -80,6 +127,7 @@ function cargarUsuarios(){
 	cuerpo.empty();
 	for(var i = 1; i <= 5; i++){
 		cuerpo.append('<tr id="fila' + i + '"></tr>');
+		$('#fila' + i).append('<td><input type="checkbox" class="check"></td>');
 		$('#fila' + i).append('<td>' + i + '</td>');
 		$('#fila' + i).append('<td><img src="http://placekitten.com/50/50" alt="Demostración"></td>');
 		$('#fila' + i).append('<td>Mauricio</td>');
@@ -95,6 +143,7 @@ function verMasUsuarios(){
 	console.log(contador);
 	for(var i = contador; i <= (contador+4); i++){
 		cuerpo.append('<tr id="fila' + i + '"></tr>');
+		$('#fila' + i).append('<td><input type="checkbox" class="check"></td>');
 		$('#fila' + i).append('<td>' + i + '</td>');
 		$('#fila' + i).append('<td><img src="http://placekitten.com/50/50" alt="Demostración"></td>');
 		$('#fila' + i).append('<td>Mauricio</td>');
@@ -107,6 +156,8 @@ function verMasUsuarios(){
 function cargarComentarios(){
 	var encabezado = $('#tablaEncabezado');
 	encabezado.empty();
+	encabezado.append('<th><input type="checkbox" id="mainCheck"></th>');
+	activaCheckbox();
 	encabezado.append('<th>ID</th>');
 	encabezado.append('<th>Avatar</th>');
 	encabezado.append('<th>Alias</th>');
@@ -117,6 +168,7 @@ function cargarComentarios(){
 	cuerpo.empty();
 	for(var i = 1; i <= 5; i++){
 		cuerpo.append('<tr id="fila' + i + '"></tr>');
+		$('#fila' + i).append('<td><input type="checkbox" class="check"></td>');
 		$('#fila' + i).append('<td>' + i + '</td>');
 		$('#fila' + i).append('<td><img src="http://placekitten.com/50/50" alt="Demostración"></td>');
 		$('#fila' + i).append('<td>Silver</td>');
@@ -131,6 +183,7 @@ function verMasComentarios(){
 	console.log(contador);
 	for(var i = contador; i <= (contador+4); i++){
 		cuerpo.append('<tr id="fila' + i + '"></tr>');
+		$('#fila' + i).append('<td><input type="checkbox" class="check"></td>');
 		$('#fila' + i).append('<td>' + i + '</td>');
 		$('#fila' + i).append('<td><img src="http://placekitten.com/50/50" alt="Demostración"></td>');
 		$('#fila' + i).append('<td>Silver</td>');

@@ -1,11 +1,11 @@
 <?php
-require_once 'app/views/doctype.php';
+require_once 'doctype.php';
 ?>
 
 <body>
 	
 	<?php
-    require_once 'app/views/header.php';
+    require_once 'header.php';
     ?>
 
     <div class="container main-usrIndex">
@@ -49,6 +49,7 @@ require_once 'app/views/doctype.php';
 						<table class="table table-hover">
 							<thead>
 								<tr id="tablaEncabezado">
+									<th><input type="checkbox" id="mainCheck"></th>
 									<th>ID</th>
 									<th>Imagen</th>
 									<th>Nombre</th>
@@ -60,6 +61,7 @@ require_once 'app/views/doctype.php';
 							</thead>
 							<tbody id="tablaCuerpo">
 								<tr id="fila1">
+									<td><input type="checkbox" class="check"></td>
 									<td>1</td>
 									<td><img class="img-sm" src="http://placekitten.com/g/300/200" alt="Demostración"></td>
 									<td>King koopa</td>
@@ -69,6 +71,7 @@ require_once 'app/views/doctype.php';
 									<td><a href="#">Eliminar</a></td>
 								</tr>
 								<tr id="fila2">
+									<td><input type="checkbox" class="check"></td>
 									<td>2</td>
 									<td><img class="img-sm" src="http://placekitten.com/g/300/200" alt="Demostración"></td>
 									<td>Silver nerd</td>
@@ -78,6 +81,7 @@ require_once 'app/views/doctype.php';
 									<td><a href="#">Eliminar</a></td>
 								</tr>
 								<tr id="fila3">
+									<td><input type="checkbox" class="check"></td>
 									<td>3</td>
 									<td><img class="img-sm" src="http://placekitten.com/g/300/200" alt="Demostración"></td>
 									<td>Random</td>
@@ -92,6 +96,7 @@ require_once 'app/views/doctype.php';
 				</div>
 				<div class="panel-footer">
 					<button class="btn btn-warning" name="btnVerMas" id="btnVerMas" onclick="verMasImagenes()"><span class="glyphicon glyphicon-plus-sign"></span> Ver mas</button>
+					<button class="btn btn-danger" name="btnEliminar" id="btnEliminar" onclick="eliminar()"><span class="glyphicon glyphicon-remove"></span> Eliminar selección</button>
 				</div>
 			</div>
 		</div>
@@ -101,7 +106,7 @@ require_once 'app/views/doctype.php';
 </body>
 
 <?php
-require_once 'app/views/footer.php';
+require_once 'footer.php';
 ?>
 
 <script type="text/javascript" src="assets/js/backend.js"></script>
