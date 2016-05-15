@@ -27,7 +27,7 @@ require_once ('doctype.php');
             </div>
             
             <div class="panel-body postDesc">
-                <form id="registroUsr" name="registroUsr" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="" method="post" novalidate>
+                <form id="registroUsr" name="registroUsr" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="app/validador.php" method="post" novalidate>
 
                     <div id="div-nombre" class="form-group">
                         <label class="control-label" for="nombre">Nombre: </label>
@@ -87,13 +87,13 @@ require_once ('footer.php');
 ?>
 
 <script>
-    $('#registroUsr').on('submit',function(event){
+    /*$('#registroUsr').on('submit',function(event){
         var inputs = $('#registroUsr input');
         event.preventDefault();
         if(validarInputs(inputs, inputs.length)){
             this.submit();
         }   
-    });
+    });*/
 </script>
 
 </html>
