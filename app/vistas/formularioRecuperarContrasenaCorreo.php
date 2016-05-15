@@ -30,7 +30,7 @@ require_once ('doctype.php');
 
                     <div class="form-group">
                         <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <button type="submit" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-send"></span> Enviar</button>
+                            <button type="submit" class="btn btn-warning btn-block" onclick="index.php?controlador=usuario&accion=recuperarcontrasena"><span class="glyphicon glyphicon-send"></span> Enviar</button>
                         </div>
                     </div>
                 </form>

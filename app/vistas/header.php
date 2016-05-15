@@ -31,13 +31,13 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="formularioRegistrarUsuario.php"><span class="glyphicon glyphicon-pencil"></span> Regístrate</a>
+                        <a href="index.php?controlador=usuario&accion=alta"><span class="glyphicon glyphicon-pencil"></span> Regístrate</a>
                     </li>
                     <li>
-                        <a href="formularioIniciarSesion.php"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a>
+                        <a href="index.php?controlador=usuario&accion=iniciarsesion"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a>
                     </li>
                     <li>
-                        <a href="formularioImagen.php"><span class="glyphicon glyphicon-upload"></span> Subir imagen</a>
+                        <a href="index.php?controlador=imagen&accion=alta"><span class="glyphicon glyphicon-upload"></span> Subir imagen</a>
                     </li>
                     <li class="dropdown">
 
@@ -47,13 +47,13 @@
 
                         <ul class="dropdown-menu submenu">
                             <li>
-                                <a href="usuarioIndex.php"><span class="glyphicon glyphicon-user"></span> Página de usuario</a>
+                                <a href="index.php?controlador=usuario&accion=perfilusuario"><span class="glyphicon glyphicon-user"></span> Página de usuario</a>
                             </li>
                             <li>
-                                <a href="notificaciones.php"><span class="glyphicon glyphicon-comment"></span> Notificaciones</a>
+                                <a href="index.php?controlador=notificaciones&accion=mostrar"><span class="glyphicon glyphicon-comment"></span> Notificaciones</a>
                             </li>
                             <li>
-                                <a href="formularioConfiguracionUsuario.php"><span class="glyphicon glyphicon-edit"></span> Editar perfil</a>
+                                <a href="index.php?controlador=usuario&accion=modificar"><span class="glyphicon glyphicon-edit"></span> Editar perfil</a>
                             </li>
                             <li role="separator" class="divider"></li>
                             <li>

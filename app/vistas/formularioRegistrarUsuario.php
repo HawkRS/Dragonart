@@ -27,7 +27,7 @@ require_once ('doctype.php');
             </div>
             
             <div class="panel-body postDesc">
-                <form id="registroUsr" name="registroUsr" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="javascript:alert( 'success!' );" method="post" novalidate>
+                <form id="registroUsr" name="registroUsr" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="" method="post" novalidate>
 
                     <div id="div-nombre" class="form-group">
                         <label class="control-label" for="nombre">Nombre: </label>
@@ -53,20 +53,20 @@ require_once ('doctype.php');
                         <span id="err-correo" class="help-inline text-danger hidden"></span>
                     </div>
 
-                    <div id="div-password" class="form-group">
+                    <div id="div-contrasena" class="form-group">
                         <label class="control-label" for="password">Contraseña: </label>
                         <div>
-                            <input type="password" class="form-control" id="password" placeholder="Contreseña" name="password" />
+                            <input type="password" class="form-control" id="contrasena" placeholder="Contreseña" name="contrasena" />
                         </div>
-                        <span id="err-password" class="help-inline text-danger hidden"></span>
+                        <span id="err-contrasena" class="help-inline text-danger hidden"></span>
                     </div>
 
-                    <div id="div-passwordConfirmacion" class="form-group">
-                        <label class="control-label" for="passwordConfirmacion">Repetir contraseña: </label>
+                    <div id="div-contrasenaConfirmacion" class="form-group">
+                        <label class="control-label" for="contrasenaConfirmacion">Repetir contraseña: </label>
                         <div>
-                            <input type="password" class="form-control" id="passwordConfirmacion" placeholder="Repetir contreseña" name="passwordConfirmacion" />
+                            <input type="password" class="form-control" id="contrasenaConfirmacion" placeholder="Repetir contreseña" name="contrasenaConfirmacion" />
                         </div>
-                        <span id="err-passwordConfirmacion" class="help-inline text-danger hidden"></span>
+                        <span id="err-contrasenaConfirmacion" class="help-inline text-danger hidden"></span>
                     </div>
 
                     <div class="form-group">

@@ -1,10 +1,10 @@
 <?php
 
-class terminosCondicionesCtl {
+class contactoCtl {
     public $modelo;
 
     function __construct() {
-        echo 'Soy terminosCondicionesCtl';
+        echo 'Soy contactoCtl';
     }
 
     function run() {
@@ -20,7 +20,7 @@ class terminosCondicionesCtl {
     }
 
     function mostrar() {
-        include('app/views/terminosCondiciones.php');
+        require_once('app/vistas/formularioContacto.php');
     }
 }
 ?>

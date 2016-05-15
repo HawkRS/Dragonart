@@ -62,7 +62,7 @@ require_once 'doctype.php';
 
                                 <div id="image1" name="image1" class="col-sm-6 col-md-3">
                                     <div class="thumbnail">
-                                        <a href="publicacionIndex.php">
+                                        <a href="index.php?controlador=imagen&accion=mostrar">
                                             <img src="http://placekitten.com/g/300/200" alt="Demostración">
                                         </a>
                                         <div class="caption">
@@ -74,7 +74,7 @@ require_once 'doctype.php';
 
                                 <div id="image2" name="image2" class="col-sm-6 col-md-3">
                                     <div class="thumbnail">
-                                    	<a href="publicacionIndex.php">
+                                    	<a href="index.php?controlador=imagen&accion=mostrar">
                                         	<img src="http://placekitten.com/g/300/200" alt="Demostración">
                                         </a>
                                         <div class="caption">
@@ -86,7 +86,7 @@ require_once 'doctype.php';
 
                                 <div id="image3" name="image3" class="col-sm-6 col-md-3">
                                     <div class="thumbnail">
-                                    	<a href="publicacionIndex.php">
+                                    	<a href="index.php?controlador=imagen&accion=mostrar">
                                         	<img src="http://placekitten.com/g/300/200" alt="Demostración">
                                         </a>
                                         <div class="caption">
@@ -98,7 +98,7 @@ require_once 'doctype.php';
 
                                 <div id="image4" name="image4" class="col-sm-6 col-md-3">
                                     <div class="thumbnail">
-                                        <a href="publicacionIndex.php">
+                                        <a href="index.php?controlador=imagen&accion=mostrar">
                                         	<img src="http://placekitten.com/g/300/200" alt="Demostración">
                                         </a>
                                         <div class="caption">
@@ -114,7 +114,7 @@ require_once 'doctype.php';
 
                                 <div id="image5" name="image5" class="col-sm-6 col-md-3">
                                     <div class="thumbnail">
-                                        <a href="publicacionIndex.php">
+                                        <a href="index.php?controlador=imagen&accion=mostrar">
                                             <img src="http://placekitten.com/g/300/200" alt="Demostración">
                                         </a>
                                         <div class="caption">
@@ -126,7 +126,7 @@ require_once 'doctype.php';
 
                                 <div id="image6" name="image6" class="col-sm-6 col-md-3">
                                     <div class="thumbnail">
-                                        <a href="publicacionIndex.php">
+                                        <a href="index.php?controlador=imagen&accion=mostrar">
                                             <img src="http://placekitten.com/g/300/200" alt="Demostración">
                                         </a>
                                         <div class="caption">
@@ -138,7 +138,7 @@ require_once 'doctype.php';
 
                                 <div id="image7" name="image7" class="col-sm-6 col-md-3">
                                     <div class="thumbnail">
-                                        <a href="publicacionIndex.php">
+                                        <a href="index.php?controlador=imagen&accion=mostrar">
                                             <img src="http://placekitten.com/g/300/200" alt="Demostración">
                                         </a>
                                         <div class="caption">
@@ -150,7 +150,7 @@ require_once 'doctype.php';
 
                                 <div id="image8" name="image8" class="col-sm-6 col-md-3">
                                     <div class="thumbnail">
-                                        <a href="publicacionIndex.php">
+                                        <a href="index.php?controlador=imagen&accion=mostrar">
                                             <img src="http://placekitten.com/g/300/200" alt="Demostración">
                                         </a>
                                         <div class="caption">

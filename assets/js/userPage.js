@@ -39,7 +39,7 @@ function llenarGaleria(){
 			$('#image' + contadorImagen)
 				.append('<div class="thumbnail"></div>');
 			$('#image' + contadorImagen + ' .thumbnail')
-				.append('<a href="publicacionIndex.php"></a>')
+				.append('<a href="index.php?controlador=imagen&accion=mostrar"></a>')
 				.append('<div class="caption"></div>');
 			$('#image' + contadorImagen + ' .thumbnail > a')
 				.append('<img src="http://placekitten.com/g/300/200" alt="Demostración" />');
@@ -75,7 +75,7 @@ function llenarSeguidores(){
 			$('#avatar' + contadorImagen)
 				.append('<div class="thumbnail"></div>');
 			$('#avatar' + contadorImagen + ' .thumbnail')
-				.append('<a href="usuarioIndex.php"></a>')
+				.append('<a href="index.php?controlador=usuario&accion=mostrar"></a>')
 				.append('<div class="caption text-center"></div>');
 			$('#avatar' + contadorImagen + ' .thumbnail > div')
 				.append('<span>Usuario</span>');

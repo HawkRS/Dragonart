@@ -1,26 +1,26 @@
 <?php
 
-class formularioRegistrarUsuarioCtl {
+class notificacionesCtl {
     public $modelo;
 
     function __construct() {
-        echo 'Soy formularioRegistrarUsuarioCtl';
+        echo 'Soy notificacionesCtl';
     }
 
     function run() {
         if(isset($_GET['accion'])) {
-            switch($_GET['accion']) {
+            switch($_GET['accion']) {                    
                 case 'mostrar':
                     $this->mostrar();
-                    break;
             }
-        }else {
+        }
+        else {
             $this->mostrar();
         }
     }
 
     function mostrar() {
-        include('app/views/formularioRegistrarUsuario.php');
+        require_once('app/vistas/notificaciones.php');
     }
 }
 ?>

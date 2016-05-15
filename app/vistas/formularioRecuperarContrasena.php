@@ -37,7 +37,7 @@ require_once ('doctype.php');
 
                     <div class="form-group">
                         <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <button type="submit" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar cambios</button>
+                            <button type="submit" class="btn btn-warning btn-block" onclick="index.php?controlador=usuario&accion=perfilusuario"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar cambios</button>
                         </div>
                     </div>
                 </form>

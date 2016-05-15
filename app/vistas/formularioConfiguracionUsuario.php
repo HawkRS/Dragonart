@@ -83,7 +83,7 @@ require_once ('doctype.php');
 
                     <div class="form-group">
                         <div class="col-xs-12 col-md-4 col-md-offset-2">
-                            <button class="btn btn-warning btn-block" type="submit"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
+                            <button class="btn btn-warning btn-block" type="submit" onclick="index.php?controlador=usuario&accion=modificar"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
                         </div>
                         <div class="col-xs-12 col-md-4">
                             <button type="button" onclick="confirmarEliminacion();" class="btn btn-danger btn-block"><span class="glyphicon glyphicon-remove-sign"></span> Eliminar cuenta</button>

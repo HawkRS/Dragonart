@@ -5,11 +5,11 @@
                 &copy; 2016. Digital Dragon. 
                 <span>
                     <span>|</span>
-                    <a href="terminosCondiciones.php">Términos y condiciones</a>
+                    <a href="index.php?controlador=paginasestaticas&accion=terminos">Términos y condiciones</a>
                     <span>|</span>
-                    <a href="politicaCargaImagenes.php">Política de carga de imágenes</a>
+                    <a href="index.php?controlador=paginasestaticas&accion=politicas">Política de carga de imágenes</a>
                     <span>|</span>
-                    <a href="formularioContacto.php">Contacto</a>
+                    <a href="index.php?controlador=contacto&accion=mostrar">Contacto</a>
                 </span>
             </div>
 
@@ -17,8 +17,6 @@
     </div>
 </footer>
 
-<script type="text/javascript" src="assets/js/external/jssor.slider.min.js"></script>
-<script type="text/javascript" src="assets/js/external/jssor.js"></script>
 <script type="text/javascript" src="assets/js/external/bootstrap.min.js"></script>
 <script type="text/javascript" src="assets/js/avatar.js"></script>
 <script type="text/javascript" src="assets/js/imagen.js"></script>

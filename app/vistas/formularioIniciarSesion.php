@@ -37,12 +37,12 @@ require_once ('doctype.php');
 
                         <div class="form-group">
                             <div class="col-xs-12 col-md-8 col-md-offset-2">
-                                <button type="submit" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-log-in"></span>  Iniciar sesión</button>
+                                <button type="submit" class="btn btn-warning btn-block" onclick="index.php?controlador=usuario&accion=perfilusuario"><span class="glyphicon glyphicon-log-in"></span>  Iniciar sesión</button>
                             </div>
                         </div>
                         <div class="form-group">
-                            <span><small>¿Aún no estás registrado en Dragonart? <a href="formularioRegistrarUsuario.php">Regístrate ahora</a></small></span><br>
-                            <span><small>¿Olvidaste tu contraseña? Recupérala <a href="formularioRecuperarContrasenaCorreo.php">aquí</a></small></span>
+                            <span><small>¿Aún no estás registrado en Dragonart? <a href="index.php?controlador=usuario&accion=alta">Regístrate ahora</a></small></span><br>
+                            <span><small>¿Olvidaste tu contraseña? Recupérala <a href="index.php?controlador=usuario&accion=recuperarcontrasenacorreo">aquí</a></small></span>
                         </div>
                     </form>                
                 </div>

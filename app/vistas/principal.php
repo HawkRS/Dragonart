@@ -25,7 +25,7 @@ require_once 'doctype.php';
                     </div>
                     <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 800px; height: 356px; overflow: hidden;">
                         <div data-p="144.50" style="display: none;">
-                            <a href="publicacionIndex.php"><img data-u="image" src="assets/img/Imagen.png" /></a>
+                            <a href="index.php?controlador=imagen&accion=mostrar"><img data-u="image" src="assets/img/Imagen.png" /></a>
                             <img data-u="thumb" src="assets/img/Imagen.png" />
                         </div>
                         <div data-p="144.50" style="display: none;">
@@ -89,6 +89,9 @@ require_once 'doctype.php';
     </div>
 
 </body>
+
+<script type="text/javascript" src="assets/js/external/jssor.slider.min.js"></script>
+<script type="text/javascript" src="assets/js/external/jssor.js"></script>
 
 <?php
 require_once 'footer.php';

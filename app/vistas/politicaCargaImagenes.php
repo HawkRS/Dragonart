@@ -34,17 +34,7 @@ require_once 'doctype.php';
                 </p>
                 <h2>Punto 5</h2>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos ullam quidem velit fugiat distinctio inventore 
-    <div class="main-pubIndex">
-        <section>
-            <div class="container-fluid">
-                <div class="col-md-10">
-                    <h1></h1>
-                    
-                </div>
-            </div>
-        </section>
-    </div>perspiciatis eaque sed repellat dolorem. Dolore rerum vitae laborum veniam corporis repellendus aliquam accusantium voluptates.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos ullam quidem velit fugiat distinctio inventore perspiciatis eaque sed repellat dolorem. Dolore rerum vitae laborum veniam corporis repellendus aliquam accusantium voluptates.
                 </p>
             </div>
         </div>
