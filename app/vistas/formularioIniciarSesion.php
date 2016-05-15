@@ -69,14 +69,8 @@ require_once ('footer.php');
     $('#inicioSesion').on('submit',function(event){
         var inputs = $('#inicioSesion input');
         event.preventDefault();
-        if(validarInputs(inputs)){
+        if(validarInputs(inputs, inputs.length)){
             this.submit();
-        }   
-    });
-    $('#inicioSesion').submit(function(event){
-        var inputs = $('#inicioSesion input');
-        if(!(validarInputs(inputs))){
-            event.preventDefault();
         }   
     });
 </script>

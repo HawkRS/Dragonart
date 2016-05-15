@@ -90,7 +90,7 @@ require_once ('footer.php');
     $('#registroUsr').on('submit',function(event){
         var inputs = $('#registroUsr input');
         event.preventDefault();
-        if(validarInputs(inputs)){
+        if(validarInputs(inputs, inputs.length)){
             this.submit();
         }   
     });

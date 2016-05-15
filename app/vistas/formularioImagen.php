@@ -76,7 +76,7 @@ require_once ('footer.php');
         var txtArea = $('#subirImagen textarea');
         var bandera = true;
         event.preventDefault();
-		banderaInput = validarInputs(inputs);
+		banderaInput = validarInputs(inputs, inputs.length);
         banderaTxt = validarTextArea(txtArea);
         if(banderaInput && banderaTxt){
             this.submit();

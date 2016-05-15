@@ -55,7 +55,7 @@ require_once ('footer.php');
     $('#nuevaContrasena').on('submit',function(event){
         var inputs = $('#nuevaContrasena input');
         event.preventDefault();
-        if(validarInputs(inputs)){
+        if(validarInputs(inputs, inputs.length)){
             this.submit();
         }   
     });

@@ -64,12 +64,13 @@ function validarTextArea(txtArea){
 
 }
 
-function validarInputs(inputs){
+function validarInputs(inputs, cantidad){
 	
 	var bandera = true;
 	var temp;
 	var tempPass = '';
 	var tempId = '#err-';
+	var contador = 0;
 
 	for(var i = 0; i < inputs.length; i++){
 		temp = inputs.eq(i);
@@ -91,11 +92,12 @@ function validarInputs(inputs){
 					else{
 						tempId = tempId + temp.attr('id');
 						quitarError(tempId, temp.attr('id'));
+						contador++;
 					}
 				}
 				break;
 
-			case 'password':
+			case 'contrasena':
 				tempPass = temp.val();
 				bandera = !(estaVacio(temp.val()));
 				if(!bandera){
@@ -112,6 +114,7 @@ function validarInputs(inputs){
 					else{
 						tempId = tempId + temp.attr('id');
 						quitarError(tempId, temp.attr('id'));
+						contador++;
 					}
 				}
 				break;
@@ -133,11 +136,12 @@ function validarInputs(inputs){
 					else{
 						tempId = tempId + temp.attr('id');
 						quitarError(tempId, temp.attr('id'));
+						contador++;
 					}
 				}
 				break;
 
-			case 'passwordConfirmacion':
+			case 'contrasenaConfirmacion':
 				bandera = !(estaVacio(temp.val()));
 				if(!bandera){
 					tempId = tempId + temp.attr('id');
@@ -153,6 +157,7 @@ function validarInputs(inputs){
 					else{
 						tempId = tempId + temp.attr('id');
 						quitarError(tempId, temp.attr('id'));
+						contador++;
 					}
 				}
 				break;
@@ -166,6 +171,7 @@ function validarInputs(inputs){
 				else{
 					tempId = tempId + temp.attr('id');
 					quitarError(tempId, temp.attr('id'));
+					contador++;
 				}
 				break;
 		}
@@ -173,6 +179,13 @@ function validarInputs(inputs){
 		tempId = '#err-';
 	}
 
+	if(contador === cantidad){
+		bandera = true;
+	}
+	else{
+		bandera = false;
+	}
+	
 	return bandera;
 
 }

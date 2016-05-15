@@ -66,7 +66,7 @@ require_once ('footer.php');
         var banderaInput = true;
         var banderaTxt = true;
         event.preventDefault();
-        banderaInput = validarInputs(inputs);
+        banderaInput = validarInputs(inputs, inputs.length);
         banderaTxt = validarTextArea(txtArea);
         if(banderaInput && banderaTxt){
             this.submit();
