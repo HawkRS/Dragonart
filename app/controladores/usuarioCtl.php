@@ -22,22 +22,9 @@ class usuarioCtl {
                     $this->mostrar();
                     break;
                     
-                case 'iniciarsesion':
-                    $this->iniciarsesion();
-                    break;
-                    
                 case 'perfilusuario':
                     $this->perfilusuario();
-                    break;
-                    
-                case 'recuperarcontrasenacorreo':
-                    $this->recuperarcontrasenacorreo();
-                    break;
-                    
-                case 'recuperarcontrasena':
-                    $this->recuperarcontrasena();
-                    break;
-            }
+                    break;            }
         }
         else {
             $this->alta();
