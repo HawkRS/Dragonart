@@ -2,6 +2,11 @@
 
 if(isset($_GET['controlador'])){
     switch($_GET['controlador']) {
+        
+        case 'backend':
+            require('app/controladores/backendCtl.php');
+            $controlador = new backendCtl();
+            break;
             
         case 'sesion':
             require('app/controladores/sesionCtl.php');
