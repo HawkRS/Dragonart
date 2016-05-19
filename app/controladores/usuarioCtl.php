@@ -58,20 +58,46 @@ class usuarioCtl {
         require_once('app/vistas/usuarioIndex.php');
     }
     
-    function iniciarsesion() {
-        require_once('app/vistas/formularioIniciarSesion.php');
-    }
-    
     function perfilusuario() {
-        require_once('app/vistas/usuarioIndex.php');
+        usuarioCtl::crearDiccionario();
     }
     
-    function recuperarcontrasenacorreo() {
-        require_once('app/vistas/formularioRecuperarContrasenaCorreo.php');
-    }
-    
-    function recuperarcontrasena() {
-        require_once('app/vistas/formularioRecuperarContrasena.php');
+    function crearDiccionario() {
+        
+        $doctype = file_get_contents('app/vistas/doctype.php');
+        $header = file_get_contents('app/vistas/header.php');
+        $vista = file_get_contents('app/vistas/usuarioIndex.php');
+        $footer = file_get_contents('app/vistas/footer.php');
+        
+        $inicio = strpos($vista,'<!--inicioRepetirImagen-->');
+        $fin = strpos($vista, '<!--finalRepetirImagen-->')+25;
+        
+        $thumbnail = substr($vista,$inicio,$fin-$inicio);
+        
+        $diccionario = array (
+            '%alias%' => 'Silver',
+            '%descripcion%' => 'Esta sería la descripción/biografía del usuario'
+        );
+        
+        for($x=0; $x<5; $x++){
+            $new_thumbnail = $thumbnail;
+            
+            $diccionarioImagen = array (
+                '%titulo%' => 'Nuevo titulo '.$x
+            );
+            
+            $new_thumbnail = strtr($new_thumbnail,$diccionarioImagen);
+            $thumbnails .= $new_thumbnail;
+        }
+        
+        $vista = str_replace($thumbnail, $thumbnails, $vista);
+        
+        $header = strtr($header,$diccionario);
+        $vista = strtr($vista,$diccionario);
+        
+        $vista = $doctype.$header.$vista.$footer;
+        
+        echo $vista;
     }
 
 
