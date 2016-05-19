@@ -42,12 +42,12 @@
                     <li class="dropdown">
 
                         <a href="#" data-toggle="dropdown" role="button">
-                            Nombre de usuario<span class="caret"></span>
+                            %alias%<span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu submenu">
                             <li>
-                                <a href="index.php?controlador=usuario&accion=perfilusuario"><span class="glyphicon glyphicon-user"></span> Página de usuario</a>
+                                <a href="index.php?controlador=usuario&accion=perfilusuario"><span class="glyphicon glyphicon-user"></span> Página principal</a>
                             </li>
                             <li>
                                 <a href="index.php?controlador=notificaciones&accion=mostrar"><span class="glyphicon glyphicon-comment"></span> Notificaciones</a>
