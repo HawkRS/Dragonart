@@ -74,8 +74,51 @@ function validarInputs(inputs, cantidad){
 
 	for(var i = 0; i < inputs.length; i++){
 		temp = inputs.eq(i);
+		console.log(temp.attr('id'));
 
 		switch(temp.attr('id')){
+			case 'nombre':
+				bandera = !(estaVacio(temp.val()));
+				if(!bandera){
+					tempId = tempId + temp.attr('id');
+					ponerError(tempId, temp.attr('id'), 'Debes escribir un nombre.');
+				}
+				else{
+					quitarError(tempId, temp.attr('id'));
+					bandera = /^[a-zA-z]([a-zA-z]|\s)*/.test(temp.val());
+					if(!bandera){
+						tempId = tempId + temp.attr('id');
+						ponerError(tempId, temp.attr('id'), 'Solo se permiten letras y espacios.');
+					}
+					else{
+						tempId = tempId + temp.attr('id');
+						quitarError(tempId, temp.attr('id'));
+						contador++;
+					}
+				}
+				break;
+
+			case 'alias':
+				bandera = !(estaVacio(temp.val()));
+				if(!bandera){
+					tempId = tempId + temp.attr('id');
+					ponerError(tempId, temp.attr('id'), 'Debes escribir un alias.');
+				}
+				else{
+					quitarError(tempId, temp.attr('id'));
+					bandera = /^[a-z0-9_-]{3,16}$/.test(temp.val());
+					if(!bandera){
+						tempId = tempId + temp.attr('id');
+						ponerError(tempId, temp.attr('id'), 'Solo letras, números y guiones. Entre 3 y 16 caracteres.');
+					}
+					else{
+						tempId = tempId + temp.attr('id');
+						quitarError(tempId, temp.attr('id'));
+						contador++;
+					}
+				}
+				break;
+
 			case 'correo':
 				bandera = !(estaVacio(temp.val()));
 				if(!bandera){

@@ -16,7 +16,7 @@ require_once ('doctype.php');
             </div>
             
             <div class="panel-body postDesc">
-                <form id="configUsuario" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" enctype="multipart/form-data" action="javascript:alert( 'success!' );" method="post" novalidate>
+                <form id="configUsuario" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" enctype="multipart/form-data" action="index.php?controlador=usuario&accion=modificar" method="post" novalidate>
 
                     <div id="div-nombre" class="form-group">
                         <label class="control-label" for="nombre">Nombre: </label>
