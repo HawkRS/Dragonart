@@ -2,6 +2,12 @@
 
 if(isset($_GET['controlador'])){
     switch($_GET['controlador']) {
+            
+        case 'sesion':
+            require('app/controladores/sesionCtl.php');
+            $controlador = new sesionCtl();
+            break;
+            
         case 'usuario':
             require('app/controladores/usuarioCtl.php');
             $controlador = new usuarioCtl();
