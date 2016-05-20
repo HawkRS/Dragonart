@@ -1,28 +1,28 @@
 <?php
-	class AlumnoMdl{
+	class usuarioMdl{
 
-		private $driver;
+		private $acceso;
+		private $db;
 
 		function __construct(){
-			$this->driver = new mysqli('localhost','root','Licosvook5','dragonart');
-			if($this->driver->connect_errno)
-				die("Error en la conexión");
+			require_once('app/modelos/conector.php');
+			$this->acceso = conector::getInstancia();
+			$this->db = $this->acceso->getDriver();
 		}
 
-		function alta($nombre, $codigo, $carrera, $correo){
-			$query = 
-					"INSERT INTO alumno
-					(nombre, correo)
-					VALUES (
-						\"$nombre\",
-						\"$correo\"
-					)";
-			$r = $this->driver->query($query);
-			if($this->driver->insert_id){
-				return $this->driver->insert_id;
+		function alta($nombre, $alias, $correo, $contrasena){			
+			if($stmt = $this->db->prepare('INSERT INTO usuario (nombreUsuario, aliasUsuario, correoUsuario, contrasenaUsuario) VALUES (?, ?, ?, ?)')){
+
+				$stmt->bind_param("ssss", $nombre, $alias, $correo, $contrasena);
+
+				$stmt->execute();
+
+				$stmt->bind_result($res);
+
+				$stmt->fetch();
+
+				$stmt->close();
 			}
-			else if($r === FALSE)
-				return FALSE;
 		}
 
 		function mostrar(){

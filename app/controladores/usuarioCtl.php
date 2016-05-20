@@ -34,6 +34,9 @@ class usuarioCtl {
     function alta() {
     	if(isset($_POST)){
 			if(usuarioCtl::validarRegistro($_POST)){
+                require_once('app/modelos/usuarioMdl.php');
+                $usrMdl = new usuarioMdl();
+                $usrMdl->alta($_POST['nombre'],$_POST['alias'],$_POST['correo'],$_POST['contrasena']);
 				require_once('app/vistas/usuarioIndex.php');
 			}
 			else{
@@ -149,7 +152,7 @@ class usuarioCtl {
 
     	if(isset($array['alias'])){
 	    	$alias = $array['alias'];
-	    	if(usuarioCtl::estaVacio($alias) || !preg_match("/^[a-z0-9_-]{3,16}$/", $alias)){
+	    	if(usuarioCtl::estaVacio($alias) || !preg_match("/^[a-zA-Z0-9_-]{3,16}$/", $alias)){
 	    		return false;
 	    	}
     	}
