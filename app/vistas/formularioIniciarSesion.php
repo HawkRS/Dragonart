@@ -18,7 +18,7 @@ require_once ('doctype.php');
                 </div>
 
                 <div class="panel-body postDesc">
-                    <form id="inicioSesion" class="form-horizontal col-xs-12 col-md-12" action="javascript:alert( 'success!' );" method="post" novalidate>
+                    <form id="inicioSesion" class="form-horizontal col-xs-12 col-md-12" action="index.php?controlador=sesion&accion=iniciarsesion" method="post" novalidate>
                         <div id="div-correo" class="form-group">
                             <label class="control-label" for="correo">Correo: </label>
                             <div>

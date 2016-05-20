@@ -34,7 +34,7 @@
                         <a href="index.php?controlador=usuario&accion=alta"><span class="glyphicon glyphicon-pencil"></span> Regístrate</a>
                     </li>
                     <li>
-                        <a href="index.php?controlador=usuario&accion=iniciarsesion"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a>
+                        <a href="index.php?controlador=sesion&accion=iniciarsesion"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a>
                     </li>
                     <li>
                         <a href="index.php?controlador=imagen&accion=alta"><span class="glyphicon glyphicon-upload"></span> Subir imagen</a>

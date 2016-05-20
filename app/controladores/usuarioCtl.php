@@ -4,6 +4,7 @@ class usuarioCtl {
     public $modelo;
 
     function __construct() {
+        session_start();
         echo 'Soy usuarioCtl';
     }
 
@@ -111,7 +112,7 @@ class usuarioCtl {
     *
     *
     *@author 	Mauricio Gerardo Lazcano Origel
-    *@version 	1.0
+    *@version 	1.0.0
     *@since 	15/Mayo/2016
     *@param 	$cadena Cadena a evaluar.
     *@return 	Retorna TRUE si las validaciones de los campos fueron correctas, sino, retorna FALSE.
