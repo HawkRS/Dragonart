@@ -59,14 +59,22 @@ class usuarioCtl {
     }
     
     function mostrar() {
-        require_once('app/vistas/usuarioIndex.php');
+        if(isset($_SESSION['correo']) && isset($_SESSION['logPass'])){
+            require_once('app/modelos/usuarioMdl.php');
+            $usrMdl = new usuarioMdl();
+            $dato = $usrMdl->obtenerInfo($_SESSION['correo'],$_SESSION['logPass']);
+            usuarioCtl::crearDiccionario($dato);
+        }
+        else{
+            header('Location: http://localhost/Dragonart/index.php');
+        }
     }
     
     function perfilusuario() {
         usuarioCtl::crearDiccionario();
     }
     
-    function crearDiccionario() {
+    function crearDiccionario($alias) {
         
         $doctype = file_get_contents('app/vistas/doctype.php');
         $header = file_get_contents('app/vistas/header.php');
@@ -79,7 +87,7 @@ class usuarioCtl {
         $thumbnail = substr($vista,$inicio,$fin-$inicio);
         
         $diccionario = array (
-            '%alias%' => 'Silver',
+            '%alias%' => $alias,
             '%descripcion%' => 'Esta sería la descripción/biografía del usuario'
         );
         

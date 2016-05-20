@@ -37,7 +37,6 @@
 
 				$stmt->fetch();
 				$numFilas = $stmt->num_rows;
-				var_dump($numFilas);
 
 				$stmt->close();
 
@@ -48,8 +47,26 @@
 					return true;
 				}
 			}
-			var_dump($stmt);
 			return false;
+		}
+
+		function obtenerInfo($correo, $contrasena){
+			if($stmt = $this->db->prepare('SELECT aliasUsuario FROM usuario WHERE correoUsuario=? AND contrasenaUsuario=PASSWORD(?)')){
+
+				$stmt->bind_param("ss", $correo, $contrasena);
+
+				$stmt->execute();
+
+				$stmt->bind_result($aliasUsuario);
+
+				$stmt->fetch();
+
+				var_dump($aliasUsuario);
+				
+				$stmt->close();
+				
+				return $aliasUsuario;
+			}
 		}
 
 		function mostrar(){

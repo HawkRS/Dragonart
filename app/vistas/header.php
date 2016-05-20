@@ -57,7 +57,7 @@
                             </li>
                             <li role="separator" class="divider"></li>
                             <li>
-                                <a href="index.php"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a>
+                                <a href="index.php?controlador=sesion&accion=cerrarsesion"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a>
                             </li>
                         </ul>
 

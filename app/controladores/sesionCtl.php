@@ -23,6 +23,10 @@ class sesionCtl {
                 case 'recuperarcontrasena':
                     $this->recuperarcontrasena();
                     break;
+
+                case 'cerrarsesion':
+                    $this->cerrarSesion();
+                    break;
             }
         }
         else {
@@ -38,7 +42,7 @@ class sesionCtl {
                 if($usrMdl->iniciarSesion($_POST['correo'],$_POST['logPass'])){
                     $_SESSION['correo'] = $_POST['correo'];
                     $_SESSION['logPass'] = $_POST['logPass'];
-                    require_once('app/vistas/usuarioIndex.php');
+                    header('Location: http://localhost/Dragonart/index.php?controlador=usuario&accion=mostrar');
                 }
                 else{
                     unset($_SESSION['correo']);
@@ -62,6 +66,13 @@ class sesionCtl {
     
     function recuperarcontrasena() {
         require_once('app/vistas/formularioRecuperarContrasena.php');
+    }
+
+    function cerrarSesion(){
+        session_unset();
+        session_destroy();
+        setcookie(session_name(), '', time()-3600);
+        header('Location: http://localhost/Dragonart/index.php');
     }
     
     /**
