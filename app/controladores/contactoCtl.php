@@ -4,6 +4,7 @@ class contactoCtl {
     public $modelo;
 
     function __construct() {
+    	session_start();
         echo 'Soy contactoCtl';
     }
 

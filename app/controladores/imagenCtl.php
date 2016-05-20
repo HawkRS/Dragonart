@@ -4,6 +4,7 @@ class imagenCtl {
     public $modelo;
 
     function __construct() {
+    	session_start();
         echo 'Soy imagenCtl';
     }
 

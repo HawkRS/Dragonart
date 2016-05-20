@@ -4,6 +4,7 @@ class paginasestaticasCtl {
     public $modelo;
 
     function __construct() {
+    	session_start();
         echo 'Soy paginasestaticasCtl';
     }
 
