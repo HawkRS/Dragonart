@@ -32,7 +32,6 @@
 
 				$stmt->execute();
 
-				$stmt->bind_result($res1, $res2, $res3, $res4, $res5, $res6, $res7, $res8);
 				$stmt->store_result();
 
 				$stmt->fetch();
@@ -51,21 +50,30 @@
 		}
 
 		function obtenerInfo($correo, $contrasena){
-			if($stmt = $this->db->prepare('SELECT aliasUsuario FROM usuario WHERE correoUsuario=? AND contrasenaUsuario=PASSWORD(?)')){
+			if($stmt = $this->db->prepare('SELECT * FROM usuario WHERE correoUsuario=? AND contrasenaUsuario=PASSWORD(?)')){
 
 				$stmt->bind_param("ss", $correo, $contrasena);
 
 				$stmt->execute();
 
-				$stmt->bind_result($aliasUsuario);
+				$stmt->bind_result($idUsuario, $nombreUsuario, $aliasUsuario, $correoUsuario, $contrasenaUsuario, $biografiaUsuario, $avatarUsuario, $statusUsuario);
 
 				$stmt->fetch();
-
-				var_dump($aliasUsuario);
 				
 				$stmt->close();
 				
-				return $aliasUsuario;
+				$array = array(
+					'id' => $idUsuario,
+					'nombre' => $nombreUsuario,
+					'alias' => $aliasUsuario,
+					'correo' => $correoUsuario,
+					'contrasena' => $contrasenaUsuario,
+					'biografia' => $biografiaUsuario,
+					'avatar' => $avatarUsuario,
+					'status' => $statusUsuario
+				);
+
+				return $array;
 			}
 		}
 
