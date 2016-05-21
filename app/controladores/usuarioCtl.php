@@ -74,21 +74,34 @@ class usuarioCtl {
         usuarioCtl::crearDiccionario();
     }
     
-    function crearDiccionario($alias) {
+    function crearDiccionario($array) {
         
-        $doctype = file_get_contents('app/vistas/doctype.php');
-        $header = file_get_contents('app/vistas/header.php');
+        $doctype = file_get_contents('app/vistas/doctype.html');
+        $header = file_get_contents('app/vistas/header.html');
         $vista = file_get_contents('app/vistas/usuarioIndex.php');
-        $footer = file_get_contents('app/vistas/footer.php');
+        $footer = file_get_contents('app/vistas/footer.html');
+        
+        if(isset($_SESSION['correo']) && isset($_SESSION['logPass'])){
+            $inicio = strpos($header,'<!--Inicio Offline-->');
+            $fin = strpos($header, '<!--Fin Offline-->')+18;
+            $busqueda = substr($header, $inicio, $fin-$inicio);
+            $header = str_replace($busqueda, "", $header, $contar);
+        }
+        else{
+            $inicio = strpos($header,'<!--Inicio Online-->');
+            $fin = strpos($header, '<!--Fin Online-->')+17;
+            $busqueda = substr($header, $inicio, $fin-$inicio);
+            str_replace($busqueda, "", $header);
+        }
         
         $inicio = strpos($vista,'<!--inicioRepetirImagen-->');
         $fin = strpos($vista, '<!--finalRepetirImagen-->')+25;
-        
+
         $thumbnail = substr($vista,$inicio,$fin-$inicio);
-        
+
         $diccionario = array (
-            '%alias%' => $alias,
-            '%descripcion%' => 'Esta sería la descripción/biografía del usuario'
+            '%alias%' => $array['alias'],
+            '%descripcion%' => $array['biografia']
         );
         
         for($x=0; $x<5; $x++){

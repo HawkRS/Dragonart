@@ -1,12 +1,5 @@
-<?php
-require_once 'doctype.php';
-?>
 
 <body>
-	
-	<?php
-    require_once 'header.php';
-    ?>
 
     <div class="container main-usrIndex">
 
@@ -87,10 +80,6 @@ require_once 'doctype.php';
     </div><!--Fin Div Principal-->
 
 </body>
-
-<?php
-require_once 'footer.php';
-?>
 
 <script type="text/javascript" src="assets/js/userPage.js"></script>
 
