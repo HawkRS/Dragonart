@@ -1,14 +1,3 @@
-<?php
-require_once 'doctype.php';
-?>
-
-
-<body>
-
-    <?php
-    require_once 'header.php';
-    ?>
-
     <div class="container warp">
         <div class="main-usrIndex">
             <h1>Notificaciones</h1>
@@ -402,9 +391,8 @@ require_once 'doctype.php';
     </div>
 </body>
 
-<?php
-require_once 'footer.php';
-?>
+<!--inicioFooter-->
+<!--finFooter-->
 
 <script type="text/javascript" src="assets/js/Notificaciones.js"></script>
 
