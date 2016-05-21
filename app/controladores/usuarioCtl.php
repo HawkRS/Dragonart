@@ -2,10 +2,18 @@
 
 class usuarioCtl {
     public $modelo;
+    
+    private $doctype;
+    private $header;
+    private $footer;
 
     function __construct() {
         session_start();
         echo 'Soy usuarioCtl';
+        
+        $this->doctype = file_get_contents('app/vistas/doctype.html');
+        $this->header = file_get_contents('app/vistas/header.html');
+        $this->footer = file_get_contents('app/vistas/footer.html');
     }
 
     function run() {
@@ -38,23 +46,58 @@ class usuarioCtl {
                 require_once('app/modelos/usuarioMdl.php');
                 $usrMdl = new usuarioMdl();
                 $usrMdl->alta($_POST['nombre'],$_POST['alias'],$_POST['correo'],$_POST['contrasena']);
-				require_once('app/vistas/usuarioIndex.php');
+				$vista = file_get_contents('app/vistas/usuarioIndex.html');
+                $inicioFooter = strpos($vista, '<!--inicioFooter-->');
+                $finFooter = strpos($vista, '<!--finFooter-->')+16;
+                $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
+
+                $vista = str_replace($remplazar, $this->footer, $vista);
+                $vista = $this->doctype.$this->header.$vista;
+                echo $vista;
 			}
 			else{
-				require_once('app/vistas/formularioRegistrarUsuario.php');
+				$vista = file_get_contents('app/vistas/formularioRegistrarUsuario.html');
+                $inicioFooter = strpos($vista, '<!--inicioFooter-->');
+                $finFooter = strpos($vista, '<!--finFooter-->')+16;
+                $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
+
+                $vista = str_replace($remplazar, $this->footer, $vista);
+                $vista = $this->doctype.$this->header.$vista;
+                echo $vista;
 			}
 		}
 		else{
-			require_once('app/vistas/formularioRegistrarUsuario.php');
+			$vista = file_get_contents('app/vistas/formularioRegistrarUsuario.html');
+            $inicioFooter = strpos($vista, '<!--inicioFooter-->');
+            $finFooter = strpos($vista, '<!--finFooter-->')+16;
+            $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
+
+            $vista = str_replace($remplazar, $this->footer, $vista);
+            $vista = $this->doctype.$this->header.$vista;
+            echo $vista;
 		}
     }
     
     function modificar() {
         if(empty($_POST)){
-            require_once('app/vistas/formularioConfiguracionUsuario.php');
+            $vista = file_get_contents('app/vistas/formularioConfiguracionUsuario.html');
+            $inicioFooter = strpos($vista, '<!--inicioFooter-->');
+            $finFooter = strpos($vista, '<!--finFooter-->')+16;
+            $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
+
+            $vista = str_replace($remplazar, $this->footer, $vista);
+            $vista = $this->doctype.$this->header.$vista;
+            echo $vista;
         } 
         else {            
-            require_once('app/vistas/usuarioIndex.php');
+            $vista = file_get_contents('app/vistas/usuarioIndex.html');
+            $inicioFooter = strpos($vista, '<!--inicioFooter-->');
+            $finFooter = strpos($vista, '<!--finFooter-->')+16;
+            $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
+
+            $vista = str_replace($remplazar, $this->footer, $vista);
+            $vista = $this->doctype.$this->header.$vista;
+            echo $vista;
         }
     }
     

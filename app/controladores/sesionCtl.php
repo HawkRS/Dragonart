@@ -2,10 +2,18 @@
 
 class sesionCtl {
     public $modelo;
+    
+    private $doctype;
+    private $header;
+    private $footer;
 
     function __construct() {
         session_start();
         echo 'Soy sesionCtl';
+        
+        $this->doctype = file_get_contents('app/vistas/doctype.html');
+        $this->header = file_get_contents('app/vistas/header.html');
+        $this->footer = file_get_contents('app/vistas/footer.html');
     }
 
     function run() {
@@ -48,24 +56,60 @@ class sesionCtl {
                     unset($_SESSION['correo']);
                     unset($_SESSION['logPass']);
                     var_dump($_POST);
-                    require_once('app/vistas/formularioIniciarSesion.php');
+                    
+                    $vista = file_get_contents('app/vistas/formularioIniciarSesion.html');
+                    $inicioFooter = strpos($vista, '<!--inicioFooter-->');
+                    $finFooter = strpos($vista, '<!--finFooter-->')+16;
+                    $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
+
+                    $vista = str_replace($remplazar, $this->footer, $vista);
+                    $vista = $this->doctype.$this->header.$vista;
+                    echo $vista;
                 }
             }
             else{
-                require_once('app/vistas/formularioIniciarSesion.php');
+                $vista = file_get_contents('app/vistas/formularioIniciarSesion.html');
+                $inicioFooter = strpos($vista, '<!--inicioFooter-->');
+                $finFooter = strpos($vista, '<!--finFooter-->')+16;
+                $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
+
+                $vista = str_replace($remplazar, $this->footer, $vista);
+                $vista = $this->doctype.$this->header.$vista;
+                echo $vista;
             }
         }
         else{
-            require_once('app/vistas/formularioIniciarSesion.php');
+            $vista = file_get_contents('app/vistas/formularioIniciarSesion.html');
+            $inicioFooter = strpos($vista, '<!--inicioFooter-->');
+            $finFooter = strpos($vista, '<!--finFooter-->')+16;
+            $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
+
+            $vista = str_replace($remplazar, $this->footer, $vista);
+            $vista = $this->doctype.$this->header.$vista;
+            echo $vista;
         }
     }
     
     function recuperarcontrasenacorreo() {
-        require_once('app/vistas/formularioRecuperarContrasenaCorreo.php');
+        $vista = file_get_contents('app/vistas/formularioRecuperarContrasenaCorreo.html');
+        $inicioFooter = strpos($vista, '<!--inicioFooter-->');
+        $finFooter = strpos($vista, '<!--finFooter-->')+16;
+        $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
+
+        $vista = str_replace($remplazar, $this->footer, $vista);
+        $vista = $this->doctype.$this->header.$vista;
+        echo $vista;
     }
     
     function recuperarcontrasena() {
-        require_once('app/vistas/formularioRecuperarContrasena.php');
+        $vista = file_get_contents('app/vistas/formularioRecuperarContrasena.html');
+        $inicioFooter = strpos($vista, '<!--inicioFooter-->');
+        $finFooter = strpos($vista, '<!--finFooter-->')+16;
+        $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
+
+        $vista = str_replace($remplazar, $this->footer, $vista);
+        $vista = $this->doctype.$this->header.$vista;
+        echo $vista;
     }
 
     function cerrarSesion(){
