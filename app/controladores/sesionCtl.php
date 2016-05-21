@@ -91,7 +91,14 @@ class sesionCtl {
     }
     
     function recuperarcontrasenacorreo() {
-        require_once('app/vistas/formularioRecuperarContrasenaCorreo.php');
+        $vista = file_get_contents('app/vistas/formularioRecuperarContrasenaCorreo.html');
+        $inicioFooter = strpos($vista, '<!--inicioFooter-->');
+        $finFooter = strpos($vista, '<!--finFooter-->')+16;
+        $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
+
+        $vista = str_replace($remplazar, $this->footer, $vista);
+        $vista = $this->doctype.$this->header.$vista;
+        echo $vista;
     }
     
     function recuperarcontrasena() {
