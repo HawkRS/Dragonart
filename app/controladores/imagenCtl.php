@@ -65,7 +65,14 @@ class imagenCtl {
     }
     
     function mostrar() {
-        require_once('app/vistas/publicacionIndex.php');
+        $vista = file_get_contents('app/vistas/publicacionIndex.html');
+        $inicioFooter = strpos($vista, '<!--inicioFooter-->');
+        $finFooter = strpos($vista, '<!--finFooter-->')+16;
+        $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
+        
+        $vista = str_replace($remplazar, $this->footer, $vista);
+        $vista = $this->doctype.$this->header.$vista;
+        echo $vista;
     }
 }
 ?>
