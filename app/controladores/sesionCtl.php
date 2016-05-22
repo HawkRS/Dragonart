@@ -48,14 +48,18 @@ class sesionCtl {
                 require_once('app/modelos/usuarioMdl.php');
                 $usrMdl = new usuarioMdl();
                 if($usrMdl->iniciarSesion($_POST['correo'],$_POST['logPass'])){
-                    $_SESSION['correo'] = $_POST['correo'];
-                    $_SESSION['logPass'] = $_POST['logPass'];
+                    $array = $usrMdl->obtenerInfo($_POST['correo'],$_POST['logPass']);
+                    $_SESSION['correo'] = $array['correo'];
+                    $_SESSION['logPass'] = $array['contrasena'];
+                    $_SESSION['alias'] = $array['alias'];
+                    $_SESSION['nombre'] = $array['nombre'];
                     header('Location: http://localhost/Dragonart/index.php?controlador=usuario&accion=mostrar');
                 }
                 else{
                     unset($_SESSION['correo']);
                     unset($_SESSION['logPass']);
-                    var_dump($_POST);
+                    unset($_SESSION['alias']);
+                    unset($_SESSION['nombre']);
                     
                     $vista = file_get_contents('app/vistas/formularioIniciarSesion.html');
                     $inicioFooter = strpos($vista, '<!--inicioFooter-->');

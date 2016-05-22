@@ -77,12 +77,32 @@
 			}
 		}
 
-		function mostrar(){
-			$query = 'SELECT * FROM alumno';
-			$r = $this->driver->query($query);
-			while($row = $r->fetch_assoc())
-				$rows[] = $row;
-			return $rows;
+		function paginaUsuario($usuario){
+			if($stmt = $this->db->prepare('SELECT * FROM usuario WHERE nombreUsuario=?')){
+
+				$stmt->bind_param("s", $usuario);
+
+				$stmt->execute();
+
+				$stmt->bind_result($idUsuario, $nombreUsuario, $aliasUsuario, $correoUsuario, $contrasenaUsuario, $biografiaUsuario, $avatarUsuario, $statusUsuario);
+
+				$stmt->fetch();
+				
+				$stmt->close();
+				
+				$array = array(
+					'id' => $idUsuario,
+					'nombre' => $nombreUsuario,
+					'alias' => $aliasUsuario,
+					'correo' => $correoUsuario,
+					'contrasena' => $contrasenaUsuario,
+					'biografia' => $biografiaUsuario,
+					'avatar' => $avatarUsuario,
+					'status' => $statusUsuario
+				);
+
+				return $array;
+			}
 		}
 
 	}

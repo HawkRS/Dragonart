@@ -30,10 +30,7 @@ class usuarioCtl {
                 case 'mostrar':
                     $this->mostrar();
                     break;
-                    
-                case 'perfilusuario':
-                    $this->perfilusuario();
-                    break;            }
+            }
         }
         else {
             $this->alta();
@@ -101,42 +98,52 @@ class usuarioCtl {
         }
     }
     
-    function mostrar() {
-        if(isset($_SESSION['correo']) && isset($_SESSION['logPass'])){
+    function mostrar(){
+        usuarioCtl::generarHeader();
+
+        if(isset($_GET['usuario'])){
             require_once('app/modelos/usuarioMdl.php');
             $usrMdl = new usuarioMdl();
-            $dato = $usrMdl->obtenerInfo($_SESSION['correo'],$_SESSION['logPass']);
-            usuarioCtl::crearDiccionario($dato);
+            $dato = $usrMdl->paginaUsuario($_GET['usuario']);
+            if(isset($dato['nombre'])){
+                $vista = file_get_contents('app/vistas/usuarioIndex.html');
+                $inicioFooter = strpos($vista, '<!--inicioFooter-->');
+                $finFooter = strpos($vista, '<!--finFooter-->')+16;
+                $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
+
+                $vista = str_replace($remplazar, $this->footer, $vista);
+                $vista = usuarioCtl::completarVistaUsuario($vista, $dato);
+                $vista = $this->doctype.$this->header.$vista;
+                echo $vista;
+            }
+            else{
+                $vista = file_get_contents('app/vistas/404.html');
+                $inicioFooter = strpos($vista, '<!--inicioFooter-->');
+                $finFooter = strpos($vista, '<!--finFooter-->')+16;
+                $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
+
+                $vista = str_replace($remplazar, $this->footer, $vista);
+                $vista = str_replace('%mensaje%', 'El usuario que buscas no existe... Seguro que modificaste la URL directamente. Dejate de hacer bromas y usa este sitio de forma responzable.', $vista);
+                $vista = $this->doctype.$this->header.$vista;
+                echo $vista;
+            }
         }
         else{
-            header('Location: http://localhost/Dragonart/index.php');
+            $vista = file_get_contents('app/vistas/404.html');
+            $inicioFooter = strpos($vista, '<!--inicioFooter-->');
+            $finFooter = strpos($vista, '<!--finFooter-->')+16;
+            $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
+
+            $vista = str_replace($remplazar, $this->footer, $vista);
+            $vista = str_replace('%mensaje%', 'No se especificó el usuario a mostrar. ¿Qué intentas provar con esto? Solo regresa a la página anterior o mejor cierra esta pestaña y olvidemos que esto pasó.', $vista);
+            $vista = $this->doctype.$this->header.$vista;
+            echo $vista;
         }
     }
     
-    function perfilusuario() {
-        usuarioCtl::crearDiccionario();
-    }
-    
-    function crearDiccionario($array) {
+    function completarVistaUsuario($vista, $array) {
         
-        $doctype = file_get_contents('app/vistas/doctype.html');
-        $header = file_get_contents('app/vistas/header.html');
-        $vista = file_get_contents('app/vistas/usuarioIndex.php');
-        $footer = file_get_contents('app/vistas/footer.html');
-        
-        if(isset($_SESSION['correo']) && isset($_SESSION['logPass'])){
-            $inicio = strpos($header,'<!--Inicio Offline-->');
-            $fin = strpos($header, '<!--Fin Offline-->')+18;
-            $busqueda = substr($header, $inicio, $fin-$inicio);
-            $header = str_replace($busqueda, "", $header, $contar);
-        }
-        else{
-            $inicio = strpos($header,'<!--Inicio Online-->');
-            $fin = strpos($header, '<!--Fin Online-->')+17;
-            $busqueda = substr($header, $inicio, $fin-$inicio);
-            str_replace($busqueda, "", $header);
-        }
-        
+        $thumbnails = "";
         $inicio = strpos($vista,'<!--inicioRepetirImagen-->');
         $fin = strpos($vista, '<!--finalRepetirImagen-->')+25;
 
@@ -160,14 +167,27 @@ class usuarioCtl {
         
         $vista = str_replace($thumbnail, $thumbnails, $vista);
         
-        $header = strtr($header,$diccionario);
         $vista = strtr($vista,$diccionario);
         
-        $vista = $doctype.$header.$vista.$footer;
-        
-        echo $vista;
+        return $vista;
     }
 
+    function generarHeader(){
+        if(isset($_SESSION['correo']) && isset($_SESSION['logPass']) && isset($_SESSION['alias']) && isset($_SESSION['nombre'])){
+            $inicio = strpos($this->header,'<!--Inicio Offline-->');
+            $fin = strpos($this->header, '<!--Fin Offline-->')+18;
+            $busqueda = substr($this->header, $inicio, $fin-$inicio);
+            $this->header = str_replace($busqueda, "", $this->header);
+            $this->header = str_replace('%alias%', $_SESSION['alias'], $this->header);
+            $this->header = str_replace('%usuario%', $_SESSION['nombre'], $this->header);
+        }
+        else{
+            $inicio = strpos($this->header,'<!--Inicio Online-->');
+            $fin = strpos($this->header, '<!--Fin Online-->')+17;
+            $busqueda = substr($this->header, $inicio, $fin-$inicio);
+            $this->header = str_replace($busqueda, "", $this->header);
+        }
+    }
 
 	/**
     *<h1>estaVacio</h1>

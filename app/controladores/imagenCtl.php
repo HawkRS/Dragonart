@@ -59,6 +59,8 @@ class imagenCtl {
         
         $this->doctype = str_replace($remplazarBody, '<body class="index">', $this->doctype);        
         $vista = str_replace($remplazarFooter, $this->footer, $vista);
+
+        imagenCtl::generarHeader();
         
         $vista = $this->doctype.$this->header.$vista;
         echo $vista;
@@ -74,5 +76,22 @@ class imagenCtl {
         $vista = $this->doctype.$this->header.$vista;
         echo $vista;
     }
-}
+
+    function generarHeader(){
+        if(isset($_SESSION['correo']) && isset($_SESSION['logPass']) && isset($_SESSION['alias']) && isset($_SESSION['nombre'])){
+            $inicio = strpos($this->header,'<!--Inicio Offline-->');
+            $fin = strpos($this->header, '<!--Fin Offline-->')+18;
+            $busqueda = substr($this->header, $inicio, $fin-$inicio);
+            $this->header = str_replace($busqueda, "", $this->header);
+            $this->header = str_replace('%alias%', $_SESSION['alias'], $this->header);
+            $this->header = str_replace('%usuario%', $_SESSION['nombre'], $this->header);
+        }
+        else{
+            $inicio = strpos($this->header,'<!--Inicio Online-->');
+            $fin = strpos($this->header, '<!--Fin Online-->')+17;
+            $busqueda = substr($this->header, $inicio, $fin-$inicio);
+            $this->header = str_replace($busqueda, "", $this->header);
+        }
+    }
+}   
 ?>
