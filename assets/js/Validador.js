@@ -85,10 +85,31 @@ function validarInputs(inputs, cantidad){
 				}
 				else{
 					quitarError(tempId, temp.attr('id'));
-					bandera = /^[a-zA-z]([a-zA-z]|\s)*/.test(temp.val());
+					bandera = /^[a-zA-Z]([a-zA-Z]|\s)*/.test(temp.val());
 					if(!bandera){
 						tempId = tempId + temp.attr('id');
 						ponerError(tempId, temp.attr('id'), 'Solo se permiten letras y espacios.');
+					}
+					else{
+						tempId = tempId + temp.attr('id');
+						quitarError(tempId, temp.attr('id'));
+						contador++;
+					}
+				}
+				break;
+
+			case 'tags':
+				bandera = !(estaVacio(temp.val()));
+				if(!bandera){
+					tempId = tempId + temp.attr('id');
+					ponerError(tempId, temp.attr('id'), 'Debes escribir al menos un tag.');
+				}
+				else{
+					quitarError(tempId, temp.attr('id'));
+					bandera = /^[a-zA-Z]([a-zA-Z0-9]|\s)*/.test(temp.val());
+					if(!bandera){
+						tempId = tempId + temp.attr('id');
+						ponerError(tempId, temp.attr('id'), 'Solo se permiten letras, números y espacios.');
 					}
 					else{
 						tempId = tempId + temp.attr('id');
