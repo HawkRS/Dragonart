@@ -91,6 +91,7 @@ class sesionCtl {
             $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
 
             $vista = str_replace($remplazar, $this->footer, $vista);
+            $vista = str_replace('%error%', '', $vista);
             $vista = $this->doctype.$this->header.$vista;
             echo $vista;
         }

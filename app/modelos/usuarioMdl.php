@@ -10,19 +10,21 @@
 			$this->db = $this->acceso->getDriver();
 		}
 
-		function alta($nombre, $alias, $correo, $contrasena){			
+		function alta($nombre, $alias, $correo, $contrasena){
+			$bandera = false;
+
 			if($stmt = $this->db->prepare('INSERT INTO usuario (nombreUsuario, aliasUsuario, correoUsuario, contrasenaUsuario) VALUES (?, ?, ?, PASSWORD(?))')){
 
 				$stmt->bind_param("ssss", $nombre, $alias, $correo, $contrasena);
 
-				$stmt->execute();
-
-				$stmt->bind_result($res);
+				$bandera = $stmt->execute();
 
 				$stmt->fetch();
 
 				$stmt->close();
 			}
+
+			return $bandera;
 		}
 
 		function iniciarSesion($correo, $contrasena){
@@ -103,6 +105,10 @@
 
 				return $array;
 			}
+		}
+
+		function getError(){
+			return $this->db->error;
 		}
 
 	}

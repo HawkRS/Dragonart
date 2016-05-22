@@ -44,25 +44,61 @@ class usuarioCtl {
 			if(usuarioCtl::validarRegistro($_POST)){
                 require_once('app/modelos/usuarioMdl.php');
                 $usrMdl = new usuarioMdl();
-                $usrMdl->alta($_POST['nombre'],$_POST['alias'],$_POST['correo'],$_POST['contrasena']);
-				$vista = file_get_contents('app/vistas/usuarioIndex.html');
-                $inicioFooter = strpos($vista, '<!--inicioFooter-->');
-                $finFooter = strpos($vista, '<!--finFooter-->')+16;
-                $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
+                if($usrMdl->alta($_POST['nombre'],$_POST['alias'],$_POST['correo'],$_POST['contrasena'])){
+                    if($usrMdl->iniciarSesion($_POST['correo'],$_POST['contrasena'])){
+                        $array = $usrMdl->obtenerInfo($_POST['correo'],$_POST['contrasena']);
+                        $_SESSION['correo'] = $array['correo'];
+                        $_SESSION['logPass'] = $array['contrasena'];
+                        $_SESSION['alias'] = $array['alias'];
+                        $_SESSION['nombre'] = $array['nombre'];
+                        header('Location: http://localhost/Dragonart/index.php?controlador=usuario&accion=mostrar&usuario='.$array['nombre']);
+                    }
+                    else{
+                        $vista = file_get_contents('app/vistas/formularioRegistrarUsuario.html');
+                        $inicioFooter = strpos($vista, '<!--inicioFooter-->');
+                        $finFooter = strpos($vista, '<!--finFooter-->')+16;
+                        $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
 
-                $vista = str_replace($remplazar, $this->footer, $vista);
-                $vista = $this->doctype.$this->header.$vista;
-                echo $vista;
+                        $vista = str_replace($remplazar, $this->footer, $vista);
+                        $vista = str_replace('%error%', '<div class="alert alert-danger">Hubo un error al procesar la solicitud. Por favor, intente de nuevo.</div>', $vista);
+                        $vista = $this->doctype.$this->header.$vista;
+                        echo $vista;
+                    }
+                }else{
+                    $vista = file_get_contents('app/vistas/formularioRegistrarUsuario.html');
+                    $inicioFooter = strpos($vista, '<!--inicioFooter-->');
+                    $finFooter = strpos($vista, '<!--finFooter-->')+16;
+                    $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
+
+                    $vista = str_replace($remplazar, $this->footer, $vista);
+                    $vista = str_replace('%error%', '<div class="alert alert-danger">'.$usrMdl->getError().'</div>', $vista);
+                    $vista = $this->doctype.$this->header.$vista;
+                    echo $vista;
+                }
 			}
 			else{
-				$vista = file_get_contents('app/vistas/formularioRegistrarUsuario.html');
-                $inicioFooter = strpos($vista, '<!--inicioFooter-->');
-                $finFooter = strpos($vista, '<!--finFooter-->')+16;
-                $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
+                if(count($_POST) === 0){
+    				$vista = file_get_contents('app/vistas/formularioRegistrarUsuario.html');
+                    $inicioFooter = strpos($vista, '<!--inicioFooter-->');
+                    $finFooter = strpos($vista, '<!--finFooter-->')+16;
+                    $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
 
-                $vista = str_replace($remplazar, $this->footer, $vista);
-                $vista = $this->doctype.$this->header.$vista;
-                echo $vista;
+                    $vista = str_replace($remplazar, $this->footer, $vista);
+                    $vista = str_replace('%error%', '', $vista);
+                    $vista = $this->doctype.$this->header.$vista;
+                    echo $vista;
+                }
+                else{
+                    $vista = file_get_contents('app/vistas/formularioRegistrarUsuario.html');
+                    $inicioFooter = strpos($vista, '<!--inicioFooter-->');
+                    $finFooter = strpos($vista, '<!--finFooter-->')+16;
+                    $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
+
+                    $vista = str_replace($remplazar, $this->footer, $vista);
+                    $vista = str_replace('%error%', '<div class="alert alert-danger">Hubo un error al procesar la solicitud. Por favor, intente de nuevo.</div>', $vista);
+                    $vista = $this->doctype.$this->header.$vista;
+                    echo $vista;
+                }
 			}
 		}
 		else{
@@ -72,6 +108,7 @@ class usuarioCtl {
             $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
 
             $vista = str_replace($remplazar, $this->footer, $vista);
+            $vista = str_replace('%error%', '', $vista);
             $vista = $this->doctype.$this->header.$vista;
             echo $vista;
 		}
@@ -155,6 +192,13 @@ class usuarioCtl {
 
         if(!isset($array['biografia'])){
             $array['biografia'] = '<i>No hay descripción...</i>';
+        }
+
+        if($array['nombre'] === $_SESSION['nombre']){
+            $inicioBtn = strpos($vista,'<!--IniBotonSeguir-->');
+            $finBtn = strpos($vista, '<!--FinBotonSeguir-->')+21;
+            $btnSeguir = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
+            $vista = str_replace($btnSeguir, '', $vista);
         }
 
         $diccionario = array (
