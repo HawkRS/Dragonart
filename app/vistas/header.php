@@ -47,7 +47,7 @@
 
                         <ul class="dropdown-menu submenu">
                             <li>
-                                <a href="index.php?controlador=usuario&accion=perfilusuario"><span class="glyphicon glyphicon-user"></span> Página principal</a>
+                                <a href="index.php?controlador=usuario&accion=mostrar"><span class="glyphicon glyphicon-user"></span> Página principal</a>
                             </li>
                             <li>
                                 <a href="index.php?controlador=notificaciones&accion=mostrar"><span class="glyphicon glyphicon-comment"></span> Notificaciones</a>
