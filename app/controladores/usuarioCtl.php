@@ -182,6 +182,7 @@ class usuarioCtl {
         }
     }
     
+
     function completarVistaUsuario($vista, $array) {
         
         $thumbnails = "";
