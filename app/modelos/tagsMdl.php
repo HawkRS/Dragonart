@@ -17,8 +17,6 @@
 
 				$stmt->execute();
 
-				$stmt->bind_result($res);
-
 				$stmt->fetch();
 
 				$stmt->close();
@@ -65,14 +63,6 @@
 
 				return $array;
 			}
-		}
-
-		function mostrar(){
-			$query = 'SELECT * FROM tag';
-			$r = $this->driver->query($query);
-			while($row = $r->fetch_assoc())
-				$rows[] = $row;
-			return $rows;
 		}
 
 	}
