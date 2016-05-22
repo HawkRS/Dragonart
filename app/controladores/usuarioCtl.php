@@ -119,22 +119,19 @@ class usuarioCtl {
     
     function crearDiccionario($array) {
         
-        $doctype = file_get_contents('app/vistas/doctype.html');
-        $header = file_get_contents('app/vistas/header.html');
-        $vista = file_get_contents('app/vistas/usuarioIndex.php');
-        $footer = file_get_contents('app/vistas/footer.html');
+        $vista = file_get_contents('app/vistas/usuarioIndex.html');
         
         if(isset($_SESSION['correo']) && isset($_SESSION['logPass'])){
-            $inicio = strpos($header,'<!--Inicio Offline-->');
-            $fin = strpos($header, '<!--Fin Offline-->')+18;
-            $busqueda = substr($header, $inicio, $fin-$inicio);
-            $header = str_replace($busqueda, "", $header, $contar);
+            $inicio = strpos($this->header,'<!--Inicio Offline-->');
+            $fin = strpos($this->header, '<!--Fin Offline-->')+18;
+            $busqueda = substr($this->header, $inicio, $fin-$inicio);
+            $header = str_replace($busqueda, "", $this->header, $contar);
         }
         else{
-            $inicio = strpos($header,'<!--Inicio Online-->');
-            $fin = strpos($header, '<!--Fin Online-->')+17;
-            $busqueda = substr($header, $inicio, $fin-$inicio);
-            str_replace($busqueda, "", $header);
+            $inicio = strpos($this->header,'<!--Inicio Online-->');
+            $fin = strpos($this->header, '<!--Fin Online-->')+17;
+            $busqueda = substr($this->header, $inicio, $fin-$inicio);
+            str_replace($busqueda, "", $this->header);
         }
         
         $inicio = strpos($vista,'<!--inicioRepetirImagen-->');
@@ -160,11 +157,15 @@ class usuarioCtl {
         
         $vista = str_replace($thumbnail, $thumbnails, $vista);
         
-        $header = strtr($header,$diccionario);
+        $header = strtr($this->header,$diccionario);
         $vista = strtr($vista,$diccionario);
         
-        $vista = $doctype.$header.$vista.$footer;
-        
+        $inicioFooter = strpos($vista, '<!--inicioFooter-->');
+        $finFooter = strpos($vista, '<!--finFooter-->')+16;
+        $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
+
+        $vista = str_replace($remplazar, $this->footer, $vista);
+        $vista = $this->doctype.$this->header.$vista;
         echo $vista;
     }
 
