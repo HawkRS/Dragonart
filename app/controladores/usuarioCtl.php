@@ -38,6 +38,8 @@ class usuarioCtl {
     }
     
     function alta() {
+        usuarioCtl::generarHeader();
+
     	if(isset($_POST)){
 			if(usuarioCtl::validarRegistro($_POST)){
                 require_once('app/modelos/usuarioMdl.php');
@@ -76,7 +78,9 @@ class usuarioCtl {
     }
     
     function modificar() {
-        if(empty($_POST)){
+        usuarioCtl::generarHeader();
+
+        if(empty($_POST) && isset($_SESSION['correo']) && isset($_SESSION['logPass'])){
             $vista = file_get_contents('app/vistas/formularioConfiguracionUsuario.html');
             $inicioFooter = strpos($vista, '<!--inicioFooter-->');
             $finFooter = strpos($vista, '<!--finFooter-->')+16;
@@ -148,6 +152,10 @@ class usuarioCtl {
         $fin = strpos($vista, '<!--finalRepetirImagen-->')+25;
 
         $thumbnail = substr($vista,$inicio,$fin-$inicio);
+
+        if(!isset($array['biografia'])){
+            $array['biografia'] = '<i>No hay descripción...</i>';
+        }
 
         $diccionario = array (
             '%alias%' => $array['alias'],

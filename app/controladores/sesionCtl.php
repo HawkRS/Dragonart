@@ -43,6 +43,8 @@ class sesionCtl {
     }
     
     function iniciarsesion() {
+        sesionCtl::generarHeader();
+
         if(isset($_POST)){
             if(sesionCtl::validarSesion($_POST)){
                 require_once('app/modelos/usuarioMdl.php');
@@ -53,7 +55,7 @@ class sesionCtl {
                     $_SESSION['logPass'] = $array['contrasena'];
                     $_SESSION['alias'] = $array['alias'];
                     $_SESSION['nombre'] = $array['nombre'];
-                    header('Location: http://localhost/Dragonart/index.php?controlador=usuario&accion=mostrar');
+                    header('Location: http://localhost/Dragonart/index.php?controlador=usuario&accion=mostrar&usuario='.$array['nombre']);
                 }
                 else{
                     unset($_SESSION['correo']);
@@ -95,6 +97,8 @@ class sesionCtl {
     }
     
     function recuperarcontrasenacorreo() {
+        sesionCtl::generarHeader();
+
         $vista = file_get_contents('app/vistas/formularioRecuperarContrasenaCorreo.html');
         $inicioFooter = strpos($vista, '<!--inicioFooter-->');
         $finFooter = strpos($vista, '<!--finFooter-->')+16;
@@ -106,6 +110,8 @@ class sesionCtl {
     }
     
     function recuperarcontrasena() {
+        sesionCtl::generarHeader();
+
         $vista = file_get_contents('app/vistas/formularioRecuperarContrasena.html');
         $inicioFooter = strpos($vista, '<!--inicioFooter-->');
         $finFooter = strpos($vista, '<!--finFooter-->')+16;
@@ -123,6 +129,23 @@ class sesionCtl {
         header('Location: http://localhost/Dragonart/index.php');
     }
     
+    function generarHeader(){
+        if(isset($_SESSION['correo']) && isset($_SESSION['logPass']) && isset($_SESSION['alias']) && isset($_SESSION['nombre'])){
+            $inicio = strpos($this->header,'<!--Inicio Offline-->');
+            $fin = strpos($this->header, '<!--Fin Offline-->')+18;
+            $busqueda = substr($this->header, $inicio, $fin-$inicio);
+            $this->header = str_replace($busqueda, "", $this->header);
+            $this->header = str_replace('%alias%', $_SESSION['alias'], $this->header);
+            $this->header = str_replace('%usuario%', $_SESSION['nombre'], $this->header);
+        }
+        else{
+            $inicio = strpos($this->header,'<!--Inicio Online-->');
+            $fin = strpos($this->header, '<!--Fin Online-->')+17;
+            $busqueda = substr($this->header, $inicio, $fin-$inicio);
+            $this->header = str_replace($busqueda, "", $this->header);
+        }
+    }
+
     /**
     *<h1>estaVacio</h1>
     *<p>Esta función evalúa una cadena recibida desde el parámetro $cadena y verifica que no tenga

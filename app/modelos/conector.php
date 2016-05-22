@@ -26,7 +26,6 @@
 		function __construct(){
 			require_once('datosBD.inc');
 			$this->driver = new mysqli($servidor, $usuario, $pass, $baseDatos);
-			//$this->driver = new mysqli("localhost","root","Licosvook5","dragonart");
 			if($this->driver->connect_errno)
 				die("Error en la conexión");
 		}
