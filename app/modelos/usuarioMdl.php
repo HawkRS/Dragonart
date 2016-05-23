@@ -62,8 +62,6 @@
 
 				$stmt->fetch();
 				
-				$stmt->close();
-				
 				$array = array(
 					'id' => $idUsuario,
 					'nombre' => $nombreUsuario,
@@ -74,9 +72,13 @@
 					'avatar' => $avatarUsuario,
 					'status' => $statusUsuario
 				);
+				
+				$stmt->close();
 
 				return $array;
 			}
+
+			return false;
 		}
 
 		function paginaUsuario($usuario){
