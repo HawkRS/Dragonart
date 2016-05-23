@@ -129,6 +129,40 @@ class imagenCtl {
         imagenCtl::generarHeader();
 
         $vista = file_get_contents('app/vistas/publicacionIndex.html');
+
+        require_once('app/modelos/imagenMdl.php');
+        $imgMdl = new imagenMdl();
+        require_once('app/modelos/usuarioMdl.php');
+        $usrMdl = new usuarioMdl();
+        $infoImagen = $imgMdl->obtenerInfo($_GET['img']);
+        $infoUsuario = $usrMdl->obtenerInfoPorID($infoImagen['idUsuario']);
+
+        $vista = str_replace('%urlImagen%', $infoImagen['url'], $vista);
+        $vista = str_replace('%nombreUsuario%', $infoUsuario['nombre'], $vista);
+        $vista = str_replace('%tituloImagen%', $infoImagen['titulo'], $vista);
+        $vista = str_replace('%fechaImagen%', $infoImagen['fecha'], $vista);
+        $vista = str_replace('%descripcionImagen%', $infoImagen['descripcion'], $vista);
+
+        if(isset($_SESSION['correo']) && $infoUsuario['correo'] !== $_SESSION['correo']){
+        	$inicioBtn = strpos($vista, '<!--iniBtn-->');
+        	$finBtn = strpos($vista, '<!--finBtn-->')+13;
+        	$remplazar = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
+        	$vista = str_replace($remplazar, '', $vista);
+        }
+
+        //Esto remueve el formulario de comentarios y los botones de edición para los que no estén registrados
+        if(!isset($_SESSION['correo']) && !isset($_SESSION['logPass'])){
+        	$inicioForm = strpos($vista, '<!--iniForm-->');
+        	$finForm = strpos($vista, '<!--finForm-->')+14;
+        	$remplazar = substr($vista,$inicioForm,$finForm-$inicioForm);
+        	$vista = str_replace($remplazar, '', $vista);
+
+        	$inicioBtn = strpos($vista, '<!--iniBtn-->');
+        	$finBtn = strpos($vista, '<!--finBtn-->')+13;
+        	$remplazar = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
+        	$vista = str_replace($remplazar, '', $vista);
+        }
+
         $inicioFooter = strpos($vista, '<!--inicioFooter-->');
         $finFooter = strpos($vista, '<!--finFooter-->')+16;
         $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
