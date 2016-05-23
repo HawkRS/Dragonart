@@ -46,12 +46,11 @@ class usuarioCtl {
                 $usrMdl = new usuarioMdl();
                 if($usrMdl->alta($_POST['nombre'],$_POST['alias'],$_POST['correo'],$_POST['contrasena'])){
                     if($usrMdl->iniciarSesion($_POST['correo'],$_POST['contrasena'])){
-                        $array = $usrMdl->obtenerInfo($_POST['correo'],$_POST['contrasena']);
-                        $_SESSION['correo'] = $array['correo'];
-                        $_SESSION['logPass'] = $array['contrasena'];
-                        $_SESSION['alias'] = $array['alias'];
-                        $_SESSION['nombre'] = $array['nombre'];
-                        header('Location: http://localhost/Dragonart/index.php?controlador=usuario&accion=mostrar&usuario='.$array['nombre']);
+                        $_SESSION['correo'] = $_POST['correo'];
+                        $_SESSION['logPass'] = $_POST['contrasena'];
+                        $_SESSION['alias'] = $_POST['alias'];
+                        $_SESSION['nombre'] = $_POST['nombre'];
+                        header('Location: http://localhost/Dragonart/index.php?controlador=usuario&accion=mostrar&usuario='.$_POST['nombre']);
                     }
                     else{
                         $vista = file_get_contents('app/vistas/formularioRegistrarUsuario.html');
@@ -146,6 +145,8 @@ class usuarioCtl {
             require_once('app/modelos/usuarioMdl.php');
             $usrMdl = new usuarioMdl();
             $dato = $usrMdl->paginaUsuario($_GET['usuario']);
+            $array = $usrMdl->obtenerInfo($_SESSION['correo'],$_SESSION['logPass']);
+            var_dump($array);
             if(isset($dato['nombre'])){
                 $vista = file_get_contents('app/vistas/usuarioIndex.html');
                 $inicioFooter = strpos($vista, '<!--inicioFooter-->');
@@ -235,6 +236,7 @@ class usuarioCtl {
             $this->header = str_replace('%usuario%', $_SESSION['nombre'], $this->header);
         }
         else{
+            var_dump($_SESSION);
             $inicio = strpos($this->header,'<!--Inicio Online-->');
             $fin = strpos($this->header, '<!--Fin Online-->')+17;
             $busqueda = substr($this->header, $inicio, $fin-$inicio);
