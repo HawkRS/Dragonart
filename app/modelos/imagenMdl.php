@@ -55,6 +55,34 @@
 			}
 		}
 
+		function obtenerInfoPorUrl($url){
+			if($stmt = $this->db->prepare('SELECT * FROM imagen WHERE urlImagen=?')){
+
+				$stmt->bind_param("s", $url);
+
+				$stmt->execute();
+
+				$stmt->bind_result($idImagen, $idUsuario, $urlImagen, $tituloImagen, $descripcionImagen, $fechaImagen, $statusImagen, $calificacionPromedioImagen);
+
+				$stmt->fetch();
+				
+				$stmt->close();
+				
+				$array = array(
+					'id' => $idImagen,
+					'idUsuario' => $idUsuario,
+					'url' => $urlImagen,
+					'titulo' => $tituloImagen,
+					'descripcion' => $descripcionImagen,
+					'fecha' => $fechaImagen,
+					'status' => $statusImagen,
+					'promedio' => $calificacionPromedioImagen
+				);
+
+				return $array;
+			}
+		}
+
 		function getError(){
 			return $this->db->error;
 		}
