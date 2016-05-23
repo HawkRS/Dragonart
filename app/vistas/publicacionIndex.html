@@ -14,7 +14,7 @@
                     <div class="row row-centered">
                         <figure>
                             <a href="index.php?controlador=usuario&accion=mostrar&usuario=%nombreUsuario%">
-                                <img class="col-xs-12 col-sm-4 col-md-3 avatar col-centered" src="%avatarUsr%" alt="avatar">
+                                <img class="col-xs-12 col-sm-4 col-md-3 avatar col-centered" src="assets/img/avatar.png" alt="avatar">
                             </a>
                         </figure>
                         <div class="col-xs-12 col-sm-6 col-md-6">
@@ -26,15 +26,15 @@
                             <input id="input-1" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="sm" data-step="1">
                             <!--finStar-->
                             <!--iniBtn-->
-                            <button type="button" onclick="location.href='formularioImagen.php';" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-edit"></span> Editar información</button>
-                            <button type="button" onclick="location.href='usuarioIndex.php';" class="btn btn-danger btn-block"><span class="glyphicon glyphicon-remove"></span> Eliminar post</button>
+                            <button type="button" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-edit"></span> Editar información</button>
+                            <button type="button" class="btn btn-danger btn-block"><span class="glyphicon glyphicon-remove"></span> Eliminar post</button>
                             <!--finBtn-->
                         </div>
                     </div>
                 </div>
 
                 <div class="panel-body postDesc">
-                    <p>%descripcion%</p>
+                    <p>%descripcionImagen%</p>
                 </div>
                 <div class="panel-footer postTags">
                     <!--iniTag-->
@@ -45,6 +45,7 @@
         </section>
 
         <section class="col-md-12">
+            <!--iniForm-->
             <form name="comentar" class="form-horizontal">
                 <div class="form-group">
                     <label for="comentario" class="col-xs-12 col-md-8 col-md-offset-2">Escribe un comentario </label>
@@ -62,6 +63,7 @@
                     </div>
                 </div>
             </form>
+            <!--finForm-->
             
             <div class="col-md-8 col-md-offset-2">
                 <!--iniCom-->
