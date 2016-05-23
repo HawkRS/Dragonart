@@ -55,9 +55,10 @@ class imagenCtl {
 
         if(isset($_POST)){
             if(imagenCtl::validarRegistro($_POST)){
-                $ruta = '/tmp/'.basename($_FILES['imagen']['name']);
+                $ruta = '/tmp/uploads/'.basename($_FILES['imagen']['name']);
                 if(move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta)){
 
+                	imagenCtl::crearThumbnail($ruta, $_FILES['imagen']['name']);
                     $postLimpio = imagenCtl::sanitizar($_POST);
 
                     require_once('app/modelos/usuarioMdl.php');
@@ -68,7 +69,9 @@ class imagenCtl {
                     require_once('app/modelos/imagenMdl.php');
                     $imgMdl = new imagenMdl();
                     if($imgMdl->alta($infoUsuario['id'], $ruta, $postLimpio['titulo'], $postLimpio['descripcion'])){
-                        header('Location: http://localhost/Dragonart/index.php?controlador=imagen&accion=mostrar&img='.$imgMdl->insert_id);
+                    	//Agregar a notificaciones
+                    	$infoImagen = $imgMdl->obtenerInfoPorUrl($ruta);
+                        header('Location: http://localhost/Dragonart/index.php?controlador=imagen&accion=mostrar&img='.$infoImagen['id']);
                     }
                     else{
                         $errorMsg = '<div class="alert alert-danger">ERROR: '.$imgMdl->getError().'.</div>';
@@ -211,7 +214,7 @@ class imagenCtl {
         }
 
         //SECCION VALIDADOR DE ARCHIVO IMAGEN
-        $destino = '/tmp/';
+        $destino = '/tmp/uploads/';
         $destArchivo = $destino.basename($_FILES['imagen']['name']);
 
         $tipoImagen = pathinfo($destArchivo,PATHINFO_EXTENSION);
@@ -262,6 +265,22 @@ class imagenCtl {
         );
 
         return $arrayNuevo;
+    }
+
+    function crearThumbnail($ruta, $nombre){
+		$inFile = $ruta;
+		$outFile = '/tmp/uploads/thumb/'.$nombre;
+		$image = new Imagick($inFile);
+		$image->scaleImage(400, 300, true);
+		if($image->getImageWidth() < 400){
+			$ancho = (400 - $image->getImageWidth())/2;
+			$image->borderImage('transparent',$ancho, 0);
+		}
+		else if($image->getImageHeight() < 300){
+			$alto = (300 - $image->getImageHeight())/2;
+			$image->borderImage('transparent',0, $alto);
+		}
+		$image->writeImage($outFile);
     }
 }   
 ?>
