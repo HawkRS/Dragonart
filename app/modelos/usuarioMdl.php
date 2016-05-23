@@ -81,6 +81,36 @@
 			return false;
 		}
 
+		function obtenerInfoPorID($id){
+			if($stmt = $this->db->prepare('SELECT * FROM usuario WHERE idUsuario=?')){
+
+				$stmt->bind_param("i", $id);
+
+				$stmt->execute();
+
+				$stmt->bind_result($idUsuario, $nombreUsuario, $aliasUsuario, $correoUsuario, $contrasenaUsuario, $biografiaUsuario, $avatarUsuario, $statusUsuario);
+
+				$stmt->fetch();
+				
+				$array = array(
+					'id' => $idUsuario,
+					'nombre' => $nombreUsuario,
+					'alias' => $aliasUsuario,
+					'correo' => $correoUsuario,
+					'contrasena' => $contrasenaUsuario,
+					'biografia' => $biografiaUsuario,
+					'avatar' => $avatarUsuario,
+					'status' => $statusUsuario
+				);
+				
+				$stmt->close();
+
+				return $array;
+			}
+
+			return false;
+		}
+
 		function paginaUsuario($usuario){
 			if($stmt = $this->db->prepare('SELECT * FROM usuario WHERE nombreUsuario=?')){
 
