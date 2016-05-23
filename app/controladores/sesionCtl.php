@@ -51,11 +51,11 @@ class sesionCtl {
                 $usrMdl = new usuarioMdl();
                 if($usrMdl->iniciarSesion($_POST['correo'],$_POST['logPass'])){
                     $array = $usrMdl->obtenerInfo($_POST['correo'],$_POST['logPass']);
-                    $_SESSION['correo'] = $array['correo'];
-                    $_SESSION['logPass'] = $array['contrasena'];
+                    $_SESSION['correo'] = $_POST['correo'];
+                    $_SESSION['logPass'] = $_POST['logPass'];
                     $_SESSION['alias'] = $array['alias'];
                     $_SESSION['nombre'] = $array['nombre'];
-                    header('Location: http://localhost/Dragonart/index.php?controlador=usuario&accion=mostrar&usuario='.$array['nombre']);
+                    header('Location: http://localhost/Dragonart/index.php?controlador=usuario&accion=mostrar&usuario='.$_SESSION['nombre']);
                 }
                 else{
                     unset($_SESSION['correo']);
