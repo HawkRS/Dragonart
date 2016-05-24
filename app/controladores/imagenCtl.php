@@ -46,7 +46,7 @@ class imagenCtl {
             $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
 
             $vista = str_replace($remplazar, $this->footer, $vista);
-            $vista = str_replace('%mensaje%', 'No es posible subir imágenes si no haz iniciado sesión. Deja de buscar fallas en este sitio web, ¿De acuerdo?. Mira, te dejo este <a href="index.php?controlador=sesion&accion=iniciarsesion">vínculo</a> para que inicies sesión o <a href="index.php?controlador=usuario&accion=alta">este</a> para que te registres.', $vista);
+            $vista = str_replace('%mensaje%', 'No es posible subir imágenes si no haz iniciado sesión.', $vista);
             $vista = $this->doctype.$this->header.$vista;
             echo $vista;
         }
@@ -59,10 +59,10 @@ class imagenCtl {
                 if(move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta)){
 
                 	$nuevoNombre = '/var/www/html/Dragonart/uploads/img/'.uniqid('img_').'.'.pathinfo($ruta,PATHINFO_EXTENSION);
-			        $destArchivo = $destino.basename($nuevoNombre);
+			        $destArchivo = '/var/www/html/Dragonart/uploads/img/'.basename($nuevoNombre);
                 	while(file_exists($destArchivo)){
 			            $nuevoNombre = '/var/www/html/Dragonart/uploads/img/'.uniqid('img_').'.'.pathinfo($ruta,PATHINFO_EXTENSION);
-			            $destArchivo = $destino.basename($nuevoNombre);
+			            $destArchivo = '/var/www/html/Dragonart/uploads/img/'.basename($nuevoNombre);
 			        }
 
 			        rename($ruta, $nuevoNombre);
@@ -72,7 +72,6 @@ class imagenCtl {
                     require_once('app/modelos/usuarioMdl.php');
                     $usrMdl = new usuarioMdl();
                     $infoUsuario = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
-                    var_dump($infoUsuario);
 
                     require_once('app/modelos/imagenMdl.php');
                     $imgMdl = new imagenMdl();
@@ -149,6 +148,7 @@ class imagenCtl {
 
         $vista = str_replace('%urlImagen%', $ruta, $vista);
         $vista = str_replace('%nombreUsuario%', $infoUsuario['nombre'], $vista);
+        $vista = str_replace('%avatarUsuario%', $infoUsuario['avatar'], $vista);
         $vista = str_replace('%tituloImagen%', $infoImagen['titulo'], $vista);
         $vista = str_replace('%fechaImagen%', $infoImagen['fecha'], $vista);
         $vista = str_replace('%descripcionImagen%', $infoImagen['descripcion'], $vista);
