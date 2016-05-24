@@ -77,11 +77,20 @@
 <!--inicioFooter-->
 <!--finFooter-->
 
+<script type="text/javascript" src="assets/js/external/sha.js"></script>
 <script>
     $('#registroUsr').on('submit',function(event){
         var inputs = $('#registroUsr input');
         event.preventDefault();
         if(validarInputs(inputs, inputs.length)){
+            var shaObj = new jsSHA("SHA-1", "TEXT");
+            shaObj.update($('#contrasena').val());
+            var hash = shaObj.getHash("HEX");
+            $('#contrasena').val(hash);
+            var shaObj2 = new jsSHA("SHA-1", "TEXT");
+            shaObj2.update($('#contrasenaConfirmacion').val());
+            var hash2 = shaObj2.getHash("HEX");
+            $('#contrasenaConfirmacion').val(hash);
             this.submit();
         }   
     });
