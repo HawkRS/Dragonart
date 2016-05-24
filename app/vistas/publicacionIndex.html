@@ -14,7 +14,7 @@
                     <div class="row row-centered">
                         <figure>
                             <a href="index.php?controlador=usuario&accion=mostrar&usuario=%nombreUsuario%">
-                                <img class="col-xs-12 col-sm-4 col-md-3 avatar col-centered" src="assets/img/avatar.png" alt="avatar">
+                                <img class="col-xs-12 col-sm-4 col-md-3 avatar col-centered img-circle" src="%avatarUsuario%" alt="avatar">
                             </a>
                         </figure>
                         <div class="col-xs-12 col-sm-6 col-md-6">
@@ -46,7 +46,7 @@
 
         <section class="col-md-12">
             <!--iniForm-->
-            <form name="comentar" class="form-horizontal">
+            <form name="comentario" class="form-horizontal" id="comentario" action="index.php?controlador=imagen&accion=mostrar&img=%idImagen%" method="post" novalidate>
                 <div class="form-group">
                     <label for="comentario" class="col-xs-12 col-md-8 col-md-offset-2">Escribe un comentario </label>
                 </div>
@@ -94,5 +94,15 @@
 
 <!--inicioFooter-->
 <!--finFooter-->
+
+<script>
+    $('#comentario').on('submit',function(event){
+        var txtArea = $('#comentario textarea');
+        event.preventDefault();
+        if(validarTextArea(txtArea)){
+            this.submit();
+        }   
+    });
+</script>
 
 </html>
