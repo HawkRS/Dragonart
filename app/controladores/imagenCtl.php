@@ -58,7 +58,15 @@ class imagenCtl {
                 $ruta = '/var/www/html/Dragonart/uploads/img/'.basename($_FILES['imagen']['name']);
                 if(move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta)){
 
-                	imagenCtl::crearThumbnail($ruta, $_FILES['imagen']['name']);
+                	$nuevoNombre = '/var/www/html/Dragonart/uploads/img/'.uniqid('img_').'.'.pathinfo($ruta,PATHINFO_EXTENSION);
+			        $destArchivo = $destino.basename($nuevoNombre);
+                	while(file_exists($destArchivo)){
+			            $nuevoNombre = '/var/www/html/Dragonart/uploads/img/'.uniqid('img_').'.'.pathinfo($ruta,PATHINFO_EXTENSION);
+			            $destArchivo = $destino.basename($nuevoNombre);
+			        }
+
+			        rename($ruta, $nuevoNombre);
+                	imagenCtl::crearThumbnail($nuevoNombre, str_replace('/var/www/html/Dragonart/uploads/img/', '', $nuevoNombre));
                     $postLimpio = imagenCtl::sanitizar($_POST);
 
                     require_once('app/modelos/usuarioMdl.php');
@@ -68,9 +76,9 @@ class imagenCtl {
 
                     require_once('app/modelos/imagenMdl.php');
                     $imgMdl = new imagenMdl();
-                    if($imgMdl->alta($infoUsuario['id'], $ruta, $postLimpio['titulo'], $postLimpio['descripcion'])){
+                    if($imgMdl->alta($infoUsuario['id'], $nuevoNombre, $postLimpio['titulo'], $postLimpio['descripcion'])){
                     	//Agregar a notificaciones
-                    	$infoImagen = $imgMdl->obtenerInfoPorUrl($ruta);
+                    	$infoImagen = $imgMdl->obtenerInfoPorUrl($nuevoNombre);
                         header('Location: http://localhost/Dragonart/index.php?controlador=imagen&accion=mostrar&img='.$infoImagen['id']);
                     }
                     else{
@@ -258,23 +266,16 @@ class imagenCtl {
         if(isset($array["submit"])){
             $tam = getimagesize($_FILES['imagen']['tmp_name']);
             if($tam === false) {
-                echo 'No es imagen';
                 return false;
             }
         }
 
-        if(file_exists($destArchivo)){
-            echo 'archivo existente';
+        if($_FILES['imagen']['size'] > 10485760){
+        	var_dump($_FILES['imagen']['size']);
             return false;
         }
 
-        if($_FILES['imagen']['size'] > 1310720){
-            echo 'archivo pesado';
-            return false;
-        }
-
-        if($tipoImagen != 'jpg' && $tipoImagen != 'png' && $tipoImagen != 'jpeg' && $tipoImagen != 'gif') {
-            echo 'archivo sin extension valida';
+        if($tipoImagen !== 'jpg' && $tipoImagen !== 'png' && $tipoImagen !== 'jpeg' && $tipoImagen !== 'gif') {
             return false;
         }
         
