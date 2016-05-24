@@ -74,7 +74,6 @@ function validarInputs(inputs, cantidad){
 
 	for(var i = 0; i < inputs.length; i++){
 		temp = inputs.eq(i);
-		console.log(temp.attr('id'));
 
 		switch(temp.attr('id')){
 			case 'nombre':
