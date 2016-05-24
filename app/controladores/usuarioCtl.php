@@ -214,7 +214,8 @@ class usuarioCtl {
 
         $diccionario = array (
             '%alias%' => $array['alias'],
-            '%descripcion%' => $array['biografia']
+            '%descripcion%' => $array['biografia'],
+            '%avatarUsuario%' => $array['avatar']
         );
         
         if(count($galeria) > 0){
