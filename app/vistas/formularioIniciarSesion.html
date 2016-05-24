@@ -54,11 +54,16 @@
 <!--inicioFooter-->
 <!--finFooter-->
 
+<script type="text/javascript" src="assets/js/external/sha.js"></script>
 <script>
     $('#inicioSesion').on('submit',function(event){
         var inputs = $('#inicioSesion input');
         event.preventDefault();
         if(validarInputs(inputs, inputs.length)){
+        	var shaObj = new jsSHA("SHA-1", "TEXT");
+			shaObj.update($('#logPass').val());
+			var hash = shaObj.getHash("HEX");
+			$('#logPass').val(hash);
             this.submit();
         }   
     });
