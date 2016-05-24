@@ -217,46 +217,51 @@ class usuarioCtl {
             '%descripcion%' => $array['biografia']
         );
         
-        $contador = 0;
-        for($x=0; $x<count($galeria); $x++){
+        if(count($galeria) > 0){
+            $contador = 0;
+            for($x=0; $x<count($galeria); $x++){
 
-            if($x !== 0 && $x%4 === 0){
-                $new_fila = $fila;
+                if($x !== 0 && $x%4 === 0){
+                    $new_fila = $fila;
 
-                $diccionarioFila = array(
-                    '%conteo%' => $contador
+                    $diccionarioFila = array(
+                        '%conteo%' => $contador
+                    );
+
+                    $new_fila = str_replace($thumbnail, $thumbnails, $new_fila);
+                    $new_fila = strtr($new_fila, $diccionarioFila);
+                    $filas .= $new_fila;
+
+                    $contador++;
+                    $thumbnails = '';
+                }
+
+                $new_thumbnail = $thumbnail;
+                
+                $diccionarioImagen = array (
+                    '%titulo%' => $galeria[$x]['titulo'],
+                    '%idImagen%' => $galeria[$x]['id'],
+                    '%urlImagen%' => str_replace('/var/www/html/Dragonart/uploads/img', 'uploads/thumb', $galeria[$x]['url']),
+                    '%conteo%' => $x
                 );
-
-                $new_fila = str_replace($thumbnail, $thumbnails, $new_fila);
-                $new_fila = strtr($new_fila, $diccionarioFila);
-                $filas .= $new_fila;
-
-                $contador++;
-                $thumbnails = '';
+                
+                $new_thumbnail = strtr($new_thumbnail,$diccionarioImagen);
+                $thumbnails .= $new_thumbnail;
             }
-
-            $new_thumbnail = $thumbnail;
             
-            $diccionarioImagen = array (
-                '%titulo%' => $galeria[$x]['titulo'],
-                '%idImagen%' => $galeria[$x]['id'],
-                '%urlImagen%' => str_replace('/var/www/html/Dragonart/uploads/img', 'uploads/thumb', $galeria[$x]['url']),
-                '%conteo%' => $x
+            $new_fila = $fila;
+
+            $diccionarioFila = array(
+                '%conteo%' => $contador
             );
-            
-            $new_thumbnail = strtr($new_thumbnail,$diccionarioImagen);
-            $thumbnails .= $new_thumbnail;
+
+            $new_fila = str_replace($thumbnail, $thumbnails, $new_fila);
+            $new_fila = strtr($new_fila, $diccionarioFila);
+            $filas .= $new_fila;
         }
-
-        $new_fila = $fila;
-
-        $diccionarioFila = array(
-            '%conteo%' => $contador
-        );
-
-        $new_fila = str_replace($thumbnail, $thumbnails, $new_fila);
-        $new_fila = strtr($new_fila, $diccionarioFila);
-        $filas .= $new_fila;
+        else{
+            $filas = '<i>No hay imágenes en la galería...</i>';
+        }
         
         $vista = str_replace($fila, $filas, $vista);
         
