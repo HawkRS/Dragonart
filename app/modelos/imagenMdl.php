@@ -83,6 +83,36 @@
 			}
 		}
 
+		function obtenerGaleria($idUsuario, $limite){
+			if($stmt = $this->db->prepare('SELECT * FROM imagen WHERE idUsuario=? ORDER BY idImagen DESC LIMIT ?,8')){
+
+				$stmt->bind_param("ii", $idUsuario, $limite);
+
+				$stmt->execute();
+
+				$stmt->bind_result($idImagen, $idUsuario, $urlImagen, $tituloImagen, $descripcionImagen, $fechaImagen, $statusImagen, $calificacionPromedioImagen);
+
+				$array = array();
+
+				while($stmt->fetch()){
+					$array[] = array(
+						'id' => $idImagen,
+						'idUsuario' => $idUsuario,
+						'url' => $urlImagen,
+						'titulo' => $tituloImagen,
+						'descripcion' => $descripcionImagen,
+						'fecha' => $fechaImagen,
+						'status' => $statusImagen,
+						'promedio' => $calificacionPromedioImagen
+					);
+				}
+				
+				$stmt->close();
+
+				return $array;
+			}
+		}
+
 		function getError(){
 			return $this->db->error;
 		}
