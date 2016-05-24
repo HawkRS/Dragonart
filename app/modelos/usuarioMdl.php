@@ -12,10 +12,13 @@
 
 		function alta($nombre, $alias, $correo, $contrasena){
 			$bandera = false;
+			$avatar = 'uploads/avatar/avatar.jpg';
+			$tipo = 0; //Usuario normal
+			$status = 1; //Usuario activo
 
-			if($stmt = $this->db->prepare('INSERT INTO usuario (nombreUsuario, aliasUsuario, correoUsuario, contrasenaUsuario) VALUES (?, ?, ?, PASSWORD(?))')){
+			if($stmt = $this->db->prepare('INSERT INTO usuario (nombreUsuario, aliasUsuario, correoUsuario, contrasenaUsuario, avatarUsuario, tipoUsuario, statusUsuario) VALUES (?, ?, ?, PASSWORD(?), ?, ?, ?)')){
 
-				$stmt->bind_param("ssss", $nombre, $alias, $correo, $contrasena);
+				$stmt->bind_param("sssssii", $nombre, $alias, $correo, $contrasena, $avatar, $tipo, $status);
 
 				$bandera = $stmt->execute();
 
@@ -58,7 +61,7 @@
 
 				$stmt->execute();
 
-				$stmt->bind_result($idUsuario, $nombreUsuario, $aliasUsuario, $correoUsuario, $contrasenaUsuario, $biografiaUsuario, $avatarUsuario, $statusUsuario);
+				$stmt->bind_result($idUsuario, $nombreUsuario, $aliasUsuario, $correoUsuario, $contrasenaUsuario, $biografiaUsuario, $avatarUsuario, $tipoUsuario, $statusUsuario);
 
 				$stmt->fetch();
 				
@@ -70,6 +73,7 @@
 					'contrasena' => $contrasenaUsuario,
 					'biografia' => $biografiaUsuario,
 					'avatar' => $avatarUsuario,
+					'tipo' => $tipoUsuario,
 					'status' => $statusUsuario
 				);
 				
@@ -88,7 +92,7 @@
 
 				$stmt->execute();
 
-				$stmt->bind_result($idUsuario, $nombreUsuario, $aliasUsuario, $correoUsuario, $contrasenaUsuario, $biografiaUsuario, $avatarUsuario, $statusUsuario);
+				$stmt->bind_result($idUsuario, $nombreUsuario, $aliasUsuario, $correoUsuario, $contrasenaUsuario, $biografiaUsuario, $avatarUsuario, $tipoUsuario, $statusUsuario);
 
 				$stmt->fetch();
 				
@@ -100,6 +104,7 @@
 					'contrasena' => $contrasenaUsuario,
 					'biografia' => $biografiaUsuario,
 					'avatar' => $avatarUsuario,
+					'tipo' => $tipoUsuario,
 					'status' => $statusUsuario
 				);
 				
@@ -118,7 +123,7 @@
 
 				$stmt->execute();
 
-				$stmt->bind_result($idUsuario, $nombreUsuario, $aliasUsuario, $correoUsuario, $contrasenaUsuario, $biografiaUsuario, $avatarUsuario, $statusUsuario);
+				$stmt->bind_result($idUsuario, $nombreUsuario, $aliasUsuario, $correoUsuario, $contrasenaUsuario, $biografiaUsuario, $avatarUsuario, $tipoUsuario, $statusUsuario);
 
 				$stmt->fetch();
 				
@@ -132,6 +137,7 @@
 					'contrasena' => $contrasenaUsuario,
 					'biografia' => $biografiaUsuario,
 					'avatar' => $avatarUsuario,
+					'tipo' => $tipoUsuario,
 					'status' => $statusUsuario
 				);
 
