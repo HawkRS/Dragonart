@@ -55,7 +55,7 @@ class imagenCtl {
 
         if(isset($_POST)){
             if(imagenCtl::validarRegistro($_POST)){
-                $ruta = '/tmp/uploads/'.basename($_FILES['imagen']['name']);
+                $ruta = '/var/www/html/Dragonart/uploads/img/'.basename($_FILES['imagen']['name']);
                 if(move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta)){
 
                 	imagenCtl::crearThumbnail($ruta, $_FILES['imagen']['name']);
@@ -137,7 +137,9 @@ class imagenCtl {
         $infoImagen = $imgMdl->obtenerInfo($_GET['img']);
         $infoUsuario = $usrMdl->obtenerInfoPorID($infoImagen['idUsuario']);
 
-        $vista = str_replace('%urlImagen%', $infoImagen['url'], $vista);
+        $ruta = str_replace('/var/www/html/Dragonart/', '', $infoImagen['url']);
+
+        $vista = str_replace('%urlImagen%', $ruta, $vista);
         $vista = str_replace('%nombreUsuario%', $infoUsuario['nombre'], $vista);
         $vista = str_replace('%tituloImagen%', $infoImagen['titulo'], $vista);
         $vista = str_replace('%fechaImagen%', $infoImagen['fecha'], $vista);
@@ -248,7 +250,7 @@ class imagenCtl {
         }
 
         //SECCION VALIDADOR DE ARCHIVO IMAGEN
-        $destino = '/tmp/uploads/';
+        $destino = '/var/www/html/Dragonart/uploads/img/';
         $destArchivo = $destino.basename($_FILES['imagen']['name']);
 
         $tipoImagen = pathinfo($destArchivo,PATHINFO_EXTENSION);
@@ -303,16 +305,16 @@ class imagenCtl {
 
     function crearThumbnail($ruta, $nombre){
 		$inFile = $ruta;
-		$outFile = '/tmp/uploads/thumb/'.$nombre;
+		$outFile = '/var/www/html/Dragonart/uploads/thumb/'.$nombre;
 		$image = new Imagick($inFile);
 		$image->scaleImage(400, 300, true);
 		if($image->getImageWidth() < 400){
 			$ancho = (400 - $image->getImageWidth())/2;
-			$image->borderImage('transparent',$ancho, 0);
+			$image->borderImage('#EEF2F2',$ancho, 0);
 		}
 		else if($image->getImageHeight() < 300){
 			$alto = (300 - $image->getImageHeight())/2;
-			$image->borderImage('transparent',0, $alto);
+			$image->borderImage('#EEF2F2',0, $alto);
 		}
 		$image->writeImage($outFile);
     }
