@@ -146,7 +146,11 @@ class usuarioCtl {
             $usrMdl = new usuarioMdl();
             $dato = $usrMdl->paginaUsuario($_GET['usuario']);
             $array = $usrMdl->obtenerInfo($_SESSION['correo'],$_SESSION['logPass']);
-            var_dump($array);
+
+            require_once('app/modelos/imagenMdl.php');
+            $imgMdl = new imagenMdl();
+            $galeria = $imgMdl->obtenerGaleria($dato['id'], 0);
+            
             if(isset($dato['nombre'])){
                 $vista = file_get_contents('app/vistas/usuarioIndex.html');
                 $inicioFooter = strpos($vista, '<!--inicioFooter-->');
@@ -154,7 +158,7 @@ class usuarioCtl {
                 $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
 
                 $vista = str_replace($remplazar, $this->footer, $vista);
-                $vista = usuarioCtl::completarVistaUsuario($vista, $dato);
+                $vista = usuarioCtl::completarVistaUsuario($vista, $dato, $galeria);
                 $vista = $this->doctype.$this->header.$vista;
                 echo $vista;
             }
@@ -165,7 +169,7 @@ class usuarioCtl {
                 $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
 
                 $vista = str_replace($remplazar, $this->footer, $vista);
-                $vista = str_replace('%mensaje%', 'El usuario que buscas no existe... Seguro que modificaste la URL directamente. Dejate de hacer bromas y usa este sitio de forma responzable.', $vista);
+                $vista = str_replace('%mensaje%', 'El usuario que buscas no existe... Seguro que modificaste la URL directamente. Deja de hacer bromas y usa este sitio de forma responzable.', $vista);
                 $vista = $this->doctype.$this->header.$vista;
                 echo $vista;
             }
@@ -184,13 +188,18 @@ class usuarioCtl {
     }
     
 
-    function completarVistaUsuario($vista, $array) {
+    function completarVistaUsuario($vista, $array, $galeria) {
         
-        $thumbnails = "";
+        $thumbnails = '';
         $inicio = strpos($vista,'<!--inicioRepetirImagen-->');
         $fin = strpos($vista, '<!--finalRepetirImagen-->')+25;
-
         $thumbnail = substr($vista,$inicio,$fin-$inicio);
+
+        $filas = '';
+        $inicioFila = strpos($vista,'<!--inicioFila-->');
+        $finFila = strpos($vista, '<!--finFila-->')+14;
+        $fila = substr($vista,$inicioFila,$finFila-$inicioFila);
+
 
         if(!isset($array['biografia'])){
             $array['biografia'] = '<i>No hay descripción...</i>';
@@ -208,18 +217,48 @@ class usuarioCtl {
             '%descripcion%' => $array['biografia']
         );
         
-        for($x=0; $x<5; $x++){
+        $contador = 0;
+        for($x=0; $x<count($galeria); $x++){
+
+            if($x !== 0 && $x%4 === 0){
+                $new_fila = $fila;
+
+                $diccionarioFila = array(
+                    '%conteo%' => $contador
+                );
+
+                $new_fila = str_replace($thumbnail, $thumbnails, $new_fila);
+                $new_fila = strtr($new_fila, $diccionarioFila);
+                $filas .= $new_fila;
+
+                $contador++;
+                $thumbnails = '';
+            }
+
             $new_thumbnail = $thumbnail;
             
             $diccionarioImagen = array (
-                '%titulo%' => 'Nuevo titulo '.$x
+                '%titulo%' => $galeria[$x]['titulo'],
+                '%idImagen%' => $galeria[$x]['id'],
+                '%urlImagen%' => str_replace('/var/www/html/Dragonart/uploads/img', 'uploads/thumb', $galeria[$x]['url']),
+                '%conteo%' => $x
             );
             
             $new_thumbnail = strtr($new_thumbnail,$diccionarioImagen);
             $thumbnails .= $new_thumbnail;
         }
+
+        $new_fila = $fila;
+
+        $diccionarioFila = array(
+            '%conteo%' => $contador
+        );
+
+        $new_fila = str_replace($thumbnail, $thumbnails, $new_fila);
+        $new_fila = strtr($new_fila, $diccionarioFila);
+        $filas .= $new_fila;
         
-        $vista = str_replace($thumbnail, $thumbnails, $vista);
+        $vista = str_replace($fila, $filas, $vista);
         
         $vista = strtr($vista,$diccionario);
         
@@ -236,7 +275,6 @@ class usuarioCtl {
             $this->header = str_replace('%usuario%', $_SESSION['nombre'], $this->header);
         }
         else{
-            var_dump($_SESSION);
             $inicio = strpos($this->header,'<!--Inicio Online-->');
             $fin = strpos($this->header, '<!--Fin Online-->')+17;
             $busqueda = substr($this->header, $inicio, $fin-$inicio);
