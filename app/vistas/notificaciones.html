@@ -2,84 +2,38 @@
         <div class="main-usrIndex">
             <h1>Notificaciones</h1>
 
+            <!--iniSeguidores-->
             <div id="panelSeg" class="panel panel-default">
                 <div class="panel-heading postHeader">
                     <h2 class="galHeaderText">Nuevos seguidores</h2>
                 </div>
 
                 <div class="panel-body postDesc">
+                    
+                    <!--iniFilaSeg-->
+                    <div id="filaSeg%conteo%" class="row">
 
-                    <div class="row">
-
-                        <div id="avatar0" class="col-sm-6 col-md-3">
+                        <!--iniSeg-->
+                        <div id="avatar%conteo%" class="col-sm-6 col-md-3">
                             <div class="thumbnail">
-                                <a href="publicacionIndex.php">
-                                    <img src="assets/img/avatar.png" alt="Demostración">
+                                <a href="index.php?controlador=usuario&accion=mostrar&usuario=%nombreUsuario%">
+                                    <img src="%urlAvatar%" alt="%nombreUsuario%">
                                 </a>
                             </div>
                             <div class="text-center">
                                 <div class="checkbox">
                                     <label style="font-size: 1.0em">
-                                        <input id="sCheck-0" name="sCheck-0" type="checkbox" value="">
+                                        <input id="sCheck-%conteo%" name="sCheck-%conteo%" type="checkbox" value="">
                                         <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                        Usuario
+                                        %aliasUsuario%
                                     </label>
                                 </div>
                             </div>
                         </div>
-
-                        <div id="avatar1" class="col-sm-6 col-md-3">
-                            <div class="thumbnail">
-                                <a href="publicacionIndex.php">
-                                    <img src="assets/img/avatar.png" alt="Demostración">
-                                </a>
-                            </div>
-                            <div class="text-center">
-                                <div class="checkbox">
-                                    <label style="font-size: 1.0em">
-                                        <input id="sCheck-1" name="sCheck-1" type="checkbox" value="">
-                                        <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                        Usuario
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="avatar2" class="col-sm-6 col-md-3">
-                            <div class="thumbnail">
-                                <a href="publicacionIndex.php">
-                                    <img src="assets/img/avatar.png" alt="Demostración">
-                                </a>
-                            </div>
-                            <div class="text-center">
-                                <div class="checkbox">
-                                    <label style="font-size: 1.0em">
-                                        <input id="sCheck-2" name="sCheck-2" type="checkbox" value="">
-                                        <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                        Usuario
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="avatar3" class="col-sm-6 col-md-3">
-                            <div class="thumbnail">
-                                <a href="publicacionIndex.php">
-                                    <img src="assets/img/avatar.png" alt="Demostración">
-                                </a>
-                            </div>
-                            <div class="text-center">
-                                <div class="checkbox">
-                                    <label style="font-size: 1.0em">
-                                        <input id="sCheck-3" name="sCheck-3" type="checkbox" value="">
-                                        <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                        Usuario
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+                        <!--finSeg-->
 
                     </div>
+                    <!--finFilaSeg-->
 
                 </div>
 
@@ -88,8 +42,10 @@
                     <button class="btn btn-warning" name="segInvertir" id="segInvertir" onclick="segInvertir()"><span class="glyphicon glyphicon-random"></span> Invertir selección</button>
                     <button class="btn btn-warning" name="segQuitar" id="segQuitar" onclick="segQuitar()"><span class="glyphicon glyphicon-remove"></span> Quitar de notificaciones</button>
                 </div>
-            </div> <!--Fin panel seguidores-->
+            </div>
+            <!--finSeguidores-->
 
+            <!--iniGaleria-->
             <div id="panelGal" class="panel panel-default">
 
                 <div class="panel-heading galHeader">
@@ -98,153 +54,31 @@
 
                 <div id="postDesc" class="panel-body">
 
-                    <div class="row">
+                    <!--iniFilaGal-->
+                    <div id="filaGal%conteo%" class="row">
 
-                        <div id="image0" name="image0" class="col-sm-6 col-md-3">
+                        <!--iniGal-->
+                        <div id="image%conteo%" name="image%conteo%" class="col-sm-6 col-md-3">
                             <div class="thumbnail">
-                                <a href="publicacionIndex.php">
-                                    <img src="http://placekitten.com/g/300/200" alt="Demostración">
+                                <a href="index.php?controlador=imagen&accion=mostrar&img=%idImagen%">
+                                    <img src="%urlImagen%" alt="%tituloImagen%">
                                 </a>
                                 <div class="caption">
                                     <div class="checkbox">
                                         <label style="font-size: 1.0em">
-                                            <input id="gCheck-0" name="gCheck-0" type="checkbox" value="">
+                                            <input id="gCheck-%conteo%" name="gCheck-%conteo%" type="checkbox" value="">
                                             <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                            Título de la imagen
+                                            %tituloImagen%
                                         </label>
                                     </div>
-                                    <input id="input-0" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1">
+                                    <input id="input-%conteo%" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1">
                                 </div>
                             </div>
                         </div>
-
-                        <div id="image1" name="image1" class="col-sm-6 col-md-3">
-                            <div class="thumbnail">
-                                <a href="publicacionIndex.php">
-                                    <img src="http://placekitten.com/g/300/200" alt="Demostración">
-                                </a>
-                                <div class="caption">
-                                    <div class="checkbox">
-                                        <label style="font-size: 1.0em">
-                                            <input id="gCheck-1" name="gCheck-1" type="checkbox" value="">
-                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                            Título de la imagen
-                                        </label>
-                                    </div>
-                                    <input id="input-1" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="image2" name="image2" class="col-sm-6 col-md-3">
-                            <div class="thumbnail">
-                                <a href="publicacionIndex.php">
-                                    <img src="http://placekitten.com/g/300/200" alt="Demostración">
-                                </a>
-                                <div class="caption">
-                                    <div class="checkbox">
-                                        <label style="font-size: 1.0em">
-                                            <input id="gCheck-2" name="gCheck-2" type="checkbox" value="">
-                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                            Título de la imagen
-                                        </label>
-                                    </div>
-                                    <input id="input-2" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="image3" name="image3" class="col-sm-6 col-md-3">
-                            <div class="thumbnail">
-                                <a href="publicacionIndex.php">
-                                    <img src="http://placekitten.com/g/300/200" alt="Demostración">
-                                </a>
-                                <div class="caption">
-                                    <div class="checkbox">
-                                        <label style="font-size: 1.0em">
-                                            <input id="gCheck-3" name="gCheck-3" type="checkbox" value="">
-                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                            Título de la imagen
-                                        </label>
-                                    </div>
-                                    <input id="input-3" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="image4" name="image4" class="col-sm-6 col-md-3">
-                            <div class="thumbnail">
-                                <a href="publicacionIndex.php">
-                                    <img src="http://placekitten.com/g/300/200" alt="Demostración">
-                                </a>
-                                <div class="caption">
-                                    <div class="checkbox">
-                                        <label style="font-size: 1.0em">
-                                            <input id="gCheck-4" name="gCheck-4" type="checkbox" value="">
-                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                            Título de la imagen
-                                        </label>
-                                    </div>
-                                    <input id="input-4" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="image5" name="image5" class="col-sm-6 col-md-3">
-                            <div class="thumbnail">
-                                <a href="publicacionIndex.php">
-                                    <img src="http://placekitten.com/g/300/200" alt="Demostración">
-                                </a>
-                                <div class="caption">
-                                    <div class="checkbox">
-                                        <label style="font-size: 1.0em">
-                                            <input id="gCheck-5" name="gCheck-5" type="checkbox" value="">
-                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                            Título de la imagen
-                                        </label>
-                                    </div>
-                                    <input id="input-5" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="image6" name="image6" class="col-sm-6 col-md-3">
-                            <div class="thumbnail">
-                                <a href="publicacionIndex.php">
-                                    <img src="http://placekitten.com/g/300/200" alt="Demostración">
-                                </a>
-                                <div class="caption">
-                                    <div class="checkbox">
-                                        <label style="font-size: 1.0em">
-                                            <input id="gCheck-6" name="gCheck-6" type="checkbox" value="">
-                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                            Título de la imagen
-                                        </label>
-                                    </div>
-                                    <input id="input-6" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="image7" name="image7" class="col-sm-6 col-md-3">
-                            <div class="thumbnail">
-                                <a href="publicacionIndex.php">
-                                    <img src="http://placekitten.com/g/300/200" alt="Demostración">
-                                </a>
-                                <div class="caption">
-                                    <div class="checkbox">
-                                        <label style="font-size: 1.0em">
-                                            <input id="gCheck-7" name="gCheck-7" type="checkbox" value="">
-                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                            Título de la imagen
-                                        </label>
-                                    </div>
-                                    <input id="input-7" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1">
-                                </div>
-                            </div>
-                        </div>
+                        <!--finGal-->
 
                     </div>
+                    <!--finFilaGal-->
 
                 </div>
 
@@ -254,8 +88,10 @@
                     <button class="btn btn-warning" name="galQuitar" id="galQuitar" onclick="galQuitar()"><span class="glyphicon glyphicon-remove"></span> Quitar de notificaciones</button>
                 </div>
 
-            </div><!--Fin Panel Galeria-->
+            </div>
+            <!--finGaleria-->
 
+            <!--iniComentarios-->
             <div id="panelCom" class="panel panel-default">
                 <div class="panel-heading postHeader">
                     <h2 class="galHeaderText">Nuevos comentarios</h2>
@@ -263,32 +99,33 @@
 
                 <div class="panel-body postDesc">
 
+                        <!--iniCom-->
                         <article class="panel panel-default">
                             <div class="panel-heading postHeader">
                                 <div class="row">
                                     <figure>
-                                        <a href="usuarioIndex.php">
-                                            <img class="col-md-3 avatar" src="assets/img/avatar.png" alt="avatar">
+                                        <a href="index.php?controlador=usuario&accion=mostrar&usuario=%nombreUsuario%">
+                                            <img class="col-md-3 avatar" src="%urlAvatar%" alt="%nombreUsuario%">
                                         </a>
                                     </figure>
                                     <div class="col-md-6">
-                                        <h2>Nombre de usuario</h2>
-                                        <span>Fecha: 28/febrero/2016</span>
+                                        <h2>%aliasUsuario%</h2>
+                                        <span>Fecha: %fechaComentario%</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="panel-body postComentario">
-                                <p>Comentario: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, aperiam soluta excepturi necessitatibus aspernatur, sequi error tempore dolores dicta eum quaerat, itaque beatae temporibus? Veritatis blanditiis adipisci, vitae maiores fuga?</p>
+                                <p>%comentario%</p>
                             </div>
                             <div class="panel-footer">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <a class="btn btn-warning" href="publicacionIndex.php">Ir a la publicación</a>
+                                        <a class="btn btn-warning" href="index.php?controlador=imagen&accion=mostrar&img=%idImagen%">Ir a la publicación</a>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="checkbox">
                                             <label style="font-size: 1.0em">
-                                                <input id="cCheck-0" name="cCheck-0" type="checkbox" value="">
+                                                <input id="cCheck-%conteo%" name="cCheck-%conteo%" type="checkbox" value="">
                                                 <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                                 Seleccionar
                                             </label>
@@ -297,41 +134,7 @@
                                 </div>
                             </div>
                         </article>
-
-                        <article class="panel panel-default">
-                            <div class="panel-heading postHeader">
-                                <div class="row">
-                                    <figure>
-                                        <a href="usuarioIndex.php">
-                                            <img class="col-md-3 avatar" src="assets/img/avatar.png" alt="avatar">
-                                        </a>
-                                    </figure>
-                                    <div class="col-md-6">
-                                        <h2>Nombre de usuario</h2>
-                                        <span>Fecha: 28/febrero/2016</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel-body postComentario">
-                                <p>Comentario: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, aperiam soluta excepturi necessitatibus aspernatur, sequi error tempore dolores dicta eum quaerat, itaque beatae temporibus? Veritatis blanditiis adipisci, vitae maiores fuga?</p>
-                            </div>
-                            <div class="panel-footer">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <a class="btn btn-warning" href="publicacionIndex.php">Ir a la publicación</a>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="checkbox">
-                                            <label style="font-size: 1.0em">
-                                                <input id="cCheck-1" name="cCheck-1" type="checkbox" value="">
-                                                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                                Seleccionar
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
+                        <!--finCom-->
 
                 </div>
 
@@ -341,43 +144,27 @@
                     <button class="btn btn-warning" name="comQuitar" id="comQuitar" onclick="comQuitar()"><span class="glyphicon glyphicon-remove"></span> Quitar de notificaciones</button>
                 </div>
             </div>
+            <!--finComentarios-->
 
+            <!--iniFavoritos-->
             <div id="panelFav" class="panel panel-default">
                 <div class="panel-heading postHeader">
                     <h2 class="galHeaderText">Nuevos favoritos</h2>
                 </div>
 
                 <div id="favGrupo" class="list-group">
-                    <a href="publicacionIndex.php" class="list-group-item">
+                    <!--iniFav-->
+                    <a href="index.php?controlador=imagen&accion=mostrar&img=%idImagen%" class="list-group-item">
                         <div class="checkbox">
-                            <img class="avatar-sm" src="assets/img/avatar.png" alt="Demostración">
+                            <img class="avatar-sm" src="%urlAvatar%" alt="%aliasUsuario%">
                             <label style="font-size: 1.3em">
-                                <input id="fCheck-0" name="fCheck-0" type="checkbox" value="">
+                                <input id="fCheck-%conteo%" name="fCheck-%conteo%" type="checkbox" value="">
                                 <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                Usuario ha agregado "Imagen" a favoritos.
+                                %aliasUsuario% ha agregado "%tituloImagen%" a favoritos.
                             </label>
                         </div>
                     </a>
-                    <a href="publicacionIndex.php" class="list-group-item">
-                        <div class="checkbox">
-                            <img class="avatar-sm" src="assets/img/avatar.png" alt="Demostración">
-                            <label style="font-size: 1.3em">
-                                <input id="fCheck-1" name="fCheck-1" type="checkbox" value="">
-                                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                Usuario ha agregado "Imagen" a favoritos.
-                            </label>
-                        </div>
-                    </a>
-                    <a href="publicacionIndex.php" class="list-group-item">
-                        <div class="checkbox">
-                            <img class="avatar-sm" src="assets/img/avatar.png" alt="Demostración">
-                            <label style="font-size: 1.3em">
-                                <input id="fCheck-2" name="fCheck-2" type="checkbox" value="">
-                                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                Usuario ha agregado "Imagen" a favoritos.
-                            </label>
-                        </div>
-                    </a>
+                    <!--finFav-->
                 </div>
 
                 <div class="panel-footer postTags">
@@ -386,6 +173,7 @@
                     <button class="btn btn-warning" name="favQuitar" id="favQuitar" onclick="favQuitar()"><span class="glyphicon glyphicon-remove"></span> Quitar de notificaciones</button>
                 </div>
             </div>
+            <!--finFavoritos-->
 
         </div>
     </div>
