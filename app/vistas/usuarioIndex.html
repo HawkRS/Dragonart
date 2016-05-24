@@ -52,22 +52,23 @@
 
                         <div id="postDesc" class="panel-body">
 
-                            <div id="fila0" class="row">
+							<!--inicioFila-->
+                            <div id="fila%conteo%" class="row">
                                 <!--inicioRepetirImagen-->
-                                <div id="image1" name="image1" class="col-sm-6 col-md-3">
+                                <div id="image%conteo%" name="image%conteo%" class="col-sm-6 col-md-3">
                                     <div class="thumbnail">
-                                        <a href="index.php?controlador=imagen&accion=mostrar">
-                                            <img src="http://placekitten.com/g/300/200" alt="Demostración">
+                                        <a href="index.php?controlador=imagen&accion=mostrar&img=%idImagen%">
+                                            <img src="%urlImagen%" alt="Demostración">
                                         </a>
                                         <div class="caption">
                                             <span>%titulo%</span>
-                                            <input id="input-1" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1">
+                                            <input id="input-%conteo%" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1">
                                         </div>
                                     </div>
                                 </div>
                                 <!--finalRepetirImagen-->
-
                             </div>
+                            <!--finFila-->
 
                         </div>
 
