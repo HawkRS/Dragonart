@@ -163,6 +163,24 @@
 	        return $vista;
 		}
 
+		function vistaModificarUsuario($doctype, $header, $vista, $footer, $infoUsuario, $mensaje){
+			$header = procesadorPlantillas::generarHeader($header);
+			$vista = procesadorPlantillas::generarFooter($vista, $footer);
+
+			$vista = str_replace('%error%', $mensaje, $vista);
+			$diccionario = array(
+				'%nombreUsuario%' => $infoUsuario['nombre'],
+				'%aliasUsuario%' => $infoUsuario['alias'],
+				'%correoUsuario%' => $infoUsuario['correo'],
+				'%descripcionUsuario%' => $infoUsuario['biografia'],
+				'%avatarUsuario%' => str_replace('/var/www/html/Dragonart/', '', $infoUsuario['avatar'])
+			);
+			$vista = procesadorPlantillas::aplicaDiccionario($vista, $diccionario);
+			$vista = $doctype.$header.$vista;
+
+	        return $vista;			
+		}
+
 		function vistaError404($doctype, $header, $vista, $footer, $mensaje){
 			$header = procesadorPlantillas::generarHeader($header);
 			$vista = procesadorPlantillas::generarFooter($vista, $footer);
