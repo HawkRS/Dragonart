@@ -97,7 +97,23 @@
 
 <script>
     $( document ).ready(function() {
-        $('#input-1').rating();
+        $('#input-1').rating().on('rating.change', function(event, value, caption){
+            console.log('Hola');
+            $.ajax({
+                type : 'GET',
+                url : 'index.php?controlador=favorito&accion=alta',
+                data : {
+                    url : $('#imgPrincipal').attr('src'),
+                    calificacion : $('#input-1').val()
+                },
+                success : function(respuesta){
+                    alert(respuesta);
+                },
+                error : function(json){
+                    alert('Error al guardar...');
+                }
+            });
+        });
     });
 
     $('#comentario').on('submit',function(event){
@@ -108,23 +124,6 @@
         }   
     });
 
-    $('#input-1').click(function(event){
-        console.log('Hola');
-        $.ajax({
-            type : 'POST',
-            url : 'index.php?controlador=favorito&accion=alta',
-            data : {
-                url : $('#imgPrincipal').attr('src'),
-                calificacion : $('#input-1').val()
-            },
-            success : function(json){
-                alert('Guardado en favoritos!');
-            },
-            error : function(json){
-                alert('Error al guardar...');
-            }
-        });
-    });
 </script>
 
 </html>
