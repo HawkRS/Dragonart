@@ -54,6 +54,54 @@
 			return false;
 		}
 
+		function existeNombre($nombre){
+			if($stmt = $this->db->prepare('SELECT * FROM usuario WHERE nombreUsuario=?')){
+
+				$stmt->bind_param("s", $nombre);
+
+				$stmt->execute();
+
+				$stmt->store_result();
+
+				$stmt->fetch();
+				$numFilas = $stmt->num_rows;
+
+				$stmt->close();
+
+				if($numFilas === 0){
+					return false;
+				}
+				else{
+					return true;
+				}
+			}
+			return true;
+		}
+
+		function existeCorreo($correo){
+			if($stmt = $this->db->prepare('SELECT * FROM usuario WHERE correoUsuario=?')){
+
+				$stmt->bind_param("s", $correo);
+
+				$stmt->execute();
+
+				$stmt->store_result();
+
+				$stmt->fetch();
+				$numFilas = $stmt->num_rows;
+
+				$stmt->close();
+
+				if($numFilas === 0){
+					return false;
+				}
+				else{
+					return true;
+				}
+			}
+			return true;
+		}
+
 		function obtenerInfo($correo, $contrasena){
 			if($stmt = $this->db->prepare('SELECT * FROM usuario WHERE correoUsuario=? AND contrasenaUsuario=PASSWORD(?)')){
 
