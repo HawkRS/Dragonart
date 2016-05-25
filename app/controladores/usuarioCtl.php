@@ -89,25 +89,44 @@ class usuarioCtl {
     
     function modificar() {
 
-        if(empty($_POST) && isset($_SESSION['correo']) && isset($_SESSION['logPass'])){
-            $vista = file_get_contents('app/vistas/formularioConfiguracionUsuario.html');
-            $inicioFooter = strpos($vista, '<!--inicioFooter-->');
-            $finFooter = strpos($vista, '<!--finFooter-->')+16;
-            $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
+        require_once('app/controladores/procesadorPlantillas.php');
+        $procesador = new procesadorPlantillas();
+        require_once('app/modelos/usuarioMdl.php');
+        $usrMdl = new usuarioMdl();
 
-            $vista = str_replace($remplazar, $this->footer, $vista);
-            $vista = $this->doctype.$this->header.$vista;
-            echo $vista;
+        if(!empty($_POST)){
+
+            require_once('app/controladores/validador.php');
+            $validador = new validador();
+            $error = $validador->validarModificacionUsuario($_POST);
+
+            if($error === true){
+                
+            }else{
+
+            }
+
         } 
-        else {            
-            $vista = file_get_contents('app/vistas/usuarioIndex.html');
-            $inicioFooter = strpos($vista, '<!--inicioFooter-->');
-            $finFooter = strpos($vista, '<!--finFooter-->')+16;
-            $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
-
-            $vista = str_replace($remplazar, $this->footer, $vista);
-            $vista = $this->doctype.$this->header.$vista;
-            echo $vista;
+        else {
+            if(isset($_SESSION['correo']) && isset($_SESSION['logPass'])){
+                $infoUsuario = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
+                if($infoUsuario !== false){
+                    $vista = file_get_contents('app/vistas/formularioConfiguracionUsuario.html');
+                    $mensaje = '';
+                    $vista = $procesador->vistaModificarUsuario($this->doctype, $this->header, $vista, $this->footer, $infoUsuario, $mensaje);
+                    echo $vista;
+                }else{
+                    $vista = file_get_contents('app/vistas/404.html');
+                    $mensaje = 'El usuario solicitado no existe.';
+                    $vista = $procesador->vistaError404($this->doctype, $this->header, $vista, $this->footer, $mensaje);
+                    echo $vista;
+                }
+            }else{
+                $vista = file_get_contents('app/vistas/404.html');
+                $mensaje = 'La sesión no está iniciada.';
+                $vista = $procesador->vistaError404($this->doctype, $this->header, $vista, $this->footer, $mensaje);
+                echo $vista;
+            }
         }
 
     }
@@ -132,14 +151,14 @@ class usuarioCtl {
                 echo $vista;
             }
             else{
-                $vista = file_get_contents('app/vistas/usuarioIndex.html');
+                $vista = file_get_contents('app/vistas/404.html');
                 $mensaje = 'El usuario que buscas no existe.';
                 $vista = $procesador->vistaError404($this->doctype, $this->header, $vista, $this->footer, $mensaje);
                 echo $vista;
             }
         }
         else{
-            $vista = file_get_contents('app/vistas/usuarioIndex.html');
+            $vista = file_get_contents('app/vistas/404.html');
             $mensaje = 'No se especificó un usuario a mostrar.';
             $vista = $procesador->vistaError404($this->doctype, $this->header, $vista, $this->footer, $mensaje);
             echo $vista;
