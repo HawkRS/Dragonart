@@ -14,7 +14,7 @@
                     <div class="row row-centered">
                         <figure>
                             <a href="index.php?controlador=usuario&accion=mostrar&usuario=%nombreUsuario%">
-                                <img class="col-xs-12 col-sm-4 col-md-3 avatar col-centered img-circle" src="%avatarUsuario%" alt="avatar">
+                                <img id="imgPrincipal" class="col-xs-12 col-sm-4 col-md-3 avatar col-centered img-circle" src="%avatarUsuario%" alt="avatar">
                             </a>
                         </figure>
                         <div class="col-xs-12 col-sm-6 col-md-6">
@@ -96,12 +96,34 @@
 <!--finFooter-->
 
 <script>
+    $( document ).ready(function() {
+        $('#input-1').rating();
+    });
+
     $('#comentario').on('submit',function(event){
         var txtArea = $('#comentario textarea');
         event.preventDefault();
         if(validarTextArea(txtArea)){
             this.submit();
         }   
+    });
+
+    $('#input-1').click(function(event){
+        console.log('Hola');
+        $.ajax({
+            type : 'POST',
+            url : 'index.php?controlador=favorito&accion=alta',
+            data : {
+                url : $('#imgPrincipal').attr('src'),
+                calificacion : $('#input-1').val()
+            },
+            success : function(json){
+                alert('Guardado en favoritos!');
+            },
+            error : function(json){
+                alert('Error al guardar...');
+            }
+        });
     });
 </script>
 
