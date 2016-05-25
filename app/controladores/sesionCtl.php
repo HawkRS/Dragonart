@@ -55,6 +55,7 @@ class sesionCtl {
                     $_SESSION['logPass'] = $_POST['logPass'];
                     $_SESSION['alias'] = $array['alias'];
                     $_SESSION['nombre'] = $array['nombre'];
+                    $_SESSION['admin'] = $array['tipo'];
                     header('Location: http://localhost/Dragonart/index.php?controlador=usuario&accion=mostrar&usuario='.$_SESSION['nombre']);
                 }
                 else{
@@ -62,6 +63,7 @@ class sesionCtl {
                     unset($_SESSION['logPass']);
                     unset($_SESSION['alias']);
                     unset($_SESSION['nombre']);
+                    unset($_SESSION['admin']);
                     
                     $vista = file_get_contents('app/vistas/formularioIniciarSesion.html');
                     $inicioFooter = strpos($vista, '<!--inicioFooter-->');
