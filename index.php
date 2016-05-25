@@ -38,6 +38,11 @@ if(isset($_GET['controlador'])){
             $controlador = new notificacionesCtl();
             break;
 
+        case 'favorito':
+            require('app/controladores/favoritoCtl.php');
+            $controlador = new favoritoCtl();
+            break;
+
         default:
             require('app/controladores/imagenCtl.php');
             $controlador = new imagenCtl();
