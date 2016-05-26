@@ -108,7 +108,7 @@
 	        );
 	        
 	        //Generamos la galería
-	        if(count($galeria) > 0){
+	        if(is_array($galeria) && count($galeria) > 0){
 	            $contador = 0;
 	            for($x=0; $x<count($galeria); $x++){
 
@@ -179,6 +179,102 @@
 			$vista = $doctype.$header.$vista;
 
 	        return $vista;			
+		}
+
+		function vistaInicio($doctype, $header, $vista, $footer){
+			$header = procesadorPlantillas::generarHeader($header);
+			$vista = procesadorPlantillas::generarFooter($vista, $footer);
+
+			$inicioBody = strpos($doctype, '<!--inicioBody-->');
+	        $finBody = strpos($doctype, '<!--finBody-->')+14;
+	        $remplazarBody = substr($doctype,$inicioBody,$finBody-$inicioBody); 
+	        $doctype = str_replace($remplazarBody, '<body class="index">', $doctype);
+
+			$vista = $doctype.$header.$vista;
+
+	        return $vista;
+		}
+
+		function vistaSubirImagen($doctype, $header, $vista, $footer, $mensaje){
+			$header = procesadorPlantillas::generarHeader($header);
+			$vista = procesadorPlantillas::generarFooter($vista, $footer);
+
+			$vista = str_replace('%error%', $mensaje, $vista);
+			$vista = $doctype.$header.$vista;
+
+	        return $vista;
+		}
+
+		function vistaMostrarImagen($doctype, $header, $vista, $footer, $infoImagen, $infoUsuario, $comentarios, $mensaje){
+			$header = procesadorPlantillas::generarHeader($header);
+			$vista = procesadorPlantillas::generarFooter($vista, $footer);
+
+			$ruta = str_replace('/var/www/html/Dragonart/', '', $infoImagen['url']);
+			$diccionario = array(
+				'%error%' => $mensaje,
+				'%aliasUsuarioImagen%' => $infoUsuario['alias'],
+				'%idImagen%' => $infoImagen['id'],
+				'%urlImagen%' => $ruta,
+				'%nombreUsuario%' => $infoUsuario['nombre'],
+				'%avatarUsuario%' => $infoUsuario['avatar'],
+				'%tituloImagen%' => $infoImagen['titulo'],
+				'%fechaImagen%' => $infoImagen['fecha'],
+				'%descripcionImagen%' => $infoImagen['descripcion']
+			);
+
+			$vista = procesadorPlantillas::aplicaDiccionario($vista, $diccionario);
+
+			//Esto remueve los botones de edición si no eres el dueño de esa imágen
+			if(isset($_SESSION['correo']) && $infoUsuario['correo'] !== $_SESSION['correo']){
+	        	$inicioBtn = strpos($vista, '<!--iniBtn-->');
+	        	$finBtn = strpos($vista, '<!--finBtn-->')+13;
+	        	$remplazar = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
+	        	$vista = str_replace($remplazar, '', $vista);
+	        }
+
+	        //Esto remueve el formulario de comentarios y los botones de edición para los que no estén registrados
+	        if(!isset($_SESSION['correo']) && !isset($_SESSION['logPass'])){
+	        	$inicioForm = strpos($vista, '<!--iniForm-->');
+	        	$finForm = strpos($vista, '<!--finForm-->')+14;
+	        	$remplazar = substr($vista,$inicioForm,$finForm-$inicioForm);
+	        	$vista = str_replace($remplazar, '', $vista);
+
+	        	$inicioBtn = strpos($vista, '<!--iniBtn-->');
+	        	$finBtn = strpos($vista, '<!--finBtn-->')+13;
+	        	$remplazar = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
+	        	$vista = str_replace($remplazar, '', $vista);
+	        }
+
+	        $todosComentarios = '';
+	        $inicioCom = strpos($vista, '<!--iniCom-->');
+        	$finCom = strpos($vista, '<!--finCom-->')+13;
+        	$Comen = substr($vista,$inicioCom,$finCom-$inicioCom);
+
+        	require_once('app/modelos/usuarioMdl.php');
+        	$usrMdl = new usuarioMdl();
+
+	        if(is_array($comentarios)){
+	        	for($x = 0; $x < count($comentarios); $x++){
+	        		$new_comentario = $Comen;
+	        		$infoUsuario = $usrMdl->obtenerInfoPorID($comentarios[$x]['usuario']);
+	                
+	                $diccionarioComen = array (
+	                    '%avatarCom%' => $infoUsuario['avatar'],
+	                    '%aliasCom%' => $infoUsuario['alias'],
+	                    '%fechaCom%' => $comentarios[$x]['fecha'],
+	                    '%comentario%' => $comentarios[$x]['comentario']
+	                );
+	                
+	                $new_comentario = procesadorPlantillas::aplicaDiccionario($new_comentario,$diccionarioComen);
+	                $todosComentarios .= $new_comentario;
+	        	}
+	        }
+	        
+	        $vista = str_replace($Comen, $todosComentarios, $vista);
+
+	        $vista = $doctype.$header.$vista;
+
+	        return $vista;
 		}
 
 		function vistaError404($doctype, $header, $vista, $footer, $mensaje){
