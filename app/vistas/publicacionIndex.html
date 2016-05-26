@@ -103,18 +103,16 @@
         $('#input-1').on('rating.change', function(event, value, caption){
             console.log('Hola');
             $.ajax({
-                type : 'GET',
-                url : 'index.php',
+                type : 'POST',
+                url : 'index.php?controlador=favorito&accion=alta',
                 data : {
-                    controlador: 'favorito',
-                    accion: 'alta',
                     url : $('#imgPrincipal').attr('src'),
                     calificacion : $('#input-1').val()
                 },
                 success : function(respuesta){
-                    //if(respuesta !== '1'){
+                    if(respuesta !== '1'){
                         alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
-                    //}
+                    }
                 },
                 error : function(respuesta){
                     alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');

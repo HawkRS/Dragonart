@@ -62,7 +62,7 @@
                                         </a>
                                         <div class="caption">
                                             <span>%titulo%</span>
-                                            <input id="input-%conteo%" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1">
+                                            <input id="input-%conteo%" class="rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1" value="%promedioImagen%">
                                         </div>
                                     </div>
                                 </div>
@@ -87,5 +87,14 @@
 <!--finFooter-->
 
 <script type="text/javascript" src="assets/js/userPage.js"></script>
+<script type="text/javascript">
+	$( document ).ready(function() {
+        for(var x = 0; x < 8; x++){
+        	if($('#input-' + x).length){
+        		$('#input-' + x).rating({displayOnly : true});
+        	}
+        }
+    });
+</script>
 
 </html>

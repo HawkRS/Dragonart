@@ -133,7 +133,8 @@
 	                    '%titulo%' => $galeria[$x]['titulo'],
 	                    '%idImagen%' => $galeria[$x]['id'],
 	                    '%urlImagen%' => str_replace('/var/www/html/Dragonart/uploads/img', 'uploads/thumb', $galeria[$x]['url']),
-	                    '%conteo%' => $x
+	                    '%conteo%' => $x,
+	                    '%promedioImagen%' => $galeria[$x]['promedio']
 	                );
 	                
 	                $new_thumbnail = procesadorPlantillas::aplicaDiccionario($new_thumbnail,$diccionarioImagen);
@@ -209,8 +210,26 @@
 			$header = procesadorPlantillas::generarHeader($header);
 			$vista = procesadorPlantillas::generarFooter($vista, $footer);
 			$rating = 'true';
+			$promedio = 0;
 
 			$ruta = str_replace('/var/www/html/Dragonart/', '', $infoImagen['url']);
+			if(isset($_SESSION['correo']) && $infoUsuario['correo'] !== $_SESSION['correo']){
+				require_once('app/modelos/usuarioMdl.php');
+				$usrMdl = new usuarioMdl();
+				require_once('app/modelos/favoritoMdl.php');
+				$favMdl = new favoritoMdl();
+				$infoUsuarioActual = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
+				if($infoUsuarioActual !== false){
+					$infoFavorito = $favMdl->obtenerFavorito($infoUsuarioActual['id']);
+					if($infoFavorito !== false){
+						$promedio = $infoFavorito['calificacion'];
+					}
+				}
+			}
+			else{
+				$promedio = $infoImagen['promedio'];
+			}
+
 			$diccionario = array(
 				'%error%' => $mensaje,
 				'%aliasUsuarioImagen%' => $infoUsuario['alias'],
@@ -221,7 +240,7 @@
 				'%tituloImagen%' => $infoImagen['titulo'],
 				'%fechaImagen%' => $infoImagen['fecha'],
 				'%descripcionImagen%' => $infoImagen['descripcion'],
-				'%promedioImagen%' => $infoImagen['promedio']
+				'%promedioImagen%' => $promedio
 			);
 
 			$vista = procesadorPlantillas::aplicaDiccionario($vista, $diccionario);

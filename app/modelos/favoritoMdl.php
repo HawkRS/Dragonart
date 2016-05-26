@@ -28,6 +28,53 @@
 			return $bandera;
 		}
 
+		function obtenerPromedio($idImagen){
+			if($stmt = $this->db->prepare('SELECT AVG(calificacionFavorito) FROM favorito WHERE idImagen=?')){
+
+				$stmt->bind_param("i", $idImagen);
+
+				$stmt->execute();
+
+				$stmt->bind_result($promedio);
+
+				$stmt->fetch();
+				
+				$stmt->close();
+
+				return $promedio;
+			}
+
+			return false;
+		}
+
+		function obtenerFavorito($idUsuario){
+			if($stmt = $this->db->prepare('SELECT * FROM favorito WHERE idUsuarioFavoriteo=?')){
+
+				$stmt->bind_param("i", $idUsuario);
+
+				$stmt->execute();
+
+				$stmt->bind_result($idFavorito, $idImagen, $idUsuarioFavoriteo, $calificacionFavorito, $fechaFavorito, $tipo);
+
+				$stmt->fetch();
+				
+				$array = array(
+					'id' => $idFavorito,
+					'imagen' => $idImagen,
+					'usuario' => $idUsuarioFavoriteo,
+					'calificacion' => $calificacionFavorito,
+					'fecha' => $fechaFavorito,
+					'tipo' => $tipo
+				);
+				
+				$stmt->close();
+
+				return $array;
+			}
+
+			return false;
+		}
+
 	}
 
 ?>

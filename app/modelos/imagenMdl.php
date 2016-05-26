@@ -122,6 +122,24 @@
 			return false;
 		}
 
+		function actualizaPromedio($promedio, $idImagen){
+			$bandera = false;
+
+			if($stmt = $this->db->prepare('UPDATE imagen SET calificacionPromedioImagen=? WHERE idImagen=?')){
+
+				$stmt->bind_param("ii", $promedio, $idImagen);
+
+				$bandera = $stmt->execute();
+
+				$stmt->fetch();
+				
+				$stmt->close();
+
+			}
+
+			return $bandera;
+		}
+
 		function getError(){
 			return $this->db->error;
 		}
