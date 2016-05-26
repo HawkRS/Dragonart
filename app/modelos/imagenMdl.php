@@ -54,6 +54,8 @@
 
 				return $array;
 			}
+
+			return false;
 		}
 
 		function obtenerInfoPorUrl($url){
@@ -83,6 +85,8 @@
 
 				return $array;
 			}
+
+			return false;
 		}
 
 		function obtenerGaleria($idUsuario, $limite){
@@ -114,6 +118,8 @@
 
 				return $array;
 			}
+
+			return false;
 		}
 
 		function getError(){
