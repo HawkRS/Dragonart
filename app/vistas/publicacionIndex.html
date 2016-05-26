@@ -24,7 +24,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-4 col-md-3 pull-right offsetUp">
                             <!--iniStar-->
-                            <input id="input-1" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="sm" data-step="1">
+                            <input id="input-1" class="rating-loading" data-show-clear="false" data-show-caption="false" data-size="sm" data-step="1" value="%promedioImagen%" >
                             <!--finStar-->
                             <!--iniBtn-->
                             <button type="button" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-edit"></span> Editar información</button>
@@ -99,7 +99,8 @@
 
 <script>
     $( document ).ready(function() {
-        $('#input-1').rating().on('rating.change', function(event, value, caption){
+        $('#input-1').rating({displayOnly : %validaRating%});
+        $('#input-1').on('rating.change', function(event, value, caption){
             console.log('Hola');
             $.ajax({
                 type : 'GET',
@@ -111,9 +112,9 @@
                     calificacion : $('#input-1').val()
                 },
                 success : function(respuesta){
-                    if(respuesta !== '1'){
+                    //if(respuesta !== '1'){
                         alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
-                    }
+                    //}
                 },
                 error : function(respuesta){
                     alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');

@@ -143,7 +143,7 @@ class usuarioCtl {
 
             require_once('app/modelos/imagenMdl.php');
             $imgMdl = new imagenMdl();
-            $galeria = $imgMdl->obtenerGaleria($infoUsuario['id'], 0);
+            $galeria = $imgMdl->obtenerGaleria($infoUsuario['id'], 0, 8);
             
             if(isset($infoUsuario['nombre'])){
                 $vista = file_get_contents('app/vistas/usuarioIndex.html');

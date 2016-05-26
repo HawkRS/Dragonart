@@ -208,6 +208,7 @@
 		function vistaMostrarImagen($doctype, $header, $vista, $footer, $infoImagen, $infoUsuario, $tags, $comentarios, $mensaje){
 			$header = procesadorPlantillas::generarHeader($header);
 			$vista = procesadorPlantillas::generarFooter($vista, $footer);
+			$rating = 'true';
 
 			$ruta = str_replace('/var/www/html/Dragonart/', '', $infoImagen['url']);
 			$diccionario = array(
@@ -219,7 +220,8 @@
 				'%avatarUsuario%' => $infoUsuario['avatar'],
 				'%tituloImagen%' => $infoImagen['titulo'],
 				'%fechaImagen%' => $infoImagen['fecha'],
-				'%descripcionImagen%' => $infoImagen['descripcion']
+				'%descripcionImagen%' => $infoImagen['descripcion'],
+				'%promedioImagen%' => $infoImagen['promedio']
 			);
 
 			$vista = procesadorPlantillas::aplicaDiccionario($vista, $diccionario);
@@ -230,6 +232,7 @@
 	        	$finBtn = strpos($vista, '<!--finBtn-->')+13;
 	        	$remplazar = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
 	        	$vista = str_replace($remplazar, '', $vista);
+	        	$rating = 'false';
 	        }
 
 	        //Esto remueve el formulario de comentarios y los botones de edición para los que no estén registrados
@@ -243,6 +246,8 @@
 	        	$finBtn = strpos($vista, '<!--finBtn-->')+13;
 	        	$remplazar = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
 	        	$vista = str_replace($remplazar, '', $vista);
+
+	        	$rating = 'true';
 	        }
 
 	        $todosTags = '';
@@ -291,6 +296,7 @@
 	        }
 	        
 	        $vista = str_replace($Comen, $todosComentarios, $vista);
+	        $vista = str_replace('%validaRating%', $rating, $vista);
 
 	        $vista = $doctype.$header.$vista;
 
