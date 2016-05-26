@@ -10,12 +10,12 @@
 	        if(isset($_GET['accion'])) {
 	            switch($_GET['accion']) {
 	                case 'alta':
-	                    $this->alta();
+	                    echo $this->alta();
 	                    break;
 	            }
 	        }
 	        else {
-	            $this->alta();
+	            echo $this->alta();
 	        }
 	    }
 
@@ -33,12 +33,14 @@
 	    		$ruta = '/var/www/html/Dragonart/'.$_GET['url'];
 	    		$infoImagen = $imgMdl->obtenerInfoPorUrl($ruta);
 
-	    		if($favMdl->alta($infoImagen['id'], $infoUsuario['id'], $_GET['calificacion'])){
-	    			echo true;
+	    		if($infoUsuario !== false && $infoImagen !== false){
+	    			if($favMdl->alta($infoImagen['id'], $infoUsuario['id'], $_GET['calificacion'])){
+	    				return true;
+	    			}
 	    		}
-	    		echo false;
+	    		return false;
 	    	}
-	    	echo false;
+	    	return false;
 
 	    }
 
