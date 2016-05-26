@@ -64,10 +64,18 @@ class imagenCtl {
 
                         require_once('app/modelos/imagenMdl.php');
                         $imgMdl = new imagenMdl();
+                        require_once('app/modelos/tagsMdl.php');
+                        $tagMdl = new tagsMdl();
                         if($imgMdl->alta($infoUsuario['id'], $nuevoNombre, $postLimpio['titulo'], $postLimpio['descripcion'])){
-                            //Agregar a notificaciones
                             $infoImagen = $imgMdl->obtenerInfoPorUrl($nuevoNombre);
-                            header('Location: http://localhost/Dragonart/index.php?controlador=imagen&accion=mostrar&img='.$infoImagen['id']);
+                            if($tagMdl->alta($infoImagen['id'], $postLimpio['tags'])){
+                                //Agregar a notificaciones
+                                $infoImagen = $imgMdl->obtenerInfoPorUrl($nuevoNombre);
+                                header('Location: http://localhost/Dragonart/index.php?controlador=imagen&accion=mostrar&img='.$infoImagen['id']);
+                            }
+                            else{
+                                $errorMsg = '<div class="alert alert-danger">ERROR: '.$tagMdl->getError().'.</div>';
+                            }
                         }
                         else{
                             $errorMsg = '<div class="alert alert-danger">ERROR: '.$imgMdl->getError().'.</div>';
@@ -111,7 +119,12 @@ class imagenCtl {
 
         $infoImagen = $imgMdl->obtenerInfo($_GET['img']);
         $infoUsuario = $usrMdl->obtenerInfoPorID($infoImagen['idUsuario']);
-        $infoUsuarioActual = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
+        if(isset($_SESSION['correo']) && isset($_SESSION['logPass'])){
+        	$infoUsuarioActual = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
+        }
+        else{
+        	$infoUsuarioActual = false;
+        }
         $mensaje = '';
 
         if($infoImagen === false || $infoImagen['status'] === 0){
@@ -128,7 +141,7 @@ class imagenCtl {
                 $error = $validador->validarComentario($_POST);
 
                 if($error === true){
-                    if($comMdl->alta($infoImagen['id'], $infoUsuarioActual['id'], $_POST['comentario'])){
+                    if($infoUsuarioActual !== false && $comMdl->alta($infoImagen['id'], $infoUsuarioActual['id'], $_POST['comentario'])){
                         header('Location: index.php?controlador=imagen&accion=mostrar&img='.$infoImagen['id']);
                     }
                     else{
@@ -140,10 +153,14 @@ class imagenCtl {
             } 
             
             $comentarios = $comMdl->obtenerComentarios($_GET['img']);
+
+            require_once('app/modelos/tagsMdl.php');
+            $tagMdl = new tagsMdl();
+            $tags = $tagMdl->obtenerTagsImagen($infoImagen['id']);
             
             $vista = file_get_contents('app/vistas/publicacionIndex.html');
 
-            $vista = $procesador->vistaMostrarImagen($this->doctype, $this->header, $vista, $this->footer, $infoImagen, $infoUsuario, $comentarios, $mensaje);
+            $vista = $procesador->vistaMostrarImagen($this->doctype, $this->header, $vista, $this->footer, $infoImagen, $infoUsuario, $tags, $comentarios, $mensaje);
 
             echo $vista;
             

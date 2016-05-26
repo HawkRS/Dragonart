@@ -89,10 +89,10 @@
 			return false;
 		}
 
-		function obtenerGaleria($idUsuario, $limite){
-			if($stmt = $this->db->prepare('SELECT * FROM imagen WHERE idUsuarioPropietario=? ORDER BY idImagen DESC LIMIT ?,8')){
+		function obtenerGaleria($idUsuario, $offset, $limite){
+			if($stmt = $this->db->prepare('SELECT * FROM imagen WHERE idUsuarioPropietario=? ORDER BY idImagen DESC LIMIT ?,?')){
 
-				$stmt->bind_param("ii", $idUsuario, $limite);
+				$stmt->bind_param("iii", $idUsuario, $offset, $limite);
 
 				$stmt->execute();
 

@@ -205,7 +205,7 @@
 	        return $vista;
 		}
 
-		function vistaMostrarImagen($doctype, $header, $vista, $footer, $infoImagen, $infoUsuario, $comentarios, $mensaje){
+		function vistaMostrarImagen($doctype, $header, $vista, $footer, $infoImagen, $infoUsuario, $tags, $comentarios, $mensaje){
 			$header = procesadorPlantillas::generarHeader($header);
 			$vista = procesadorPlantillas::generarFooter($vista, $footer);
 
@@ -244,6 +244,26 @@
 	        	$remplazar = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
 	        	$vista = str_replace($remplazar, '', $vista);
 	        }
+
+	        $todosTags = '';
+	        $inicioTag = strpos($vista, '<!--iniTag-->');
+        	$finTag = strpos($vista, '<!--finTag-->')+13;
+        	$tag = substr($vista,$inicioTag,$finTag-$inicioTag);
+
+	        if(is_array($tags)){
+	            for($x=0; $x<count($tags); $x++){
+	            	$new_tag = $tag;
+	                
+	                $diccionarioTag = array (
+	                    '%tag%' => $tags[$x]['tag']
+	                );
+	                
+	                $new_tag = procesadorPlantillas::aplicaDiccionario($new_tag,$diccionarioTag);
+	                $todosTags .= $new_tag;
+	            }
+	        }
+
+	        $vista = str_replace($tag, $todosTags, $vista);
 
 	        $todosComentarios = '';
 	        $inicioCom = strpos($vista, '<!--iniCom-->');

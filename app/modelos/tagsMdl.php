@@ -10,59 +10,59 @@
 			$this->db = $this->acceso->getDriver();
 		}
 
-		function alta($idImagen, $tag){			
-			if($stmt = $this->db->prepare('INSERT INTO tag (idImagen, tag) VALUES (?, ?)')){
+		function alta($idImagen, $tags){			
+			$bandera = true;
 
-				$stmt->bind_param("ss", $idImagen, $tag);
+			$token = strtok($tags, ' ');
 
-				$stmt->execute();
+			while($token !== false){
+				if($stmt = $this->db->prepare('INSERT INTO tag (idImagen, tag) VALUES (?, ?)')){
 
-				$stmt->fetch();
+					$stmt->bind_param("is", $idImagen, $token);
 
-				$stmt->close();
+					if($stmt->execute() !== true){
+						$bandera = false;
+					}
+
+					$stmt->fetch();
+
+					$stmt->close();
+				}
+				$token = strtok(' ');
 			}
+
+			return $bandera;
 		}
         
-        function obtenerTag($tag){
-			if($stmt = $this->db->prepare('SELECT * FROM tag WHERE tag=?')){
-
-				$stmt->bind_param("s", $tag);
-
-				$stmt->execute();
-
-				$stmt->bind_result($tags);
-
-				$stmt->fetch();
-				
-				$stmt->close();
-				
-				$array = array(
-					'tag' => $tags
-				);
-
-				return $array;
-			}
-		}
-        
-        function obtenerTagsImagen($idImagen){
+        function obtenerTagsImagen($id){
 			if($stmt = $this->db->prepare('SELECT * FROM tag WHERE idImagen=?')){
 
-				$stmt->bind_param("s", $idImagen);
+				$stmt->bind_param("i", $id);
 
 				$stmt->execute();
 
-				$stmt->bind_result($idImagenTag);
+				$stmt->bind_result($idTag, $idImagen, $tag);
 
-				$stmt->fetch();
+				$array = array();
+
+				while($stmt->fetch()){
+					$array[] = array(
+						'id' => $idTag,
+						'imagen' => $idImagen,
+						'tag' => $tag
+					);
+				}
 				
 				$stmt->close();
-				
-				$array = array(
-					'idImagen' => $idImagenTag
-				);
 
 				return $array;
 			}
+
+			return false;
+		}
+
+		function getError(){
+			return $this->db->error;
 		}
 
 	}
