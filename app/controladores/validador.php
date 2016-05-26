@@ -104,6 +104,112 @@
 	    	return true;
 	    }
 
+	    function validarRegistroImagen($array){
+	        if(isset($array['titulo'])){
+	            if(validador::estaVacio($array['titulo'])){
+	                return 'El título no debe llevar solamente espacios en blanco.';
+	            }
+	        }
+	        else{
+	            return 'Debe escribir un título.';
+	        }
+
+	        if(isset($array['descripcion'])){
+	        	if(validador::estaVacio($array['descripcion'])){
+	                return 'La descripción no debe llevar solamente espacios en blanco.';
+	            }
+	        }
+	        else{
+	        	return 'Debe escribir una descripción.';
+	        }
+
+	        if(isset($array['tags'])){
+	            $tags = $array['tags'];
+	            if(validador::estaVacio($tags) || !preg_match("/^[a-zA-Z]*([a-zA-Z0-9]|\s)+$/", $tags)){
+	                return 'Los tags no deben ser solamente espacios en blanco.';
+	            }
+	        }
+	        else{
+	            return 'Debe escribir al menos un tag.';
+	        }
+
+	        $mensaje = validador::validarArchivoCargado('imagen');
+	        if($mensaje !== true){
+	        	return $mensaje;
+	        }
+
+	        return true;
+	    }
+
+	    function validarArchivoCargado($form){
+	    	if(!isset($_FILES[$form]['error']) || is_array($_FILES[$form]['error'])){
+	            return 'ERROR: Archivo erroneo.';
+	        }
+
+	        switch($_FILES[$form]['error']){
+	            case UPLOAD_ERR_OK:
+	                break;
+
+	            case UPLOAD_ERR_INI_SIZE:
+	            case UPLOAD_ERR_FORM_SIZE:
+	                return 'ERROR: El archivo sobrepasa el límite permitido.';
+	                break;
+
+	            case UPLOAD_ERR_NO_FILE:
+	                return 'ERROR: No se subió ningún archivo.';
+	                break;
+	        }
+
+	        if($_FILES[$form]['size'] > 10485760){
+	            return 'ERROR: El archivo sobrepasa el límite permitido.';
+	        }
+
+	        $infoArchivo = new finfo(FILEINFO_MIME_TYPE);
+	        $extension = $infoArchivo->file($_FILES[$form]['tmp_name']);
+	        $arrayTipos = array(
+	            'jpg' => 'image/jpeg',
+	            'png' => 'image/png',
+	            'gif' => 'image/gif'
+	        );
+
+	        if(array_search($extension, $arrayTipos, true) === false){
+	            return 'ERROR: Formato de archivo inválido.';
+	        }
+
+	        return true;
+	    }
+
+	    function moverArchivo($form, $carpeta, $infoUsuario){
+	    	if(isset($_FILES[$form]['error']) && $_FILES[$form]['error'] === UPLOAD_ERR_OK){
+	    		$ruta = "/var/www/html/Dragonart/uploads/$carpeta/".basename($_FILES[$form]['name']);
+		    	if(move_uploaded_file($_FILES[$form]['tmp_name'], $ruta)){
+
+	                $nuevoNombre = "/var/www/html/Dragonart/uploads/$carpeta/".uniqid('dragonart_'.$infoUsuario['nombre'].'_').'.'.pathinfo($ruta,PATHINFO_EXTENSION);
+	                $destArchivo = "/var/www/html/Dragonart/uploads/$carpeta/".basename($nuevoNombre);
+	                while(file_exists($destArchivo)){
+	                    $nuevoNombre = "/var/www/html/Dragonart/uploads/$carpeta/".uniqid('dragonart_'.$infoUsuario['nombre'].'_').'.'.pathinfo($ruta,PATHINFO_EXTENSION);
+	                    $destArchivo = "/var/www/html/Dragonart/uploads/$carpeta/".basename($nuevoNombre);
+	                }
+
+	                rename($ruta, $nuevoNombre);
+	                return $nuevoNombre;
+	            }
+        	}
+        	return false;
+	    }
+
+	    function sanitizar($array){
+	        require_once('app/modelos/imagenMdl.php');
+	        $imgMdl = new imagenMdl();
+
+	    	foreach($array as $llave => $valor){
+	        	$array[$llave] = $imgMdl->real_escape_string($array[$llave]);
+	    	}
+	    	unset($valor);
+
+	        return $array;
+	    }
+
 	    function validarComentario($array){
 	    	if(isset($array['comentario'])){
 		    	$nombre = $array['comentario'];
