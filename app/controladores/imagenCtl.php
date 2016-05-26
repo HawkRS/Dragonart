@@ -37,17 +37,11 @@ class imagenCtl {
     }
     
     function alta() {
-        imagenCtl::generarHeader();
+        require_once('app/controladores/procesadorPlantillas.php');
+        $procesador = new procesadorPlantillas();
 
         if(!isset($_SESSION['correo']) && !isset($_SESSION['logPass'])){
-            $vista = file_get_contents('app/vistas/404.html');
-            $inicioFooter = strpos($vista, '<!--inicioFooter-->');
-            $finFooter = strpos($vista, '<!--finFooter-->')+16;
-            $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
-
-            $vista = str_replace($remplazar, $this->footer, $vista);
-            $vista = str_replace('%mensaje%', 'No es posible subir imágenes si no haz iniciado sesión.', $vista);
-            $vista = $this->doctype.$this->header.$vista;
+            $vista = $procesador->vistaError404($this->doctype, $this->header, $vista, $this->footer, 'No es posible subir imágenes si no haz iniciado sesión.');
             echo $vista;
         }
 
@@ -57,21 +51,20 @@ class imagenCtl {
             if(imagenCtl::validarRegistro($_POST)){
                 $ruta = '/var/www/html/Dragonart/uploads/img/'.basename($_FILES['imagen']['name']);
                 if(move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta)){
-
-                	$nuevoNombre = '/var/www/html/Dragonart/uploads/img/'.uniqid('img_').'.'.pathinfo($ruta,PATHINFO_EXTENSION);
-			        $destArchivo = '/var/www/html/Dragonart/uploads/img/'.basename($nuevoNombre);
-                	while(file_exists($destArchivo)){
-			            $nuevoNombre = '/var/www/html/Dragonart/uploads/img/'.uniqid('img_').'.'.pathinfo($ruta,PATHINFO_EXTENSION);
-			            $destArchivo = '/var/www/html/Dragonart/uploads/img/'.basename($nuevoNombre);
-			        }
-
-			        rename($ruta, $nuevoNombre);
-                	imagenCtl::crearThumbnail($nuevoNombre, str_replace('/var/www/html/Dragonart/uploads/img/', '', $nuevoNombre));
-                    $postLimpio = imagenCtl::sanitizar($_POST);
-
                     require_once('app/modelos/usuarioMdl.php');
                     $usrMdl = new usuarioMdl();
                     $infoUsuario = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
+
+                    $nuevoNombre = '/var/www/html/Dragonart/uploads/img/'.uniqid('dragonart_'.$infoUsuario['nombre'].'_').'.'.pathinfo($ruta,PATHINFO_EXTENSION);
+                    $destArchivo = '/var/www/html/Dragonart/uploads/img/'.basename($nuevoNombre);
+                    while(file_exists($destArchivo)){
+                        $nuevoNombre = '/var/www/html/Dragonart/uploads/img/'.uniqid('dragonart_'.$infoUsuario['nombre'].'_').'.'.pathinfo($ruta,PATHINFO_EXTENSION);
+                        $destArchivo = '/var/www/html/Dragonart/uploads/img/'.basename($nuevoNombre);
+                    }
+
+                    rename($ruta, $nuevoNombre);
+                    imagenCtl::crearThumbnail($nuevoNombre, str_replace('/var/www/html/Dragonart/uploads/img/', '', $nuevoNombre));
+                    $postLimpio = imagenCtl::sanitizar($_POST);
 
                     require_once('app/modelos/imagenMdl.php');
                     $imgMdl = new imagenMdl();
@@ -103,100 +96,60 @@ class imagenCtl {
         }
 
         $vista = file_get_contents('app/vistas/formularioImagen.html');
-        $inicioFooter = strpos($vista, '<!--inicioFooter-->');
-        $finFooter = strpos($vista, '<!--finFooter-->')+16;
-        $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
-        
-        $vista = str_replace($remplazar, $this->footer, $vista);
-        $vista = str_replace('%error%', $errorMsg, $vista);
-        $vista = $this->doctype.$this->header.$vista;
+        $vista = $procesador->vistaSubirImagen($this->doctype, $this->header, $vista, $this->footer, $errorMsg);
         echo $vista;
     }
 
     function inicio() {
-        imagenCtl::generarHeader();
-
+        require_once('app/controladores/procesadorPlantillas.php');
+        $procesador = new procesadorPlantillas();
         $vista = file_get_contents('app/vistas/principal.html');
-        $inicioBody = strpos($this->doctype, '<!--inicioBody-->');
-        $finBody = strpos($this->doctype, '<!--finBody-->')+14;
-        $inicioFooter = strpos($vista, '<!--inicioFooter-->');
-        $finFooter = strpos($vista, '<!--finFooter-->')+16;
-        
-        $remplazarBody = substr($this->doctype,$inicioBody,$finBody-$inicioBody); 
-        $remplazarFooter = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
-        
-        $this->doctype = str_replace($remplazarBody, '<body class="index">', $this->doctype);        
-        $vista = str_replace($remplazarFooter, $this->footer, $vista);
-        
-        $vista = $this->doctype.$this->header.$vista;
+        $vista = $procesador->vistaInicio($this->doctype, $this->header, $vista, $this->footer);
         echo $vista;
     }
     
     function mostrar() {
-        imagenCtl::generarHeader();
 
-        $vista = file_get_contents('app/vistas/publicacionIndex.html');
-
+        require_once('app/controladores/procesadorPlantillas.php');
+        $procesador = new procesadorPlantillas();
         require_once('app/modelos/imagenMdl.php');
         $imgMdl = new imagenMdl();
         require_once('app/modelos/usuarioMdl.php');
         $usrMdl = new usuarioMdl();
+        require_once('app/modelos/comentarioMdl.php');
+        $comMdl = new comentarioMdl();
+
         $infoImagen = $imgMdl->obtenerInfo($_GET['img']);
         $infoUsuario = $usrMdl->obtenerInfoPorID($infoImagen['idUsuario']);
+        $infoUsuarioActual = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
+        $mensaje = '';
 
-        $ruta = str_replace('/var/www/html/Dragonart/', '', $infoImagen['url']);
+        if(!empty($_POST)){
+            require_once('app/controladores/validador.php');
+            $validador = new validador();
+            $error = $validador->validarComentario($_POST);
 
-        $vista = str_replace('%urlImagen%', $ruta, $vista);
-        $vista = str_replace('%nombreUsuario%', $infoUsuario['nombre'], $vista);
-        $vista = str_replace('%avatarUsuario%', $infoUsuario['avatar'], $vista);
-        $vista = str_replace('%tituloImagen%', $infoImagen['titulo'], $vista);
-        $vista = str_replace('%fechaImagen%', $infoImagen['fecha'], $vista);
-        $vista = str_replace('%descripcionImagen%', $infoImagen['descripcion'], $vista);
-
-        if(isset($_SESSION['correo']) && $infoUsuario['correo'] !== $_SESSION['correo']){
-        	$inicioBtn = strpos($vista, '<!--iniBtn-->');
-        	$finBtn = strpos($vista, '<!--finBtn-->')+13;
-        	$remplazar = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
-        	$vista = str_replace($remplazar, '', $vista);
-        }
-
-        //Esto remueve el formulario de comentarios y los botones de edición para los que no estén registrados
-        if(!isset($_SESSION['correo']) && !isset($_SESSION['logPass'])){
-        	$inicioForm = strpos($vista, '<!--iniForm-->');
-        	$finForm = strpos($vista, '<!--finForm-->')+14;
-        	$remplazar = substr($vista,$inicioForm,$finForm-$inicioForm);
-        	$vista = str_replace($remplazar, '', $vista);
-
-        	$inicioBtn = strpos($vista, '<!--iniBtn-->');
-        	$finBtn = strpos($vista, '<!--finBtn-->')+13;
-        	$remplazar = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
-        	$vista = str_replace($remplazar, '', $vista);
-        }
-
-        $inicioFooter = strpos($vista, '<!--inicioFooter-->');
-        $finFooter = strpos($vista, '<!--finFooter-->')+16;
-        $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
+            if($error === true){
+                if($comMdl->alta($infoImagen['id'], $infoUsuarioActual['id'], $_POST['comentario'])){
+                    header('Location: index.php?controlador=imagen&accion=mostrar&img='.$infoImagen['id']);
+                }
+                else{
+                    $mensaje = '<div class="alert alert-danger">'.$comMdl->getError().'</div>';
+                }
+            }else{
+                $mensaje = '<div class="alert alert-danger">'.$error.'</div>';
+            }
+        } 
         
-        $vista = str_replace($remplazar, $this->footer, $vista);
-        $vista = $this->doctype.$this->header.$vista;
-        echo $vista;
-    }
+        $comentarios = $comMdl->obtenerComentarios($_GET['img']);
+        
+        $vista = file_get_contents('app/vistas/publicacionIndex.html');
 
-    function generarHeader(){
-        if(isset($_SESSION['correo']) && isset($_SESSION['logPass']) && isset($_SESSION['alias']) && isset($_SESSION['nombre'])){
-            $inicio = strpos($this->header,'<!--Inicio Offline-->');
-            $fin = strpos($this->header, '<!--Fin Offline-->')+18;
-            $busqueda = substr($this->header, $inicio, $fin-$inicio);
-            $this->header = str_replace($busqueda, "", $this->header);
-            $this->header = str_replace('%alias%', $_SESSION['alias'], $this->header);
-            $this->header = str_replace('%usuario%', $_SESSION['nombre'], $this->header);
-        }
-        else{
-            $inicio = strpos($this->header,'<!--Inicio Online-->');
-            $fin = strpos($this->header, '<!--Fin Online-->')+17;
-            $busqueda = substr($this->header, $inicio, $fin-$inicio);
-            $this->header = str_replace($busqueda, "", $this->header);
-        }
+        $vista = $procesador->vistaMostrarImagen($this->doctype, $this->header, $vista, $this->footer, $infoImagen, $infoUsuario, $comentarios, $mensaje);
+        
+
+        echo $vista;
+
     }
 
     /**
@@ -257,28 +210,41 @@ class imagenCtl {
             return false;
         }
 
-        //SECCION VALIDADOR DE ARCHIVO IMAGEN
-        $destino = '/var/www/html/Dragonart/uploads/img/';
-        $destArchivo = $destino.basename($_FILES['imagen']['name']);
+        if(!isset($_FILES['imagen']['error']) || is_array($_FILES['imagen']['error'])){
+            return false;
+        }
 
-        $tipoImagen = pathinfo($destArchivo,PATHINFO_EXTENSION);
+        switch($_FILES['imagen']['error']){
+            case UPLOAD_ERR_OK:
+                break;
 
-        if(isset($array["submit"])){
-            $tam = getimagesize($_FILES['imagen']['tmp_name']);
-            if($tam === false) {
+            case UPLOAD_ERR_INI_SIZE:
+            case UPLOAD_ERR_FORM_SIZE:
                 return false;
-            }
+                break;
+
+            case UPLOAD_ERR_NO_FILE:
+                return false;
+                break;
         }
 
         if($_FILES['imagen']['size'] > 10485760){
-        	var_dump($_FILES['imagen']['size']);
             return false;
         }
 
-        if($tipoImagen !== 'jpg' && $tipoImagen !== 'png' && $tipoImagen !== 'jpeg' && $tipoImagen !== 'gif') {
+        $infoArchivo = new finfo(FILEINFO_MIME_TYPE);
+        $extension = $infoArchivo->file($_FILES['imagen']['tmp_name']);
+        $arrayTipos = array(
+            'jpg' => 'image/jpeg',
+            'png' => 'image/png',
+            'gif' => 'image/gif'
+        );
+
+        if(array_search($extension, $arrayTipos, true) === false){
             return false;
         }
-        
+
+        //Intentar mover imagen
 
         return true;
     }
