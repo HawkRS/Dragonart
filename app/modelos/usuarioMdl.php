@@ -191,11 +191,17 @@
 
 				return $array;
 			}
+
+			return false;
 		}
 
 		function getError(){
 			return $this->db->error;
 		}
 
+		function real_escape_string($cadena){
+			return $this->db->real_escape_string($cadena);
+		}
+		
 	}
 ?>
