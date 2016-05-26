@@ -1,10 +1,10 @@
     <div class="container main-pubIndex">
-
+        %error%
         <section class="col-md-12">
             <div class="row margen">
                 <figure>
                     <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-                        <img class="center-block img-responsive" src="%urlImagen%" alt="Imagen del post">
+                        <img id="imgPrincipal" class="center-block img-responsive" src="%urlImagen%" alt="Imagen del post">
                     </div>
                 </figure>
             </div>
@@ -14,11 +14,12 @@
                     <div class="row row-centered">
                         <figure>
                             <a href="index.php?controlador=usuario&accion=mostrar&usuario=%nombreUsuario%">
-                                <img id="imgPrincipal" class="col-xs-12 col-sm-4 col-md-3 avatar col-centered img-circle" src="%avatarUsuario%" alt="avatar">
+                                <img class="col-xs-12 col-sm-4 col-md-3 avatar col-centered img-circle" src="%avatarUsuario%" alt="avatar">
                             </a>
                         </figure>
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <h2>%tituloImagen%</h2>
+                            <span>Autor: %aliasUsuarioImagen%</span><br>
                             <span>Fecha: %fechaImagen%</span>
                         </div>
                         <div class="col-xs-12 col-sm-4 col-md-3 pull-right offsetUp">
@@ -46,15 +47,16 @@
 
         <section class="col-md-12">
             <!--iniForm-->
-            <form name="comentario" class="form-horizontal" id="comentario" action="index.php?controlador=imagen&accion=mostrar&img=%idImagen%" method="post" novalidate>
+            <form name="frmComentario" class="form-horizontal" id="comentario" action="index.php?controlador=imagen&accion=mostrar&img=%idImagen%" method="post" novalidate>
                 <div class="form-group">
                     <label for="comentario" class="col-xs-12 col-md-8 col-md-offset-2">Escribe un comentario </label>
                 </div>
 
-                <div class="form-group">
+                <div id="div-comentario" class="form-group">
                     <div class="col-xs-12 col-md-8 col-md-offset-2">
-                        <textarea class="form-control" id="comentario" rows="5"></textarea>
+                        <textarea class="form-control" id="comentario" name="comentario" rows="5"></textarea>
                     </div>
+                    <span id="err-comentario" class="help-inline text-danger hidden"></span>
                 </div>
 
                 <div class="form-group">
@@ -77,7 +79,7 @@
                             </figure>
                             <div class="col-md-9">
                                 <h2>%aliasCom%</h2>
-                                <span>%fechaCom%</span>
+                                <span>Fecha: %fechaCom%</span>
                             </div>
                         </div>
                     </div>
@@ -101,16 +103,20 @@
             console.log('Hola');
             $.ajax({
                 type : 'GET',
-                url : 'index.php?controlador=favorito&accion=alta',
+                url : 'index.php',
                 data : {
+                    controlador: 'favorito',
+                    accion: 'alta',
                     url : $('#imgPrincipal').attr('src'),
                     calificacion : $('#input-1').val()
                 },
                 success : function(respuesta){
-                    alert(respuesta);
+                    if(respuesta !== '1'){
+                        alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
+                    }
                 },
-                error : function(json){
-                    alert('Error al guardar...');
+                error : function(respuesta){
+                    alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
                 }
             });
         });
