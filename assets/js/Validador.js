@@ -50,7 +50,12 @@ function validarTextArea(txtArea){
 			ponerError(tempId, txtArea.attr('id'), 'Debes escribir un contenido.');
 		}
 		else{
-			ponerError(tempId, txtArea.attr('id'), 'Debes escribir algo sobre tí.');
+			if(tempId === '#err-comentario'){
+				ponerError(tempId, txtArea.attr('id'), 'No puedes enviar comentarios en blanco.');
+			}
+			else{
+				ponerError(tempId, txtArea.attr('id'), 'Debes escribir algo sobre tí.');
+			}
 		}
 		bandera = false;
 	}
