@@ -104,6 +104,20 @@
 	    	return true;
 	    }
 
+	    function validarComentario($array){
+	    	if(isset($array['comentario'])){
+		    	$nombre = $array['comentario'];
+		    	if(validador::estaVacio($nombre)){
+		    		return 'Su comentario no debe ser llenado solamente de espacios en blanco.';
+		    	}
+	    	}
+	    	else{
+	    		return 'Debe escribir un comentario.';
+	    	}
+
+	    	return true;
+	    }
+
 	}
 
 ?>
