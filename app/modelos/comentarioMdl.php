@@ -10,12 +10,12 @@
 			$this->db = $this->acceso->getDriver();
 		}
 
-		function alta($nombre, $alias, $correo, $contrasena){
+		function alta($idImagen, $idUsuario, $comentario){
 			$bandera = false;
 
-			if($stmt = $this->db->prepare('INSERT INTO usuario (nombreUsuario, aliasUsuario, correoUsuario, contrasenaUsuario) VALUES (?, ?, ?, PASSWORD(?))')){
+			if($stmt = $this->db->prepare('INSERT INTO comentario (idImagen, idUsuarioComento, comentario, fechaComentario) VALUES (?, ?, ?, NOW())')){
 
-				$stmt->bind_param("ssss", $nombre, $alias, $correo, $contrasena);
+				$stmt->bind_param("iis", $idImagen, $idUsuario, $comentario);
 
 				$bandera = $stmt->execute();
 
@@ -27,27 +27,27 @@
 			return $bandera;
 		}
 
-		function obtenerInfo($correo, $contrasena){
-			if($stmt = $this->db->prepare('SELECT * FROM usuario WHERE correoUsuario=? AND contrasenaUsuario=PASSWORD(?)')){
+		function obtenerComentarios($idImagen){
+			if($stmt = $this->db->prepare('SELECT * FROM comentario WHERE idImagen=? ORDER BY idComentario')){
 
-				$stmt->bind_param("ss", $correo, $contrasena);
+				$stmt->bind_param("i", $idImagen);
 
 				$stmt->execute();
 
-				$stmt->bind_result($idUsuario, $nombreUsuario, $aliasUsuario, $correoUsuario, $contrasenaUsuario, $biografiaUsuario, $avatarUsuario, $statusUsuario);
+				$stmt->bind_result($idComentario, $idImagen, $idUsuarioComento, $comentario, $fechaComentario, $tipo);
 
-				$stmt->fetch();
-				
-				$array = array(
-					'id' => $idUsuario,
-					'nombre' => $nombreUsuario,
-					'alias' => $aliasUsuario,
-					'correo' => $correoUsuario,
-					'contrasena' => $contrasenaUsuario,
-					'biografia' => $biografiaUsuario,
-					'avatar' => $avatarUsuario,
-					'status' => $statusUsuario
-				);
+				$array = array();
+
+				while($stmt->fetch()){
+					$array[] = array(
+						'id' => $idComentario,
+						'imagen' => $idImagen,
+						'usuario' => $idUsuarioComento,
+						'comentario' => $comentario,
+						'fecha' => $fechaComentario,
+						'tipo' => $tipo
+					);
+				}
 				
 				$stmt->close();
 
