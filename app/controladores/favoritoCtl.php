@@ -34,13 +34,28 @@
 	    		$infoImagen = $imgMdl->obtenerInfoPorUrl($ruta);
 
 	    		if($infoUsuario !== false && $infoImagen !== false){
-	    			if($favMdl->alta($infoImagen['id'], $infoUsuario['id'], $_POST['calificacion'])){
-	    				$promedio = $favMdl->obtenerPromedio($infoImagen['id']);
-	    				if($promedio !== false){
-	    					if($imgMdl->actualizaPromedio($promedio, $infoImagen['id'])){
-	    						return true;
-	    					}
+	    			$infoFavorito = $favMdl->obtenerFavorito($infoUsuario['id'], $infoImagen['id']);
+	    			if($infoFavorito !== false){
+	    				//Modificamos el favorito actual
+	    				if($favMdl->modificar($_POST['calificacion'], $infoFavorito['id'])){
+	    					$promedio = $favMdl->obtenerPromedio($infoImagen['id']);
+		    				if($promedio !== false){
+		    					if($imgMdl->actualizaPromedio($promedio, $infoImagen['id'])){
+		    						return true;
+		    					}
+		    				}
 	    				}
+	    			}
+	    			else{
+	    				//Agregamos nuevo favorito
+	    				if($favMdl->alta($infoImagen['id'], $infoUsuario['id'], $_POST['calificacion'])){
+		    				$promedio = $favMdl->obtenerPromedio($infoImagen['id']);
+		    				if($promedio !== false){
+		    					if($imgMdl->actualizaPromedio($promedio, $infoImagen['id'])){
+		    						return true;
+		    					}
+		    				}
+		    			}
 	    			}
 	    		}
 	    		return false;
