@@ -21,6 +21,9 @@ class contactoCtl {
                 case 'mostrar':
                     $this->mostrar();
                     break;
+                case 'mandarcorreo':
+                    $this->mandarcorreo();
+                    break;
             }
         }else {
             $this->mostrar();
@@ -28,14 +31,16 @@ class contactoCtl {
     }
 
     function mostrar() {
-         $vista = file_get_contents('app/vistas/formularioContacto.html');
-        $inicioFooter = strpos($vista, '<!--inicioFooter-->');
-        $finFooter = strpos($vista, '<!--finFooter-->')+16;
-        $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
+        require_once('app/controladores/procesadorPlantillas.php');
+        $procesador = new procesadorPlantillas();
+        $vista = file_get_contents('app/vistas/formularioContacto.html');
+        $vista = $procesador->vistaContacto($this->doctype, $this->header, $vista, $this->footer);
         
-        $vista = str_replace($remplazar, $this->footer, $vista);
-        $vista = $this->doctype.$this->header.$vista;
         echo $vista;
+    }
+    
+    function mandarcorreo(){
+        
     }
 }
 ?>
