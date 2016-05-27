@@ -25,7 +25,7 @@ menu.click(function(){
 function asignarAJAX(urlImagen, val){
 	$.ajax({
             type : 'POST',
-            url : 'index.php?controlador=favorito&accion=alta',
+            url : 'index.php?controlador=imagen&accion=altaFavorito',
             data : {
                 url : urlImagen,
                 calificacion : val
