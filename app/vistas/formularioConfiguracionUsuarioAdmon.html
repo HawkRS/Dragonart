@@ -1,0 +1,76 @@
+    <div class="container main-pubIndex">
+        %error%
+        <div class="panel panel-default">
+            <div class="panel-heading postHeader">
+                <div class="row">
+                    <h1 class="col-md-12">Editar perfil</h1>
+                </div>
+            </div>
+            
+            <div class="panel-body postDesc">
+                <form id="configUsuario" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" enctype="multipart/form-data" action="index.php?controlador=usuario&accion=modificar" method="post" novalidate>
+
+                    <div id="div-nombre" class="form-group">
+                        <label class="control-label" for="nombre">Nombre: </label>
+                        <div>
+                            <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre" value="%nombreUsuario%"/>
+                        </div>
+                        <span id="err-nombre" class="help-inline text-danger hidden"></span>
+                    </div>
+
+                    <div id="div-alias" class="form-group">
+                        <label class="control-label" for="alias">Alias: </label>
+                        <div>
+                            <input type="text" class="form-control" id="alias" placeholder="Alias" name="alias" value="%aliasUsuario%"/>
+                        </div>
+                        <span id="err-alias" class="help-inline text-danger hidden"></span>
+                    </div>
+
+                    <div id="div-correo" class="form-group">
+                        <label class="control-label" for="correo">Correo: </label>
+                        <div>
+                            <input type="email" class="form-control" id="correo" placeholder="alguien@ejemplo.com" name="correo" value="%correoUsuario%"/>
+                        </div>
+                        <span id="err-correo" class="help-inline text-danger hidden"></span>
+                    </div>
+
+                    <div id="div-biografia" class="form-group">
+                        <label class="control-label" for="biografia">Biografía: </label>
+                        <div>
+                            <textarea class="form-control col-xs-12 col-md-8" id="biografia" name="biografia" value="%descripcionUsuario%"></textarea>
+                        </div>
+                        <span id="err-biografia" class="help-inline text-danger hidden"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="col-xs-12 col-md-4 col-md-offset-2">
+                            <button class="btn btn-warning btn-block" type="submit"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
+                        </div>
+                        <div class="col-xs-12 col-md-4">
+                            <button type="button" onclick="confirmarEliminacion();" class="btn btn-danger btn-block"><span class="glyphicon glyphicon-remove-sign"></span> Eliminar cuenta</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+<!--inicioFooter-->
+<!--finFooter-->
+
+<script>
+    $('#configUsuario').on('submit',function(event){
+        event.preventDefault();
+        this.submit();
+    });
+
+    function confirmarEliminacion(){
+        var eliminar = confirm('Está seguro de que quiere eliminar su cuenta? Todos sus datos serán eliminados.');
+        if(eliminar){
+            location.href = 'index.php';
+        }
+    }
+</script>
+
+</html>
