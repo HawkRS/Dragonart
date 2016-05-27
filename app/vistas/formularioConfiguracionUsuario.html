@@ -10,28 +10,12 @@
             <div class="panel-body postDesc">
                 <form id="configUsuario" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" enctype="multipart/form-data" action="index.php?controlador=usuario&accion=modificar" method="post" novalidate>
 
-                    <div id="div-nombre" class="form-group">
-                        <label class="control-label" for="nombre">Nombre: </label>
-                        <div>
-                            <input type="text" class="form-control" id="nombre" placeholder="Nombre" disabled name="nombre" value="%nombreUsuario%"/>
-                        </div>
-                        <span id="err-nombre" class="help-inline text-danger hidden"></span>
-                    </div>
-
                     <div id="div-alias" class="form-group">
                         <label class="control-label" for="alias">Alias: </label>
                         <div>
                             <input type="text" class="form-control" id="alias" placeholder="Alias" name="alias" value="%aliasUsuario%"/>
                         </div>
                         <span id="err-alias" class="help-inline text-danger hidden"></span>
-                    </div>
-
-                    <div id="div-correo" class="form-group">
-                        <label class="control-label" for="correo">Correo: </label>
-                        <div>
-                            <input type="email" class="form-control" id="correo" placeholder="alguien@ejemplo.com" disabled name="correo" value="%correoUsuario%"/>
-                        </div>
-                        <span id="err-correo" class="help-inline text-danger hidden"></span>
                     </div>
 
                     <div id="div-password" class="form-group">
