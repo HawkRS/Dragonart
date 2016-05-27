@@ -36,7 +36,7 @@
 
 	    		if($infoUsuario !== false && $infoImagen !== false){
 	    			$infoFavorito = $favMdl->obtenerFavorito($infoUsuario['id'], $infoImagen['id']);
-	    			if($infoFavorito !== false || !empty($infoFavorito)){
+	    			if($infoFavorito !== false && !empty($infoFavorito)){
 	    				//Modificamos el favorito actual
 	    				if($favMdl->modificar($_POST['calificacion'], $infoFavorito['id'])){
 	    					$promedio = $favMdl->obtenerPromedio($infoImagen['id']);

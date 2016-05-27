@@ -91,27 +91,15 @@
 <script type="text/javascript">
 	$( document ).ready(function() {
         for(var x = 0; x < 8; x++){
-        	if($('#input-' + x).length){
-        		$('#input-' + x).rating({displayOnly : %validaRating%});
-		        $('#input-' + x).on('rating.change', function(event, value, caption){
-		            $.ajax({
-		                type : 'POST',
-		                url : 'index.php?controlador=favorito&accion=alta',
-		                data : {
-		                    url : $('#image' + x).find('img').attr('src'),
-		                    calificacion : $('#input-' + x).val()
-		                },
-		                success : function(respuesta){
-		                    if(respuesta !== '1'){
-		                        alert(respuesta);
-		                    }
-		                },
-		                error : function(respuesta){
-		                    alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
-		                }
-		            });
-		        });
-        	}
+        	(function(tmp){
+        		if($('#input-' + tmp).length){
+	        		$('#input-' + tmp).rating({displayOnly : %validaRating%});
+			        $('#input-' + tmp).on('rating.change', function(event, value, caption){
+			        	url = $('#image' + tmp).find('img').attr('src');
+			            asignarAJAX(url, value);
+			        });
+	        	}
+        	})(x);
         }
     });
 </script>

@@ -22,6 +22,25 @@ menu.click(function(){
 	}
 });
 
+function asignarAJAX(urlImagen, val){
+	$.ajax({
+            type : 'POST',
+            url : 'index.php?controlador=favorito&accion=alta',
+            data : {
+                url : urlImagen,
+                calificacion : val
+            },
+            success : function(respuesta){
+                if(respuesta !== '1'){
+                    alert('No se pudo agregar el favorito.');
+                }
+            },
+            error : function(respuesta){
+                alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
+            }
+        });
+}
+
 function llenarGaleria(){
 	var contadorFilas = 0;
 	var contadorImagen = 0;
@@ -51,37 +70,25 @@ function llenarGaleria(){
 	            	while(contadorFilas < limiteFilas){
 	            		$('#postDesc').append('<div id="fila' + contadorFilas + '" class="row"></div>');
 	            		while(contadorImagen < limite && contadorImagen < json.length){
-	            			$('#fila' + contadorFilas)
-								.append('<div id="image' + contadorImagen + '" name="image' + contadorImagen + '" class="col-sm-6 col-md-3"></div>');
-							$('#image' + contadorImagen)
-								.append('<div class="thumbnail"></div>');
-							$('#image' + contadorImagen + ' .thumbnail')
-								.append('<a href="index.php?controlador=imagen&accion=mostrar&img='+ json[contadorImagen].id +'"></a>')
-								.append('<div class="caption"></div>');
-							$('#image' + contadorImagen + ' .thumbnail > a')
-								.append('<img src="'+ json[contadorImagen].url +'" alt="'+ json[contadorImagen].titulo +'" />');
-							$('#image' + contadorImagen + ' .thumbnail > div')
-								.append('<span>'+ json[contadorImagen].titulo +'</span>')
-								.append('<input id="input-' + contadorImagen + '" class="rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1" value="'+ json[contadorImagen].promedio +'">');
-							$('#input-' + contadorImagen).rating({displayOnly : json[contadorImagen].bool});
-							$('#input-' + contadorImagen).on('rating.change', function(event, value, caption){
-					            $.ajax({
-					                type : 'POST',
-					                url : 'index.php?controlador=favorito&accion=alta',
-					                data : {
-					                    url : $('#image' + x).find('a').attr('href'),
-					                    calificacion : $('#input-' + contadorImagen).val()
-					                },
-					                success : function(respuesta){
-					                    if(respuesta !== '1'){
-					                        alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
-					                    }
-					                },
-					                error : function(respuesta){
-					                    alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
-					                }
-					            });
-					        });
+	            			(function(tmp, tmpFila){
+	            				$('#fila' + tmpFila)
+									.append('<div id="image' + tmp + '" name="image' + tmp + '" class="col-sm-6 col-md-3"></div>');
+								$('#image' + tmp)
+									.append('<div class="thumbnail"></div>');
+								$('#image' + tmp + ' .thumbnail')
+									.append('<a href="index.php?controlador=imagen&accion=mostrar&img='+ json[tmp].id +'"></a>')
+									.append('<div class="caption"></div>');
+								$('#image' + tmp + ' .thumbnail > a')
+									.append('<img src="'+ json[contadorImagen].url +'" alt="'+ json[tmp].titulo +'" />');
+								$('#image' + tmp + ' .thumbnail > div')
+									.append('<span>'+ json[tmp].titulo +'</span>')
+									.append('<input id="input-' + tmp + '" class="rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1" value="'+ json[tmp].promedio +'">');
+								$('#input-' + tmp).rating({displayOnly : json[tmp].bool});
+								$('#input-' + tmp).on('rating.change', function(event, value, caption){
+						            url = $('#image' + tmp).find('img').attr('src');
+				            		asignarAJAX(url, value);
+						        });
+							})(contadorImagen, contadorFilas);
 							contadorImagen++;
 	            		}
 	            		$('#fila' + contadorFilas).css('display', 'none');
@@ -156,34 +163,22 @@ function verMas(){
                         alert($('#nombreUsuario').text());
                     }else{
                     	for(var i = 0; i < json.length; i++){
-							clon.find('#image' + i).attr('id','image' + contadorInputs);
-							clon.find('#image' + contadorInputs).attr('name','image' + contadorInputs);
-							clon.find('#image' + contadorInputs).find('img').attr('src',json[i].url);
-							clon.find('#image' + contadorInputs).find('img').attr('alt',json[i].titulo);
-							clon.find('#image' + contadorInputs).find('a').attr('href','index.php?controlador=imagen&accion=mostrar&img='+json[i].id);
-							clon.find('#image' + contadorInputs).find('#titulo' + i).text(json[i].titulo);
-							clon.find('#image' + contadorInputs).find('#input-' + i).parent().remove();
-							clon.find('#image' + contadorInputs).find('.caption').append('<input id="input-'+ contadorInputs +'" class="rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1" value="0">');
-							clon.find('#image' + contadorInputs).find('#input-' + contadorInputs).attr('value', json[i].promedio);
-							clon.find('#image' + contadorInputs).find('#input-' + contadorInputs).rating({displayOnly : json[i].bool});
-							clon.find('#image' + contadorInputs).find('#input-' + contadorInputs).on('rating.change', function(event, value, caption){
-					            $.ajax({
-					                type : 'POST',
-					                url : 'index.php?controlador=favorito&accion=alta',
-					                data : {
-					                    url : clon.find('#image' + contadorInputs).find('a').attr('href'),
-					                    calificacion : clon.find('#image' + contadorInputs).find('#input-' + contadorInputs).val()
-					                },
-					                success : function(respuesta){
-					                    if(respuesta !== '1'){
-					                        alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
-					                    }
-					                },
-					                error : function(respuesta){
-					                    alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
-					                }
-					            });
-					        });
+                    		(function(tmp, cont){
+								clon.find('#image' + tmp).attr('id','image' + cont);
+								clon.find('#image' + cont).attr('name','image' + cont);
+								clon.find('#image' + cont).find('img').attr('src',json[tmp].url);
+								clon.find('#image' + cont).find('img').attr('alt',json[tmp].titulo);
+								clon.find('#image' + cont).find('a').attr('href','index.php?controlador=imagen&accion=mostrar&img='+json[tmp].id);
+								clon.find('#image' + cont).find('#titulo' + tmp).text(json[tmp].titulo);
+								clon.find('#image' + cont).find('#input-' + tmp).parent().remove();
+								clon.find('#image' + cont).find('.caption').append('<input id="input-'+ cont +'" class="rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1" value="0">');
+								clon.find('#image' + cont).find('#input-' + cont).attr('value', json[tmp].promedio);
+								clon.find('#image' + cont).find('#input-' + cont).rating({displayOnly : json[tmp].bool});
+								clon.find('#image' + cont).find('#input-' + cont).on('rating.change', function(event, value, caption){
+						            url = $('#image' + cont).find('img').attr('src');
+			            			asignarAJAX(url, value);
+						        });
+							})(i, contadorInputs);
 							contadorInputs++;
 						}
 
