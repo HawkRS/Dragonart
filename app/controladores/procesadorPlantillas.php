@@ -340,7 +340,33 @@
 
 	        return $vista;
 		}
-
+        
+        function vistaContacto($doctype, $header, $vista, $footer){
+            $header = procesadorPlantillas::generarHeader($header);
+			$vista = procesadorPlantillas::generarFooter($vista, $footer);
+            
+            $vista = $doctype.$header.$vista;
+            
+            return $vista;
+        }
+        
+        function vistaRecuperarContrasena($doctype, $header, $vista, $footer){
+            $header = procesadorPlantillas::generarHeader($header);
+			$vista = procesadorPlantillas::generarFooter($vista, $footer);
+            
+            $vista = $doctype.$header.$vista;
+            
+            return $vista;
+        }
+        
+        function vistaRecuperarContrasenaCorreo($doctype, $header, $vista, $footer){
+            $header = procesadorPlantillas::generarHeader($header);
+			$vista = procesadorPlantillas::generarFooter($vista, $footer);
+            
+            $vista = $doctype.$header.$vista;
+            
+            return $vista;
+        }
 	}
 
 ?>
