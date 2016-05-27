@@ -48,6 +48,7 @@
 		function vistaPaginaUsuario($doctype, $header, $vista, $footer, $infoUsuario, $galeria){
 			$header = procesadorPlantillas::generarHeader($header);
 			$vista = procesadorPlantillas::generarFooter($vista, $footer);
+			$rating = 'true';
 
 			$thumbnails = '';
 	        $inicio = strpos($vista,'<!--inicioRepetirImagen-->');
@@ -71,6 +72,7 @@
 		            $finBtn = strpos($vista, '<!--FinBotonSeguir-->')+21;
 		            $btnSeguir = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
 		            $vista = str_replace($btnSeguir, '', $vista);
+		            $rating = 'true';
 		        }
 
 		        //Valida que el usuario que visita la página NO sea admin para quitar el botón "Bloquear"
@@ -79,6 +81,7 @@
 		            $finBtn = strpos($vista, '<!--FinBotonBloquear-->')+23;
 		            $btnBloquear = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
 		            $vista = str_replace($btnBloquear, '', $vista);
+		            $rating = 'false';
 		        }else{
 		        	//Valida que el usuario que visita la página sea admin y esté viendo su propia página para quitar el botón "Bloquear"
 		        	if(isset($_SESSION['admin']) && $_SESSION['admin'] === 1 && $infoUsuario['nombre'] === $_SESSION['nombre']){
@@ -86,6 +89,7 @@
 			            $finBtn = strpos($vista, '<!--FinBotonBloquear-->')+23;
 			            $btnBloquear = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
 			            $vista = str_replace($btnBloquear, '', $vista);
+			            $rating = 'true';
 		        	}
 		        }
 	    	}else{
@@ -98,6 +102,8 @@
 	            $finBtn = strpos($vista, '<!--FinBotonBloquear-->')+23;
 	            $btnBloquear = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
 	            $vista = str_replace($btnBloquear, '', $vista);
+
+	            $rating = 'true';
 	    	}
 
 	        //Generamos el diccionario con la info a escribir en la plantilla
@@ -105,9 +111,11 @@
 	            '%alias%' => $infoUsuario['alias'],
 	            '%nombreUsuario%' => $infoUsuario['nombre'],
 	            '%descripcion%' => $infoUsuario['biografia'],
-	            '%avatarUsuario%' => $infoUsuario['avatar']
+	            '%avatarUsuario%' => $infoUsuario['avatar'],
+	            '%validaRating%' => $rating
 	        );
 	        
+
 	        //Generamos la galería
 	        if(is_array($galeria) && count($galeria) > 0){
 	            $contador = 0;

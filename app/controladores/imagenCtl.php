@@ -182,12 +182,23 @@ class imagenCtl {
         $infoImagen = array();
 
         if($infoUsuario !== false){
-            $infoImagen = $imgMdl->obtenerGaleria($infoUsuario['id'], $_POST['offset'], 4);
+            $infoImagen = $imgMdl->obtenerGaleria($infoUsuario['id'], $_POST['offset'], $_POST['limit']);
             if($infoImagen === false){
                 $infoImagen = array();
             }else{
                 for($x = 0; $x < count($infoImagen); $x++){
                     $infoImagen[$x]['url'] = str_replace('/var/www/html/Dragonart/', '', $infoImagen[$x]['url']);
+                    if(isset($_SESSION['correo']) && $_SESSION['correo'] === $infoUsuario['correo']){
+                        $infoImagen[$x]['bool'] = true;
+                    }else{
+                        if(isset($_SESSION['correo']) && $_SESSION['correo'] !== $infoUsuario['correo']){
+                            $infoImagen[$x]['bool'] = false;
+                        }else{
+                           if(!isset($_SESSION['correo'])){
+                                $infoImagen[$x]['bool'] = true;
+                           }
+                        }
+                    }
                 }
             }
         }

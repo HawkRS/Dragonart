@@ -30,12 +30,13 @@
 	    		$favMdl = new favoritoMdl();
 
 	    		$infoUsuario = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
-	    		$ruta = '/var/www/html/Dragonart/'.$_POST['url'];
+	    		$ruta = str_replace('/thumb/', '/img/', $_POST['url']);
+	    		$ruta = '/var/www/html/Dragonart/'.$ruta;
 	    		$infoImagen = $imgMdl->obtenerInfoPorUrl($ruta);
 
 	    		if($infoUsuario !== false && $infoImagen !== false){
 	    			$infoFavorito = $favMdl->obtenerFavorito($infoUsuario['id'], $infoImagen['id']);
-	    			if($infoFavorito !== false){
+	    			if($infoFavorito !== false || !empty($infoFavorito)){
 	    				//Modificamos el favorito actual
 	    				if($favMdl->modificar($_POST['calificacion'], $infoFavorito['id'])){
 	    					$promedio = $favMdl->obtenerPromedio($infoImagen['id']);

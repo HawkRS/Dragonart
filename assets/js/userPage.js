@@ -24,38 +24,79 @@ menu.click(function(){
 
 function llenarGaleria(){
 	var contadorFilas = 0;
-	var contadorImagen = 1;
+	var contadorImagen = 0;
 	var limite = 4;
 
 	$('#postDesc').empty();
 
-	while(contadorFilas < 2){
-		$('#postDesc')
-			.append('<div id="fila' + contadorFilas + '" class="row"></div>');
+	$.ajax({
+	        type : 'POST',
+	        url : 'index.php?controlador=imagen&accion=masImagenes',
+	        dataType: 'json',
+	        data : {
+	            usuario: $('#nombreUsuario').text(),
+	            offset: 0,
+	            limit: 8
+	        },
+	        success : function(json){
+	            if($.isEmptyObject(json)){
+	                $('#postDesc').append('<i>No hay imágenes en la galería...</i>');
+	            }else{
+	            	if(json.length <= 4){
+	            		var limiteFilas = 1;
+	            	}else if(json.length > 4 && json.length <=8){
+	            		var limiteFilas = 2;
+	            	}
 
-		while(contadorImagen <= limite){
-			$('#fila' + contadorFilas)
-				.append('<div id="image' + contadorImagen + '" name="image' + contadorImagen + '" class="col-sm-6 col-md-3"></div>');
-			$('#image' + contadorImagen)
-				.append('<div class="thumbnail"></div>');
-			$('#image' + contadorImagen + ' .thumbnail')
-				.append('<a href="index.php?controlador=imagen&accion=mostrar"></a>')
-				.append('<div class="caption"></div>');
-			$('#image' + contadorImagen + ' .thumbnail > a')
-				.append('<img src="http://placekitten.com/g/300/200" alt="Demostración" />');
-			$('#image' + contadorImagen + ' .thumbnail > div')
-				.append('<span>Título de la imagen</span>')
-				.append('<input id="input-' + contadorImagen + '" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1">');
-			$('#input-' + contadorImagen).rating();
-			contadorImagen++;
-		}
+	            	while(contadorFilas < limiteFilas){
+	            		$('#postDesc').append('<div id="fila' + contadorFilas + '" class="row"></div>');
+	            		while(contadorImagen < limite && contadorImagen < json.length){
+	            			$('#fila' + contadorFilas)
+								.append('<div id="image' + contadorImagen + '" name="image' + contadorImagen + '" class="col-sm-6 col-md-3"></div>');
+							$('#image' + contadorImagen)
+								.append('<div class="thumbnail"></div>');
+							$('#image' + contadorImagen + ' .thumbnail')
+								.append('<a href="index.php?controlador=imagen&accion=mostrar&img='+ json[contadorImagen].id +'"></a>')
+								.append('<div class="caption"></div>');
+							$('#image' + contadorImagen + ' .thumbnail > a')
+								.append('<img src="'+ json[contadorImagen].url +'" alt="'+ json[contadorImagen].titulo +'" />');
+							$('#image' + contadorImagen + ' .thumbnail > div')
+								.append('<span>'+ json[contadorImagen].titulo +'</span>')
+								.append('<input id="input-' + contadorImagen + '" class="rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1" value="'+ json[contadorImagen].promedio +'">');
+							$('#input-' + contadorImagen).rating({displayOnly : json[contadorImagen].bool});
+							$('#input-' + contadorImagen).on('rating.change', function(event, value, caption){
+					            $.ajax({
+					                type : 'POST',
+					                url : 'index.php?controlador=favorito&accion=alta',
+					                data : {
+					                    url : $('#image' + x).find('a').attr('href'),
+					                    calificacion : $('#input-' + contadorImagen).val()
+					                },
+					                success : function(respuesta){
+					                    if(respuesta !== '1'){
+					                        alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
+					                    }
+					                },
+					                error : function(respuesta){
+					                    alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
+					                }
+					            });
+					        });
+							contadorImagen++;
+	            		}
+	            		$('#fila' + contadorFilas).css('display', 'none');
+						$('#fila' + contadorFilas).fadeIn('slow');
 
-		$('#fila' + contadorFilas).css('display', 'none');
-		$('#fila' + contadorFilas).fadeIn('slow');
-
-		limite += limite;
-		contadorFilas++;
-	}
+						limite += limite;
+						contadorFilas++;
+	            	}
+	            	
+	            }
+	        },
+	        error : function(respuesta){
+	            alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
+	        }
+	    });
 }
 
 function llenarSeguidores(){
@@ -107,14 +148,14 @@ function verMas(){
                 dataType: 'json',
                 data : {
                     usuario: $('#nombreUsuario').text(),
-                    offset: contadorInputs
+                    offset: contadorInputs,
+                    limit: 4
                 },
                 success : function(json){
                     if($.isEmptyObject(json)){
                         alert($('#nombreUsuario').text());
                     }else{
                     	for(var i = 0; i < json.length; i++){
-							//console.log($('#input-'+i).parent());
 							clon.find('#image' + i).attr('id','image' + contadorInputs);
 							clon.find('#image' + contadorInputs).attr('name','image' + contadorInputs);
 							clon.find('#image' + contadorInputs).find('img').attr('src',json[i].url);
@@ -124,7 +165,25 @@ function verMas(){
 							clon.find('#image' + contadorInputs).find('#input-' + i).parent().remove();
 							clon.find('#image' + contadorInputs).find('.caption').append('<input id="input-'+ contadorInputs +'" class="rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1" value="0">');
 							clon.find('#image' + contadorInputs).find('#input-' + contadorInputs).attr('value', json[i].promedio);
-							clon.find('#image' + contadorInputs).find('#input-' + contadorInputs).rating({displayOnly : true});
+							clon.find('#image' + contadorInputs).find('#input-' + contadorInputs).rating({displayOnly : json[i].bool});
+							clon.find('#image' + contadorInputs).find('#input-' + contadorInputs).on('rating.change', function(event, value, caption){
+					            $.ajax({
+					                type : 'POST',
+					                url : 'index.php?controlador=favorito&accion=alta',
+					                data : {
+					                    url : clon.find('#image' + contadorInputs).find('a').attr('href'),
+					                    calificacion : clon.find('#image' + contadorInputs).find('#input-' + contadorInputs).val()
+					                },
+					                success : function(respuesta){
+					                    if(respuesta !== '1'){
+					                        alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
+					                    }
+					                },
+					                error : function(respuesta){
+					                    alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
+					                }
+					            });
+					        });
 							contadorInputs++;
 						}
 

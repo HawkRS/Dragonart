@@ -73,16 +73,20 @@
 
 				$stmt->bind_result($idFavorito, $idImagen, $idUsuarioFavoriteo, $calificacionFavorito, $fechaFavorito, $tipo);
 
-				$stmt->fetch();
+				$res = $stmt->fetch();
 				
-				$array = array(
-					'id' => $idFavorito,
-					'imagen' => $idImagen,
-					'usuario' => $idUsuarioFavoriteo,
-					'calificacion' => $calificacionFavorito,
-					'fecha' => $fechaFavorito,
-					'tipo' => $tipo
-				);
+				if($res === true){
+					$array = array(
+						'id' => $idFavorito,
+						'imagen' => $idImagen,
+						'usuario' => $idUsuarioFavoriteo,
+						'calificacion' => $calificacionFavorito,
+						'fecha' => $fechaFavorito,
+						'tipo' => $tipo
+					);
+				}else{
+					$array = array();
+				}
 				
 				$stmt->close();
 
