@@ -103,6 +103,7 @@
 	        //Generamos el diccionario con la info a escribir en la plantilla
 	        $diccionario = array (
 	            '%alias%' => $infoUsuario['alias'],
+	            '%nombreUsuario%' => $infoUsuario['nombre'],
 	            '%descripcion%' => $infoUsuario['biografia'],
 	            '%avatarUsuario%' => $infoUsuario['avatar']
 	        );
@@ -220,7 +221,7 @@
 				$favMdl = new favoritoMdl();
 				$infoUsuarioActual = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
 				if($infoUsuarioActual !== false){
-					$infoFavorito = $favMdl->obtenerFavorito($infoUsuarioActual['id']);
+					$infoFavorito = $favMdl->obtenerFavorito($infoUsuarioActual['id'], $infoImagen['id']);
 					if($infoFavorito !== false){
 						$promedio = $infoFavorito['calificacion'];
 					}

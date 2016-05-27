@@ -28,6 +28,23 @@
 			return $bandera;
 		}
 
+		function modificar($calificacion, $id){
+			$bandera = false;
+
+			if($stmt = $this->db->prepare('UPDATE favorito SET calificacionFavorito=? WHERE idFavorito=?')){
+
+				$stmt->bind_param("di", $calificacion, $id);
+
+				$bandera = $stmt->execute();
+
+				$stmt->fetch();
+
+				$stmt->close();
+			}
+
+			return $bandera;
+		}
+
 		function obtenerPromedio($idImagen){
 			if($stmt = $this->db->prepare('SELECT AVG(calificacionFavorito) FROM favorito WHERE idImagen=?')){
 
@@ -47,10 +64,10 @@
 			return false;
 		}
 
-		function obtenerFavorito($idUsuario){
-			if($stmt = $this->db->prepare('SELECT * FROM favorito WHERE idUsuarioFavoriteo=?')){
+		function obtenerFavorito($idUsuario, $imagen){
+			if($stmt = $this->db->prepare('SELECT * FROM favorito WHERE idImagen=? AND idUsuarioFavoriteo=?')){
 
-				$stmt->bind_param("i", $idUsuario);
+				$stmt->bind_param("ii", $imagen, $idUsuario);
 
 				$stmt->execute();
 

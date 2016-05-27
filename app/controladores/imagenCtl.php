@@ -9,7 +9,7 @@ class imagenCtl {
 
     function __construct() {
     	session_start();
-        echo 'Soy imagenCtl';
+
         $this->doctype = file_get_contents('app/vistas/doctype.html');
         $this->header = file_get_contents('app/vistas/header.html');
         $this->footer = file_get_contents('app/vistas/footer.html');
@@ -28,6 +28,10 @@ class imagenCtl {
                     
                 case 'inicio':
                     $this->inicio();
+                    break;
+
+                case 'masImagenes':
+                    echo json_encode($this->masImagenes());
                     break;
             }
         }
@@ -165,6 +169,30 @@ class imagenCtl {
             echo $vista;
             
         }
+
+    }
+
+    function masImagenes(){
+
+        require_once('app/modelos/usuarioMdl.php');
+        $usrMdl = new usuarioMdl();
+        require_once('app/modelos/imagenMdl.php');
+        $imgMdl = new imagenMdl();
+        $infoUsuario = $usrMdl->paginaUsuario($_POST['usuario']);
+        $infoImagen = array();
+
+        if($infoUsuario !== false){
+            $infoImagen = $imgMdl->obtenerGaleria($infoUsuario['id'], $_POST['offset'], 4);
+            if($infoImagen === false){
+                $infoImagen = array();
+            }else{
+                for($x = 0; $x < count($infoImagen); $x++){
+                    $infoImagen[$x]['url'] = str_replace('/var/www/html/Dragonart/', '', $infoImagen[$x]['url']);
+                }
+            }
+        }
+
+        return $infoImagen;
 
     }
 

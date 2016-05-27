@@ -96,10 +96,61 @@ function verMas(){
 	var contadorFilas = $('#postDesc .row').length;
 	var contadorInputs = $('#postDesc .row .thumbnail').length + 1;
 	var clon = $('#fila0').clone();
+	var bandera = false;
 
 	clon.attr('id', 'fila' + contadorFilas);
 
-	for(var i = 1; i <= 4; i++){
+	if(clon.find('#image0').length > 0){
+		$.ajax({
+                type : 'POST',
+                url : 'index.php?controlador=imagen&accion=masImagenes',
+                dataType: 'json',
+                data : {
+                    usuario: $('#nombreUsuario').text(),
+                    offset: contadorInputs
+                },
+                success : function(json){
+                    if($.isEmptyObject(json)){
+                        alert($('#nombreUsuario').text());
+                    }else{
+                    	for(var i = 0; i < json.length; i++){
+							//console.log($('#input-'+i).parent());
+							clon.find('#image' + i).attr('id','image' + contadorInputs);
+							clon.find('#image' + contadorInputs).attr('name','image' + contadorInputs);
+							clon.find('#image' + contadorInputs).find('img').attr('src',json[i].url);
+							clon.find('#image' + contadorInputs).find('img').attr('alt',json[i].titulo);
+							clon.find('#image' + contadorInputs).find('a').attr('href','index.php?controlador=imagen&accion=mostrar&img='+json[i].id);
+							clon.find('#image' + contadorInputs).find('#titulo' + i).text(json[i].titulo);
+							clon.find('#image' + contadorInputs).find('#input-' + i).parent().remove();
+							clon.find('#image' + contadorInputs).find('.caption').append('<input id="input-'+ contadorInputs +'" class="rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1" value="0">');
+							clon.find('#image' + contadorInputs).find('#input-' + contadorInputs).attr('value', json[i].promedio);
+							clon.find('#image' + contadorInputs).find('#input-' + contadorInputs).rating({displayOnly : true});
+							contadorInputs++;
+						}
+
+						if(json.length < 4){
+							var Eliminar = 0;
+							while(Eliminar !== 4){
+								clon.find('#image' + Eliminar).remove();
+								Eliminar++;
+							}
+						}
+
+						clon.css('display', 'none');
+						clon.fadeIn('slow');
+
+						$('#postDesc').append(clon);
+                    }
+                },
+                error : function(respuesta){
+                    alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
+                }
+            });
+	}else{
+
+	}
+
+	/*for(var i = 0; i < 4; i++){
 		if(clon.find('#image' + i).length){
 			clon.find('#image' + i).attr('id','image' + contadorInputs);
 			clon.find('#image' + contadorInputs).attr('name','image' + contadorInputs);
@@ -109,10 +160,6 @@ function verMas(){
 			clon.find('#avatar' + contadorInputs).attr('name','avatar' + contadorInputs);
 		}
 		contadorInputs++;
-	}
+	}*/
 
-	clon.css('display', 'none');
-	clon.fadeIn('slow');
-
-	$('#postDesc').append(clon);
 }
