@@ -2,13 +2,13 @@
 
 class contactoCtl {
     public $modelo;
-    
+
     private $doctype;
     private $header;
     private $footer;
 
     function __construct() {
-    	session_start();
+        session_start();
         echo 'Soy contactoCtl';
         $this->doctype = file_get_contents('app/vistas/doctype.html');
         $this->header = file_get_contents('app/vistas/header.html');
@@ -21,8 +21,8 @@ class contactoCtl {
                 case 'mostrar':
                     $this->mostrar();
                     break;
-                case 'mandarcorreo':
-                    $this->mandarcorreo();
+                case 'mandarcorreocontacto':
+                    echo $this->mandarcorreocontacto();
                     break;
             }
         }else {
@@ -35,12 +35,17 @@ class contactoCtl {
         $procesador = new procesadorPlantillas();
         $vista = file_get_contents('app/vistas/formularioContacto.html');
         $vista = $procesador->vistaContacto($this->doctype, $this->header, $vista, $this->footer);
-        
+
         echo $vista;
     }
-    
-    function mandarcorreo(){
-        
+
+    function mandarcorreocontacto(){
+        if(!empty($_POST)){
+            echo $_POST['correo'];
+            require_once('app/controladores/correoCtl.php');
+            $correoCtl = new correoCtl();
+            return $correoCtl->mandarCorreoContacto($_POST['nombre'],$_POST['correo'],$_POST['descripcion']);
+        }
     }
 }
 ?>
