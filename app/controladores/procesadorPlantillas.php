@@ -270,7 +270,8 @@
 			$diccionario = array(
 				'%aliasUsuario%' => $infoUsuario['alias'],
 				'%descripcionUsuario%' => $infoUsuario['biografia'],
-				'%avatarUsuario%' => str_replace('/var/www/html/Dragonart/', '', $infoUsuario['avatar'])
+				'%avatarUsuario%' => str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/', '', $infoUsuario['avatar']),
+				'%idUsuario%' => $infoUsuario['id']
 			);
 			$vista = procesadorPlantillas::aplicaDiccionario($vista, $diccionario);
 			$vista = $doctype.$header.$vista;
@@ -308,7 +309,7 @@
 			$rating = 'true';
 			$promedio = 0;
 
-			$ruta = str_replace($_SERVER['DOCUMENT_ROOT'].'Dragonart/', '', $infoImagen['url']);
+			$ruta = str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/', '', $infoImagen['url']);
 			if(isset($_SESSION['correo']) && $infoUsuario['correo'] !== $_SESSION['correo']){
 				require_once('app/modelos/usuarioMdl.php');
 				$usrMdl = new usuarioMdl();
@@ -336,7 +337,8 @@
 				'%tituloImagen%' => $infoImagen['titulo'],
 				'%fechaImagen%' => $infoImagen['fecha'],
 				'%descripcionImagen%' => $infoImagen['descripcion'],
-				'%promedioImagen%' => $promedio
+				'%promedioImagen%' => $promedio,
+				'%idImagen%' => $infoImagen['id']
 			);
 
 			$vista = procesadorPlantillas::aplicaDiccionario($vista, $diccionario);
@@ -416,6 +418,25 @@
 	        $vista = $doctype.$header.$vista;
 
 	        return $vista;
+		}
+
+		function vistaModificarImagen($doctype, $header, $vista, $footer, $infoImagen, $tags, $mensaje){
+			$header = procesadorPlantillas::generarHeader($header);
+			$vista = procesadorPlantillas::generarFooter($vista, $footer);
+
+			$vista = str_replace('%error%', $mensaje, $vista);
+			$diccionario = array(
+                '%idImagen%' => $infoImagen['id'],
+                '%urlImagen%' => str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/', '', $infoImagen['url']),
+                '%titulo%' => $infoImagen['titulo'],
+                '%descripcion%' => $infoImagen['descripcion'],
+                '%tags%' => $tags
+            );
+
+			$vista = procesadorPlantillas::aplicaDiccionario($vista, $diccionario);
+			$vista = $doctype.$header.$vista;
+
+	        return $vista;			
 		}
 
 		function vistaError404($doctype, $header, $vista, $footer, $mensaje){

@@ -30,6 +30,10 @@ class imagenCtl {
                     $this->inicio();
                     break;
 
+                case 'modificar':
+                    $this->modificar();
+                    break;
+
                 case 'masImagenes':
                     echo json_encode($this->masImagenes());
                     break;
@@ -195,7 +199,7 @@ class imagenCtl {
                 $infoImagen = array();
             }else{
                 for($x = 0; $x < count($infoImagen); $x++){
-                    $infoImagen[$x]['url'] = str_replace('/var/www/html/Dragonart/', '', $infoImagen[$x]['url']);
+                    $infoImagen[$x]['url'] = str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/', '', $infoImagen[$x]['url']);
                     if(isset($_SESSION['correo']) && $_SESSION['correo'] === $infoUsuario['correo']){
                         $infoImagen[$x]['bool'] = true;
                     }else{
@@ -213,6 +217,66 @@ class imagenCtl {
 
         return $infoImagen;
 
+    }
+
+    function modificar(){
+        require_once('app/controladores/procesadorPlantillas.php');
+        $procesador = new procesadorPlantillas();
+
+        if(isset($_SESSION['correo']) && isset($_SESSION['logPass'])){
+            if(isset($_GET['img'])){
+                require_once('app/modelos/usuarioMdl.php');
+                $usrMdl = new usuarioMdl();
+                require_once('app/modelos/imagenMdl.php');
+                $imgMdl = new imagenMdl();
+                require_once('app/modelos/tagsMdl.php');
+                $tagMdl = new tagsMdl();
+
+                $infoUsuario = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
+                $infoImagen = $imgMdl->obtenerInfo($_GET['img']);
+                $infoTags = $tagMdl->obtenerTagsImagen($_GET['img']);
+                $todosTags = '';
+
+                if($infoUsuario !== false && $infoImagen !== false && $infoTags !== false && !empty($infoUsuario) && !empty($infoImagen) && !empty($infoTags)){
+                    for($x = 0; $x < count($infoTags); $x++){
+                        $todosTags .= $infoTags[$x]['tag'];
+                        $todosTags .= ' ';
+                    }
+
+                    if($infoUsuario['id'] === $infoImagen['idUsuario']){
+                        if(!empty($_POST)){
+
+                        }else{
+                            $vista = file_get_contents('app/vistas/formularioEditarImagen.html');
+                            $mensaje = '';
+                            $vista = $procesador->vistaModificarImagen($this->doctype, $this->header, $vista, $this->footer, $infoImagen, $todosTags, $mensaje);
+                            echo $vista;
+                        }
+                    }else{
+                        $vista = file_get_contents('app/vistas/404.html');
+                        $mensaje = 'No puedes editar esta imagen si no eres su autor.';
+                        $vista = $procesador->vistaError404($this->doctype, $this->header, $vista, $this->footer, $mensaje);
+                        echo $vista;
+                    }
+                }else{
+                    $vista = file_get_contents('app/vistas/404.html');
+                    $mensaje = 'La imagen solicitada no existe.';
+                    $vista = $procesador->vistaError404($this->doctype, $this->header, $vista, $this->footer, $mensaje);
+                    echo $vista;
+                }
+
+            }else{
+                $vista = file_get_contents('app/vistas/404.html');
+                $mensaje = 'La imagen solicitada no existe.';
+                $vista = $procesador->vistaError404($this->doctype, $this->header, $vista, $this->footer, $mensaje);
+                echo $vista;
+            }
+        }else{
+            $vista = file_get_contents('app/vistas/404.html');
+            $mensaje = 'No puedes modificar la imagen si no haz iniciado sesión.';
+            $vista = $procesador->vistaError404($this->doctype, $this->header, $vista, $this->footer, $mensaje);
+            echo $vista;
+        }
     }
 
     function masFavoritos(){

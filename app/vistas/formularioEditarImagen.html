@@ -7,7 +7,7 @@
                 </div>
             </div>
             <div class="panel-body postDesc">
-                <form id="subirImagen" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" enctype="multipart/form-data" action="index.php?controlador=imagen&accion=modificar" method="post" novalidate>
+                <form id="subirImagen" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" enctype="multipart/form-data" action="index.php?controlador=imagen&accion=modificar&img=%idImagen%" method="post" novalidate>
 
                     <div class="form-group">
                         <div>
@@ -18,7 +18,7 @@
 					<div id="div-titulo" class="form-group">
                         <label class="control-label" for="titulo">Título: </label>
                         <div>
-                            <input type="text" class="form-control" id="titulo" placeholder="Título" name="titulo" />
+                            <input type="text" class="form-control" id="titulo" placeholder="Título" name="titulo" value="%titulo%"/>
                         </div>
                         <span id="err-titulo" class="help-inline text-danger hidden"></span>
                     </div>
@@ -26,7 +26,7 @@
                     <div id="div-descripcion" class="form-group">
                         <label class="control-label" for="descripcion">Descripción: </label>
                         <div>
-                            <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Descripción o comentario de la imagen"></textarea>
+                            <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Descripción o comentario de la imagen">%descripcion%</textarea>
                         </div>
                         <span id="err-descripcion" class="help-inline text-danger hidden"></span>
                     </div>
@@ -34,7 +34,7 @@
                     <div id="div-tags" class="form-group">
                         <label class="control-label" for="tags">Tags: </label>
                         <div>
-                            <input type="text" class="form-control" id="tags" placeholder="Tags" name="tags" />
+                            <input type="text" class="form-control" id="tags" placeholder="Tags" name="tags" value="%tags%"/>
                         </div>
                         <span id="err-tags" class="help-inline text-danger hidden"></span>
                     </div>

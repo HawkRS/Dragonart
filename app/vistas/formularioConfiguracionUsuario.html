@@ -108,7 +108,7 @@
     function confirmarEliminacion(){
         var eliminar = confirm('Está seguro de que quiere eliminar su cuenta? Todos sus datos serán eliminados.');
         if(eliminar){
-            location.href = 'index.php';
+            location.href = 'index.php?controlador=usuario&accion=eliminar&usr=%idUsuario%';
         }
     }
 </script>

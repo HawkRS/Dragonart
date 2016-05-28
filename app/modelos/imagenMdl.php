@@ -90,7 +90,7 @@
 		}
 
 		function obtenerGaleria($idUsuario, $offset, $limite){
-			if($stmt = $this->db->prepare('SELECT * FROM imagen WHERE idUsuarioPropietario=? ORDER BY idImagen DESC LIMIT ?,?')){
+			if($stmt = $this->db->prepare('SELECT * FROM imagen WHERE idUsuarioPropietario=? AND statusImagen=1 ORDER BY idImagen DESC LIMIT ?,?')){
 
 				$stmt->bind_param("iii", $idUsuario, $offset, $limite);
 

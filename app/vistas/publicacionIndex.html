@@ -27,8 +27,8 @@
                             <input id="input-1" class="rating-loading" data-show-clear="false" data-show-caption="false" data-size="sm" data-step="1" value="%promedioImagen%" >
                             <!--finStar-->
                             <!--iniBtn-->
-                            <button type="button" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-edit"></span> Editar información</button>
-                            <button type="button" class="btn btn-danger btn-block"><span class="glyphicon glyphicon-remove"></span> Eliminar post</button>
+                            <button id="btnEditarImagen" type="button" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-edit"></span> Editar información</button>
+                            <button id="btnEliminarImagen" type="button" class="btn btn-danger btn-block"><span class="glyphicon glyphicon-remove"></span> Eliminar post</button>
                             <!--finBtn-->
                         </div>
                     </div>
@@ -101,7 +101,6 @@
     $( document ).ready(function() {
         $('#input-1').rating({displayOnly : %validaRating%});
         $('#input-1').on('rating.change', function(event, value, caption){
-            console.log('Hola');
             $.ajax({
                 type : 'POST',
                 url : 'index.php?controlador=imagen&accion=altaFavorito',
@@ -119,14 +118,25 @@
                 }
             });
         });
-    });
 
-    $('#comentario').on('submit',function(event){
-        var txtArea = $('#comentario textarea');
-        event.preventDefault();
-        if(validarTextArea(txtArea)){
-            this.submit();
-        }   
+        $('#comentario').on('submit',function(event){
+            var txtArea = $('#comentario textarea');
+            event.preventDefault();
+            if(validarTextArea(txtArea)){
+                this.submit();
+            }   
+        });
+
+        $('#btnEditarImagen').on('click',function(event){
+            location.href = 'index.php?controlador=imagen&accion=modificar&img=%idImagen%';
+        });
+
+        $('#btnEliminarImagen').on('click',function(event){
+                var eliminar = confirm('Está seguro de que quiere eliminar esta imagen? Todo el contenido será eliminado.');
+            if(eliminar){
+                location.href = 'index.php?controlador=imagen&accion=eliminar&img=%idImagen%';
+            }
+        });
     });
 
 </script>
