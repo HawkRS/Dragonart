@@ -71,7 +71,7 @@ class imagenCtl {
                     $infoUsuario = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
                     $nuevoNombre = $validador->moverArchivo('imagen', 'img', $infoUsuario);
                     if($nuevoNombre !== false){
-                        imagenCtl::crearThumbnail($nuevoNombre, str_replace('/var/www/html/Dragonart/uploads/img/', '', $nuevoNombre));
+                        imagenCtl::crearThumbnail($nuevoNombre, str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/uploads/img/', '', $nuevoNombre));
                         $postLimpio = $validador->sanitizar($_POST);
 
                         require_once('app/modelos/imagenMdl.php');

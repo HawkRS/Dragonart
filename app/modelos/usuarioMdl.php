@@ -31,6 +31,42 @@
 			return $bandera;
 		}
 
+		function modificar($id, $alias, $contrasena, $biografia, $avatar){
+			$bandera = false;
+
+			if($stmt = $this->db->prepare('UPDATE usuario SET aliasUsuario=?, contrasenaUsuario=PASSWORD(?), biografiaUsuario=?, avatarUsuario=? WHERE idUsuario=?')){
+
+				$stmt->bind_param("ssssi", $alias, $contrasena, $biografia, $avatar, $id);
+
+				$bandera = $stmt->execute();
+
+				$stmt->fetch();
+				
+				$stmt->close();
+
+			}
+
+			return $bandera;
+		}
+
+		function modificarSinContrasena($id, $alias, $biografia, $avatar){
+			$bandera = false;
+
+			if($stmt = $this->db->prepare('UPDATE usuario SET aliasUsuario=?, biografiaUsuario=?, avatarUsuario=? WHERE idUsuario=?')){
+
+				$stmt->bind_param("sssi", $alias, $biografia, $avatar, $id);
+
+				$bandera = $stmt->execute();
+
+				$stmt->fetch();
+				
+				$stmt->close();
+
+			}
+
+			return $bandera;
+		}
+
 		function iniciarSesion($correo, $contrasena){
 			if($stmt = $this->db->prepare('SELECT * FROM usuario WHERE correoUsuario=? AND contrasenaUsuario=PASSWORD(?)')){
 

@@ -37,7 +37,7 @@
                     <div id="div-biografia" class="form-group">
                         <label class="control-label" for="biografia">Biografía: </label>
                         <div>
-                            <textarea class="form-control col-xs-12 col-md-8" id="biografia" name="biografia" value="%descripcionUsuario%"></textarea>
+                            <textarea class="form-control col-xs-12 col-md-8" id="biografia" name="biografia">%descripcionUsuario%</textarea>
                         </div>
                         <span id="err-biografia" class="help-inline text-danger hidden"></span>
                     </div>
@@ -45,7 +45,7 @@
                     <div id="div-avatar" class="form-group">
                         <label class="control-label" for="avatar">Avatar: </label>
                         <div>
-                           <input type="file" name="filename" id="avatar" accept="image/gif, image/jpeg, image/png, image/jpg" onchange="readURL(this);">
+                           <input type="file" name="avatar" id="avatar" accept="image/gif, image/jpeg, image/png, image/jpg" onchange="readURL(this);">
                         </div>
                         <span id="err-avatar" class="help-inline text-danger hidden"></span>
                     </div>
@@ -73,10 +73,36 @@
 <!--inicioFooter-->
 <!--finFooter-->
 
+<script type="text/javascript" src="assets/js/external/sha.js"></script>
 <script>
     $('#configUsuario').on('submit',function(event){
+        var inputs = $('#configUsuario input');
+        var txtArea = $('#configUsuario textarea');
+        var bandera = true;
+        var banderaInput = false;
+        var banderaTxt = false;
         event.preventDefault();
-        this.submit();
+        banderaInput = validarInputsModUsuario(inputs, inputs.length);
+        if(txtArea.val().length > 0){
+            banderaTxt = validarTextArea(txtArea);
+        }else{
+            banderaTxt = true;
+        }
+
+        event.preventDefault();
+        if(banderaInput && banderaTxt){
+            if($('#contrasena').val().length > 0 && $('#contrasenaConfirmacion').val().length > 0){
+                var shaObj = new jsSHA("SHA-1", "TEXT");
+                shaObj.update($('#contrasena').val());
+                var hash = shaObj.getHash("HEX");
+                $('#contrasena').val(hash);
+                var shaObj2 = new jsSHA("SHA-1", "TEXT");
+                shaObj2.update($('#contrasenaConfirmacion').val());
+                var hash2 = shaObj2.getHash("HEX");
+                $('#contrasenaConfirmacion').val(hash);
+            }
+            this.submit();
+        } 
     });
 
     function confirmarEliminacion(){

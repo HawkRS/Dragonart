@@ -118,11 +118,55 @@ class usuarioCtl {
             require_once('app/controladores/validador.php');
             $validador = new validador();
             $error = $validador->validarModificacionUsuario($_POST);
+            $infoUsuario = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
 
             if($error === true){
-                
-            }else{
 
+                $aliasNuevo = $_POST['alias'];
+                if(isset($_POST['contrasena']) && isset($_POST['contrasenaConfirmacion']) && strlen($_POST['contrasena']) > 0 && strlen($_POST['contrasenaConfirmacion']) > 0){
+                    $contrasenaNueva = $_POST['contrasena'];
+                    $cambiarContrasena = true;
+                }else{
+                    $contrasenaNueva = $infoUsuario['contrasena'];
+                    $cambiarContrasena = false;
+                }
+                if(isset($_POST['biografia']) && strlen($_POST['biografia']) > 0){
+                    $biografiaNueva = $_POST['biografia'];
+                }else{
+                    $biografiaNueva = $infoUsuario['biografia'];
+                }
+                if(isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK){
+                    $nuevoNombre = $validador->moverArchivo('avatar', 'avatar', $infoUsuario);
+                    $avatarNuevo = $nuevoNombre;
+                }else{
+                    $avatarNuevo = $infoUsuario['avatar'];
+                }
+
+                if($cambiarContrasena === true){
+                    $opExitosa = $usrMdl->modificar($infoUsuario['id'], $aliasNuevo, $contrasenaNueva, $biografiaNueva, $avatarNuevo);
+                    $_SESSION['logPass'] = $contrasenaNueva;
+                }else{
+                    $opExitosa = $usrMdl->modificarSinContrasena($infoUsuario['id'], $aliasNuevo, $biografiaNueva, $avatarNuevo);
+                }
+
+                if($opExitosa){
+                    $_SESSION['alias'] = $aliasNuevo;
+                    $infoUsuario = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
+                    $vista = file_get_contents('app/vistas/formularioConfiguracionUsuario.html');
+                    $mensaje = '<div class="alert alert-success">Los cambios se han realizado con éxito.</div>';
+                    $vista = $procesador->vistaModificarUsuario($this->doctype, $this->header, $vista, $this->footer, $infoUsuario, $mensaje);
+                    echo $vista;
+                }else{
+                    $vista = file_get_contents('app/vistas/formularioConfiguracionUsuario.html');
+                    $mensaje = '<div class="alert alert-danger">'.$usrMdl->getError().'</div>';
+                    $vista = $procesador->vistaModificarUsuario($this->doctype, $this->header, $vista, $this->footer, $infoUsuario, $mensaje);
+                    echo $vista;
+                }
+            }else{
+                $vista = file_get_contents('app/vistas/formularioConfiguracionUsuario.html');
+                $mensaje = '<div class="alert alert-danger">'.$error.'</div>';
+                $vista = $procesador->vistaModificarUsuario($this->doctype, $this->header, $vista, $this->footer, $infoUsuario, $mensaje);
+                echo $vista;
             }
 
         } 

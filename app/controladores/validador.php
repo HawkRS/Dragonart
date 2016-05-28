@@ -133,7 +133,7 @@
 	            return 'Debe escribir al menos un tag.';
 	        }
 
-	        $mensaje = validador::validarArchivoCargado('imagen');
+	        $mensaje = validador::validarArchivoCargado('imagen', 10485760);
 	        if($mensaje !== true){
 	        	return $mensaje;
 	        }
@@ -141,7 +141,59 @@
 	        return true;
 	    }
 
-	    function validarArchivoCargado($form){
+	    function validarModificacionUsuario($array){
+	    	$hayPass = false;
+
+	    	if(isset($array['alias'])){
+		    	$alias = $array['alias'];
+		    	if(validador::estaVacio($alias) || !preg_match("/^[a-zA-Z0-9_-]{3,16}$/", $alias)){
+		    		return 'El alias ingresado es erroneo.';
+		    	}
+	    	}
+	    	else{
+	    		return 'Debe escribir un alias.';
+	    	}
+
+	    	if(isset($array['contrasena'])){
+		    	$contrasena = $array['contrasena'];
+		    	if(strlen($contrasena) > 0){
+			    	if(validador::estaVacio($contrasena) || strlen($contrasena) < 8){
+			    		return 'La contraseña es erronea.';
+			    	}
+			    	$hayPass = true;
+			    }
+		    }
+
+		    if($hayPass){
+		    	if(isset($array['contrasenaConfirmacion'])){
+			    	$contrasenaConfirmacion = $array['contrasenaConfirmacion'];
+			    	if(validador::estaVacio($contrasenaConfirmacion) || strcmp($contrasena, $contrasenaConfirmacion) !== 0){
+			    		return 'Las contraseñas escritas no son iguales.';
+			    	}
+			    }
+		    }
+
+		    if(isset($array['biografia'])){
+		    	if(strlen($array['biografia']) > 0){
+		        	if(validador::estaVacio($array['biografia'])){
+		                return 'La biografía no debe llevar solamente espacios en blanco.';
+		            }
+		    	}
+	        }
+
+	        if(isset($_FILES['avatar'])){
+	        	if($_FILES['avatar']['error'] === UPLOAD_ERR_OK){
+	        		$mensaje = validador::validarArchivoCargado('avatar', 500000);
+			        if($mensaje !== true){
+			        	return $mensaje;
+			        }
+	        	}
+	        }
+
+	        return true;
+	    }
+
+	    function validarArchivoCargado($form, $fileMax){
 	    	if(!isset($_FILES[$form]['error']) || is_array($_FILES[$form]['error'])){
 	            return 'ERROR: Archivo erroneo.';
 	        }
@@ -160,7 +212,7 @@
 	                break;
 	        }
 
-	        if($_FILES[$form]['size'] > 10485760){
+	        if($_FILES[$form]['size'] > $fileMax){
 	            return 'ERROR: El archivo sobrepasa el límite permitido.';
 	        }
 
@@ -181,14 +233,14 @@
 
 	    function moverArchivo($form, $carpeta, $infoUsuario){
 	    	if(isset($_FILES[$form]['error']) && $_FILES[$form]['error'] === UPLOAD_ERR_OK){
-	    		$ruta = "/var/www/html/Dragonart/uploads/$carpeta/".basename($_FILES[$form]['name']);
+	    		$ruta = $_SERVER['DOCUMENT_ROOT']."/Dragonart/uploads/$carpeta/".basename($_FILES[$form]['name']);
 		    	if(move_uploaded_file($_FILES[$form]['tmp_name'], $ruta)){
 
-	                $nuevoNombre = "/var/www/html/Dragonart/uploads/$carpeta/".uniqid('dragonart_'.$infoUsuario['nombre'].'_').'.'.pathinfo($ruta,PATHINFO_EXTENSION);
-	                $destArchivo = "/var/www/html/Dragonart/uploads/$carpeta/".basename($nuevoNombre);
+	                $nuevoNombre = $_SERVER['DOCUMENT_ROOT']."/Dragonart/uploads/$carpeta/".uniqid('dragonart_'.$infoUsuario['nombre'].'_').'.'.pathinfo($ruta,PATHINFO_EXTENSION);
+	                $destArchivo = $_SERVER['DOCUMENT_ROOT']."/Dragonart/uploads/$carpeta/".basename($nuevoNombre);
 	                while(file_exists($destArchivo)){
-	                    $nuevoNombre = "/var/www/html/Dragonart/uploads/$carpeta/".uniqid('dragonart_'.$infoUsuario['nombre'].'_').'.'.pathinfo($ruta,PATHINFO_EXTENSION);
-	                    $destArchivo = "/var/www/html/Dragonart/uploads/$carpeta/".basename($nuevoNombre);
+	                    $nuevoNombre = $_SERVER['DOCUMENT_ROOT']."/Dragonart/uploads/$carpeta/".uniqid('dragonart_'.$infoUsuario['nombre'].'_').'.'.pathinfo($ruta,PATHINFO_EXTENSION);
+	                    $destArchivo = $_SERVER['DOCUMENT_ROOT']."/Dragonart/uploads/$carpeta/".basename($nuevoNombre);
 	                }
 
 	                rename($ruta, $nuevoNombre);

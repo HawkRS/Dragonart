@@ -257,3 +257,102 @@ function validarInputs(inputs, cantidad){
 	return bandera;
 
 }
+
+function validarInputsModUsuario(inputs, cantidad){
+	
+	var bandera = true;
+	var temp;
+	var tempPass = '';
+	var tempId = '#err-';
+	var contador = 0;
+
+	for(var i = 0; i < inputs.length; i++){
+		temp = inputs.eq(i);
+
+		switch(temp.attr('id')){
+
+			case 'alias':
+				bandera = !(estaVacio(temp.val()));
+				if(!bandera){
+					tempId = tempId + temp.attr('id');
+					ponerError(tempId, temp.attr('id'), 'Debes escribir un alias.');
+				}
+				else{
+					quitarError(tempId, temp.attr('id'));
+					bandera = /^[a-zA-Z0-9_-]{3,16}$/.test(temp.val());
+					if(!bandera){
+						tempId = tempId + temp.attr('id');
+						ponerError(tempId, temp.attr('id'), 'Solo letras, números y guiones. Entre 3 y 16 caracteres.');
+					}
+					else{
+						tempId = tempId + temp.attr('id');
+						quitarError(tempId, temp.attr('id'));
+						contador++;
+					}
+				}
+				break;
+
+			case 'contrasena':
+				if(temp.val().length > 0){
+					tempPass = temp.val();
+					bandera = !(estaVacio(temp.val()));
+					if(!bandera){
+						tempId = tempId + temp.attr('id');
+						ponerError(tempId, temp.attr('id'), 'Debes escribir una contraseña (Mínimo 8 caracteres).');
+					}
+					else{
+						quitarError(tempId, temp.attr('id'));
+						bandera = contrasenaValida(tempPass);
+						if(!bandera){
+							tempId = tempId + temp.attr('id');
+							ponerError(tempId, temp.attr('id'), 'La contraseña debe ser mínimo de 8 caracteres.');
+						}
+						else{
+							tempId = tempId + temp.attr('id');
+							quitarError(tempId, temp.attr('id'));
+						}
+					}
+				}
+				contador++;
+				break;
+
+			case 'contrasenaConfirmacion':
+				if(tempPass.length > 0){
+					bandera = !(estaVacio(temp.val()));
+					if(!bandera){
+						tempId = tempId + temp.attr('id');
+						ponerError(tempId, temp.attr('id'), 'Debes repetir tu contraseña.');
+					}
+					else{
+						quitarError(tempId, temp.attr('id'));
+						bandera = contrasenasIguales(tempPass, temp.val());
+						if(!bandera){
+							tempId = tempId + temp.attr('id');
+							ponerError(tempId, temp.attr('id'), 'La contraseña debe ser igual al del campo anterior.');
+						}
+						else{
+							tempId = tempId + temp.attr('id');
+							quitarError(tempId, temp.attr('id'));
+						}
+					}
+				}
+				contador++;
+				break;
+
+			default:
+				contador++;
+				break;
+		}
+		tempId = '#err-';
+	}
+
+	if(contador === cantidad){
+		bandera = true;
+	}
+	else{
+		bandera = false;
+	}
+	
+	return bandera;
+
+}

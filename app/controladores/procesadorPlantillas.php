@@ -194,12 +194,13 @@
 	    	}
 
 	        //Generamos el diccionario con la info a escribir en la plantilla
+	        $ruta = str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/', '', $infoUsuario['avatar']);
 	        $diccionario = array (
 	        	'%estrella%' => $estrella,
 	            '%alias%' => $infoUsuario['alias'],
 	            '%nombreUsuario%' => $infoUsuario['nombre'],
 	            '%descripcion%' => $infoUsuario['biografia'],
-	            '%avatarUsuario%' => $infoUsuario['avatar'],
+	            '%avatarUsuario%' => $ruta,
 	            '%validaRating%' => $rating
 	        );
 	        
@@ -267,9 +268,7 @@
 
 			$vista = str_replace('%error%', $mensaje, $vista);
 			$diccionario = array(
-				'%nombreUsuario%' => $infoUsuario['nombre'],
 				'%aliasUsuario%' => $infoUsuario['alias'],
-				'%correoUsuario%' => $infoUsuario['correo'],
 				'%descripcionUsuario%' => $infoUsuario['biografia'],
 				'%avatarUsuario%' => str_replace('/var/www/html/Dragonart/', '', $infoUsuario['avatar'])
 			);
@@ -309,7 +308,7 @@
 			$rating = 'true';
 			$promedio = 0;
 
-			$ruta = str_replace('/var/www/html/Dragonart/', '', $infoImagen['url']);
+			$ruta = str_replace($_SERVER['DOCUMENT_ROOT'].'Dragonart/', '', $infoImagen['url']);
 			if(isset($_SESSION['correo']) && $infoUsuario['correo'] !== $_SESSION['correo']){
 				require_once('app/modelos/usuarioMdl.php');
 				$usrMdl = new usuarioMdl();
