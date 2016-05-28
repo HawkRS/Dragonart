@@ -97,5 +97,63 @@
 			return false;
 		}
 
+		function obtenerSeguidores($id, $offset, $limit){
+			if($stmt = $this->db->prepare('SELECT * FROM seguidor WHERE idUsuarioSeguido=? LIMIT ?,?')){
+
+				$stmt->bind_param("iii", $id, $offset, $limit);
+
+				$stmt->execute();
+
+				$stmt->bind_result($idSeguidor, $idUsuarioSeguidor, $idUsuarioSeguido, $statusSeguidor, $tipo);
+
+				$array = array();
+
+				while($stmt->fetch()){
+					$array[] = array(
+						'id' => $idSeguidor,
+						'seguidor' => $idUsuarioSeguidor,
+						'seguido' => $idUsuarioSeguido,
+						'status' => $statusSeguidor,
+						'tipo' => $tipo
+					);
+				}
+				
+				$stmt->close();
+
+				return $array;
+			}
+
+			return false;
+		}
+
+		function obtenerSeguidos($id, $offset, $limit){
+			if($stmt = $this->db->prepare('SELECT * FROM seguidor WHERE idUsuarioSeguidor=? LIMIT ?,?')){
+
+				$stmt->bind_param("iii", $id, $offset, $limit);
+
+				$stmt->execute();
+
+				$stmt->bind_result($idSeguidor, $idUsuarioSeguidor, $idUsuarioSeguido, $statusSeguidor, $tipo);
+
+				$array = array();
+
+				while($stmt->fetch()){
+					$array[] = array(
+						'id' => $idSeguidor,
+						'seguidor' => $idUsuarioSeguidor,
+						'seguido' => $idUsuarioSeguido,
+						'status' => $statusSeguidor,
+						'tipo' => $tipo
+					);
+				}
+				
+				$stmt->close();
+
+				return $array;
+			}
+
+			return false;
+		}
+
 	}
 ?>

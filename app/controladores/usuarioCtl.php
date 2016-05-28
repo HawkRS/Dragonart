@@ -9,7 +9,6 @@ class usuarioCtl {
 
     function __construct() {
         session_start();
-        echo 'Soy usuarioCtl';
         
         $this->doctype = file_get_contents('app/vistas/doctype.html');
         $this->header = file_get_contents('app/vistas/header.html');
@@ -41,6 +40,14 @@ class usuarioCtl {
 
                 case 'estadoUsuario':
                     $this->estadoUsuario();
+                    break;
+
+                case 'seguidores':
+                    echo json_encode($this->seguidores());
+                    break;
+
+                case 'seguidos':
+                    echo json_encode($this->seguidos());
                     break;
             }
         }
@@ -255,6 +262,84 @@ class usuarioCtl {
         }
         return false;
 
+    }
+
+    function seguidores(){
+        require_once('app/modelos/usuarioMdl.php');
+        $usrMdl = new usuarioMdl();
+        require_once('app/modelos/seguidorMdl.php');
+        $segMdl = new seguidorMdl();
+        $infoUsuario = $usrMdl->paginaUsuario($_POST['usuario']);
+        $galSeguidores = array();
+
+        if($infoUsuario !== false && !empty($infoUsuario)){
+            $infoSeguidores = $segMdl->obtenerSeguidores($infoUsuario['id'], $_POST['offset'], $_POST['limit']);
+            if($infoSeguidores === false){
+                $galSeguidores = array();
+            }else{
+                for($x = 0; $x < count($infoSeguidores) && $x < $_POST['limit']; $x++){
+                    if($infoSeguidores[$x]['status'] === 1){
+                        $usuarioSeguidor = $usrMdl->obtenerInfoPorID($infoSeguidores[$x]['seguidor']);
+                        if($usuarioSeguidor !== false && !empty($usuarioSeguidor)){
+                            $usuarioSeguidor['avatar'] = str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/', '', $usuarioSeguidor['avatar']);
+                            
+                            $galSeguidores[$x] = array(
+                                'id' => $usuarioSeguidor['id'],
+                                'nombre' => $usuarioSeguidor['nombre'],
+                                'alias' => $usuarioSeguidor['alias'],
+                                'correo' => $usuarioSeguidor['correo'],
+                                'contrasena' => $usuarioSeguidor['contrasena'],
+                                'biografia' => $usuarioSeguidor['biografia'],
+                                'avatar' => $usuarioSeguidor['avatar'],
+                                'tipo' => $usuarioSeguidor['tipo'],
+                                'status' => $usuarioSeguidor['status']
+                            );
+                        }
+                    }
+                }
+            }
+        }
+
+        return $galSeguidores;
+    }
+
+    function seguidos(){
+        require_once('app/modelos/usuarioMdl.php');
+        $usrMdl = new usuarioMdl();
+        require_once('app/modelos/seguidorMdl.php');
+        $segMdl = new seguidorMdl();
+        $infoUsuario = $usrMdl->paginaUsuario($_POST['usuario']);
+        $galSeguidores = array();
+
+        if($infoUsuario !== false && !empty($infoUsuario)){
+            $infoSeguidores = $segMdl->obtenerSeguidos($infoUsuario['id'], $_POST['offset'], $_POST['limit']);
+            if($infoSeguidores === false){
+                $galSeguidores = array();
+            }else{
+                for($x = 0; $x < count($infoSeguidores) && $x < $_POST['limit']; $x++){
+                    if($infoSeguidores[$x]['status'] === 1){
+                        $usuarioSeguidor = $usrMdl->obtenerInfoPorID($infoSeguidores[$x]['seguido']);
+                        if($usuarioSeguidor !== false && !empty($usuarioSeguidor)){
+                            $usuarioSeguidor['avatar'] = str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/', '', $usuarioSeguidor['avatar']);
+                            
+                            $galSeguidores[$x] = array(
+                                'id' => $usuarioSeguidor['id'],
+                                'nombre' => $usuarioSeguidor['nombre'],
+                                'alias' => $usuarioSeguidor['alias'],
+                                'correo' => $usuarioSeguidor['correo'],
+                                'contrasena' => $usuarioSeguidor['contrasena'],
+                                'biografia' => $usuarioSeguidor['biografia'],
+                                'avatar' => $usuarioSeguidor['avatar'],
+                                'tipo' => $usuarioSeguidor['tipo'],
+                                'status' => $usuarioSeguidor['status']
+                            );
+                        }
+                    }
+                }
+            }
+        }
+
+        return $galSeguidores;
     }
 
 }

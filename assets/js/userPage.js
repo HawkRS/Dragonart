@@ -17,7 +17,7 @@ menu.click(function(){
 		}
 		if($(this).attr('id') === 'siguiendo'){
 			$('.galHeader > h2').text('Siguiendo');
-			llenarSeguidores();
+			llenarSeguidos();
 		}
 	}
 });
@@ -174,36 +174,120 @@ function llenarFavoritos(){
 
 function llenarSeguidores(){
 	var contadorFilas = 0;
-	var contadorImagen = 1;
+	var contadorImagen = 0;
 	var limite = 4;
 
 	$('#postDesc').empty();
 
-	while(contadorFilas < 2){
-		$('#postDesc')
-			.append('<div id="fila' + contadorFilas + '" class="row"></div>');
+	$.ajax({
+	        type : 'POST',
+	        url : 'index.php?controlador=usuario&accion=seguidores',
+	        dataType: 'json',
+	        data : {
+	            usuario: $('#nombreUsuario').text(),
+	            offset: 0,
+	            limit: 8
+	        },
+	        success : function(json){
+	        	console.log(json);
+	            if($.isEmptyObject(json)){
+	                $('#postDesc').append('<i>No hay seguidores...</i>');
+	            }else{
+	            	if(json.length <= 4){
+	            		var limiteFilas = 1;
+	            	}else if(json.length > 4 && json.length <=8){
+	            		var limiteFilas = 2;
+	            	}
 
-		while(contadorImagen <= limite){
-			$('#fila' + contadorFilas)
-				.append('<div id="avatar' + contadorImagen + '" name="avatar' + contadorImagen + '" class="col-sm-6 col-md-3"></div>');
-			$('#avatar' + contadorImagen)
-				.append('<div class="thumbnail"></div>');
-			$('#avatar' + contadorImagen + ' .thumbnail')
-				.append('<a href="index.php?controlador=usuario&accion=mostrar"></a>')
-				.append('<div class="caption text-center"></div>');
-			$('#avatar' + contadorImagen + ' .thumbnail > div')
-				.append('<span>Usuario</span>');
-			$('#avatar' + contadorImagen + ' .thumbnail > a')
-				.append('<img class="avatar img-circle" src="assets/img/avatar.png" alt="Demostración" />');
-			contadorImagen++;
-		}
+	            	while(contadorFilas < limiteFilas){
+	            		$('#postDesc').append('<div id="fila' + contadorFilas + '" class="row"></div>');
+	            		while(contadorImagen < limite && contadorImagen < json.length){
+	            			(function(tmp, tmpFila){
+	            				$('#fila' + contadorFilas).append('<div id="avatar' + contadorImagen + '" name="avatar' + contadorImagen + '" class="col-sm-6 col-md-3"></div>');
+								$('#avatar' + contadorImagen).append('<div class="thumbnail"></div>');
+								$('#avatar' + contadorImagen + ' .thumbnail')
+									.append('<a href="index.php?controlador=usuario&accion=mostrar&usuario='+ json[tmp].nombre +'"></a>')
+									.append('<div class="caption text-center"></div>');
+								$('#avatar' + contadorImagen + ' .thumbnail > div')
+									.append('<span id="titulo'+ contadorImagen +'">'+ json[tmp].nombre +'</span>');
+								$('#avatar' + contadorImagen + ' .thumbnail > a')
+									.append('<img class="avatar img-circle" src="'+ json[tmp].avatar +'" alt="'+ json[tmp].nombre +'" />');
+							})(contadorImagen, contadorFilas);
+							contadorImagen++;
+	            		}
+	            		$('#fila' + contadorFilas).css('display', 'none');
+						$('#fila' + contadorFilas).fadeIn('slow');
 
-		$('#fila' + contadorFilas).css('display', 'none');
-		$('#fila' + contadorFilas).fadeIn('slow');
+						limite += limite;
+						contadorFilas++;
+	            	}
+	            	
+	            }
+	        },
+	        error : function(respuesta){
+	            alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
+	        }
+	    });
 
-		limite += limite;
-		contadorFilas++;
-	}
+}
+
+function llenarSeguidos(){
+	var contadorFilas = 0;
+	var contadorImagen = 0;
+	var limite = 4;
+
+	$('#postDesc').empty();
+
+	$.ajax({
+	        type : 'POST',
+	        url : 'index.php?controlador=usuario&accion=seguidos',
+	        dataType: 'json',
+	        data : {
+	            usuario: $('#nombreUsuario').text(),
+	            offset: 0,
+	            limit: 8
+	        },
+	        success : function(json){
+	            if($.isEmptyObject(json)){
+	                $('#postDesc').append('<i>No hay usuarios seguidos...</i>');
+	            }else{
+	            	if(json.length <= 4){
+	            		var limiteFilas = 1;
+	            	}else if(json.length > 4 && json.length <=8){
+	            		var limiteFilas = 2;
+	            	}
+
+	            	while(contadorFilas < limiteFilas){
+	            		$('#postDesc').append('<div id="fila' + contadorFilas + '" class="row"></div>');
+	            		while(contadorImagen < limite && contadorImagen < json.length){
+	        	console.log(json);
+	            			(function(tmp, tmpFila){
+	            				$('#fila' + tmpFila).append('<div id="avatar' + tmp + '" name="avatar' + tmp + '" class="col-sm-6 col-md-3"></div>');
+								$('#avatar' + tmp).append('<div class="thumbnail"></div>');
+								$('#avatar' + tmp + ' .thumbnail')
+									.append('<a href="index.php?controlador=usuario&accion=mostrar&usuario='+ json[tmp].nombre +'"></a>')
+									.append('<div class="caption text-center"></div>');
+								$('#avatar' + tmp + ' .thumbnail > div')
+									.append('<span id="titulo'+ tmp +'">'+ json[tmp].nombre +'</span>');
+								$('#avatar' + tmp + ' .thumbnail > a')
+									.append('<img class="avatar img-circle" src="'+ json[tmp].avatar +'" alt="'+ json[tmp].nombre +'" />');
+							})(contadorImagen, contadorFilas);
+							contadorImagen++;
+	            		}
+	            		$('#fila' + contadorFilas).css('display', 'none');
+						$('#fila' + contadorFilas).fadeIn('slow');
+
+						limite += limite;
+						contadorFilas++;
+	            	}
+	            	
+	            }
+	        },
+	        error : function(respuesta){
+	            alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
+	        }
+	    });
+
 }
 
 function verMas(){
@@ -319,12 +403,97 @@ function verMas(){
 	                    alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
 	                }
 	            });
-		}if($('.galHeader > h2').text() === 'Seguidores'){
+		}	
+	}else{
+		if($('.galHeader > h2').text() === 'Seguidores'){
+			$.ajax({
+	                type : 'POST',
+	                url : 'index.php?controlador=usuario&accion=seguidores',
+	                dataType: 'json',
+	                data : {
+	                    usuario: $('#nombreUsuario').text(),
+	                    offset: contadorInputs,
+	                    limit: 4
+	                },
+	                success : function(json){
+	                    if($.isEmptyObject(json)){
+	                        alert('No hay mas seguidores.');
+	                    }else{
+	                    	for(var i = 0; i < json.length; i++){
+	                    		(function(tmp, cont){
+									clon.find('#avatar' + tmp).attr('id','image' + cont);
+									clon.find('#avatar' + cont).attr('name','avatar' + cont);
+									clon.find('#avatar' + cont).find('img').attr('src',json[tmp].avatar);
+									clon.find('#avatar' + cont).find('img').attr('alt',json[tmp].nombre);
+									clon.find('#avatar' + cont).find('a').attr('href','index.php?controlador=usuario&accion=mostrar&usuario='+json[tmp].nombre);
+									clon.find('#avatar' + cont).find('#titulo' + tmp).text(json[tmp].nombre);
+								})(i, contadorInputs);
+								contadorInputs++;
+							}
 
+							if(json.length < 4){
+								var Eliminar = 0;
+								while(Eliminar !== 4){
+									clon.find('#avatar' + Eliminar).remove();
+									Eliminar++;
+								}
+							}
+
+							clon.css('display', 'none');
+							clon.fadeIn('slow');
+
+							$('#postDesc').append(clon);
+	                    }
+	                },
+	                error : function(respuesta){
+	                    alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
+	                }
+	            });
 		}if($('.galHeader > h2').text() === 'Siguiendo'){
+			$.ajax({
+	                type : 'POST',
+	                url : 'index.php?controlador=usuario&accion=seguidos',
+	                dataType: 'json',
+	                data : {
+	                    usuario: $('#nombreUsuario').text(),
+	                    offset: contadorInputs,
+	                    limit: 4
+	                },
+	                success : function(json){
+	                    if($.isEmptyObject(json)){
+	                        alert('No hay mas usuarios seguidos.');
+	                    }else{
+	                    	for(var i = 0; i < json.length; i++){
+	                    		(function(tmp, cont){
+									clon.find('#avatar' + tmp).attr('id','image' + cont);
+									clon.find('#avatar' + cont).attr('name','avatar' + cont);
+									clon.find('#avatar' + cont).find('img').attr('src',json[tmp].avatar);
+									clon.find('#avatar' + cont).find('img').attr('alt',json[tmp].nombre);
+									clon.find('#avatar' + cont).find('a').attr('href','index.php?controlador=usuario&accion=mostrar&usuario='+json[tmp].nombre);
+									clon.find('#avatar' + cont).find('#titulo' + tmp).text(json[tmp].nombre);
+								})(i, contadorInputs);
+								contadorInputs++;
+							}
 
+							if(json.length < 4){
+								var Eliminar = 0;
+								while(Eliminar !== 4){
+									clon.find('#avatar' + Eliminar).remove();
+									Eliminar++;
+								}
+							}
+
+							clon.css('display', 'none');
+							clon.fadeIn('slow');
+
+							$('#postDesc').append(clon);
+	                    }
+	                },
+	                error : function(respuesta){
+	                    alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
+	                }
+	            });
 		}
-			
 	}
 
 	/*for(var i = 0; i < 4; i++){
