@@ -194,7 +194,7 @@ function llenarSeguidores(){
 			$('#avatar' + contadorImagen + ' .thumbnail > div')
 				.append('<span>Usuario</span>');
 			$('#avatar' + contadorImagen + ' .thumbnail > a')
-				.append('<img src="assets/img/avatar.png" alt="Demostración" />');
+				.append('<img class="avatar img-circle" src="assets/img/avatar.png" alt="Demostración" />');
 			contadorImagen++;
 		}
 

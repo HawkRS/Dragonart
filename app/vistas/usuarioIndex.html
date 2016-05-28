@@ -10,15 +10,24 @@
 							</picture>
 						</figure>
 
-						<h2 class="text-center">%alias%</h2>
+						<h2 class="text-center">
+							%estrella%
+							%alias%
+						</h2>
 						<p id="nombreUsuario" class="text-center">%nombreUsuario%</p>
 						<div class="profile-userbuttons">
 							<!--IniBotonSeguir-->
 							<button class="btn btn-warning btn-sm btn-block" name="btnSeguir" id="btnSeguir"><span class="glyphicon glyphicon-plus-sign"></span> Seguir</button>
 							<!--FinBotonSeguir-->
+							<!--IniBotonDejar-->
+							<button class="btn btn-danger btn-sm btn-block" name="btnDejar" id="btnDejar"><span class="glyphicon glyphicon-minus-sign"></span> Dejar de seguir</button>
+							<!--FinBotonDejar-->
 							<!--IniBotonBloquear-->
 	                        <button class="btn btn-danger btn-sm btn-block" name="btnBloquear" id="btnBloquear"><span class="glyphicon glyphicon-ban-circle"></span> Bloquear</button>
 	                        <!--FinBotonBloquear-->
+	                        <!--IniBotonDesbloquear-->
+	                        <button class="btn btn-success btn-sm btn-block" name="btnDesbloquear" id="btnDesbloquear"><span class="glyphicon glyphicon-ok-sign"></span> Desbloquear</button>
+	                        <!--FinBotonDesbloquear-->
                         </div>
 					</div><!--Fin Panel header-->
 					<div class="panel-body">
@@ -90,6 +99,80 @@
 <script type="text/javascript" src="assets/js/userPage.js"></script>
 <script type="text/javascript">
 	$( document ).ready(function() {
+		if($('#btnSeguir').length){
+			$('#btnSeguir').on('click', function(){
+				$.ajax({
+		            type : 'POST',
+		            url : 'index.php?controlador=usuario&accion=seguirUsuario',
+		            data : {
+		                nombre: $('#nombreUsuario').text()
+		            },
+		            success : function(respuesta){
+		                location.reload();
+		            },
+		            error : function(respuesta){
+		                alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
+		            }
+		       	});
+			});
+		}
+
+		if($('#btnDejar').length){
+			$('#btnDejar').on('click', function(){
+				$.ajax({
+		            type : 'POST',
+		            url : 'index.php?controlador=usuario&accion=dejarUsuario',
+		            data : {
+		                nombre: $('#nombreUsuario').text()
+		            },
+		            success : function(respuesta){
+		                location.reload();
+		            },
+		            error : function(respuesta){
+		                alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
+		            }
+		       	});
+			});
+		}
+
+		if($('#btnBloquear').length){
+			$('#btnBloquear').on('click', function(){
+				$.ajax({
+		            type : 'POST',
+		            url : 'index.php?controlador=usuario&accion=estadoUsuario',
+		            data : {
+		                nombre: $('#nombreUsuario').text(),
+		                status: 0
+		            },
+		            success : function(respuesta){
+		                location.reload();
+		            },
+		            error : function(respuesta){
+		                alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
+		            }
+		       	});
+			});
+		}
+
+		if($('#btnDesbloquear').length){
+			$('#btnDesbloquear').on('click', function(){
+				$.ajax({
+		            type : 'POST',
+		            url : 'index.php?controlador=usuario&accion=estadoUsuario',
+		            data : {
+		                nombre: $('#nombreUsuario').text(),
+		                status: 1
+		            },
+		            success : function(respuesta){
+		                location.reload();
+		            },
+		            error : function(respuesta){
+		                alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
+		            }
+		       	});
+			});
+		}
+
         for(var x = 0; x < 8; x++){
         	(function(tmp){
         		if($('#input-' + tmp).length){

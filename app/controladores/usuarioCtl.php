@@ -30,6 +30,18 @@ class usuarioCtl {
                 case 'mostrar':
                     $this->mostrar();
                     break;
+
+                case 'seguirUsuario':
+                    $this->seguirUsuario();
+                    break;
+
+                case 'dejarUsuario':
+                    $this->dejarUsuario();
+                    break;
+
+                case 'estadoUsuario':
+                    $this->estadoUsuario();
+                    break;
             }
         }
         else {
@@ -50,13 +62,13 @@ class usuarioCtl {
 			if($error === true){
                 require_once('app/modelos/usuarioMdl.php');
                 $usrMdl = new usuarioMdl();
-                if($usrMdl->alta($_POST['nombre'],$_POST['alias'],$_POST['correo'],$_POST['contrasena'])){
+                if($usrMdl->alta($_POST['nombre'],$_POST['alias'],$_POST['correo'],$_POST['contrasena'], 1)){
                     if($usrMdl->iniciarSesion($_POST['correo'],$_POST['contrasena'])){
                         $_SESSION['correo'] = $_POST['correo'];
                         $_SESSION['logPass'] = $_POST['contrasena'];
                         $_SESSION['alias'] = $_POST['alias'];
                         $_SESSION['nombre'] = $_POST['nombre'];
-                        $_SESSION['admin'] = 0;
+                        $_SESSION['admin'] = 1;
                         header('Location: http://localhost/Dragonart/index.php?controlador=usuario&accion=mostrar&usuario='.$_POST['nombre']);
                     }
                     else{
@@ -141,29 +153,107 @@ class usuarioCtl {
             $usrMdl = new usuarioMdl();
             $infoUsuario = $usrMdl->paginaUsuario($_GET['usuario']);
 
-            require_once('app/modelos/imagenMdl.php');
-            $imgMdl = new imagenMdl();
-            $galeria = $imgMdl->obtenerGaleria($infoUsuario['id'], 0, 8);
-            
-            if(isset($infoUsuario['nombre'])){
-                $vista = file_get_contents('app/vistas/usuarioIndex.html');
-                $vista = $procesador->vistaPaginaUsuario($this->doctype, $this->header, $vista, $this->footer, $infoUsuario, $galeria);
-                echo $vista;
+            if($infoUsuario['status'] === 1 || (isset($_SESSION['admin']) && $_SESSION['admin'] === 0)){
+                require_once('app/modelos/seguidorMdl.php');
+                $segMdl = new seguidorMdl();
+                if(isset($_SESSION['correo']) && isset($_SESSION['logPass'])){
+                    $infoUsuarioSeguidor = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
+                    $infoSeguidor = $segMdl->obtenerInfo($infoUsuarioSeguidor['id'], $infoUsuario['id']);
+                    if($infoSeguidor['status'] === 1){
+                        $estaSiguiendolo = true;
+                    }else{
+                        $estaSiguiendolo = false;
+                    }
+                }else{
+                    $estaSiguiendolo = false;
+                }
+
+                require_once('app/modelos/imagenMdl.php');
+                $imgMdl = new imagenMdl();
+                $galeria = $imgMdl->obtenerGaleria($infoUsuario['id'], 0, 8);
+                
+                if(isset($infoUsuario['nombre'])){
+                    $vista = file_get_contents('app/vistas/usuarioIndex.html');
+                    $vista = $procesador->vistaPaginaUsuario($this->doctype, $this->header, $vista, $this->footer, $infoUsuario, $galeria, $estaSiguiendolo);
+                    echo $vista;
+                }
+                else{
+                    $vista = file_get_contents('app/vistas/404.html');
+                    $mensaje = 'El usuario que buscas no existe.';
+                    $vista = $procesador->vistaError404($this->doctype, $this->header, $vista, $this->footer, $mensaje);
+                    echo $vista;
+                }
             }
             else{
                 $vista = file_get_contents('app/vistas/404.html');
-                $mensaje = 'El usuario que buscas no existe.';
+                $mensaje = 'El usuario ha sido bloqueado. Si cree que esto es un error, por favor <a href="index.php?controlador=contacto&accion=mostrar">contáctenos</a>.';
                 $vista = $procesador->vistaError404($this->doctype, $this->header, $vista, $this->footer, $mensaje);
                 echo $vista;
             }
+            
         }
         else{
             $vista = file_get_contents('app/vistas/404.html');
             $mensaje = 'No se especificó un usuario a mostrar.';
             $vista = $procesador->vistaError404($this->doctype, $this->header, $vista, $this->footer, $mensaje);
             echo $vista;
-            echo $vista;
         }
+
+    }
+
+    function seguirUsuario(){
+
+        if(isset($_SESSION['correo']) && isset($_SESSION['logPass']) && isset($_POST['nombre'])){
+            require_once('app/modelos/usuarioMdl.php');
+            $usrMdl = new usuarioMdl();
+            require_once('app/modelos/seguidorMdl.php');
+            $segMdl = new seguidorMdl();
+            $infoUsuarioASeguir = $usrMdl->paginaUsuario($_POST['nombre']);
+            $infoUsuarioSeguidor = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
+            if($segMdl->existe($infoUsuarioSeguidor['id'], $infoUsuarioASeguir['id']) === false){
+                if($segMdl->alta($infoUsuarioSeguidor['id'], $infoUsuarioASeguir['id'])){
+                    return true;
+                }
+            }else{
+                if($segMdl->modificar($infoUsuarioSeguidor['id'], $infoUsuarioASeguir['id'], 1)){
+                    return true;
+                }
+            }
+        }
+        return false;
+
+    }
+
+    function dejarUsuario(){
+
+        if(isset($_SESSION['correo']) && isset($_SESSION['logPass']) && isset($_POST['nombre'])){
+            require_once('app/modelos/usuarioMdl.php');
+            $usrMdl = new usuarioMdl();
+            require_once('app/modelos/seguidorMdl.php');
+            $segMdl = new seguidorMdl();
+            $infoUsuarioASeguir = $usrMdl->paginaUsuario($_POST['nombre']);
+            $infoUsuarioSeguidor = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
+            if($segMdl->existe($infoUsuarioSeguidor['id'], $infoUsuarioASeguir['id']) === true){
+                if($segMdl->modificar($infoUsuarioSeguidor['id'], $infoUsuarioASeguir['id'], 0)){
+                    return true;
+                }
+            }
+        }
+        return false;
+
+    }
+
+    function estadoUsuario(){
+
+        if(isset($_SESSION['correo']) && isset($_SESSION['logPass']) && isset($_SESSION['admin']) && $_SESSION['admin'] === 0 && isset($_POST['nombre'])){
+            require_once('app/modelos/usuarioMdl.php');
+            $usrMdl = new usuarioMdl();
+
+            if($usrMdl->cambiarEstadoUsuario($_POST['nombre'], $_POST['status'])){
+                return true;
+            }
+        }
+        return false;
 
     }
 

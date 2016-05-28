@@ -10,10 +10,11 @@
 			$this->db = $this->acceso->getDriver();
 		}
 
-		function alta($nombre, $alias, $correo, $contrasena){
+		function alta($nombre, $alias, $correo, $contrasena, $tipo){
 			$bandera = false;
 			$avatar = 'uploads/avatar/avatar.jpg';
-			$tipo = 0; //Usuario normal
+			//TIPO 0 ES ADMINISTRADOR
+			//TIPO 1 ES USUARIO
 			$status = 1; //Usuario activo
 
 			if($stmt = $this->db->prepare('INSERT INTO usuario (nombreUsuario, aliasUsuario, correoUsuario, contrasenaUsuario, avatarUsuario, tipoUsuario, statusUsuario) VALUES (?, ?, ?, PASSWORD(?), ?, ?, ?)')){
@@ -193,6 +194,24 @@
 			}
 
 			return false;
+		}
+
+		function cambiarEstadoUsuario($nombre, $estado){
+			$bandera = false;
+
+			if($stmt = $this->db->prepare('UPDATE usuario SET statusUsuario=? WHERE nombreUsuario=?')){
+
+				$stmt->bind_param("is", $estado, $nombre);
+
+				$bandera = $stmt->execute();
+
+				$stmt->fetch();
+				
+				$stmt->close();
+
+			}
+
+			return $bandera;
 		}
 
 		function getError(){

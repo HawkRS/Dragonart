@@ -45,10 +45,15 @@
 	        return $vista;
 		}
 
-		function vistaPaginaUsuario($doctype, $header, $vista, $footer, $infoUsuario, $galeria){
+		function vistaPaginaUsuario($doctype, $header, $vista, $footer, $infoUsuario, $galeria, $estaSiguiendolo){
 			$header = procesadorPlantillas::generarHeader($header);
 			$vista = procesadorPlantillas::generarFooter($vista, $footer);
 			$rating = 'true';
+			$estrella = '';
+			$btnSeguirCortado = false;
+			$btnDejarCortado = false;
+			$btnBloquearCortado = false;
+			$btnDesbloquearCortado = false;
 
 			$thumbnails = '';
 	        $inicio = strpos($vista,'<!--inicioRepetirImagen-->');
@@ -65,6 +70,11 @@
 	            $infoUsuario['biografia'] = '<i>No hay descripción...</i>';
 	        }
 
+	        //Si el usuario que visitas es Admin, entonces mostramos una estrella
+	        if($infoUsuario['tipo'] === 0){
+	        	$estrella = '<span class="glyphicon glyphicon-star"></span>';
+	        }
+
 	        if(isset($_SESSION['nombre'])){
 		        //Valida que el usuario que visita la página sea el mismo para quitar el botón "Seguir"
 		        if($infoUsuario['nombre'] === $_SESSION['nombre']){
@@ -73,23 +83,90 @@
 		            $btnSeguir = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
 		            $vista = str_replace($btnSeguir, '', $vista);
 		            $rating = 'true';
+
+		            $inicioBtn = strpos($vista,'<!--IniBotonDejar-->');
+		            $finBtn = strpos($vista, '<!--FinBotonDejar-->')+20;
+		            $btnSeguir = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
+		            $vista = str_replace($btnSeguir, '', $vista);
+
+		            $btnSeguirCortado = true;
+		            $btnDejarCortado = true;
 		        }
 
 		        //Valida que el usuario que visita la página NO sea admin para quitar el botón "Bloquear"
-		        if(isset($_SESSION['admin']) && $_SESSION['admin'] === 0){
+		        if(isset($_SESSION['admin']) && $_SESSION['admin'] === 1){
 		        	$inicioBtn = strpos($vista,'<!--IniBotonBloquear-->');
 		            $finBtn = strpos($vista, '<!--FinBotonBloquear-->')+23;
 		            $btnBloquear = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
 		            $vista = str_replace($btnBloquear, '', $vista);
+
+		            $inicioBtn = strpos($vista,'<!--IniBotonDesbloquear-->');
+		            $finBtn = strpos($vista, '<!--FinBotonDesbloquear-->')+26;
+		            $btnBloquear = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
+		            $vista = str_replace($btnBloquear, '', $vista);
 		            $rating = 'false';
+
+		            $btnBloquearCortado = true;
+		            $btnDesbloquearCortado = true;
+
+		            if($estaSiguiendolo && !$btnSeguirCortado){
+		            	$inicioBtn = strpos($vista,'<!--IniBotonSeguir-->');
+			            $finBtn = strpos($vista, '<!--FinBotonSeguir-->')+21;
+			            $btnSeguir = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
+			            $vista = str_replace($btnSeguir, '', $vista);
+		            }else{
+		            	if(!$estaSiguiendolo && !$btnDejarCortado){
+		            		$inicioBtn = strpos($vista,'<!--IniBotonDejar-->');
+				            $finBtn = strpos($vista, '<!--FinBotonDejar-->')+20;
+				            $btnSeguir = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
+				            $vista = str_replace($btnSeguir, '', $vista);
+		            	}
+		            }
 		        }else{
 		        	//Valida que el usuario que visita la página sea admin y esté viendo su propia página para quitar el botón "Bloquear"
-		        	if(isset($_SESSION['admin']) && $_SESSION['admin'] === 1 && $infoUsuario['nombre'] === $_SESSION['nombre']){
+		        	if(isset($_SESSION['admin']) && $_SESSION['admin'] === 0 && $infoUsuario['nombre'] === $_SESSION['nombre']){
 			        	$inicioBtn = strpos($vista,'<!--IniBotonBloquear-->');
 			            $finBtn = strpos($vista, '<!--FinBotonBloquear-->')+23;
 			            $btnBloquear = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
 			            $vista = str_replace($btnBloquear, '', $vista);
 			            $rating = 'true';
+
+			            $inicioBtn = strpos($vista,'<!--IniBotonDesbloquear-->');
+			            $finBtn = strpos($vista, '<!--FinBotonDesbloquear-->')+26;
+			            $btnBloquear = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
+			            $vista = str_replace($btnBloquear, '', $vista);
+
+			            $btnBloquearCortado = true;
+		            	$btnDesbloquearCortado = true;
+		        	}
+		        	if(isset($_SESSION['admin']) && $_SESSION['admin'] === 0){
+		        		if($estaSiguiendolo && !$btnSeguirCortado){
+			            	$inicioBtn = strpos($vista,'<!--IniBotonSeguir-->');
+				            $finBtn = strpos($vista, '<!--FinBotonSeguir-->')+21;
+				            $btnSeguir = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
+				            $vista = str_replace($btnSeguir, '', $vista);
+			            }else{
+			            	if(!$estaSiguiendolo && !$btnDejarCortado){
+			            		$inicioBtn = strpos($vista,'<!--IniBotonDejar-->');
+					            $finBtn = strpos($vista, '<!--FinBotonDejar-->')+20;
+					            $btnSeguir = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
+					            $vista = str_replace($btnSeguir, '', $vista);
+			            	}
+			            }
+
+			            if($infoUsuario['status'] === 0 && !$btnBloquearCortado){
+			            	$inicioBtn = strpos($vista,'<!--IniBotonBloquear-->');
+				            $finBtn = strpos($vista, '<!--FinBotonBloquear-->')+23;
+				            $btnBloquear = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
+				            $vista = str_replace($btnBloquear, '', $vista);
+			            }else{
+			            	if($infoUsuario['status'] === 1 && !$btnDesbloquearCortado){
+			            		$inicioBtn = strpos($vista,'<!--IniBotonDesbloquear-->');
+					            $finBtn = strpos($vista, '<!--FinBotonDesbloquear-->')+26;
+					            $btnBloquear = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
+					            $vista = str_replace($btnBloquear, '', $vista);
+			            	}
+			            }
 		        	}
 		        }
 	    	}else{
@@ -98,8 +175,18 @@
 	            $btnSeguir = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
 	            $vista = str_replace($btnSeguir, '', $vista);
 
+	            $inicioBtn = strpos($vista,'<!--IniBotonDejar-->');
+	            $finBtn = strpos($vista, '<!--FinBotonDejar-->')+20;
+	            $btnSeguir = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
+	            $vista = str_replace($btnSeguir, '', $vista);
+
 	            $inicioBtn = strpos($vista,'<!--IniBotonBloquear-->');
 	            $finBtn = strpos($vista, '<!--FinBotonBloquear-->')+23;
+	            $btnBloquear = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
+	            $vista = str_replace($btnBloquear, '', $vista);
+
+	            $inicioBtn = strpos($vista,'<!--IniBotonDesbloquear-->');
+	            $finBtn = strpos($vista, '<!--FinBotonDesbloquear-->')+26;
 	            $btnBloquear = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
 	            $vista = str_replace($btnBloquear, '', $vista);
 
@@ -108,6 +195,7 @@
 
 	        //Generamos el diccionario con la info a escribir en la plantilla
 	        $diccionario = array (
+	        	'%estrella%' => $estrella,
 	            '%alias%' => $infoUsuario['alias'],
 	            '%nombreUsuario%' => $infoUsuario['nombre'],
 	            '%descripcion%' => $infoUsuario['biografia'],
