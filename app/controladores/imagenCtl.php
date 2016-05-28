@@ -245,7 +245,33 @@ class imagenCtl {
 
                     if($infoUsuario['id'] === $infoImagen['idUsuario']){
                         if(!empty($_POST)){
+                            require_once('app/controladores/validador.php');
+                            $validador = new validador();
 
+                            $error = $validador->validarModificacionImagen($_POST);
+                            if($error === true){
+                                if($imgMdl->modificar($infoImagen['id'], $_POST['titulo'], $_POST['descripcion'])){
+                                    $tagMdl->eliminar($infoImagen['id']);
+                                    if($tagMdl->alta($infoImagen['id'], $_POST['tags'])){
+                                        header('Location: http://localhost/Dragonart/index.php?controlador=imagen&accion=mostrar&img='.$infoImagen['id']);
+                                    }else{
+                                        $vista = file_get_contents('app/vistas/formularioEditarImagen.html');
+                                        $mensaje = '<div class="alert alert-danger">'.$tagMdl->getError().'</div>';
+                                        $vista = $procesador->vistaModificarImagen($this->doctype, $this->header, $vista, $this->footer, $infoImagen, $todosTags, $mensaje);
+                                        echo $vista;
+                                    }
+                                }else{
+                                    $vista = file_get_contents('app/vistas/formularioEditarImagen.html');
+                                    $mensaje = '<div class="alert alert-danger">'.$imgMdl->getError().'</div>';
+                                    $vista = $procesador->vistaModificarImagen($this->doctype, $this->header, $vista, $this->footer, $infoImagen, $todosTags, $mensaje);
+                                    echo $vista;
+                                }
+                            }else{
+                                $vista = file_get_contents('app/vistas/formularioEditarImagen.html');
+                                $mensaje = '<div class="alert alert-danger">'.$error.'</div>';
+                                $vista = $procesador->vistaModificarImagen($this->doctype, $this->header, $vista, $this->footer, $infoImagen, $todosTags, $mensaje);
+                                echo $vista;
+                            }
                         }else{
                             $vista = file_get_contents('app/vistas/formularioEditarImagen.html');
                             $mensaje = '';

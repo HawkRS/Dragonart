@@ -27,6 +27,24 @@
 			return $bandera;
 		}
 
+		function modificar($id, $titulo, $descripcion){
+			$bandera = false;
+
+			if($stmt = $this->db->prepare('UPDATE imagen SET tituloImagen=?, descripcionImagen=? WHERE idImagen=?')){
+
+				$stmt->bind_param("ssi", $titulo, $descripcion, $id);
+
+				$bandera = $stmt->execute();
+
+				$stmt->fetch();
+				
+				$stmt->close();
+
+			}
+
+			return $bandera;
+		}
+
 		function obtenerInfo($id){
 			if($stmt = $this->db->prepare('SELECT * FROM imagen WHERE idImagen=?')){
 

@@ -141,6 +141,38 @@
 	        return true;
 	    }
 
+	    function validarModificacionImagen($array){
+	        if(isset($array['titulo'])){
+	            if(validador::estaVacio($array['titulo'])){
+	                return 'El título no debe llevar solamente espacios en blanco.';
+	            }
+	        }
+	        else{
+	            return 'Debe escribir un título.';
+	        }
+
+	        if(isset($array['descripcion'])){
+	        	if(validador::estaVacio($array['descripcion'])){
+	                return 'La descripción no debe llevar solamente espacios en blanco.';
+	            }
+	        }
+	        else{
+	        	return 'Debe escribir una descripción.';
+	        }
+
+	        if(isset($array['tags'])){
+	            $tags = $array['tags'];
+	            if(validador::estaVacio($tags) || !preg_match("/^[a-zA-Z]*([a-zA-Z0-9]|\s)+$/", $tags)){
+	                return 'Los tags no deben ser solamente espacios en blanco.';
+	            }
+	        }
+	        else{
+	            return 'Debe escribir al menos un tag.';
+	        }
+
+	        return true;
+	    }
+
 	    function validarModificacionUsuario($array){
 	    	$hayPass = false;
 

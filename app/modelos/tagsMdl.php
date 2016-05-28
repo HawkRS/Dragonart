@@ -34,6 +34,24 @@
 			return $bandera;
 		}
         
+		function eliminar($id){
+			$bandera = false;
+
+			if($stmt = $this->db->prepare('DELETE FROM tag WHERE idImagen=?')){
+
+				$stmt->bind_param("i", $id);
+
+				$bandera = $stmt->execute();
+
+				$stmt->fetch();
+				
+				$stmt->close();
+
+			}
+
+			return $bandera;
+		}
+
         function obtenerTagsImagen($id){
 			if($stmt = $this->db->prepare('SELECT * FROM tag WHERE idImagen=?')){
 
