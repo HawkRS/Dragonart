@@ -27,9 +27,17 @@ class sesionCtl {
                 case 'recuperarcontrasenacorreo':
                     $this->recuperarcontrasenacorreo();
                     break;
+                
+                case 'mandarcorreorecuperacion':
+                    $this->mandarcorreorecuperacion();
+                    break;
                     
                 case 'recuperarcontrasena':
                     $this->recuperarcontrasena();
+                    break;
+                    
+                case 'mandarcorreoconfirmacion':
+                    $this->mandarcorreoconfirmacion();
                     break;
 
                 case 'cerrarsesion':
@@ -108,6 +116,19 @@ class sesionCtl {
         echo $vista;
     }
     
+    function mandarcorreorecuperacion(){
+        if(!empty($_POST)){
+            require_once('app/modelos/usuarioMdl.php');
+            $usrMdl = new usuarioMdl();
+            $infoUsuario = $usrMdl->existeCorreoNombre($_POST['correo']);
+            if($infoUsuario !== false && !empty($infoUsuario)){
+                require_once('app/controladores/correoCtl.php');
+                $correoCtl = new correoCtl();
+                return $correoCtl->mandarCorreoRecuperacion($infoUsuario['nombre'],$infoUsuario['correo'],$infoUsuario['pass']);
+            }
+        }
+    }
+    
     function recuperarcontrasena() {
         $vista = require_once('app/controladores/procesadorPlantillas.php');
         $procesador = new procesadorPlantillas();
@@ -115,6 +136,21 @@ class sesionCtl {
         $vista = $procesador->vistaRecuperarContrasena($this->doctype, $this->header, $vista, $this->footer);
         
         echo $vista;
+    }
+    
+    function mandarcorreoconfirmacion(){
+        if(!empty($_POST)){
+            require_once('app/modelos/usuarioMdl.php');
+            $usrMdl = new usuarioMdl();
+            $infoUsuario = $usrMdl->existeCorreoNombre($_POST['correo']);
+            if($infoUsuario !== false && !empty($infoUsuario)){
+                require_once('app/controladores/correoCtl.php');
+                $correoCtl = new correoCtl();
+                if($correoCtl->mandarCorreoConfirmacion($infoUsuario['nombre'],$infoUsuario['correo'])){
+                    header('Location: http://localhost/Dragonart/index.php');
+                }
+            }
+        }
     }
 
     function cerrarSesion(){
