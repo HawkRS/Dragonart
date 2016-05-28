@@ -101,6 +101,30 @@
 			}
 			return true;
 		}
+        
+        function existeCorreoNombre($correo){
+			if($stmt = $this->db->prepare('SELECT nombreUsuario, correoUsuario, contrasenaUsuario FROM usuario WHERE correoUsuario=?')){
+
+				$stmt->bind_param("s", $correo);
+
+				$stmt->execute();
+                
+                $stmt->bind_result($nombreUsuario, $correoUsuario, $contrasenaUsuario);
+                
+				$stmt->fetch();
+                
+                $array = array(
+                    'nombre' => $nombreUsuario,
+                    'correo' => $correoUsuario,
+                    'pass' => $contrasenaUsuario
+                );
+                
+				$stmt->close();
+                
+                return $array;
+			}
+			return false;
+		}
 
 		function obtenerInfo($correo, $contrasena){
 			if($stmt = $this->db->prepare('SELECT * FROM usuario WHERE correoUsuario=? AND contrasenaUsuario=PASSWORD(?)')){
