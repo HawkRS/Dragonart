@@ -96,6 +96,35 @@
 			return false;
 		}
 
+		function obtenerTodos($idUsuario, $offset, $limite){
+			if($stmt = $this->db->prepare('SELECT * FROM favorito WHERE idUsuarioFavoriteo=? ORDER BY fechaFavorito DESC LIMIT ?,?')){
+
+				$stmt->bind_param("iii", $idUsuario, $offset, $limite);
+
+				$stmt->execute();
+
+				$stmt->bind_result($idFavorito, $idImagen, $idUsuarioFavoriteo, $calificacionFavorito, $fechaFavorito, $tipo);
+
+				$array = array();
+				while($stmt->fetch()){
+					$array[] = array(
+						'id' => $idFavorito,
+						'imagen' => $idImagen,
+						'usuario' => $idUsuarioFavoriteo,
+						'calificacion' => $calificacionFavorito,
+						'fecha' => $fechaFavorito,
+						'tipo' => $tipo
+					);
+				}
+				
+				$stmt->close();
+
+				return $array;
+			}
+
+			return false;
+		}
+
 	}
 
 ?>

@@ -34,6 +34,10 @@ class imagenCtl {
                     echo json_encode($this->masImagenes());
                     break;
 
+                case 'masFavoritos':
+                    echo json_encode($this->masFavoritos());
+                    break;
+
                 case 'altaFavorito':
                     echo $this->altaFavorito();
                     break;
@@ -208,6 +212,59 @@ class imagenCtl {
         }
 
         return $infoImagen;
+
+    }
+
+    function masFavoritos(){
+
+        require_once('app/modelos/usuarioMdl.php');
+        $usrMdl = new usuarioMdl();
+        require_once('app/modelos/imagenMdl.php');
+        $imgMdl = new imagenMdl();
+        require_once('app/modelos/favoritoMdl.php');
+        $favMdl = new favoritoMdl();
+        $infoUsuario = $usrMdl->paginaUsuario($_POST['usuario']);
+        $galFavoritos = array();
+        $bool = true;
+
+        if($infoUsuario !== false && !empty($infoUsuario)){
+            $infoFavorito = $favMdl->obtenerTodos($infoUsuario['id'], $_POST['offset'], $_POST['limit']);
+            if($infoFavorito === false){
+                $galFavoritos = array();
+            }else{
+                for($x = 0; $x < count($infoFavorito) && $x < $_POST['limit']; $x++){
+                    $infoImagen = $imgMdl->obtenerInfo($infoFavorito[$x]['imagen']);
+                    if($infoImagen !== false && !empty($infoImagen) && $infoImagen['status'] !== 0){
+                        $infoImagen['url'] = str_replace('/var/www/html/Dragonart/', '', $infoImagen['url']);
+                        if(isset($_SESSION['correo']) && $_SESSION['correo'] === $infoUsuario['correo']){
+                            $bool = true;
+                        }else{
+                            if(isset($_SESSION['correo']) && $_SESSION['correo'] !== $infoUsuario['correo']){
+                                $bool = false;
+                            }else{
+                               if(!isset($_SESSION['correo'])){
+                                    $bool = true;
+                               }
+                            }
+                        }
+                        $galFavoritos[$x] = array(
+                            'id' => $infoImagen['id'],
+                            'idUsuario' => $infoImagen['idUsuario'],
+                            'url' => $infoImagen['url'],
+                            'titulo' => $infoImagen['titulo'],
+                            'descripcion' => $infoImagen['descripcion'],
+                            'fecha' => $infoImagen['fecha'],
+                            'status' => $infoImagen['status'],
+                            'promedio' => $infoImagen['promedio'],
+                            'tipo' => $infoImagen['tipo'],
+                            'bool' => $bool
+                        );
+                    }
+                }
+            }
+        }
+
+        return $galFavoritos;
 
     }
 
