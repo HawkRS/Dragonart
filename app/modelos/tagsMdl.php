@@ -82,6 +82,30 @@
 		function getError(){
 			return $this->db->error;
 		}
+        
+        function busquedaTags($palabra){
+            if($stmt = $this->db->prepare('SELECT idImagen, tag FROM tag WHERE tag LIKE '%?%'')){
+
+				$stmt->bind_param("s", $palabra);
+
+				$stmt->execute();
+
+				$stmt->bind_result($idImagen, $tag);
+
+				$array = array();
+
+				while($stmt->fetch()){
+					$array[] = array(
+						'id' => $idImagen,
+						'tag' => $tag
+					);
+				}
+
+				return $array;
+			}
+
+			return false;
+        }
 
 	}
 ?>

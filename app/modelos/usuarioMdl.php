@@ -299,6 +299,32 @@
 		function real_escape_string($cadena){
 			return $this->db->real_escape_string($cadena);
 		}
+        
+        function busquedaUsuario($palabra){
+            if($stmt = $this->db->prepare('SELECT idUsuario, nombreUsuario, aliasUsuario, avatarUsuario FROM usuario WHERE nombreUsuario LIKE '%?%' OR aliasUsuario LIKE '%?%'')){
+
+				$stmt->bind_param("ss", $palabra, $palabra);
+
+				$stmt->execute();
+
+				$stmt->bind_result($idUsuario, $nombreUsuario, $aliasUsuario, $avatarUsuario);
+
+				$array = array();
+
+				while($stmt->fetch()){
+					$array[] = array(
+						'id' => $idUsuario,
+						'nombre' => $nombreUsuario,
+						'alias' => $aliasUsuario,
+						'avatar' => $avatarUsuario
+					);
+				}
+
+				return $array;
+			}
+
+			return false;
+        }
 		
 	}
 ?>
