@@ -75,6 +75,16 @@
 	        return $vista;
 		}
 
+		function vistaIniciarSesion($doctype, $header, $vista, $footer, $mensaje){
+			$header = procesadorPlantillas::generarHeader($header);
+			$vista = procesadorPlantillas::generarFooter($vista, $footer);
+
+			$vista = str_replace('%error%', $mensaje, $vista);
+			$vista = $doctype.$header.$vista;
+
+	        return $vista;
+		}
+
 		function vistaPaginaUsuario($doctype, $header, $vista, $footer, $infoUsuario, $galeria, $estaSiguiendolo){
 			$header = procesadorPlantillas::generarHeader($header);
 			$vista = procesadorPlantillas::generarFooter($vista, $footer);
@@ -787,19 +797,21 @@
             return $vista;
         }
         
-        function vistaRecuperarContrasena($doctype, $header, $vista, $footer){
+        function vistaRecuperarContrasena($doctype, $header, $vista, $footer, $mensaje){
             $header = procesadorPlantillas::generarHeader($header);
 			$vista = procesadorPlantillas::generarFooter($vista, $footer);
             
+            $vista = str_replace('%error%', $mensaje, $vista);
             $vista = $doctype.$header.$vista;
             
             return $vista;
         }
         
-        function vistaRecuperarContrasenaCorreo($doctype, $header, $vista, $footer){
+        function vistaRecuperarContrasenaCorreo($doctype, $header, $vista, $footer, $mensaje){
             $header = procesadorPlantillas::generarHeader($header);
 			$vista = procesadorPlantillas::generarFooter($vista, $footer);
             
+            $vista = str_replace('%error%', $mensaje, $vista);
             $vista = $doctype.$header.$vista;
             
             return $vista;

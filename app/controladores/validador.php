@@ -104,6 +104,44 @@
 	    	return true;
 	    }
 
+	    function validarSesion($array){
+	        if(isset($array['correo'])){
+	            $correo = $array['correo'];
+	            if(validador::estaVacio($correo) || !filter_var($correo, FILTER_VALIDATE_EMAIL)){
+	                return 'El correo ingresado no es válido.';
+	            }
+	        }
+	        else{
+	            return 'Debes ingresar un correo.';
+	        }
+
+	        if(isset($array['logPass'])){
+	            $contrasena = $array['logPass'];
+	            if(validador::estaVacio($contrasena) || strlen($contrasena) < 8){
+	                return 'La contraseña escrita no es válida.';
+	            }
+	        }
+	        else{
+	            return 'Debes escribir una contraseña.';
+	        }
+
+	        return true;
+	    }
+
+	    function validarCorreoParaNuevaContrasena($array){
+	    	if(isset($array['correo'])){
+	            $correo = $array['correo'];
+	            if(validador::estaVacio($correo) || !filter_var($correo, FILTER_VALIDATE_EMAIL)){
+	                return 'El correo ingresado no es válido.';
+	            }
+	        }
+	        else{
+	            return 'Debes ingresar un correo.';
+	        }
+
+	        return true;
+	    }
+
 	    function validarRegistroImagen($array){
 	        if(isset($array['titulo'])){
 	            if(validador::estaVacio($array['titulo'])){

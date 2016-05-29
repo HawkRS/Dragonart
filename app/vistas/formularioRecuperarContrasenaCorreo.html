@@ -1,4 +1,5 @@
     <div class="container main-pubIndex">
+    %error%
     <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-default">
             <div class="panel-heading postHeader">
@@ -8,7 +9,7 @@
             </div>
             <div class="panel-body postDesc">
                 <p>Para restablecer tu contraseña, escribe el correo con el que te registraste.</p>
-                <form id="recContrasena" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="javascript:alert( 'success!' );" method="post" novalidate>
+                <form id="recContrasena" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="index.php?controlador=sesion&accion=recuperarcontrasenacorreo" method="post" novalidate>
 
                     <div id="div-correo" class="form-group">
                         <label class="control-label" for="correo">Correo: </label>
@@ -20,7 +21,7 @@
 
                     <div class="form-group">
                         <div class="col-xs-12 col-md-8 col-md-offset-2">
-                            <button type="submit" class="btn btn-warning btn-block" onclick="index.php?controlador=usuario&accion=recuperarcontrasena"><span class="glyphicon glyphicon-send"></span> Enviar</button>
+                            <button type="submit" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-send"></span> Enviar</button>
                         </div>
                     </div>
                 </form>

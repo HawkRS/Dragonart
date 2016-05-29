@@ -71,9 +71,9 @@ class correoCtl{
         $correo->MsgHTML($contenido);
 
         if(!$correo->Send()) {
-            echo "Hubo un error: " . $correo->ErrorInfo;
+            return 'No se pudo enviar el correo: '.$correo->ErrorInfo;
         } else {
-            echo "Mensaje enviado con exito.";
+            return true;
         }
     }
     

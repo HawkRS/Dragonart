@@ -91,6 +91,24 @@
 			return false;
 		}
 
+		function cambiarContrasenas($viejoPass, $nuevoPass){
+			$bandera = false;
+
+			if($stmt = $this->db->prepare('UPDATE usuario SET contrasenaUsuario=? WHERE idUsuario=?')){
+
+				$stmt->bind_param("sssi", $alias, $biografia, $avatar, $id);
+
+				$bandera = $stmt->execute();
+
+				$stmt->fetch();
+				
+				$stmt->close();
+
+			}
+
+			return $bandera;
+		}
+
 		function existeNombre($nombre){
 			if($stmt = $this->db->prepare('SELECT * FROM usuario WHERE nombreUsuario=?')){
 
