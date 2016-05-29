@@ -116,6 +116,32 @@
 		function getError(){
 			return $this->db->error;
 		}
+        
+        function busquedaComentario($palabra){
+            if($stmt = $this->db->prepare('SELECT idImagen, idUsuarioComento, comentario, fechaComentario FROM comentario WHERE comentario LIKE '%?%'')){
+
+				$stmt->bind_param("s", $palabra);
+
+				$stmt->execute();
+
+				$stmt->bind_result($idImagen, $idUsuario, $comentario, $fechaComentario);
+
+				$stmt->fetch();
+				
+				$stmt->close();
+				
+				$array = array(
+					'idImagen' => $idImagen,
+					'idUsuario' => $idUsuarioComento,
+					'comentario' => $comentario,
+                    'fecha' => $fechaComentario
+				);
+
+				return $array;
+			}
+
+			return false;
+        }
 
 	}
 ?>
