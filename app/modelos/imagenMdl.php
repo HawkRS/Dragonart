@@ -165,6 +165,31 @@
 		function real_escape_string($cadena){
 			return $this->db->real_escape_string($cadena);
 		}
+        
+        function busquedaImagen($palabra){
+            if($stmt = $this->db->prepare('SELECT urlImagen, tituloImagen, descripcionImagen FROM imagen WHERE tituloImagen LIKE '%?%' OR descripcionImagen LIKE '%?%'')){
+
+				$stmt->bind_param("ss", $palabra, $palabra);
+
+				$stmt->execute();
+
+				$stmt->bind_result($urlImagen, $tituloImagen, $descripcionImagen);
+
+				$stmt->fetch();
+				
+				$stmt->close();
+				
+				$array = array(
+					'url' => $urlImagen,
+					'titulo' => $tituloImagen,
+					'descripcion' => $descripcionImagen
+				);
+
+				return $array;
+			}
+
+			return false;
+        }
 
 	}
 ?>
