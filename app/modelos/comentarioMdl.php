@@ -124,18 +124,18 @@
 
 				$stmt->execute();
 
-				$stmt->bind_result($idImagen, $idUsuario, $comentario, $fechaComentario);
+				$stmt->bind_result($idImagen, $idUsuarioComento, $comentario, $fechaComentario);
 
-				$stmt->fetch();
-				
-				$stmt->close();
-				
-				$array = array(
-					'idImagen' => $idImagen,
-					'idUsuario' => $idUsuarioComento,
-					'comentario' => $comentario,
-                    'fecha' => $fechaComentario
-				);
+				$array = array();
+
+				while($stmt->fetch()){
+					$array[] = array(
+						'idImagen' => $idImagen,
+						'idUsuarioComento' => $idUsuarioComento,
+						'comentario' => $comentario,
+						'fecha' => $fechaComentario
+					);
+				}
 
 				return $array;
 			}
