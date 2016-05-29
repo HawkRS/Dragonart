@@ -167,23 +167,29 @@
 		}
         
         function busquedaImagen($palabra){
-            if($stmt = $this->db->prepare('SELECT urlImagen, tituloImagen, descripcionImagen FROM imagen WHERE tituloImagen LIKE '%?%' OR descripcionImagen LIKE '%?%'')){
+            if($stmt = $this->db->prepare('SELECT * FROM imagen WHERE tituloImagen LIKE '%?%' OR descripcionImagen LIKE '%?%'')){
 
 				$stmt->bind_param("ss", $palabra, $palabra);
 
 				$stmt->execute();
 
-				$stmt->bind_result($urlImagen, $tituloImagen, $descripcionImagen);
+				$stmt->bind_result($idImagen, $idUsuario, $urlImagen, $tituloImagen, $descripcionImagen, $fechaImagen, $statusImagen, $calificacionPromedioImagen, $tipoImagen);
 
-				$stmt->fetch();
-				
-				$stmt->close();
-				
-				$array = array(
-					'url' => $urlImagen,
-					'titulo' => $tituloImagen,
-					'descripcion' => $descripcionImagen
-				);
+				$array = array();
+
+				while($stmt->fetch()){
+					$array[] = array(
+						'id' => $idImagen,
+						'idUsuario' => $idUsuario,
+						'url' => $urlImagen,
+						'titulo' => $tituloImagen,
+						'descripcion' => $descripcionImagen,
+						'fecha' => $fechaImagen,
+						'status' => $statusImagen,
+						'promedio' => $calificacionPromedioImagen,
+						'tipo' => $tipoImagen
+					);
+				}
 
 				return $array;
 			}
