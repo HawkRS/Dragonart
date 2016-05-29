@@ -92,14 +92,14 @@
 
 				$stmt->bind_result($idImagen, $tag);
 
-				$stmt->fetch();
-				
-				$stmt->close();
-				
-				$array = array(
-					'id' => $idImagen,
-					'tag' => $tag
-				);
+				$array = array();
+
+				while($stmt->fetch()){
+					$array[] = array(
+						'id' => $idImagen,
+						'tag' => $tag
+					);
+				}
 
 				return $array;
 			}
