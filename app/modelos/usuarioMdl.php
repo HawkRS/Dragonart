@@ -283,23 +283,24 @@
 		}
         
         function busquedaUsuario($palabra){
-            if($stmt = $this->db->prepare('SELECT nombreUsuario, aliasUsuario, avatarUsuario FROM usuario WHERE nombreUsuario LIKE '%?%' OR aliasUsuario LIKE '%?%'')){
+            if($stmt = $this->db->prepare('SELECT idUsuario, nombreUsuario, aliasUsuario, avatarUsuario FROM usuario WHERE nombreUsuario LIKE '%?%' OR aliasUsuario LIKE '%?%'')){
 
 				$stmt->bind_param("ss", $palabra, $palabra);
 
 				$stmt->execute();
 
-				$stmt->bind_result($nombreUsuario, $aliasUsuario, $avatarUsuario);
+				$stmt->bind_result($idUsuario, $nombreUsuario, $aliasUsuario, $avatarUsuario);
 
-				$stmt->fetch();
-				
-				$stmt->close();
-				
-				$array = array(
-					'nombre' => $nombreUsuario,
-					'alias' => $aliasUsuario,
-					'avatar' => $avatarUsuario
-				);
+				$array = array();
+
+				while($stmt->fetch()){
+					$array[] = array(
+						'id' => $idUsuario,
+						'nombre' => $nombreUsuario,
+						'alias' => $aliasUsuario,
+						'avatar' => $avatarUsuario
+					);
+				}
 
 				return $array;
 			}
