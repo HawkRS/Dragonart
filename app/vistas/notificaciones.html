@@ -1,7 +1,7 @@
     <div class="container warp">
         <div class="main-usrIndex">
             <h1>Notificaciones</h1>
-
+            %mensaje%
             <!--iniSeguidores-->
             <div id="panelSeg" class="panel panel-default">
                 <div class="panel-heading postHeader">
@@ -17,7 +17,7 @@
                         <div id="avatar%conteo%" class="col-sm-6 col-md-3">
                             <div class="thumbnail">
                                 <a href="index.php?controlador=usuario&accion=mostrar&usuario=%nombreUsuario%">
-                                    <img src="%urlAvatar%" alt="%nombreUsuario%">
+                                    <img class="avatar img-circle" src="%urlAvatar%" alt="%nombreUsuario%">
                                 </a>
                             </div>
                             <div class="text-center">
@@ -105,7 +105,7 @@
                                 <div class="row">
                                     <figure>
                                         <a href="index.php?controlador=usuario&accion=mostrar&usuario=%nombreUsuario%">
-                                            <img class="col-md-3 avatar" src="%urlAvatar%" alt="%nombreUsuario%">
+                                            <img class="col-md-3 avatar img-circle" src="%urlAvatar%" alt="%nombreUsuario%">
                                         </a>
                                     </figure>
                                     <div class="col-md-6">
@@ -156,7 +156,7 @@
                     <!--iniFav-->
                     <a href="index.php?controlador=imagen&accion=mostrar&img=%idImagen%" class="list-group-item">
                         <div class="checkbox">
-                            <img class="avatar-sm" src="%urlAvatar%" alt="%aliasUsuario%">
+                            <img class="avatar-sm img-circle" src="%urlAvatar%" alt="%aliasUsuario%">
                             <label style="font-size: 1.3em">
                                 <input id="fCheck-%conteo%" name="fCheck-%conteo%" type="checkbox" value="">
                                 <span class="cr"><i class="cr-icon fa fa-check"></i></span>

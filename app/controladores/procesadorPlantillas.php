@@ -12,12 +12,20 @@
 	            $header = str_replace($busqueda, "", $header);
 	            $header = str_replace('%alias%', $_SESSION['alias'], $header);
 	            $header = str_replace('%usuario%', $_SESSION['nombre'], $header);
+
+	            //Si NO es administrador, entonces quitamos el botón de registrar Admin
+	            if(isset($_SESSION['admin']) && $_SESSION['admin'] === 1){
+	            	$inicio = strpos($header,'<!--IniAdmin-->');
+		            $fin = strpos($header, '<!--FinAdmin-->')+15;
+		            $busqueda = substr($header, $inicio, $fin-$inicio);
+		            $header = str_replace($busqueda, '', $header);
+	            }
 	        }
 	        else{
 	            $inicio = strpos($header,'<!--Inicio Online-->');
 	            $fin = strpos($header, '<!--Fin Online-->')+17;
 	            $busqueda = substr($header, $inicio, $fin-$inicio);
-	            $header = str_replace($busqueda, "", $header);
+	            $header = str_replace($busqueda, '', $header);
 	        }
 
 	        return $header;
@@ -333,7 +341,7 @@
 				'%idImagen%' => $infoImagen['id'],
 				'%urlImagen%' => $ruta,
 				'%nombreUsuario%' => $infoUsuario['nombre'],
-				'%avatarUsuario%' => $infoUsuario['avatar'],
+				'%avatarUsuario%' => str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/', '', $infoUsuario['avatar']),
 				'%tituloImagen%' => $infoImagen['titulo'],
 				'%fechaImagen%' => $infoImagen['fecha'],
 				'%descripcionImagen%' => $infoImagen['descripcion'],
@@ -401,7 +409,7 @@
 	        		$infoUsuario = $usrMdl->obtenerInfoPorID($comentarios[$x]['usuario']);
 	                
 	                $diccionarioComen = array (
-	                    '%avatarCom%' => $infoUsuario['avatar'],
+	                    '%avatarCom%' => str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/', '', $infoUsuario['avatar']),
 	                    '%aliasCom%' => $infoUsuario['alias'],
 	                    '%fechaCom%' => $comentarios[$x]['fecha'],
 	                    '%comentario%' => $comentarios[$x]['comentario']
@@ -437,6 +445,283 @@
 			$vista = $doctype.$header.$vista;
 
 	        return $vista;			
+		}
+
+		function vistaNotificaciones($doctype, $header, $vista, $footer, $notifSeguidores, $notifImagenes, $notifComentarios, $notifFavoritos){
+			$header = procesadorPlantillas::generarHeader($header);
+			$vista = procesadorPlantillas::generarFooter($vista, $footer);
+			$contador = 0;
+
+			if($notifSeguidores !== false && !empty($notifSeguidores)){
+				$vista = procesadorPlantillas::llenarSeguidores($vista, $notifSeguidores);
+			}else{
+				$inicio = strpos($vista, '<!--iniSeguidores-->');
+	        	$fin = strpos($vista, '<!--finSeguidores-->')+20;
+	        	$remplazar = substr($vista,$inicio,$fin-$inicio);
+	        	$vista = str_replace($remplazar, '', $vista);
+	        	$contador++;
+			}
+
+			if($notifImagenes !== false && !empty($notifImagenes)){
+				$vista = procesadorPlantillas::llenarImgNuevas($vista, $notifImagenes);
+			}else{
+				$inicio = strpos($vista, '<!--iniGaleria-->');
+	        	$fin = strpos($vista, '<!--finGaleria-->')+17;
+	        	$remplazar = substr($vista,$inicio,$fin-$inicio);
+	        	$vista = str_replace($remplazar, '', $vista);
+	        	$contador++;
+			}
+
+			if($notifComentarios !== false && !empty($notifComentarios)){
+				$vista = procesadorPlantillas::llenarComentarios($vista, $notifComentarios);
+			}else{
+				$inicio = strpos($vista, '<!--iniComentarios-->');
+	        	$fin = strpos($vista, '<!--finComentarios-->')+21;
+	        	$remplazar = substr($vista,$inicio,$fin-$inicio);
+	        	$vista = str_replace($remplazar, '', $vista);
+	        	$contador++;
+			}
+
+			if($notifFavoritos !== false && !empty($notifFavoritos)){
+				$vista = procesadorPlantillas::llenarFavoritos($vista, $notifFavoritos);
+			}else{
+				$inicio = strpos($vista, '<!--iniFavoritos-->');
+	        	$fin = strpos($vista, '<!--finFavoritos-->')+19;
+	        	$remplazar = substr($vista,$inicio,$fin-$inicio);
+	        	$vista = str_replace($remplazar, '', $vista);
+	        	$contador++;
+			}
+
+			if($contador === 4){
+				$vista = str_replace('%mensaje%', '<h3>No hay notificaciones nuevas.</h3>', $vista);
+			}else{
+				$vista = str_replace('%mensaje%', '', $vista);
+			}
+
+			$vista = $doctype.$header.$vista;
+
+	        return $vista;
+		}
+
+		function llenarSeguidores($vista, $notifSeguidores){
+			require_once('app/modelos/usuarioMdl.php');
+        	$usrMdl = new usuarioMdl();
+        	$usrTmp = array();
+
+			$filas = '';
+	        $inicioFila = strpos($vista,'<!--iniFilaSeg-->');
+	        $finFila = strpos($vista, '<!--finFilaSeg-->')+17;
+	        $fila = substr($vista,$inicioFila,$finFila-$inicioFila);
+
+	        $thumbnails = '';
+	        $inicio = strpos($vista,'<!--iniSeg-->');
+	        $fin = strpos($vista, '<!--finSeg-->')+13;
+	        $thumbnail = substr($vista,$inicio,$fin-$inicio);
+
+	        if(is_array($notifSeguidores) && count($notifSeguidores) > 0){
+	            $contador = 0;
+	            for($x=0; $x<count($notifSeguidores); $x++){
+
+	                if($x !== 0 && $x%4 === 0){
+	                    $new_fila = $fila;
+
+	                    $diccionarioFila = array(
+	                        '%conteo%' => $contador
+	                    );
+
+	                    $new_fila = str_replace($thumbnail, $thumbnails, $new_fila);
+	                    $new_fila = strtr($new_fila, $diccionarioFila);
+	                    $filas .= $new_fila;
+
+	                    $contador++;
+	                    $thumbnails = '';
+	                }
+
+	                $usrTmp = $usrMdl->obtenerInfoPorID($notifSeguidores[$x]['autor']);
+
+	                $new_thumbnail = $thumbnail;
+	                
+	                $diccionario = array (
+	                	'%conteo%' => $x,
+	                    '%nombreUsuario%' => $usrTmp['nombre'],
+	                    '%urlAvatar%' => str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/', '', $usrTmp['avatar'])
+	                );
+	                
+	                $new_thumbnail = procesadorPlantillas::aplicaDiccionario($new_thumbnail,$diccionario);
+	                $thumbnails .= $new_thumbnail;
+	            }
+	            
+	            $new_fila = $fila;
+
+	            $diccionarioFila = array(
+	                '%conteo%' => $contador
+	            );
+
+	            $new_fila = str_replace($thumbnail, $thumbnails, $new_fila);
+	            $new_fila = procesadorPlantillas::aplicaDiccionario($new_fila, $diccionarioFila);
+	            $filas .= $new_fila;
+	        }
+
+	        $vista = str_replace($fila, $filas, $vista);
+
+	        return $vista;
+		}
+
+		function llenarImgNuevas($vista, $notifImagenes){
+			require_once('app/modelos/imagenMdl.php');
+        	$imgMdl = new imagenMdl();
+        	$imgTmp = array();
+
+			$filas = '';
+	        $inicioFila = strpos($vista,'<!--iniFilaGal-->');
+	        $finFila = strpos($vista, '<!--finFilaGal-->')+17;
+	        $fila = substr($vista,$inicioFila,$finFila-$inicioFila);
+
+	        $thumbnails = '';
+	        $inicio = strpos($vista,'<!--iniGal-->');
+	        $fin = strpos($vista, '<!--finGal-->')+13;
+	        $thumbnail = substr($vista,$inicio,$fin-$inicio);
+
+	        if(is_array($notifImagenes) && count($notifImagenes) > 0){
+	            $contador = 0;
+	            for($x=0; $x<count($notifImagenes); $x++){
+
+	                if($x !== 0 && $x%4 === 0){
+	                    $new_fila = $fila;
+
+	                    $diccionarioFila = array(
+	                        '%conteo%' => $contador
+	                    );
+
+	                    $new_fila = str_replace($thumbnail, $thumbnails, $new_fila);
+	                    $new_fila = strtr($new_fila, $diccionarioFila);
+	                    $filas .= $new_fila;
+
+	                    $contador++;
+	                    $thumbnails = '';
+	                }
+
+	                $imgTmp = $imgMdl->obtenerInfo($notifImagenes[$x]['elemento']);
+
+	                $new_thumbnail = $thumbnail;
+	                
+	                $diccionarioImagen = array (
+	                    '%conteo%' => $x,
+	                    '%idImagen%' => $imgTmp['id'],
+	                    '%urlImagen%' => str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/uploads/img', 'uploads/thumb', $imgTmp['url']),
+	                    '%tituloImagen%' => $imgTmp['titulo']
+	                );
+	                
+	                $new_thumbnail = procesadorPlantillas::aplicaDiccionario($new_thumbnail,$diccionarioImagen);
+	                $thumbnails .= $new_thumbnail;
+	            }
+	            
+	            $new_fila = $fila;
+
+	            $diccionarioFila = array(
+	                '%conteo%' => $contador
+	            );
+
+	            $new_fila = str_replace($thumbnail, $thumbnails, $new_fila);
+	            $new_fila = procesadorPlantillas::aplicaDiccionario($new_fila, $diccionarioFila);
+	            $filas .= $new_fila;
+	        }
+	        else{
+	            $filas = '<i>No hay imágenes en la galería...</i>';
+	        }
+	        
+	        $vista = str_replace($fila, $filas, $vista);
+
+	        return $vista;
+		}
+
+		function llenarComentarios($vista, $notifComentarios){
+			require_once('app/modelos/usuarioMdl.php');
+        	$usrMdl = new usuarioMdl();
+        	$usrTmp = array();
+
+        	require_once('app/modelos/comentarioMdl.php');
+        	$comMdl = new comentarioMdl();
+        	$comTmp = array();
+
+	        $thumbnails = '';
+	        $inicio = strpos($vista,'<!--iniCom-->');
+	        $fin = strpos($vista, '<!--finCom-->')+13;
+	        $thumbnail = substr($vista,$inicio,$fin-$inicio);
+
+	        if(is_array($notifComentarios) && count($notifComentarios) > 0){
+	            $contador = 0;
+	            for($x=0; $x<count($notifComentarios); $x++){
+
+	                $usrTmp = $usrMdl->obtenerInfoPorID($notifComentarios[$x]['autor']);
+	                $comTmp = $comMdl->obtenerInfo($notifComentarios[$x]['elemento']);
+
+	                $new_thumbnail = $thumbnail;
+	                
+	                $diccionario = array (
+	                	'%conteo%' => $x,
+	                    '%nombreUsuario%' => $usrTmp['nombre'],
+	                    '%urlAvatar%' => str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/', '', $usrTmp['avatar']),
+	                    '%aliasUsuario%' => $usrTmp['alias'],
+	                    '%fechaComentario%' => $comTmp['fecha'],
+	                    '%comentario%' => $comTmp['comentario'],
+	                    '%idImagen%' => $comTmp['imagen']
+	                );
+	                
+	                $new_thumbnail = procesadorPlantillas::aplicaDiccionario($new_thumbnail,$diccionario);
+	                $thumbnails .= $new_thumbnail;
+	            }
+	        }
+
+	        $vista = str_replace($thumbnail, $thumbnails, $vista);
+
+	        return $vista;
+		}
+
+		function llenarFavoritos($vista, $notifFavoritos){
+			require_once('app/modelos/usuarioMdl.php');
+        	$usrMdl = new usuarioMdl();
+        	$usrTmp = array();
+
+        	require_once('app/modelos/favoritoMdl.php');
+        	$favMdl = new favoritoMdl();
+        	$favTmp = array();
+
+        	require_once('app/modelos/imagenMdl.php');
+        	$imgMdl = new imagenMdl();
+        	$imgTmp = array();
+
+	        $thumbnails = '';
+	        $inicio = strpos($vista,'<!--iniFav-->');
+	        $fin = strpos($vista, '<!--finFav-->')+13;
+	        $thumbnail = substr($vista,$inicio,$fin-$inicio);
+
+	        if(is_array($notifFavoritos) && count($notifFavoritos) > 0){
+	            $contador = 0;
+	            for($x=0; $x<count($notifFavoritos); $x++){
+
+	                $usrTmp = $usrMdl->obtenerInfoPorID($notifFavoritos[$x]['autor']);
+	                $favTmp = $favMdl->obtenerInfo($notifFavoritos[$x]['elemento']);
+	                $imgTmp = $imgMdl->obtenerInfo($favTmp['imagen']);
+
+	                $new_thumbnail = $thumbnail;
+	                
+	                $diccionario = array (
+	                	'%conteo%' => $x,
+	                    '%idImagen%' => $imgTmp['id'],
+	                    '%urlAvatar%' => str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/', '', $usrTmp['avatar']),
+	                    '%aliasUsuario%' => $usrTmp['alias'],
+	                    '%tituloImagen%' => $imgTmp['titulo']
+	                );
+	                
+	                $new_thumbnail = procesadorPlantillas::aplicaDiccionario($new_thumbnail,$diccionario);
+	                $thumbnails .= $new_thumbnail;
+	            }
+	        }
+
+	        $vista = str_replace($thumbnail, $thumbnails, $vista);
+
+	        return $vista;
 		}
 
 		function vistaError404($doctype, $header, $vista, $footer, $mensaje){

@@ -125,6 +125,34 @@
 			return false;
 		}
 
+		function obtenerInfo($id){
+			if($stmt = $this->db->prepare('SELECT * FROM favorito WHERE idFavorito=?')){
+
+				$stmt->bind_param("i", $id);
+
+				$stmt->execute();
+
+				$stmt->bind_result($idFavorito, $idImagen, $idUsuarioFavoriteo, $calificacionFavorito, $fechaFavorito, $tipo);
+
+				$stmt->fetch();
+
+				$array = array(
+					'id' => $idFavorito,
+					'imagen' => $idImagen,
+					'usuario' => $idUsuarioFavoriteo,
+					'calificacion' => $calificacionFavorito,
+					'fecha' => $fechaFavorito,
+					'tipo' => $tipo
+				);
+				
+				$stmt->close();
+
+				return $array;
+			}
+
+			return false;
+		}
+
 	}
 
 ?>

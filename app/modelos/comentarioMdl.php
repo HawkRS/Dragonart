@@ -57,6 +57,34 @@
 			return false;
 		}
 
+		function obtenerInfo($id){
+			if($stmt = $this->db->prepare('SELECT * FROM comentario WHERE idComentario=?')){
+
+				$stmt->bind_param("i", $id);
+
+				$stmt->execute();
+
+				$stmt->bind_result($idComentario, $idImagen, $idUsuarioComento, $comentario, $fechaComentario, $tipo);
+
+				$stmt->fetch();
+
+				$array = array(
+					'id' => $idComentario,
+					'imagen' => $idImagen,
+					'usuario' => $idUsuarioComento,
+					'comentario' => $comentario,
+					'fecha' => $fechaComentario,
+					'tipo' => $tipo
+				);
+				
+				$stmt->close();
+
+				return $array;
+			}
+
+			return false;
+		}
+
 		function getError(){
 			return $this->db->error;
 		}

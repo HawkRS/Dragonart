@@ -39,13 +39,22 @@
                     </li>
                     <!--Fin Offline-->
                     <!--Inicio Online-->
+                    <!--IniAdmin-->
+                    <li>
+                        <a href="index.php?controlador=usuario&accion=altaAdmin"><span class="glyphicon glyphicon-pencil"></span> Registrar usuario</a>
+                    </li>
+                    <!--FinAdmin-->
                     <li>
                         <a href="index.php?controlador=imagen&accion=alta"><span class="glyphicon glyphicon-upload"></span> Subir imagen</a>
                     </li>
                     <li class="dropdown">
 
                         <a href="#" data-toggle="dropdown" role="button">
-                            %alias%<span class="caret"></span>
+                            %alias%
+                            <!--iniNotif1-->
+                            <span class="label label-warning">%num%</span>
+                            <!--finNotif1-->
+                            <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu submenu">
@@ -53,7 +62,11 @@
                                 <a href="index.php?controlador=usuario&accion=mostrar&usuario=%usuario%"><span class="glyphicon glyphicon-user"></span> Página principal</a>
                             </li>
                             <li>
-                                <a href="index.php?controlador=notificaciones&accion=mostrar"><span class="glyphicon glyphicon-comment"></span> Notificaciones</a>
+                                <a href="index.php?controlador=notificaciones&accion=mostrar"><span class="glyphicon glyphicon-comment"></span> Notificaciones 
+                                <!--iniNotif2-->
+                                <span class="label label-warning">%num%</span>
+                                <!--finNotif2-->
+                                </a>
                             </li>
                             <li>
                                 <a href="index.php?controlador=usuario&accion=modificar"><span class="glyphicon glyphicon-edit"></span> Editar perfil</a>
