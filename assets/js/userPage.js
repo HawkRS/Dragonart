@@ -81,7 +81,7 @@ function llenarGaleria(){
 								$('#image' + tmp + ' .thumbnail > a')
 									.append('<img src="'+ json[tmp].url +'" alt="'+ json[tmp].titulo +'" />');
 								$('#image' + tmp + ' .thumbnail > div')
-									.append('<span>'+ json[tmp].titulo +'</span>')
+									.append('<span id="titulo'+ tmp +'">'+ json[tmp].titulo +'</span>')
 									.append('<input id="input-' + tmp + '" class="rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1" value="'+ json[tmp].promedio +'">');
 								$('#input-' + tmp).rating({displayOnly : json[tmp].bool});
 								$('#input-' + tmp).on('rating.change', function(event, value, caption){
@@ -147,7 +147,7 @@ function llenarFavoritos(){
 								$('#image' + tmp + ' .thumbnail > a')
 									.append('<img src="'+ json[tmp].url +'" alt="'+ json[tmp].titulo +'" />');
 								$('#image' + tmp + ' .thumbnail > div')
-									.append('<span>'+ json[tmp].titulo +'</span>')
+									.append('<span id="titulo'+ tmp +'">'+ json[tmp].titulo +'</span>')
 									.append('<input id="input-' + tmp + '" class="rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1" value="'+ json[tmp].promedio +'">');
 								$('#input-' + tmp).rating({displayOnly : json[tmp].bool});
 								$('#input-' + tmp).on('rating.change', function(event, value, caption){

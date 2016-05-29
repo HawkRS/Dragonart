@@ -20,6 +20,28 @@
 		            $busqueda = substr($header, $inicio, $fin-$inicio);
 		            $header = str_replace($busqueda, '', $header);
 	            }
+
+	            require_once('app/modelos/usuarioMdl.php');
+	            $usrMdl = new usuarioMdl();
+	            require_once('app/modelos/notificacionMdl.php');
+	            $ntfMdl = new notificacionMdl();
+
+	            $infoUsuario = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
+	            $conteo = $ntfMdl->contarNotificaciones($infoUsuario['id']);
+
+	            if($conteo > 0){
+	            	$header = str_replace('%num%', $conteo, $header);
+	            }else{
+	            	$inicio = strpos($header,'<!--iniNotif1-->');
+		            $fin = strpos($header, '<!--finNotif1-->')+16;
+		            $busqueda = substr($header, $inicio, $fin-$inicio);
+		            $header = str_replace($busqueda, '', $header);
+
+		            $inicio = strpos($header,'<!--iniNotif2-->');
+		            $fin = strpos($header, '<!--finNotif2-->')+16;
+		            $busqueda = substr($header, $inicio, $fin-$inicio);
+		            $header = str_replace($busqueda, '', $header);
+	            }
 	        }
 	        else{
 	            $inicio = strpos($header,'<!--Inicio Online-->');
@@ -99,6 +121,8 @@
 
 		            $btnSeguirCortado = true;
 		            $btnDejarCortado = true;
+		        }else{
+		        	$rating = 'false';
 		        }
 
 		        //Valida que el usuario que visita la página NO sea admin para quitar el botón "Bloquear"
@@ -112,7 +136,6 @@
 		            $finBtn = strpos($vista, '<!--FinBotonDesbloquear-->')+26;
 		            $btnBloquear = substr($vista,$inicioBtn,$finBtn-$inicioBtn);
 		            $vista = str_replace($btnBloquear, '', $vista);
-		            $rating = 'false';
 
 		            $btnBloquearCortado = true;
 		            $btnDesbloquearCortado = true;
@@ -148,6 +171,7 @@
 		            	$btnDesbloquearCortado = true;
 		        	}
 		        	if(isset($_SESSION['admin']) && $_SESSION['admin'] === 0){
+		        		$rating = 'false';
 		        		if($estaSiguiendolo && !$btnSeguirCortado){
 			            	$inicioBtn = strpos($vista,'<!--IniBotonSeguir-->');
 				            $finBtn = strpos($vista, '<!--FinBotonSeguir-->')+21;
@@ -542,6 +566,7 @@
 	                $new_thumbnail = $thumbnail;
 	                
 	                $diccionario = array (
+	                	'%idNotificacion%' => $notifSeguidores[$x]['id'],
 	                	'%conteo%' => $x,
 	                    '%nombreUsuario%' => $usrTmp['nombre'],
 	                    '%urlAvatar%' => str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/', '', $usrTmp['avatar'])
@@ -571,6 +596,14 @@
 			require_once('app/modelos/imagenMdl.php');
         	$imgMdl = new imagenMdl();
         	$imgTmp = array();
+
+        	require_once('app/modelos/usuarioMdl.php');
+        	$usrMdl = new usuarioMdl();
+        	$usrTmp = array();
+
+        	require_once('app/modelos/favoritoMdl.php');
+        	$favMdl = new favoritoMdl();
+        	$favTmp = array();
 
 			$filas = '';
 	        $inicioFila = strpos($vista,'<!--iniFilaGal-->');
@@ -602,14 +635,23 @@
 	                }
 
 	                $imgTmp = $imgMdl->obtenerInfo($notifImagenes[$x]['elemento']);
+	                $usrTmp = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
+	                $favTmp = $favMdl->obtenerFavorito($usrTmp['id'], $imgTmp['id']);
+                	if($favTmp !== false && !empty($favTmp)){
+                		$valorFav = $favTmp['calificacion'];
+                	}else{
+                		$valorFav = 0;
+                	}
 
 	                $new_thumbnail = $thumbnail;
 	                
 	                $diccionarioImagen = array (
+	                	'%idNotificacion%' => $notifImagenes[$x]['id'],
 	                    '%conteo%' => $x,
 	                    '%idImagen%' => $imgTmp['id'],
 	                    '%urlImagen%' => str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/uploads/img', 'uploads/thumb', $imgTmp['url']),
-	                    '%tituloImagen%' => $imgTmp['titulo']
+	                    '%tituloImagen%' => $imgTmp['titulo'],
+	                    '%valorFav%' => $valorFav
 	                );
 	                
 	                $new_thumbnail = procesadorPlantillas::aplicaDiccionario($new_thumbnail,$diccionarioImagen);
@@ -659,6 +701,7 @@
 	                $new_thumbnail = $thumbnail;
 	                
 	                $diccionario = array (
+	                	'%idNotificacion%' => $notifComentarios[$x]['id'],
 	                	'%conteo%' => $x,
 	                    '%nombreUsuario%' => $usrTmp['nombre'],
 	                    '%urlAvatar%' => str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/', '', $usrTmp['avatar']),
@@ -707,6 +750,7 @@
 	                $new_thumbnail = $thumbnail;
 	                
 	                $diccionario = array (
+	                	'%idNotificacion%' => $notifFavoritos[$x]['id'],
 	                	'%conteo%' => $x,
 	                    '%idImagen%' => $imgTmp['id'],
 	                    '%urlAvatar%' => str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/', '', $usrTmp['avatar']),

@@ -263,13 +263,14 @@ class usuarioCtl {
             $usrMdl = new usuarioMdl();
             require_once('app/modelos/seguidorMdl.php');
             $segMdl = new seguidorMdl();
+            require_once('app/modelos/notificacionMdl.php');
+            $ntfMdl = new notificacionMdl();
+
             $infoUsuarioASeguir = $usrMdl->paginaUsuario($_POST['nombre']);
             $infoUsuarioSeguidor = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
             if($segMdl->existe($infoUsuarioSeguidor['id'], $infoUsuarioASeguir['id']) === false){
                 if($segMdl->alta($infoUsuarioSeguidor['id'], $infoUsuarioASeguir['id'])){
                     $nuevoSeguir = $segMdl->obtenerInfo($infoUsuarioSeguidor['id'], $infoUsuarioASeguir['id']);
-                    require_once('app/modelos/notificacionMdl.php');
-                    $ntfMdl = new notificacionMdl();
 
                     if($ntfMdl->existe($infoUsuarioSeguidor['id'], $infoUsuarioASeguir['id'], 4, $nuevoSeguir['id'])){
                         $ntfMdl->modificar($infoUsuarioSeguidor['id'], $infoUsuarioASeguir['id'], 4, $nuevoSeguir['id'], 1);
@@ -280,6 +281,8 @@ class usuarioCtl {
                 }
             }else{
                 if($segMdl->modificar($infoUsuarioSeguidor['id'], $infoUsuarioASeguir['id'], 1)){
+                    $nuevoSeguir = $segMdl->obtenerInfo($infoUsuarioSeguidor['id'], $infoUsuarioASeguir['id']);
+                    
                     if($ntfMdl->existe($infoUsuarioSeguidor['id'], $infoUsuarioASeguir['id'], 4, $nuevoSeguir['id'])){
                         $ntfMdl->modificar($infoUsuarioSeguidor['id'], $infoUsuarioASeguir['id'], 4, $nuevoSeguir['id'], 1);
                     }

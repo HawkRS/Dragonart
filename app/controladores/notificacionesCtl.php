@@ -9,7 +9,7 @@ class notificacionesCtl {
 
     function __construct() {
     	session_start();
-        echo 'Soy notificacionesCtl';
+
         $this->doctype = file_get_contents('app/vistas/doctype.html');
         $this->header = file_get_contents('app/vistas/header.html');
         $this->footer = file_get_contents('app/vistas/footer.html');
@@ -20,6 +20,10 @@ class notificacionesCtl {
             switch($_GET['accion']) {                    
                 case 'mostrar':
                     $this->mostrar();
+                    break;
+
+                case 'baja':
+                    echo $this->baja();
                     break;
             }
         }
@@ -53,6 +57,22 @@ class notificacionesCtl {
         }
 
         echo $vista;
+    }
+
+    function baja(){
+        if(isset($_SESSION['correo']) && isset($_SESSION['logPass'])){
+            require_once('app/modelos/usuarioMdl.php');
+            $usrMdl = new usuarioMdl();
+            require_once('app/modelos/notificacionMdl.php');
+            $ntfMdl = new notificacionMdl();
+
+            $infoUsuario = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
+
+            if($ntfMdl->modificarPorID($_POST['idNotificacion'], 0)){
+                return true;
+            }
+        }
+        return false;
     }
 }
 ?>

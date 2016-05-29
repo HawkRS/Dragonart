@@ -1,3 +1,40 @@
+function asignarAJAX(urlImagen, val){
+    $.ajax({
+            type : 'POST',
+            url : 'index.php?controlador=imagen&accion=altaFavorito',
+            data : {
+                url : urlImagen,
+                calificacion : val
+            },
+            success : function(respuesta){
+                if(respuesta !== '1'){
+                    alert('No se pudo agregar el favorito.');
+                }
+            },
+            error : function(respuesta){
+                alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
+            }
+        });
+}
+
+function quitarNotificacion(id){
+    $.ajax({
+            type : 'POST',
+            url : 'index.php?controlador=notificaciones&accion=baja',
+            data : {
+                idNotificacion : id
+            },
+            success : function(respuesta){
+                if(respuesta !== '1'){
+                    alert('No se pudo quitar la notificación.');
+                }
+            },
+            error : function(respuesta){
+                alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
+            }
+        });
+}
+
 /********************/
 /*Seccion seguidores*/
 /********************/
@@ -27,7 +64,10 @@ function segQuitar(){
         .length;
     for(var i = 0; i < contador; i++){
         if($('#sCheck-' + i).prop('checked')){
-            $('#avatar' + i).remove();
+            (function(tmp){
+                quitarNotificacion($('#avatar' + tmp).attr('data-notificacion'));
+                $('#avatar' + tmp).remove();
+            })(i);
         }
     }
 
@@ -83,7 +123,10 @@ function galQuitar(){
         .length;
     for(var i = 0; i < contador; i++){
         if($('#gCheck-' + i).prop('checked')){
-            $('#image' + i).remove();
+            (function(tmp){
+                quitarNotificacion($('#image' + tmp).attr('data-notificacion'));
+                $('#image' + tmp).remove();
+            })(i);
         }
     }
 
@@ -136,7 +179,10 @@ function comQuitar(){
     var temp = $('.panel-body > .panel');
     for(var i = 0; i < contador; i++){
         if($('#cCheck-' + i).prop('checked')){
-            temp.eq(i).remove();
+            (function(tmp){
+                quitarNotificacion(temp.eq(tmp).attr('data-notificacion'));
+                temp.eq(tmp).remove();
+            })(i);
         }
     }
     for(var i = 0; i < contador; i++){
@@ -180,7 +226,10 @@ function favQuitar(){
     var temp = $('#favGrupo > a');
     for(var i = 0; i < contador; i++){
         if($('#fCheck-' + i).prop('checked')){
-            temp.eq(i).remove();
+            (function(tmp){
+                quitarNotificacion(temp.eq(tmp).attr('data-notificacion'));
+                temp.eq(tmp).remove();
+            })(i);
         }
     }
     for(var i = 0; i < contador; i++){

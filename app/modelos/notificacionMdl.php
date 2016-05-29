@@ -29,12 +29,49 @@
 			return $bandera;
 		}
 
+		function contarNotificaciones($id){
+			if($stmt = $this->db->prepare('SELECT COUNT(*) FROM notificacion WHERE idUsuarioDestino=? AND statusNotificacion=1')){
+
+				$stmt->bind_param("i", $id);
+
+				$stmt->execute();
+
+				$stmt->bind_result($conteo);
+
+				$stmt->fetch();
+				
+				$stmt->close();
+
+				return $conteo;
+			}
+
+			return false;
+		}
+
 		function modificar($idAut, $idDes, $tipo, $idObj, $status){
 			$bandera = false;
 
 			if($stmt = $this->db->prepare('UPDATE notificacion SET statusNotificacion=? WHERE idUsuarioAutor=? AND idUsuarioDestino=? AND TipoNotificacion=? AND idElementoObjetivo=?')){
 
 				$stmt->bind_param("iiiii", $status, $idAut, $idDes, $tipo, $idObj);
+
+				$bandera = $stmt->execute();
+
+				$stmt->fetch();
+				
+				$stmt->close();
+
+			}
+
+			return $bandera;
+		}
+
+		function modificarPorID($id, $status){
+			$bandera = false;
+
+			if($stmt = $this->db->prepare('UPDATE notificacion SET statusNotificacion=? WHERE idNotificacion=?')){
+
+				$stmt->bind_param("ii", $status, $id);
 
 				$bandera = $stmt->execute();
 
@@ -72,7 +109,7 @@
 		}
 
 		function obtenerSeguidores($idDes){
-			if($stmt = $this->db->prepare('SELECT * FROM notificacion WHERE idUsuarioDestino=? AND TipoNotificacion=4')){
+			if($stmt = $this->db->prepare('SELECT * FROM notificacion WHERE idUsuarioDestino=? AND TipoNotificacion=4 AND statusNotificacion=1')){
 
 				$stmt->bind_param("i", $idDes);
 
@@ -102,7 +139,7 @@
 		}
 
 		function obtenerImagenes($idDes){
-			if($stmt = $this->db->prepare('SELECT * FROM notificacion WHERE idUsuarioDestino=? AND TipoNotificacion=3')){
+			if($stmt = $this->db->prepare('SELECT * FROM notificacion WHERE idUsuarioDestino=? AND TipoNotificacion=3 AND statusNotificacion=1')){
 
 				$stmt->bind_param("i", $idDes);
 
@@ -132,7 +169,7 @@
 		}
 
 		function obtenerComentarios($idDes){
-			if($stmt = $this->db->prepare('SELECT * FROM notificacion WHERE idUsuarioDestino=? AND TipoNotificacion=1')){
+			if($stmt = $this->db->prepare('SELECT * FROM notificacion WHERE idUsuarioDestino=? AND TipoNotificacion=1 AND statusNotificacion=1')){
 
 				$stmt->bind_param("i", $idDes);
 
@@ -162,7 +199,7 @@
 		}
 
 		function obtenerFavoritos($idDes){
-			if($stmt = $this->db->prepare('SELECT * FROM notificacion WHERE idUsuarioDestino=? AND TipoNotificacion=2')){
+			if($stmt = $this->db->prepare('SELECT * FROM notificacion WHERE idUsuarioDestino=? AND TipoNotificacion=2 AND statusNotificacion=1')){
 
 				$stmt->bind_param("i", $idDes);
 

@@ -14,7 +14,7 @@
                     <div id="filaSeg%conteo%" class="row">
 
                         <!--iniSeg-->
-                        <div id="avatar%conteo%" class="col-sm-6 col-md-3">
+                        <div id="avatar%conteo%" data-notificacion="%idNotificacion%" class="col-sm-6 col-md-3">
                             <div class="thumbnail">
                                 <a href="index.php?controlador=usuario&accion=mostrar&usuario=%nombreUsuario%">
                                     <img class="avatar img-circle" src="%urlAvatar%" alt="%nombreUsuario%">
@@ -58,7 +58,7 @@
                     <div id="filaGal%conteo%" class="row">
 
                         <!--iniGal-->
-                        <div id="image%conteo%" name="image%conteo%" class="col-sm-6 col-md-3">
+                        <div id="image%conteo%" data-notificacion="%idNotificacion%" name="image%conteo%" class="col-sm-6 col-md-3">
                             <div class="thumbnail">
                                 <a href="index.php?controlador=imagen&accion=mostrar&img=%idImagen%">
                                     <img src="%urlImagen%" alt="%tituloImagen%">
@@ -71,7 +71,7 @@
                                             %tituloImagen%
                                         </label>
                                     </div>
-                                    <input id="input-%conteo%" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1">
+                                    <input id="input-%conteo%" class="rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1" value="%valorFav%">
                                 </div>
                             </div>
                         </div>
@@ -100,7 +100,7 @@
                 <div class="panel-body postDesc">
 
                         <!--iniCom-->
-                        <article class="panel panel-default">
+                        <article class="panel panel-default" data-notificacion="%idNotificacion%">
                             <div class="panel-heading postHeader">
                                 <div class="row">
                                     <figure>
@@ -154,7 +154,7 @@
 
                 <div id="favGrupo" class="list-group">
                     <!--iniFav-->
-                    <a href="index.php?controlador=imagen&accion=mostrar&img=%idImagen%" class="list-group-item">
+                    <a href="index.php?controlador=imagen&accion=mostrar&img=%idImagen%" data-notificacion="%idNotificacion%" class="list-group-item">
                         <div class="checkbox">
                             <img class="avatar-sm img-circle" src="%urlAvatar%" alt="%aliasUsuario%">
                             <label style="font-size: 1.3em">
@@ -183,5 +183,25 @@
 <!--finFooter-->
 
 <script type="text/javascript" src="assets/js/Notificaciones.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var contador = $('#panelGal .panel-body .row')
+            .find('.thumbnail')
+            .length;
+        console.log(contador);
+        for(var x = 0; x < contador; x++){
+            (function(tmp){
+                if($('#input-' + tmp).length){
+                    console.log('hola');
+                    $('#input-' + tmp).rating({displayOnly : false});
+                    $('#input-' + tmp).on('rating.change', function(event, value, caption){
+                        url = $('#image' + tmp).find('img').attr('src');
+                        asignarAJAX(url, value);
+                    });
+                }
+            })(x);
+        }
+    });
+</script>
 
 </html>

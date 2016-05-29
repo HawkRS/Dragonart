@@ -85,8 +85,10 @@ class imagenCtl {
                         if($imgMdl->alta($infoUsuario['id'], $nuevoNombre, $postLimpio['titulo'], $postLimpio['descripcion'])){
                             $infoImagen = $imgMdl->obtenerInfoPorUrl($nuevoNombre);
                             if($tagMdl->alta($infoImagen['id'], $postLimpio['tags'])){
-                                //Agregar a notificaciones
+                                
                                 $infoImagen = $imgMdl->obtenerInfoPorUrl($nuevoNombre);
+                                //SECCIÓN NOTIFICACIONES
+                                imagenCtl::mandarNotificaciones($infoImagen, 3);
                                 header('Location: http://localhost/Dragonart/index.php?controlador=imagen&accion=mostrar&img='.$infoImagen['id']);
                             }
                             else{
@@ -158,6 +160,11 @@ class imagenCtl {
 
                 if($error === true){
                     if($infoUsuarioActual !== false && $comMdl->alta($infoImagen['id'], $infoUsuarioActual['id'], $_POST['comentario'])){
+                        if($infoImagen['idUsuario'] !== $infoUsuarioActual['id']){
+                            //Mandamos notificación si no mandas comentario a tu propia imagen
+                            $infoComentario = $comMdl->obtenerComentario($infoImagen['id'], $infoUsuarioActual['id'], $_POST['comentario']);
+                            imagenCtl::mandarNotificacion($infoImagen['idUsuario'], $infoComentario, 1);
+                        }
                         header('Location: index.php?controlador=imagen&accion=mostrar&img='.$infoImagen['id']);
                     }
                     else{
@@ -324,12 +331,13 @@ class imagenCtl {
             }else{
                 for($x = 0; $x < count($infoFavorito) && $x < $_POST['limit']; $x++){
                     $infoImagen = $imgMdl->obtenerInfo($infoFavorito[$x]['imagen']);
+                    $infoDueno = $usrMdl->obtenerInfoPorID($infoImagen['idUsuario']);
                     if($infoImagen !== false && !empty($infoImagen) && $infoImagen['status'] !== 0){
                         $infoImagen['url'] = str_replace('/var/www/html/Dragonart/', '', $infoImagen['url']);
-                        if(isset($_SESSION['correo']) && $_SESSION['correo'] === $infoUsuario['correo']){
+                        if(isset($_SESSION['correo']) && $_SESSION['correo'] === $infoDueno['correo']){
                             $bool = true;
                         }else{
-                            if(isset($_SESSION['correo']) && $_SESSION['correo'] !== $infoUsuario['correo']){
+                            if(isset($_SESSION['correo']) && $_SESSION['correo'] !== $infoDueno['correo']){
                                 $bool = false;
                             }else{
                                if(!isset($_SESSION['correo'])){
@@ -360,49 +368,91 @@ class imagenCtl {
 
     function altaFavorito(){
 
-            if(isset($_POST['url']) && isset($_POST['calificacion']) && isset($_SESSION['correo']) && isset($_SESSION['logPass'])){
-                require_once('app/modelos/usuarioMdl.php');
-                $usrMdl = new usuarioMdl();
-                require_once('app/modelos/imagenMdl.php');
-                $imgMdl = new imagenMdl();
-                require_once('app/modelos/favoritoMdl.php');
-                $favMdl = new favoritoMdl();
+        if(isset($_POST['url']) && isset($_POST['calificacion']) && isset($_SESSION['correo']) && isset($_SESSION['logPass'])){
+            require_once('app/modelos/usuarioMdl.php');
+            $usrMdl = new usuarioMdl();
+            require_once('app/modelos/imagenMdl.php');
+            $imgMdl = new imagenMdl();
+            require_once('app/modelos/favoritoMdl.php');
+            $favMdl = new favoritoMdl();
 
-                $infoUsuario = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
-                $ruta = str_replace('/thumb/', '/img/', $_POST['url']);
-                $ruta = '/var/www/html/Dragonart/'.$ruta;
-                $infoImagen = $imgMdl->obtenerInfoPorUrl($ruta);
+            $infoUsuario = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
+            $ruta = str_replace('/thumb/', '/img/', $_POST['url']);
+            $ruta = '/var/www/html/Dragonart/'.$ruta;
+            $infoImagen = $imgMdl->obtenerInfoPorUrl($ruta);
 
-                if($infoUsuario !== false && $infoImagen !== false){
-                    $infoFavorito = $favMdl->obtenerFavorito($infoUsuario['id'], $infoImagen['id']);
-                    if($infoFavorito !== false && !empty($infoFavorito)){
-                        //Modificamos el favorito actual
-                        if($favMdl->modificar($_POST['calificacion'], $infoFavorito['id'])){
-                            $promedio = $favMdl->obtenerPromedio($infoImagen['id']);
-                            if($promedio !== false){
-                                if($imgMdl->actualizaPromedio($promedio, $infoImagen['id'])){
-                                    return true;
-                                }
-                            }
-                        }
-                    }
-                    else{
-                        //Agregamos nuevo favorito
-                        if($favMdl->alta($infoImagen['id'], $infoUsuario['id'], $_POST['calificacion'])){
-                            $promedio = $favMdl->obtenerPromedio($infoImagen['id']);
-                            if($promedio !== false){
-                                if($imgMdl->actualizaPromedio($promedio, $infoImagen['id'])){
-                                    return true;
-                                }
+            if($infoUsuario !== false && $infoImagen !== false){
+                $infoFavorito = $favMdl->obtenerFavorito($infoUsuario['id'], $infoImagen['id']);
+                if($infoFavorito !== false && !empty($infoFavorito)){
+                    //Modificamos el favorito actual
+                    if($favMdl->modificar($_POST['calificacion'], $infoFavorito['id'])){
+                        $promedio = $favMdl->obtenerPromedio($infoImagen['id']);
+                        if($promedio !== false){
+                            if($imgMdl->actualizaPromedio($promedio, $infoImagen['id'])){
+                                return true;
                             }
                         }
                     }
                 }
-                return false;
+                else{
+                    //Agregamos nuevo favorito
+                    if($favMdl->alta($infoImagen['id'], $infoUsuario['id'], $_POST['calificacion'])){
+                        $promedio = $favMdl->obtenerPromedio($infoImagen['id']);
+                        if($promedio !== false){
+                            if($imgMdl->actualizaPromedio($promedio, $infoImagen['id'])){
+                                //Mandamos notificacion
+                                $infoFavorito = $favMdl->obtenerFavorito($infoUsuario['id'], $infoImagen['id']);
+                                imagenCtl::mandarNotificacion($infoImagen['idUsuario'], $infoFavorito, 2);
+                                return true;
+                            }
+                        }
+                    }
+                }
             }
             return false;
-
         }
+        return false;
+
+    }
+
+    function mandarNotificaciones($objetivo, $tipo){
+        require_once('app/modelos/usuarioMdl.php');
+        $usrMdl = new usuarioMdl();
+        require_once('app/modelos/seguidorMdl.php');
+        $segMdl = new seguidorMdl();
+        require_once('app/modelos/notificacionMdl.php');
+        $ntfMdl = new notificacionMdl();
+
+        $infoUsuario = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
+        $infoSeguidores = $segMdl->obtenerSeguidoresCompleto($infoUsuario['id']);
+
+        if($infoSeguidores !== false && !empty($infoSeguidores)){
+            for($x = 0; $x < count($infoSeguidores); $x++){
+                if($ntfMdl->existe($infoUsuario['id'], $infoSeguidores[$x]['seguidor'], $tipo, $objetivo['id'])){
+                    $ntfMdl->modificar($infoUsuario['id'], $infoSeguidores[$x]['seguidor'], $tipo, $objetivo['id'], 1);
+                }else{
+                    $ntfMdl->alta($infoUsuario['id'], $infoSeguidores[$x]['seguidor'], $tipo, $objetivo['id']);
+                }
+            }
+        }
+    }
+
+    function mandarNotificacion($destino, $objetivo, $tipo){
+        require_once('app/modelos/usuarioMdl.php');
+        $usrMdl = new usuarioMdl();
+        require_once('app/modelos/seguidorMdl.php');
+        $segMdl = new seguidorMdl();
+        require_once('app/modelos/notificacionMdl.php');
+        $ntfMdl = new notificacionMdl();
+
+        $infoUsuario = $usrMdl->obtenerInfo($_SESSION['correo'], $_SESSION['logPass']);
+
+        if($ntfMdl->existe($infoUsuario['id'], $destino, $tipo, $objetivo['id'])){
+            $ntfMdl->modificar($infoUsuario['id'], $destino, $tipo, $objetivo['id'], 1);
+        }else{
+            $ntfMdl->alta($infoUsuario['id'], $destino, $tipo, $objetivo['id']);
+        }
+    }
 
     function crearThumbnail($ruta, $nombre){
 		$inFile = $ruta;

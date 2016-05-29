@@ -155,5 +155,34 @@
 			return false;
 		}
 
+		function obtenerSeguidoresCompleto($id){
+			if($stmt = $this->db->prepare('SELECT * FROM seguidor WHERE idUsuarioSeguido=?')){
+
+				$stmt->bind_param("i", $id);
+
+				$stmt->execute();
+
+				$stmt->bind_result($idSeguidor, $idUsuarioSeguidor, $idUsuarioSeguido, $statusSeguidor, $tipo);
+
+				$array = array();
+
+				while($stmt->fetch()){
+					$array[] = array(
+						'id' => $idSeguidor,
+						'seguidor' => $idUsuarioSeguidor,
+						'seguido' => $idUsuarioSeguido,
+						'status' => $statusSeguidor,
+						'tipo' => $tipo
+					);
+				}
+				
+				$stmt->close();
+
+				return $array;
+			}
+
+			return false;
+		}
+
 	}
 ?>
