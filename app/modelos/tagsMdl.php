@@ -83,21 +83,22 @@
 			return $this->db->error;
 		}
         
-        function busquedaTags($palabra){
-            if($stmt = $this->db->prepare('SELECT idImagen, tag FROM tag WHERE tag LIKE '%?%'')){
+        function busquedaTags($palabra, $offset, $limit){
+        	$palabra = '%'.$palabra.'%';
+        	
+            if($stmt = $this->db->prepare('SELECT DISTINCT idImagen FROM tag WHERE tag LIKE ? LIMIT ?,?')){
 
-				$stmt->bind_param("s", $palabra);
+				$stmt->bind_param("sii", $palabra, $offset, $limit);
 
-				$stmt->execute();
+				$stmt->	execute();
 
-				$stmt->bind_result($idImagen, $tag);
+				$stmt->bind_result($idImagen);
 
 				$array = array();
 
 				while($stmt->fetch()){
 					$array[] = array(
-						'id' => $idImagen,
-						'tag' => $tag
+						'id' => $idImagen
 					);
 				}
 

@@ -446,7 +446,8 @@
 	                    '%avatarCom%' => str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/', '', $infoUsuario['avatar']),
 	                    '%aliasCom%' => $infoUsuario['alias'],
 	                    '%fechaCom%' => $comentarios[$x]['fecha'],
-	                    '%comentario%' => $comentarios[$x]['comentario']
+	                    '%comentario%' => $comentarios[$x]['comentario'],
+	                    '%nomUsuario%' => $infoUsuario['nombre']
 	                );
 	                
 	                $new_comentario = procesadorPlantillas::aplicaDiccionario($new_comentario,$diccionarioComen);
@@ -774,6 +775,98 @@
 	        }
 
 	        $vista = str_replace($thumbnail, $thumbnails, $vista);
+
+	        return $vista;
+		}
+
+		function vistaBusqueda($doctype, $header, $vista, $footer, $resImagenes){
+			require_once('app/modelos/usuarioMdl.php');
+        	$usrMdl = new usuarioMdl();
+        	$usrTmp = array();
+
+			$header = procesadorPlantillas::generarHeader($header);
+			$vista = procesadorPlantillas::generarFooter($vista, $footer);
+
+			$thumbnails = '';
+	        $inicio = strpos($vista,'<!--inicioRepetirImagen-->');
+	        $fin = strpos($vista, '<!--finalRepetirImagen-->')+25;
+	        $thumbnail = substr($vista,$inicio,$fin-$inicio);
+
+	        $filas = '';
+	        $inicioFila = strpos($vista,'<!--inicioFila-->');
+	        $finFila = strpos($vista, '<!--finFila-->')+14;
+	        $fila = substr($vista,$inicioFila,$finFila-$inicioFila);
+
+			//Generamos la galería
+	        if(is_array($resImagenes) && count($resImagenes) > 0){
+	            $contador = 0;
+	            for($x=0; $x<count($resImagenes); $x++){
+
+	                if($x !== 0 && $x%4 === 0){
+	                    $new_fila = $fila;
+
+	                    $diccionarioFila = array(
+	                        '%conteo%' => $contador
+	                    );
+
+	                    $new_fila = str_replace($thumbnail, $thumbnails, $new_fila);
+	                    $new_fila = strtr($new_fila, $diccionarioFila);
+	                    $filas .= $new_fila;
+
+	                    $contador++;
+	                    $thumbnails = '';
+	                }
+
+	                $new_thumbnail = $thumbnail;
+	                $usrTmp = $usrMdl->obtenerInfoPorID($resImagenes[$x]['idUsuario']);
+
+	                if(isset($_SESSION['correo']) && strlen($_SESSION['correo']) > 0){
+		                if($usrTmp['correo'] === $_SESSION['correo']){
+		                	$rating = true;
+		                }else{
+		                	$rating = false;
+		                }
+	                }else{
+	                	$rating = true;
+	                }
+
+	                $diccionarioImagen = array (
+	                    '%titulo%' => $resImagenes[$x]['titulo'],
+	                    '%idImagen%' => $resImagenes[$x]['id'],
+	                    '%urlImagen%' => str_replace('/var/www/html/Dragonart/uploads/img', 'uploads/thumb', $resImagenes[$x]['url']),
+	                    '%conteo%' => $x,
+	                    '%promedioImagen%' => $resImagenes[$x]['promedio'],
+	                    '%rating%' => $rating
+	                );
+	                
+	                $new_thumbnail = procesadorPlantillas::aplicaDiccionario($new_thumbnail,$diccionarioImagen);
+	                $thumbnails .= $new_thumbnail;
+	            }
+	            
+	            $new_fila = $fila;
+
+	            $diccionarioFila = array(
+	                '%conteo%' => $contador
+	            );
+
+	            $new_fila = str_replace($thumbnail, $thumbnails, $new_fila);
+	            $new_fila = procesadorPlantillas::aplicaDiccionario($new_fila, $diccionarioFila);
+	            $filas .= $new_fila;
+	        }
+	        else{
+	            $filas = '<i>No hay resultados...</i>';
+	        }
+	        
+	        $vista = str_replace($fila, $filas, $vista);
+
+	        if(isset($_GET['buscar']) && strlen($_GET['buscar']) > 0){
+	        	$buscar = $_GET['buscar'];
+	        }else{
+	        	$buscar = '';
+	        }
+	        $vista = str_replace('%buscar%', $buscar, $vista);
+
+			$vista = $doctype.$header.$vista;
 
 	        return $vista;
 		}

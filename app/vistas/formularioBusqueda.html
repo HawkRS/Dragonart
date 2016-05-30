@@ -1,153 +1,79 @@
     <div class="container main-pubIndex">
-    %mensaje%
-        <div class="panel panel-default">
-            <div class="panel-heading postHeader">
-                <div class="row">
-                    <h1 class="col-md-12">Búsqueda avanzada</h1>
+        <aside class="col-xs-12 col-sm-3 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading postHeader">
+                    <div class="row">
+                        <h1 class="col-md-12">Búsqueda avanzada</h1>
+                    </div>
+                </div>
+                <div class="panel-body postDesc">
+                    <form id="busqueda" class="form-horizontal col-md-12" novalidate>
+
+                        <div id="div-buscarPor" class="form-group">
+                            <label class="control-label" for="buscarPor">Buscar por: </label>
+                            <div>
+                                <select class="form-control" id="buscarPor" name="buscarPor">
+                                    <option value="1">Título de la imagen</option>
+                                    <option value="2">Descripción de la imagen</option>  
+                                    <option value="3">Tag de imágenes</option>
+                                    <option value="4">Nombre de usuario</option>
+                                    <option value="5">Alias de usuario</option>
+                                    <option value="6">Comentario</option> 
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="div-inputBuscar" class="form-group">
+                            <label class="control-label" for="palabraClave">Palabra clave: </label>
+                            <div>
+                                <input type="text" class="form-control" id="inputBuscar" placeholder="Ejemplo: dragon" name="inputBuscar" value="%buscar%"/>
+                            </div>
+                            <span id="err-inputBuscar" class="help-inline text-danger hidden"></span>
+                        </div>
+
+                        <div class="form-group">
+                                <button class="btn btn-warning btn-block" type="button" id="btnBuscar"><span class="glyphicon glyphicon-search"></span> Buscar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="panel-body postDesc">
-                <form id="busqueda" class="form-horizontal col-xs-12 col-md-8 col-md-offset-2" action="javascript:buscar();" method="post" novalidate>
+        </aside>
 
-                    <div id="div-buscarPor" class="form-group">
-                        <label class="control-label" for="buscarPor">Buscar por: </label>
-                        <div>
-                            <select class="form-control" id="buscarPor" name="buscarPor">
-                                <option value="1">Alias de usuario</option> 
-                                <option value="2">Título de la imagen</option> 
-                                <option value="3">Tag de imágenes</option>
-                            </select>
-                        </div>
-                    </div>
+        <div class="col-xs-12 col-sm-9 col-md-9">
+            <div id="panelResultado" class="panel panel-default">
 
-                    <div id="div-palabraClave" class="form-group">
-                        <label class="control-label" for="palabraClave">Palabra clave: </label>
-                        <div>
-                            <input type="text" class="form-control" id="palabraClave" placeholder="Ejemplo: dragon" name="palabraClave"/>
+                <div class="panel-heading galHeader">
+                            <h2 class="galHeaderText">Resultado de imágenes por título</h2>
                         </div>
-                        <span id="err-palabraClave" class="help-inline text-danger hidden"></span>
-                    </div>
 
-                    <div class="form-group">
-                        <div class="col-xs-12 col-md-4 col-md-offset-4">
-                            <button class="btn btn-warning btn-block" type="submit"><span class="glyphicon glyphicon-search"></span> Buscar</button>
+                        <div id="postDesc" class="panel-body">
+
+                            <!--inicioFila-->
+                            <div id="fila%conteo%" class="row">
+                                <!--inicioRepetirImagen-->
+                                <div id="image%conteo%" name="image%conteo%" class="col-sm-6 col-md-3">
+                                    <div class="thumbnail">
+                                        <a href="index.php?controlador=imagen&accion=mostrar&img=%idImagen%">
+                                            <img src="%urlImagen%" alt="Demostración">
+                                        </a>
+                                        <div class="caption">
+                                            <span id="titulo%conteo%">%titulo%</span>
+                                            <input id="input-%conteo%" class="rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1" value="%promedioImagen%" data-allowrating="%rating%">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--finalRepetirImagen-->
+                            </div>
+                            <!--finFila-->
+
                         </div>
-                    </div>
-                </form>
-            </div>
+
+                        <div class="panel-footer postTags">
+                            <button class="btn btn-warning" name="btnVerMas" id="btnVerMas" onclick="verMasResultados()"><span class="glyphicon glyphicon-plus-sign"></span> Ver mas</button>
+                        </div>
+
+            </div><!--Fin Panel Galeria-->
         </div>
-
-        <div id="panelResultado" class="panel panel-default hidden">
-
-            <div class="panel-heading galHeader">
-                <h2 class="galHeaderText">Usuarios</h2>
-            </div>
-
-            <div id="postDesc" class="panel-body">
-
-                <div id="fila0" class="row">
-
-                    <div id="avatar1" name="avatar1" class="col-sm-6 col-md-3">
-                        <div class="thumbnail">
-                            <a href="usuarioIndex.php">
-                                <img src="assets/img/avatar.png" alt="Demostración">
-                            </a>
-                            <div class="caption text-center">
-                                <span>Usuario</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="avatar2" name="avatar2" class="col-sm-6 col-md-3">
-                        <div class="thumbnail">
-                            <a href="usuarioIndex.php">
-                                <img src="assets/img/avatar.png" alt="Demostración">
-                            </a>
-                            <div class="caption text-center">
-                                <span>Usuario</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="iavatar" name="iavatar" class="col-sm-6 col-md-3">
-                        <div class="thumbnail">
-                            <a href="usuarioIndex.php">
-                                <img src="assets/img/avatar.png" alt="Demostración">
-                            </a>
-                            <div class="caption text-center">
-                                <span>Usuario</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="avatar4" name="avatar4" class="col-sm-6 col-md-3">
-                        <div class="thumbnail">
-                            <a href="usuarioIndex.php">
-                                <img src="assets/img/avatar.png" alt="Demostración">
-                            </a>
-                            <div class="caption text-center">
-                                <span>Usuario</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div id="fila1" class="row">
-
-                    <div id="avatar5" name="avatar5" class="col-sm-6 col-md-3">
-                        <div class="thumbnail">
-                            <a href="usuarioIndex.php">
-                                <img src="assets/img/avatar.png" alt="Demostración">
-                            </a>
-                            <div class="caption text-center">
-                                <span>Usuario</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="avatar6" name="avatar6" class="col-sm-6 col-md-3">
-                        <div class="thumbnail">
-                            <a href="usuarioIndex.php">
-                                <img src="assets/img/avatar.png" alt="Demostración">
-                            </a>
-                            <div class="caption text-center">
-                                <span>Usuario</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="avatar7" name="avatar7" class="col-sm-6 col-md-3">
-                        <div class="thumbnail">
-                            <a href="usuarioIndex.php">
-                                <img src="assets/img/avatar.png" alt="Demostración">
-                            </a>
-                            <div class="caption text-center">
-                                <span>Usuario</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="avatar8" name="avatar8" class="col-sm-6 col-md-3">
-                        <div class="thumbnail">
-                            <a href="usuarioIndex.php">
-                                <img src="assets/img/avatar.png" alt="Demostración">
-                            </a>
-                            <div class="caption text-center">
-                                <span>Usuario</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="panel-footer postTags">
-                <button class="btn btn-warning" name="btnVerMas" id="btnVerMas" onclick="verMas()"><span class="glyphicon glyphicon-plus-sign"></span> Ver mas</button>
-            </div>
-
-        </div><!--Fin Panel Galeria-->
 
     </div>
 </body>
@@ -155,14 +81,29 @@
 <!--inicioFooter-->
 <!--finFooter-->
 
-<script type="text/javascript" src="assets/js/userPage.js"></script>
-<script>
-    $('#busqueda').on('submit',function(event){
-        var inputs = $('#busqueda input');
-        event.preventDefault();
-        if(validarInputs(inputs, inputs.length)){
-            this.submit();
-        }   
+<script type="text/javascript" src="assets/js/busqueda.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        for(var x = 0; x < 8; x++){
+            (function(tmp){
+                if($('#input-' + tmp).length){
+                    var rating = $('#input-' + tmp).attr('data-allowrating');
+                    $('#input-' + tmp).rating({displayOnly : rating});
+                    $('#input-' + tmp).on('rating.change', function(event, value, caption){
+                        var url = $('#image' + tmp).find('img').attr('src');
+                        asignarAJAX(url, value);
+                    });
+                }
+            })(x);
+        }
+
+        $('#btnBuscar').on('click',function(event){
+            var inputs = $('#inputBuscar');
+            if(validarInputs(inputs, inputs.length)){
+                buscar();
+            }   
+        });
+
     });
 
     function buscar(){
@@ -172,25 +113,42 @@
         }
 
         switch($('option:selected').val()){
+            //BUSCAR IMAGEN POR TITULO
             case '1':
-                $('.galHeader > h2').text('Resultado de usuarios');
-                llenarSeguidores();
+                $('.galHeader > h2').text('Resultado de imágenes por título');
+                buscarTitulo();
                 break;
 
             case '2':
-                $('.galHeader > h2').text('Resultado de imágenes por título');
-                llenarGaleria();
+                $('.galHeader > h2').text('Resultado de imágenes por descripción');
+                buscarDescripcion();
                 break;
 
             case '3':
                 $('.galHeader > h2').text('Resultado de imágenes por tag');
-                llenarGaleria();
+                buscarTags();
+                break;
+
+            case '4':
+                $('.galHeader > h2').text('Resultado de usuarios por nombre');
+                buscarNombre();
+                break;
+
+            case '5':
+                $('.galHeader > h2').text('Resultado de usuarios por alias');
+                buscarAlias();
+                break;
+
+            case '6':
+                $('.galHeader > h2').text('Resultado de comentarios');
+                buscarComentario();
                 break;
 
             default:
                 break;
         }
     }
+
 </script>
 
 </html>

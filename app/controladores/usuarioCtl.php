@@ -53,6 +53,14 @@ class usuarioCtl {
                 case 'seguidos':
                     echo json_encode($this->seguidos());
                     break;
+
+                case 'buscarNombre':
+                    echo json_encode($this->buscarNombre());
+                    break;
+
+                case 'buscarAlias':
+                    echo json_encode($this->buscarAlias());
+                    break;
             }
         }
         else {
@@ -409,6 +417,44 @@ class usuarioCtl {
         }
 
         return $galSeguidores;
+    }
+
+    function buscarNombre(){
+        require_once('app/modelos/usuarioMdl.php');
+        $usrMdl = new usuarioMdl();
+        $infoUsuarios = array();
+
+        $infoUsuarios = $usrMdl->busquedaUsuarioNombre($_POST['buscar'], $_POST['offset'], $_POST['limit']);
+        if($infoUsuarios === false){
+            return array();
+        }
+
+        for($x = 0; $x < count($infoUsuarios) && $x < $_POST['limit']; $x++){
+            if($infoUsuarios[$x]['status'] === 1){
+                $infoUsuarios[$x]['avatar'] = str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/', '', $infoUsuarios[$x]['avatar']);
+            }
+        }
+
+        return $infoUsuarios;
+    }
+
+    function buscarAlias(){
+        require_once('app/modelos/usuarioMdl.php');
+        $usrMdl = new usuarioMdl();
+        $infoUsuarios = array();
+
+        $infoUsuarios = $usrMdl->busquedaUsuarioAlias($_POST['buscar'], $_POST['offset'], $_POST['limit']);
+        if($infoUsuarios === false){
+            return array();
+        }
+
+        for($x = 0; $x < count($infoUsuarios) && $x < $_POST['limit']; $x++){
+            if($infoUsuarios[$x]['status'] === 1){
+                $infoUsuarios[$x]['avatar'] = str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/', '', $infoUsuarios[$x]['avatar']);
+            }
+        }
+
+        return $infoUsuarios;
     }
 
 }

@@ -38,6 +38,22 @@ class imagenCtl {
                     echo json_encode($this->masImagenes());
                     break;
 
+                case 'buscarTitulo':
+                    echo json_encode($this->buscarTitulo());
+                    break;
+
+                case 'buscarDescripcion':
+                    echo json_encode($this->buscarDescripcion());
+                    break;
+
+                case 'buscarTags':
+                    echo json_encode($this->buscarTags());
+                    break;
+
+                case 'buscarComentario':
+                    echo json_encode($this->buscarComentario());
+                    break;
+
                 case 'masFavoritos':
                     echo json_encode($this->masFavoritos());
                     break;
@@ -206,7 +222,7 @@ class imagenCtl {
                 $infoImagen = array();
             }else{
                 for($x = 0; $x < count($infoImagen); $x++){
-                    $infoImagen[$x]['url'] = str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/', '', $infoImagen[$x]['url']);
+                    $infoImagen[$x]['url'] = str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/uploads/img', 'uploads/thumb', $infoImagen[$x]['url']);
                     if(isset($_SESSION['correo']) && $_SESSION['correo'] === $infoUsuario['correo']){
                         $infoImagen[$x]['bool'] = true;
                     }else{
@@ -224,6 +240,144 @@ class imagenCtl {
 
         return $infoImagen;
 
+    }
+
+    function buscarTitulo(){
+
+        require_once('app/modelos/usuarioMdl.php');
+        $usrMdl = new usuarioMdl();
+        require_once('app/modelos/imagenMdl.php');
+        $imgMdl = new imagenMdl();
+        $infoImagen = array();
+
+            $infoImagen = $imgMdl->busquedaImagenTitulo($_POST['buscar'], $_POST['offset'], $_POST['limit']);
+            if($infoImagen === false){
+                $infoImagen = array();
+            }else{
+                for($x = 0; $x < count($infoImagen); $x++){
+                    $infoImagen[$x]['url'] = str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/uploads/img', 'uploads/thumb', $infoImagen[$x]['url']);
+                    $infoUsuario = $usrMdl->obtenerInfoPorID($infoImagen[$x]['idUsuario']);
+                    if(isset($_SESSION['correo']) && $_SESSION['correo'] === $infoUsuario['correo']){
+                        $infoImagen[$x]['bool'] = true;
+                    }else{
+                        if(isset($_SESSION['correo']) && $_SESSION['correo'] !== $infoUsuario['correo']){
+                            $infoImagen[$x]['bool'] = false;
+                        }else{
+                           if(!isset($_SESSION['correo'])){
+                                $infoImagen[$x]['bool'] = true;
+                           }
+                        }
+                    }
+                }
+            }
+
+        return $infoImagen;
+    }
+
+    function buscarDescripcion(){
+        require_once('app/modelos/usuarioMdl.php');
+        $usrMdl = new usuarioMdl();
+        require_once('app/modelos/imagenMdl.php');
+        $imgMdl = new imagenMdl();
+        $infoImagen = array();
+
+            $infoImagen = $imgMdl->busquedaImagenDescripcion($_POST['buscar'], $_POST['offset'], $_POST['limit']);
+            if($infoImagen === false){
+                $infoImagen = array();
+            }else{
+                for($x = 0; $x < count($infoImagen); $x++){
+                    $infoImagen[$x]['url'] = str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/uploads/img', 'uploads/thumb', $infoImagen[$x]['url']);
+                    $infoUsuario = $usrMdl->obtenerInfoPorID($infoImagen[$x]['idUsuario']);
+                    if(isset($_SESSION['correo']) && $_SESSION['correo'] === $infoUsuario['correo']){
+                        $infoImagen[$x]['bool'] = true;
+                    }else{
+                        if(isset($_SESSION['correo']) && $_SESSION['correo'] !== $infoUsuario['correo']){
+                            $infoImagen[$x]['bool'] = false;
+                        }else{
+                           if(!isset($_SESSION['correo'])){
+                                $infoImagen[$x]['bool'] = true;
+                           }
+                        }
+                    }
+                }
+            }
+
+        return $infoImagen;
+    }
+
+    function buscarTags(){
+        require_once('app/modelos/usuarioMdl.php');
+        $usrMdl = new usuarioMdl();
+        require_once('app/modelos/imagenMdl.php');
+        $imgMdl = new imagenMdl();
+        $infoImagen = array();
+        $totalImagen = array();
+        require_once('app/modelos/tagsMdl.php');
+        $tagMdl = new tagsMdl();
+        $infoTokens = array();
+
+            $token = strtok($_POST['buscar'], ' ');
+            while($token !== false){
+                $temp = $tagMdl->busquedaTags($token, $_POST['offset'], $_POST['limit']);
+                if($temp === false){
+                    return array();
+                }
+                $infoTokens = array_merge($infoTokens, $temp);
+                $token = strtok(' ');
+            }
+
+            for($x = 0; $x < count($infoTokens); $x++){
+                $infoImagen = $imgMdl->obtenerInfo($infoTokens[$x]['id']);
+                if($infoImagen !== false){
+                    $infoImagen['url'] = str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/uploads/img', 'uploads/thumb', $infoImagen['url']);
+                    $infoUsuario = $usrMdl->obtenerInfoPorID($infoImagen['idUsuario']);
+                    if(isset($_SESSION['correo']) && $_SESSION['correo'] === $infoUsuario['correo']){
+                        $infoImagen['bool'] = true;
+                    }else{
+                        if(isset($_SESSION['correo']) && $_SESSION['correo'] !== $infoUsuario['correo']){
+                            $infoImagen['bool'] = false;
+                        }else{
+                           if(!isset($_SESSION['correo'])){
+                                $infoImagen['bool'] = true;
+                           }
+                        }
+                    }
+                    $totalImagen[] = $infoImagen;
+                }
+            }
+
+        return $totalImagen;
+    }
+
+    function buscarComentario(){
+        require_once('app/modelos/usuarioMdl.php');
+        $usrMdl = new usuarioMdl();
+        $infoUsuario = array();
+        require_once('app/modelos/comentarioMdl.php');
+        $comMdl = new comentarioMdl();
+        $infocomentario = array();
+        $totalComentario = array();
+
+        $infoComentario = $comMdl->busquedaComentario($_POST['buscar'], $_POST['offset'], $_POST['limit']);
+        if($infoComentario === false){
+            return array();
+        }
+
+        for($x = 0; $x < count($infoComentario) && $x < $_POST['limit']; $x++){
+            $infoUsuario = $usrMdl->obtenerInfoPorID($infoComentario[$x]['idUsuarioComento']);
+            if($infoUsuario !== false && $infoUsuario['status'] === 1){
+                $infoUsuario['avatar'] = str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/', '', $infoUsuario['avatar']);
+                $totalComentario[] = array(
+                    'avatar' => $infoUsuario['avatar'],
+                    'nombreUsuario' => $infoUsuario['nombre'],
+                    'comentario' => $infoComentario[$x]['comentario'],
+                    'imagen' => $infoComentario[$x]['idImagen'],
+                    'fecha' => $infoComentario[$x]['fecha']
+                );
+            }
+        }
+
+        return $totalComentario;
     }
 
     function modificar(){
@@ -333,7 +487,7 @@ class imagenCtl {
                     $infoImagen = $imgMdl->obtenerInfo($infoFavorito[$x]['imagen']);
                     $infoDueno = $usrMdl->obtenerInfoPorID($infoImagen['idUsuario']);
                     if($infoImagen !== false && !empty($infoImagen) && $infoImagen['status'] !== 0){
-                        $infoImagen['url'] = str_replace('/var/www/html/Dragonart/', '', $infoImagen['url']);
+                        $infoImagen['url'] = str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/uploads/img', 'uploads/thumb', $infoImagen['url']);
                         if(isset($_SESSION['correo']) && $_SESSION['correo'] === $infoDueno['correo']){
                             $bool = true;
                         }else{

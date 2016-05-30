@@ -117,10 +117,11 @@
 			return $this->db->error;
 		}
         
-        function busquedaComentario($palabra){
-            if($stmt = $this->db->prepare('SELECT idImagen, idUsuarioComento, comentario, fechaComentario FROM comentario WHERE comentario LIKE '%?%'')){
+        function busquedaComentario($palabra, $offset, $limit){
+        	$palabra = '%'.$palabra.'%';
+            if($stmt = $this->db->prepare('SELECT idImagen, idUsuarioComento, comentario, fechaComentario FROM comentario WHERE comentario LIKE ? LIMIT ?,?')){
 
-				$stmt->bind_param("s", $palabra);
+				$stmt->bind_param("sii", $palabra, $offset, $limit);
 
 				$stmt->execute();
 

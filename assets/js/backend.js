@@ -160,7 +160,7 @@ function cargarComentarios(){
 	activaCheckbox();
 	encabezado.append('<th>ID</th>');
 	encabezado.append('<th>Avatar</th>');
-	encabezado.append('<th>Alias</th>');
+	encabezado.append('<th>Nombre</th>');
 	encabezado.append('<th>Comentario</th>');
 	encabezado.append('<th>Eliminar</th>');
 

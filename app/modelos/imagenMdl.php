@@ -166,10 +166,43 @@
 			return $this->db->real_escape_string($cadena);
 		}
         
-        function busquedaImagen($palabra){
-            if($stmt = $this->db->prepare('SELECT * FROM imagen WHERE tituloImagen LIKE '%?%' OR descripcionImagen LIKE '%?%'')){
+        function busquedaImagenTitulo($palabra, $offset, $limite){
+        	$palabra = "%$palabra%";
+            if($stmt = $this->db->prepare('SELECT * FROM imagen WHERE tituloImagen LIKE ? LIMIT ?,?')){
 
-				$stmt->bind_param("ss", $palabra, $palabra);
+				$stmt->bind_param("sii", $palabra, $offset, $limite);
+
+				$stmt->execute();
+
+				$stmt->bind_result($idImagen, $idUsuario, $urlImagen, $tituloImagen, $descripcionImagen, $fechaImagen, $statusImagen, $calificacionPromedioImagen, $tipoImagen);
+
+				$array = array();
+
+				while($stmt->fetch()){
+					$array[] = array(
+						'id' => $idImagen,
+						'idUsuario' => $idUsuario,
+						'url' => $urlImagen,
+						'titulo' => $tituloImagen,
+						'descripcion' => $descripcionImagen,
+						'fecha' => $fechaImagen,
+						'status' => $statusImagen,
+						'promedio' => $calificacionPromedioImagen,
+						'tipo' => $tipoImagen
+					);
+				}
+
+				return $array;
+			}
+
+			return false;
+        }
+
+        function busquedaImagenDescripcion($palabra, $offset, $limite){
+        	$palabra = '%'.$palabra.'%';
+            if($stmt = $this->db->prepare('SELECT * FROM imagen WHERE descripcionImagen LIKE ? LIMIT ?,?')){
+
+				$stmt->bind_param("sii", $palabra, $offset, $limite);
 
 				$stmt->execute();
 

@@ -300,14 +300,15 @@
 			return $this->db->real_escape_string($cadena);
 		}
         
-        function busquedaUsuario($palabra){
-            if($stmt = $this->db->prepare('SELECT idUsuario, nombreUsuario, aliasUsuario, avatarUsuario FROM usuario WHERE nombreUsuario LIKE '%?%' OR aliasUsuario LIKE '%?%'')){
+        function busquedaUsuarioNombre($palabra, $offset, $limit){
+        	$palabra = '%'.$palabra.'%';
+            if($stmt = $this->db->prepare('SELECT idUsuario, nombreUsuario, aliasUsuario, avatarUsuario, statusUsuario FROM usuario WHERE nombreUsuario LIKE ? LIMIT ?,?')){
 
-				$stmt->bind_param("ss", $palabra, $palabra);
+				$stmt->bind_param("sii", $palabra, $offset, $limit);
 
 				$stmt->execute();
 
-				$stmt->bind_result($idUsuario, $nombreUsuario, $aliasUsuario, $avatarUsuario);
+				$stmt->bind_result($idUsuario, $nombreUsuario, $aliasUsuario, $avatarUsuario, $statusUsuario);
 
 				$array = array();
 
@@ -316,7 +317,36 @@
 						'id' => $idUsuario,
 						'nombre' => $nombreUsuario,
 						'alias' => $aliasUsuario,
-						'avatar' => $avatarUsuario
+						'avatar' => $avatarUsuario,
+						'status' => $statusUsuario
+					);
+				}
+
+				return $array;
+			}
+
+			return false;
+        }
+
+        function busquedaUsuarioAlias($palabra, $offset, $limit){
+        	$palabra = '%'.$palabra.'%';
+            if($stmt = $this->db->prepare('SELECT idUsuario, nombreUsuario, aliasUsuario, avatarUsuario, statusUsuario FROM usuario WHERE aliasUsuario LIKE ? LIMIT ?,?')){
+
+				$stmt->bind_param("sii", $palabra, $offset, $limit);
+
+				$stmt->execute();
+
+				$stmt->bind_result($idUsuario, $nombreUsuario, $aliasUsuario, $avatarUsuario, $statusUsuario);
+
+				$array = array();
+
+				while($stmt->fetch()){
+					$array[] = array(
+						'id' => $idUsuario,
+						'nombre' => $nombreUsuario,
+						'alias' => $aliasUsuario,
+						'avatar' => $avatarUsuario,
+						'status' => $statusUsuario
 					);
 				}
 

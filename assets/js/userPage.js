@@ -496,16 +496,4 @@ function verMas(){
 		}
 	}
 
-	/*for(var i = 0; i < 4; i++){
-		if(clon.find('#image' + i).length){
-			clon.find('#image' + i).attr('id','image' + contadorInputs);
-			clon.find('#image' + contadorInputs).attr('name','image' + contadorInputs);
-		}
-		else{
-			clon.find('#avatar' + i).attr('id','avatar' + contadorInputs);
-			clon.find('#avatar' + contadorInputs).attr('name','avatar' + contadorInputs);
-		}
-		contadorInputs++;
-	}*/
-
 }
