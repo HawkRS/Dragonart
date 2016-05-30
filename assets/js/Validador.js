@@ -131,10 +131,10 @@ function validarInputs(inputs, cantidad){
 				}
 				else{
 					quitarError(tempId, temp.attr('id'));
-					bandera = /^[a-zA-Z0-9_-]{3,16}$/.test(temp.val());
+					bandera = /^[a-zA-Z0-9_-]$/.test(temp.val());
 					if(!bandera){
 						tempId = tempId + temp.attr('id');
-						ponerError(tempId, temp.attr('id'), 'Solo letras, números y guiones. Entre 3 y 16 caracteres.');
+						ponerError(tempId, temp.attr('id'), 'Solo letras, números y guiones.');
 					}
 					else{
 						tempId = tempId + temp.attr('id');
@@ -279,10 +279,10 @@ function validarInputsModUsuario(inputs, cantidad){
 				}
 				else{
 					quitarError(tempId, temp.attr('id'));
-					bandera = /^[a-zA-Z0-9_-]{3,16}$/.test(temp.val());
+					bandera = /^[a-zA-Z0-9_-]$/.test(temp.val());
 					if(!bandera){
 						tempId = tempId + temp.attr('id');
-						ponerError(tempId, temp.attr('id'), 'Solo letras, números y guiones. Entre 3 y 16 caracteres.');
+						ponerError(tempId, temp.attr('id'), 'Solo letras, números y guiones.');
 					}
 					else{
 						tempId = tempId + temp.attr('id');

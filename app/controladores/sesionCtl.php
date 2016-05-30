@@ -9,7 +9,6 @@ class sesionCtl {
 
     function __construct() {
         session_start();
-        echo 'Soy sesionCtl';
         
         $this->doctype = file_get_contents('app/vistas/doctype.html');
         $this->header = file_get_contents('app/vistas/header.html');
@@ -22,6 +21,10 @@ class sesionCtl {
                     
                 case 'iniciarsesion':
                     $this->iniciarsesion();
+                    break;
+                    
+                case 'iniciarsesionFB':
+                    $this->iniciarsesionFB();
                     break;
                     
                 case 'recuperarcontrasenacorreo':
@@ -93,6 +96,49 @@ class sesionCtl {
         else{
             $vista = file_get_contents('app/vistas/formularioIniciarSesion.html');
             $mensaje = '';
+            $vista = $procesador->vistaIniciarSesion($this->doctype, $this->header, $vista, $this->footer, $mensaje);
+            echo $vista;
+        }
+    }
+    
+    function iniciarsesionFB() {
+        require_once('app/controladores/procesadorPlantillas.php');
+        $procesador = new procesadorPlantillas();
+
+        if(!empty($_POST)){
+            $datosFB = json_decode($_POST['datosFB']);
+            if($usrMdl->existeCorreo($datosDB['email'])){
+                $array = $usrMdl->obtenerInfoFB($datosFB['email']);
+                $_SESSION['correo'] = $array['correo'];
+                $_SESSION['logPass'] = $array['logPass'];
+                $_SESSION['alias'] = $array['alias'];
+                $_SESSION['nombre'] = $array['nombre'];
+                $_SESSION['admin'] = $array['tipo'];
+                header('Location: http://localhost/Dragonart/index.php?controlador=usuario&accion=mostrar&usuario='.$_SESSION['nombre']);
+            }
+            else {
+                $contrasena = sha1($contrasena);
+                if($usrMdl->alta($datosFB['name'],$datosDB['name'],$datosDB['email'],$contrasena, 1)){
+                    if($usrMdl->iniciarSesion($datosDB['email'],$contrasena)){
+                        $_SESSION['correo'] = $datosDB['email'];
+                        $_SESSION['logPass'] = $contrasena;
+                        $_SESSION['alias'] = $datosDB['name'];
+                        $_SESSION['nombre'] = $datosDB['name'];
+                        $_SESSION['admin'] = 1;
+                        header('Location: http://localhost/Dragonart/index.php?controlador=usuario&accion=mostrar&usuario='.$datosFB['name']);
+                    }
+                    else{
+                        $vista = file_get_contents('app/vistas/formularioIniciarSesion.html');
+                        $mensaje = '<div class="alert alert-danger">No se ha podido iniciar sesión con Facebook.</div>';
+                        $vista = $procesador->vistaIniciarSesion($this->doctype, $this->header, $vista, $this->footer, $mensaje);
+                        echo $vista;
+                    }
+                }
+            }
+        }
+        else{
+            $vista = file_get_contents('app/vistas/formularioIniciarSesion.html');
+            $mensaje = '<div class="alert alert-danger">No se ha podido iniciar sesión con Facebook.</div>';
             $vista = $procesador->vistaIniciarSesion($this->doctype, $this->header, $vista, $this->footer, $mensaje);
             echo $vista;
         }
