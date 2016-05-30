@@ -25,14 +25,21 @@ function validarUsuario() {
     FB.getLoginStatus(function(response) {  
         if(response.status == 'connected') {
             FB.api('/me?fields=id,name,email', function(response) {
-                console.log(JSON.stringify(response));
-                alert('Hola ' + response.email);
 
                 $.ajax({
                     type : 'POST',
                     url : 'index.php?controlador=sesion&accion=iniciarsesionFB',
+                    datatype: 'text',
                     data : {
                         datosFB: JSON.stringify(response)
+                    },
+                    success: function(respuesta){
+                        console.log(respuesta);
+                        if(respuesta === 'false'){
+                            alert('No se pudo acceder usando Facebook.');
+                        }else{
+                            location.href = 'http://dragonart.silverdragon.xyz/index.php?controlador=usuario&accion=mostrar&usuario=' + respuesta;
+                        }
                     },
                     error : function(respuesta){
                         alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');

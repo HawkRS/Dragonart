@@ -238,7 +238,6 @@ class usuarioCtl {
     }
 
     function mostrar(){
-
         require_once('app/controladores/procesadorPlantillas.php');
         $procesador = new procesadorPlantillas();
 
