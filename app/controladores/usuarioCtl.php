@@ -30,6 +30,10 @@ class usuarioCtl {
                     $this->modificar();
                     break;
                     
+                case 'eliminar':
+                    $this->eliminar();
+                    break;
+
                 case 'mostrar':
                     $this->mostrar();
                     break;
@@ -206,6 +210,33 @@ class usuarioCtl {
 
     }
     
+    function eliminar(){
+        require_once('app/modelos/usuarioMdl.php');
+        $usrMdl = new usuarioMdl();
+        require_once('app/modelos/imagenMdl.php');
+        $imgMdl = new imagenMdl();
+        require_once('app/modelos/comentarioMdl.php');
+        $comMdl = new comentarioMdl();
+        require_once('app/modelos/seguidorMdl.php');
+        $segMdl = new seguidorMdl();
+        require_once('app/modelos/notificacionMdl.php');
+        $ntfMdl = new notificacionMdl();
+
+        if(isset($_GET['usr']) && strlen($_GET['usr']) > 0){
+            if($usrMdl->baja($_GET['usr'])){
+                $imgMdl->bajaPorUsuario($_GET['usr']);
+                $comMdl->bajaPorUsuario($_GET['usr']);
+                $segMdl->bajaPorUsuario($_GET['usr']);
+                $ntfMdl->bajaPorUsuario($_GET['usr']);
+                header('Location: http://localhost/Dragonart/index.php');
+            }else{
+                usuarioCtl::modificar();
+            }
+        }else{
+            usuarioCtl::modificar();
+        }
+    }
+
     function mostrar(){
 
         require_once('app/controladores/procesadorPlantillas.php');

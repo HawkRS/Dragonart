@@ -70,6 +70,24 @@
 			return $bandera;
 		}
 
+		function bajaPorUsuario($id){
+			$bandera = false;
+
+			if($stmt = $this->db->prepare('UPDATE seguidor SET statusSeguidor=0 WHERE idUsuarioSeguidor=? OR idUsuarioSeguido=?')){
+
+				$stmt->bind_param("ii", $id, $id);
+
+				$bandera = $stmt->execute();
+
+				$stmt->fetch();
+				
+				$stmt->close();
+
+			}
+
+			return $bandera;
+		}
+
 		function obtenerInfo($seguidor, $seguido){
 			if($stmt = $this->db->prepare('SELECT * FROM seguidor WHERE idUsuarioSeguidor=? AND idUsuarioSeguido=?')){
 
