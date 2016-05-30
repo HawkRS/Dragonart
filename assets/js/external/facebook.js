@@ -27,6 +27,20 @@ function validarUsuario() {
             FB.api('/me?fields=id,name,email', function(response) {
                 console.log(JSON.stringify(response));
                 alert('Hola ' + response.email);
+
+                $.ajax({
+                    type : 'POST',
+                    url : 'index.php?controlador=sesion&accion=iniciarsesionFB',
+                    data : {
+                        datosFB: JSON.stringify(response)
+                    },
+                    error : function(respuesta){
+                        alert('Hubo un error al ejecutar tu petición. Inténtelo más tarde.');
+                    }
+                });
+
+                FB.logout(function(response){
+                });
             });   
         } else if(response.status == 'not_authorized') {  
             alert('Debes de dar permisos a DragonArt para el manejo de tu información');  
