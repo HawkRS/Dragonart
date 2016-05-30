@@ -66,12 +66,25 @@ class sesionCtl {
                 $usrMdl = new usuarioMdl();
                 if($usrMdl->iniciarSesion($_POST['correo'],$_POST['logPass'])){
                     $array = $usrMdl->obtenerInfo($_POST['correo'],$_POST['logPass']);
-                    $_SESSION['correo'] = $_POST['correo'];
-                    $_SESSION['logPass'] = $_POST['logPass'];
-                    $_SESSION['alias'] = $array['alias'];
-                    $_SESSION['nombre'] = $array['nombre'];
-                    $_SESSION['admin'] = $array['tipo'];
-                    header('Location: http://localhost/Dragonart/index.php?controlador=usuario&accion=mostrar&usuario='.$_SESSION['nombre']);
+                    if($array['status'] === 1){
+                        $_SESSION['correo'] = $_POST['correo'];
+                        $_SESSION['logPass'] = $_POST['logPass'];
+                        $_SESSION['alias'] = $array['alias'];
+                        $_SESSION['nombre'] = $array['nombre'];
+                        $_SESSION['admin'] = $array['tipo'];
+                        header('Location: http://localhost/Dragonart/index.php?controlador=usuario&accion=mostrar&usuario='.$_SESSION['nombre']);
+                    }else{
+                        unset($_SESSION['correo']);
+                        unset($_SESSION['logPass']);
+                        unset($_SESSION['alias']);
+                        unset($_SESSION['nombre']);
+                        unset($_SESSION['admin']);
+                        
+                        $vista = file_get_contents('app/vistas/formularioIniciarSesion.html');
+                        $mensaje = '<div class="alert alert-danger">El correo o la contraseña ingresados son erroneos.</div>';
+                        $vista = $procesador->vistaIniciarSesion($this->doctype, $this->header, $vista, $this->footer, $mensaje);
+                        echo $vista;
+                    }
                 }
                 else{
                     unset($_SESSION['correo']);

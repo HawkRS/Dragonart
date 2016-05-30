@@ -862,7 +862,11 @@
 	        if(isset($_GET['buscar']) && strlen($_GET['buscar']) > 0){
 	        	$buscar = $_GET['buscar'];
 	        }else{
-	        	$buscar = '';
+	        	if(isset($_GET['inputBuscar']) && strlen($_GET['inputBuscar']) > 0){
+		        	$buscar = $_GET['inputBuscar'];
+		        }else{
+	        		$buscar = '';
+		        }
 	        }
 	        $vista = str_replace('%buscar%', $buscar, $vista);
 
@@ -881,10 +885,11 @@
 	        return $vista;
 		}
         
-        function vistaContacto($doctype, $header, $vista, $footer){
+        function vistaContacto($doctype, $header, $vista, $footer, $mensaje){
             $header = procesadorPlantillas::generarHeader($header);
 			$vista = procesadorPlantillas::generarFooter($vista, $footer);
             
+            $vista = str_replace('%error%', $mensaje, $vista);
             $vista = $doctype.$header.$vista;
             
             return $vista;

@@ -263,6 +263,38 @@
 	        return true;
 	    }
 
+	    function validarContacto($array){
+	    	if(isset($array['nombre'])){
+	            if(validador::estaVacio($array['nombre'])){
+	                return 'El nombre no debe llevar solamente espacios en blanco.';
+	            }
+	        }
+	        else{
+	            return 'Debe escribir un nombre.';
+	        }
+
+	        if(isset($array['correo'])){
+	            $correo = $array['correo'];
+	            if(validador::estaVacio($correo) || !filter_var($correo, FILTER_VALIDATE_EMAIL)){
+	                return 'El correo ingresado no es válido.';
+	            }
+	        }
+	        else{
+	            return 'Debes ingresar un correo.';
+	        }
+
+	        if(isset($array['descripcion'])){
+	        	if(validador::estaVacio($array['descripcion'])){
+	                return 'La descripción no debe llevar solamente espacios en blanco.';
+	            }
+	        }
+	        else{
+	        	return 'Debe escribir una descripción.';
+	        }
+
+	        return true;
+	    }
+
 	    function validarArchivoCargado($form, $fileMax){
 	    	if(!isset($_FILES[$form]['error']) || is_array($_FILES[$form]['error'])){
 	            return 'ERROR: Archivo erroneo.';

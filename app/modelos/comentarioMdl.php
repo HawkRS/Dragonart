@@ -30,7 +30,7 @@
 		function baja($idImagen){
 			$bandera = false;
 
-			if($stmt = $this->db->prepare('UPDATE comentario SET statusComentario=0 WHERE idImagen=?')){
+			if($stmt = $this->db->prepare('UPDATE comentario SET statusComentario=0 WHERE idImagen=? AND statusComentario=1')){
 
 				$stmt->bind_param("i", $idImagen);
 
@@ -64,7 +64,7 @@
 		}
 
 		function obtenerComentarios($idImagen){
-			if($stmt = $this->db->prepare('SELECT * FROM comentario WHERE idImagen=? ORDER BY idComentario')){
+			if($stmt = $this->db->prepare('SELECT * FROM comentario WHERE idImagen=? AND statusComentario=1 ORDER BY idComentario')){
 
 				$stmt->bind_param("i", $idImagen);
 
@@ -158,7 +158,7 @@
         
         function busquedaComentario($palabra, $offset, $limit){
         	$palabra = '%'.$palabra.'%';
-            if($stmt = $this->db->prepare('SELECT idImagen, idUsuarioComento, comentario, fechaComentario FROM comentario WHERE comentario LIKE ? LIMIT ?,?')){
+            if($stmt = $this->db->prepare('SELECT idImagen, idUsuarioComento, comentario, fechaComentario FROM comentario WHERE comentario LIKE ? AND statusComentario=1 LIMIT ?,?')){
 
 				$stmt->bind_param("sii", $palabra, $offset, $limit);
 

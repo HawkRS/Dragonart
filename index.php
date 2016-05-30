@@ -1,6 +1,6 @@
 <?php
 
-if(isset($_GET['buscar']) && strlen($_GET['buscar']) > 0){
+if((isset($_GET['buscar']) && strlen($_GET['buscar']) > 0) || (isset($_GET['inputBuscar']) && strlen($_GET['inputBuscar']) > 0)){
     
     resultadoBusqueda();    
     
@@ -65,7 +65,13 @@ function resultadoBusqueda(){
     require_once('app/modelos/imagenMdl.php');
     $imgMdl = new imagenMdl();
 
-    $resImagenes = $imgMdl->busquedaImagenTitulo($_GET['buscar'], 0, 8);
+    if(isset($_GET['buscar']) && strlen($_GET['buscar']) > 0){
+        $resImagenes = $imgMdl->busquedaImagenTitulo($_GET['buscar'], 0, 8);
+    }else{
+        if(isset($_GET['inputBuscar']) && strlen($_GET['inputBuscar']) > 0){
+            $resImagenes = $imgMdl->busquedaImagenTitulo($_GET['inputBuscar'], 0, 8);
+        }
+    }
 
     $doctype = file_get_contents('app/vistas/doctype.html');
     $header = file_get_contents('app/vistas/header.html');

@@ -228,6 +228,9 @@ class usuarioCtl {
                 $comMdl->bajaPorUsuario($_GET['usr']);
                 $segMdl->bajaPorUsuario($_GET['usr']);
                 $ntfMdl->bajaPorUsuario($_GET['usr']);
+                session_unset();
+                session_destroy();
+                setcookie(session_name(), '', time()-3600);
                 header('Location: http://localhost/Dragonart/index.php');
             }else{
                 usuarioCtl::modificar();
