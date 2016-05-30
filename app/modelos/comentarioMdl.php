@@ -13,7 +13,7 @@
 		function alta($idImagen, $idUsuario, $comentario){
 			$bandera = false;
 
-			if($stmt = $this->db->prepare('INSERT INTO comentario (idImagen, idUsuarioComento, comentario, fechaComentario) VALUES (?, ?, ?, NOW())')){
+			if($stmt = $this->db->prepare('INSERT INTO comentario (idImagen, idUsuarioComento, comentario, fechaComentario, statusComentario) VALUES (?, ?, ?, NOW(), 1)')){
 
 				$stmt->bind_param("iis", $idImagen, $idUsuario, $comentario);
 
@@ -34,7 +34,7 @@
 
 				$stmt->execute();
 
-				$stmt->bind_result($idComentario, $idImagen, $idUsuarioComento, $comentario, $fechaComentario, $tipo);
+				$stmt->bind_result($idComentario, $idImagen, $idUsuarioComento, $comentario, $fechaComentario, $statusComentario, $tipo);
 
 				$array = array();
 
@@ -45,6 +45,7 @@
 						'usuario' => $idUsuarioComento,
 						'comentario' => $comentario,
 						'fecha' => $fechaComentario,
+                        'status' => $statusComentario,
 						'tipo' => $tipo
 					);
 				}
@@ -64,7 +65,7 @@
 
 				$stmt->execute();
 
-				$stmt->bind_result($idComentario, $idImagen, $idUsuarioComento, $comentario, $fechaComentario, $tipo);
+				$stmt->bind_result($idComentario, $idImagen, $idUsuarioComento, $comentario, $fechaComentario, $statusComentario, $tipo);
 
 				$stmt->fetch();
 
@@ -74,6 +75,7 @@
 					'usuario' => $idUsuarioComento,
 					'comentario' => $comentario,
 					'fecha' => $fechaComentario,
+                    'status' => $statusComentario,
 					'tipo' => $tipo
 				);
 				
@@ -92,7 +94,7 @@
 
 				$stmt->execute();
 
-				$stmt->bind_result($idComentario, $idImagen, $idUsuarioComento, $comentario, $fechaComentario, $tipo);
+				$stmt->bind_result($idComentario, $idImagen, $idUsuarioComento, $comentario, $fechaComentario, $statusComentario, $tipo);
 
 				$stmt->fetch();
 
@@ -102,6 +104,7 @@
 					'usuario' => $idUsuarioComento,
 					'comentario' => $comentario,
 					'fecha' => $fechaComentario,
+                    'status' => $statusComentario,
 					'tipo' => $tipo
 				);
 				
