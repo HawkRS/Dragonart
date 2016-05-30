@@ -31,6 +31,24 @@
 			return $bandera;
 		}
 
+		function baja($id){
+			$bandera = false;
+
+			if($stmt = $this->db->prepare('UPDATE usuario SET statusUsuario=0 WHERE idUsuario=?')){
+
+				$stmt->bind_param("i", $id);
+
+				$bandera = $stmt->execute();
+
+				$stmt->fetch();
+				
+				$stmt->close();
+
+			}
+
+			return $bandera;
+		}
+
 		function modificar($id, $alias, $contrasena, $biografia, $avatar){
 			$bandera = false;
 
@@ -180,6 +198,36 @@
 			}
 			return false;
 		}
+        
+        function obtenerInfoFB($correo){
+			if($stmt = $this->db->prepare('SELECT * FROM usuario WHERE correoUsuario=?')){
+
+				$stmt->bind_param("s", $correo);
+
+				$stmt->execute();
+                
+                $stmt->bind_result($idUsuario, $nombreUsuario, $aliasUsuario, $correoUsuario, $contrasenaUsuario, $biografiaUsuario, $avatarUsuario, $tipoUsuario, $statusUsuario);
+
+				$stmt->fetch();
+				
+				$array = array(
+					'id' => $idUsuario,
+					'nombre' => $nombreUsuario,
+					'alias' => $aliasUsuario,
+					'correo' => $correoUsuario,
+					'contrasena' => $contrasenaUsuario,
+					'biografia' => $biografiaUsuario,
+					'avatar' => $avatarUsuario,
+					'tipo' => $tipoUsuario,
+					'status' => $statusUsuario
+				);
+                
+				$stmt->close();
+                
+                return $array;
+			}
+			return false;
+		}
 
 		function obtenerInfo($correo, $contrasena){
 			if($stmt = $this->db->prepare('SELECT * FROM usuario WHERE correoUsuario=? AND contrasenaUsuario=PASSWORD(?)')){
@@ -302,7 +350,7 @@
         
         function busquedaUsuarioNombre($palabra, $offset, $limit){
         	$palabra = '%'.$palabra.'%';
-            if($stmt = $this->db->prepare('SELECT idUsuario, nombreUsuario, aliasUsuario, avatarUsuario, statusUsuario FROM usuario WHERE nombreUsuario LIKE ? LIMIT ?,?')){
+            if($stmt = $this->db->prepare('SELECT idUsuario, nombreUsuario, aliasUsuario, avatarUsuario, statusUsuario FROM usuario WHERE nombreUsuario LIKE ? AND statusUsuario=1 LIMIT ?,?')){
 
 				$stmt->bind_param("sii", $palabra, $offset, $limit);
 
@@ -330,7 +378,7 @@
 
         function busquedaUsuarioAlias($palabra, $offset, $limit){
         	$palabra = '%'.$palabra.'%';
-            if($stmt = $this->db->prepare('SELECT idUsuario, nombreUsuario, aliasUsuario, avatarUsuario, statusUsuario FROM usuario WHERE aliasUsuario LIKE ? LIMIT ?,?')){
+            if($stmt = $this->db->prepare('SELECT idUsuario, nombreUsuario, aliasUsuario, avatarUsuario, statusUsuario FROM usuario WHERE aliasUsuario LIKE ? AND statusUsuario=1 LIMIT ?,?')){
 
 				$stmt->bind_param("sii", $palabra, $offset, $limit);
 

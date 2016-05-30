@@ -13,7 +13,7 @@
 		function alta($idImagen, $idUsuario, $comentario){
 			$bandera = false;
 
-			if($stmt = $this->db->prepare('INSERT INTO comentario (idImagen, idUsuarioComento, comentario, fechaComentario) VALUES (?, ?, ?, NOW())')){
+			if($stmt = $this->db->prepare('INSERT INTO comentario (idImagen, idUsuarioComento, comentario, fechaComentario, statusComentario) VALUES (?, ?, ?, NOW(), 1)')){
 
 				$stmt->bind_param("iis", $idImagen, $idUsuario, $comentario);
 
@@ -27,6 +27,42 @@
 			return $bandera;
 		}
 
+		function baja($idImagen){
+			$bandera = false;
+
+			if($stmt = $this->db->prepare('UPDATE comentario SET statusComentario=0 WHERE idImagen=?')){
+
+				$stmt->bind_param("i", $idImagen);
+
+				$bandera = $stmt->execute();
+
+				$stmt->fetch();
+				
+				$stmt->close();
+
+			}
+
+			return $bandera;
+		}
+
+		function bajaPorUsuario($id){
+			$bandera = false;
+
+			if($stmt = $this->db->prepare('UPDATE comentario SET statusComentario=0 WHERE idUsuarioComento=?')){
+
+				$stmt->bind_param("i", $id);
+
+				$bandera = $stmt->execute();
+
+				$stmt->fetch();
+				
+				$stmt->close();
+
+			}
+
+			return $bandera;
+		}
+
 		function obtenerComentarios($idImagen){
 			if($stmt = $this->db->prepare('SELECT * FROM comentario WHERE idImagen=? ORDER BY idComentario')){
 
@@ -34,7 +70,7 @@
 
 				$stmt->execute();
 
-				$stmt->bind_result($idComentario, $idImagen, $idUsuarioComento, $comentario, $fechaComentario, $tipo);
+				$stmt->bind_result($idComentario, $idImagen, $idUsuarioComento, $comentario, $fechaComentario, $statusComentario, $tipo);
 
 				$array = array();
 
@@ -45,6 +81,7 @@
 						'usuario' => $idUsuarioComento,
 						'comentario' => $comentario,
 						'fecha' => $fechaComentario,
+                        'status' => $statusComentario,
 						'tipo' => $tipo
 					);
 				}
@@ -64,7 +101,7 @@
 
 				$stmt->execute();
 
-				$stmt->bind_result($idComentario, $idImagen, $idUsuarioComento, $comentario, $fechaComentario, $tipo);
+				$stmt->bind_result($idComentario, $idImagen, $idUsuarioComento, $comentario, $fechaComentario, $statusComentario, $tipo);
 
 				$stmt->fetch();
 
@@ -74,6 +111,7 @@
 					'usuario' => $idUsuarioComento,
 					'comentario' => $comentario,
 					'fecha' => $fechaComentario,
+                    'status' => $statusComentario,
 					'tipo' => $tipo
 				);
 				
@@ -92,7 +130,7 @@
 
 				$stmt->execute();
 
-				$stmt->bind_result($idComentario, $idImagen, $idUsuarioComento, $comentario, $fechaComentario, $tipo);
+				$stmt->bind_result($idComentario, $idImagen, $idUsuarioComento, $comentario, $fechaComentario, $statusComentario, $tipo);
 
 				$stmt->fetch();
 
@@ -102,6 +140,7 @@
 					'usuario' => $idUsuarioComento,
 					'comentario' => $comentario,
 					'fecha' => $fechaComentario,
+                    'status' => $statusComentario,
 					'tipo' => $tipo
 				);
 				

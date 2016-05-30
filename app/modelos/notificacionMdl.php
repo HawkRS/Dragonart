@@ -29,6 +29,24 @@
 			return $bandera;
 		}
 
+		function bajaPorUsuario($id){
+			$bandera = false;
+
+			if($stmt = $this->db->prepare('UPDATE notificacion SET statusNotificacion=0 WHERE idUsuarioAutor=? OR idUsuarioDestino=?')){
+
+				$stmt->bind_param("ii", $id, $id);
+
+				$bandera = $stmt->execute();
+
+				$stmt->fetch();
+				
+				$stmt->close();
+
+			}
+
+			return $bandera;
+		}
+
 		function contarNotificaciones($id){
 			if($stmt = $this->db->prepare('SELECT COUNT(*) FROM notificacion WHERE idUsuarioDestino=? AND statusNotificacion=1')){
 

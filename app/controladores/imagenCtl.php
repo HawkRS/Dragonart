@@ -34,6 +34,10 @@ class imagenCtl {
                     $this->modificar();
                     break;
 
+                case 'eliminar':
+                    $this->eliminar();
+                    break;
+
                 case 'masImagenes':
                     echo json_encode($this->masImagenes());
                     break;
@@ -328,7 +332,7 @@ class imagenCtl {
 
             for($x = 0; $x < count($infoTokens); $x++){
                 $infoImagen = $imgMdl->obtenerInfo($infoTokens[$x]['id']);
-                if($infoImagen !== false){
+                if($infoImagen !== false && $infoImagen['status'] === 1){
                     $infoImagen['url'] = str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/uploads/img', 'uploads/thumb', $infoImagen['url']);
                     $infoUsuario = $usrMdl->obtenerInfoPorID($infoImagen['idUsuario']);
                     if(isset($_SESSION['correo']) && $_SESSION['correo'] === $infoUsuario['correo']){
@@ -463,6 +467,27 @@ class imagenCtl {
             $mensaje = 'No puedes modificar la imagen si no haz iniciado sesión.';
             $vista = $procesador->vistaError404($this->doctype, $this->header, $vista, $this->footer, $mensaje);
             echo $vista;
+        }
+    }
+
+    function eliminar(){
+        require_once('app/modelos/imagenMdl.php');
+        $imgMdl = new imagenMdl();
+        require_once('app/modelos/comentarioMdl.php');
+        $comMdl = new comentarioMdl();
+        require_once('app/modelos/usuarioMdl.php');
+        $usrMdl = new usuarioMdl();
+
+        if(isset($_GET['img']) && strlen($_GET['img']) > 0){
+            if($imgMdl->baja($_GET['img']) && $comMdl->baja($_GET['img'])){
+                $infoImagen = $imgMdl->obtenerInfo($_GET['img']);
+                $infoUsuario = $usrMdl->obtenerInfoPorID($infoImagen['idUsuario']);
+                header('Location: http://localhost/Dragonart/index.php?controlador=usuario&accion=mostrar&usuario='.$infoUsuario['nombre']);
+            }else{
+                header('Location: http://localhost/Dragonart/index.php?controlador=imagen&accion=mostrar&img='.$_GET['img']);
+            }
+        }else{
+            header('Location: http://localhost/Dragonart/index.php?controlador=imagen&accion=mostrar&img='.$_GET['img']);
         }
     }
 

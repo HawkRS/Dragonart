@@ -3,10 +3,11 @@
 class correoCtl{
 
     function __construct(){
-
+        
     }
 
     function mandarCorreoContacto($nombre,$correo,$descripcion){
+        require_once('datosGMAIL.inc');
         require_once('app/phpmailer/PHPMailerAutoload.php');
         $contenido = file_get_contents('app/vistas/correoContacto.html');
 
@@ -26,30 +27,31 @@ class correoCtl{
         $correo->Host = "smtp.gmail.com";
         $correo->Port = 587;
 
-        $correo->Username = "dragonart.dd@gmail.com";
-        $correo->Password = "20962123";
+        $correo->Username = $gmail;
+        $correo->Password = $passG;
 
-        $correo->SetFrom($correo,$nombre);
-        $correo->AddAddress("dragonart.dd@gmail.com", "DragonArt");
+        $correo->SetFrom($gmail,$nombre);
+        $correo->AddAddress($gmail, "DragonArt");
 
         $correo->Subject = "Contacto DragonArt";
         $correo->MsgHTML($contenido);
 
         if(!$correo->Send()) {
-            echo "Hubo un error: " . $correo->ErrorInfo;
+            return 'No se pudo enviar el correo: '.$correo->ErrorInfo;
         } else {
-            echo "Mensaje enviado con exito.";
+            return true;
         }
     }
     
-    function mandarCorreoRecuperacion($nombre,$email,$pass){
+    function mandarCorreoRecuperacion($nombre,$email,$link){
+        require_once('datosGMAIL.inc');
         require_once('app/phpmailer/PHPMailerAutoload.php');
         $contenido = file_get_contents('app/vistas/correoRecuperacion.html');
 
         $diccionario = array(
             '%usuario%' => $nombre,
             '%correo%' => $email,
-            '%link%' => "dragonart.silverdragon.xyz/index.php?controlador=sesion&accion=recuperarcontrasena&w=$pass"
+            '%link%' => $link
         );
         
         $contenido = strtr($contenido,$diccionario);
@@ -62,10 +64,10 @@ class correoCtl{
         $correo->Host = "smtp.gmail.com";
         $correo->Port = 587;
 
-        $correo->Username = "dragonart.dd@gmail.com";
-        $correo->Password = "20962123";
+        $correo->Username = $gmail;
+        $correo->Password = $passG;
 
-        $correo->SetFrom("dragonart.dd@gmail.com","DragonArt");
+        $correo->SetFrom($gmail,"DragonArt");
         $correo->AddAddress($email,$nombre);
         $correo->Subject = "Recuperar contraseña de tu cuenta DragonArt";
         $correo->MsgHTML($contenido);
@@ -78,6 +80,7 @@ class correoCtl{
     }
     
     function mandarCorreoConfirmacion($nombre,$email){
+        require_once('datosGMAIL.inc');
         require_once('app/phpmailer/PHPMailerAutoload.php');
         $contenido = file_get_contents('app/vistas/correoConfirmacion.html');
 
@@ -96,10 +99,10 @@ class correoCtl{
         $correo->Host = "smtp.gmail.com";
         $correo->Port = 587;
 
-        $correo->Username = "dragonart.dd@gmail.com";
-        $correo->Password = "20962123";
+        $correo->Username = $gmail;
+        $correo->Password = $passG;
 
-        $correo->SetFrom("dragonart.dd@gmail.com","DragonArt");
+        $correo->SetFrom($gmail,"DragonArt");
         $correo->AddAddress($email,$nombre);
         $correo->Subject = "Se restableció la contraseña de tu cuenta DragonArt";
         $correo->MsgHTML($contenido);

@@ -45,6 +45,42 @@
 			return $bandera;
 		}
 
+		function baja($id){
+			$bandera = false;
+
+			if($stmt = $this->db->prepare('UPDATE imagen SET statusImagen=0 WHERE idImagen=?')){
+
+				$stmt->bind_param("i", $id);
+
+				$bandera = $stmt->execute();
+
+				$stmt->fetch();
+				
+				$stmt->close();
+
+			}
+
+			return $bandera;
+		}
+
+		function bajaPorUsuario($id){
+			$bandera = false;
+
+			if($stmt = $this->db->prepare('UPDATE imagen SET statusImagen=0 WHERE idUsuarioPropietario=?')){
+
+				$stmt->bind_param("i", $id);
+
+				$bandera = $stmt->execute();
+
+				$stmt->fetch();
+				
+				$stmt->close();
+
+			}
+
+			return $bandera;
+		}
+
 		function obtenerInfo($id){
 			if($stmt = $this->db->prepare('SELECT * FROM imagen WHERE idImagen=?')){
 
@@ -168,7 +204,7 @@
         
         function busquedaImagenTitulo($palabra, $offset, $limite){
         	$palabra = "%$palabra%";
-            if($stmt = $this->db->prepare('SELECT * FROM imagen WHERE tituloImagen LIKE ? LIMIT ?,?')){
+            if($stmt = $this->db->prepare('SELECT * FROM imagen WHERE tituloImagen LIKE ? AND statusImagen=1 LIMIT ?,?')){
 
 				$stmt->bind_param("sii", $palabra, $offset, $limite);
 
@@ -200,7 +236,7 @@
 
         function busquedaImagenDescripcion($palabra, $offset, $limite){
         	$palabra = '%'.$palabra.'%';
-            if($stmt = $this->db->prepare('SELECT * FROM imagen WHERE descripcionImagen LIKE ? LIMIT ?,?')){
+            if($stmt = $this->db->prepare('SELECT * FROM imagen WHERE descripcionImagen LIKE ? AND statusImagen=1 LIMIT ?,?')){
 
 				$stmt->bind_param("sii", $palabra, $offset, $limite);
 
