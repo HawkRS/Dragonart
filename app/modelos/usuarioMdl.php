@@ -180,6 +180,36 @@
 			}
 			return false;
 		}
+        
+        function obtenerInfoFB($correo){
+			if($stmt = $this->db->prepare('SELECT * FROM usuario WHERE correoUsuario=?')){
+
+				$stmt->bind_param("s", $correo);
+
+				$stmt->execute();
+                
+                $stmt->bind_result($idUsuario, $nombreUsuario, $aliasUsuario, $correoUsuario, $contrasenaUsuario, $biografiaUsuario, $avatarUsuario, $tipoUsuario, $statusUsuario);
+
+				$stmt->fetch();
+				
+				$array = array(
+					'id' => $idUsuario,
+					'nombre' => $nombreUsuario,
+					'alias' => $aliasUsuario,
+					'correo' => $correoUsuario,
+					'contrasena' => $contrasenaUsuario,
+					'biografia' => $biografiaUsuario,
+					'avatar' => $avatarUsuario,
+					'tipo' => $tipoUsuario,
+					'status' => $statusUsuario
+				);
+                
+				$stmt->close();
+                
+                return $array;
+			}
+			return false;
+		}
 
 		function obtenerInfo($correo, $contrasena){
 			if($stmt = $this->db->prepare('SELECT * FROM usuario WHERE correoUsuario=? AND contrasenaUsuario=PASSWORD(?)')){
