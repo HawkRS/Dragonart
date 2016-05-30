@@ -216,7 +216,7 @@
 
 	    	if(isset($array['alias'])){
 		    	$alias = $array['alias'];
-		    	if(validador::estaVacio($alias) || !preg_match("/^[a-zA-Z0-9_-]{3,16}$/", $alias)){
+		    	if(validador::estaVacio($alias) || !preg_match("/^[a-zA-Z0-9_-]$/", $alias)){
 		    		return 'El alias ingresado es erroneo.';
 		    	}
 	    	}
