@@ -321,7 +321,7 @@
 	        return $vista;			
 		}
 
-		function vistaInicio($doctype, $header, $vista, $footer){
+		function vistaInicio($doctype, $header, $vista, $footer, $infoImagen){
 			$header = procesadorPlantillas::generarHeader($header);
 			$vista = procesadorPlantillas::generarFooter($vista, $footer);
 
@@ -329,6 +329,32 @@
 	        $finBody = strpos($doctype, '<!--finBody-->')+14;
 	        $remplazarBody = substr($doctype,$inicioBody,$finBody-$inicioBody); 
 	        $doctype = str_replace($remplazarBody, '<body class="index">', $doctype);
+
+	        $thumbnails = '';
+	        $inicio = strpos($vista,'<!--iniImg-->');
+	        $fin = strpos($vista, '<!--finImg-->')+13;
+	        $thumbnail = substr($vista,$inicio,$fin-$inicio);
+
+	        //Generamos la galería
+	        if(is_array($infoImagen) && count($infoImagen) > 0){
+	            for($x=0; $x<count($infoImagen); $x++){
+
+	                $new_thumbnail = $thumbnail;
+	                
+	                $diccionarioImagen = array (
+	                    '%idImagen%' => $infoImagen[$x]['id'],
+	                    '%urlImagen%' => str_replace('/var/www/html/Dragonart/', '', $infoImagen[$x]['url']),
+	                    '%urlThumb%' => str_replace('/var/www/html/Dragonart/uploads/img', 'uploads/thumb', $infoImagen[$x]['url'])
+	                );
+	                
+	                $new_thumbnail = procesadorPlantillas::aplicaDiccionario($new_thumbnail,$diccionarioImagen);
+	                $thumbnails .= $new_thumbnail;
+	            }
+	        }else{
+	        	$thumbnails = '';
+	        }
+	        
+	        $vista = str_replace($thumbnail, $thumbnails, $vista);
 
 			$vista = $doctype.$header.$vista;
 

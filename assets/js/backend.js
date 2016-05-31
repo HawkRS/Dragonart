@@ -205,7 +205,7 @@ function verMasImagenes(){
                             $('#fila' + tmp).append('<td>'+ json[i].alias +'</td>');
                             $('#fila' + tmp).append('<td><input id="input-'+ tmp +'" class="rating-loading" data-show-clear="false" data-show-caption="false" data-size="xs" data-step="1" value="'+ json[i].promedio +'"></td>');
                             $('#fila' + tmp).append('<td>'+ json[i].status +'</td>');
-                            $('#fila' + i).append('<td><button class="btn btn-sm btn-warning" name="btnCom'+ i +'" id="btnCom'+ i +'" onclick="cargarComentarios('+ json[i].id +')"><span class="glyphicon glyphicon-comment"></span> Ver comentarios</button></td>');
+                            $('#fila' + tmp).append('<td><button class="btn btn-sm btn-warning" name="btnCom'+ tmp +'" id="btnCom'+ tmp +'" onclick="cargarComentarios('+ json[i].id +')"><span class="glyphicon glyphicon-comment"></span> Ver comentarios</button></td>');
                             $('#input-' + tmp).rating({displayOnly : true});
                         })(contador, x);
                         contador++;
@@ -311,6 +311,7 @@ function verMasUsuarios(){
 }
 
 function cargarComentarios(id){
+	$('#btnVerMas').attr('onclick', 'verMasComentarios('+ id +')');
 	$('.galHeader > h2').text('Comentarios');
 	var encabezado = $('#tablaEncabezado');
 	encabezado.empty();
@@ -362,7 +363,7 @@ function cargarComentarios(id){
 
 }
 
-function verMasComentarios(){
+function verMasComentarios(id){
 	var cuerpo = $('#tablaCuerpo');
 	var contador = $('#tablaCuerpo > tr').length + 1;
 	

@@ -155,8 +155,13 @@ class imagenCtl {
     function inicio() {
         require_once('app/controladores/procesadorPlantillas.php');
         $procesador = new procesadorPlantillas();
+        require_once('app/modelos/imagenMdl.php');
+        $imgMdl = new imagenMdl();
+
+        $infoImagen = $imgMdl->inicio();
+
         $vista = file_get_contents('app/vistas/principal.html');
-        $vista = $procesador->vistaInicio($this->doctype, $this->header, $vista, $this->footer);
+        $vista = $procesador->vistaInicio($this->doctype, $this->header, $vista, $this->footer, $infoImagen);
         echo $vista;
     }
     

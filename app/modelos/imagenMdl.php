@@ -10,6 +10,37 @@
 			$this->db = $this->acceso->getDriver();
 		}
 
+		function inicio(){
+			if($stmt = $this->db->prepare('SELECT * FROM imagen WHERE statusImagen=1 ORDER BY calificacionPromedioImagen DESC LIMIT 0,10')){
+
+				$stmt->execute();
+
+				$stmt->bind_result($idImagen, $idUsuario, $urlImagen, $tituloImagen, $descripcionImagen, $fechaImagen, $statusImagen, $calificacionPromedioImagen, $tipoImagen);
+
+				$array = array();
+
+				while($stmt->fetch()){
+					$array[] = array(
+						'id' => $idImagen,
+						'idUsuario' => $idUsuario,
+						'url' => $urlImagen,
+						'titulo' => $tituloImagen,
+						'descripcion' => $descripcionImagen,
+						'fecha' => $fechaImagen,
+						'status' => $statusImagen,
+						'promedio' => $calificacionPromedioImagen,
+						'tipo' => $tipoImagen
+					);
+				}
+				
+				$stmt->close();
+
+				return $array;
+			}
+
+			return false;
+		}
+
 		function alta($idUsuario, $urlImagen, $tituloImagen, $descripcionImagen){
 			$bandera = false;
 
