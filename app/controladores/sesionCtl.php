@@ -173,7 +173,7 @@ class sesionCtl {
                         echo $vista;
                     }else{
                         $vista = file_get_contents('app/vistas/formularioRecuperarContrasenaCorreo.html');
-                        $mensaje = '<div class="alert alert-danger">'+ $respuesta +'</div>';
+                        $mensaje = '<div class="alert alert-danger">' . $respuesta  .'</div>';
                         $vista = $procesador->vistaRecuperarContrasenaCorreo($this->doctype, $this->header, $vista, $this->footer, $mensaje);
                         echo $vista;
                     }
@@ -185,7 +185,7 @@ class sesionCtl {
                 }
             }else{
                 $vista = file_get_contents('app/vistas/formularioRecuperarContrasenaCorreo.html');
-                $mensaje = '<div class="alert alert-danger">'+ $error +'</div>';
+                $mensaje = '<div class="alert alert-danger">'. $error .'</div>';
                 $vista = $procesador->vistaRecuperarContrasenaCorreo($this->doctype, $this->header, $vista, $this->footer, $mensaje);
                 echo $vista;
             }
@@ -206,14 +206,33 @@ class sesionCtl {
             $infoUsuario = $usrMdl->existeCorreoNombre($_POST['correo']);
             if($infoUsuario !== false && !empty($infoUsuario)){
                 require_once('app/controladores/correoCtl.php');
-                require_once('app/modelos/recuperarMdl.php');
                 $correoCtl = new correoCtl();
+                require_once('app/modelos/recuperarMdl.php');
                 $recuperarMdl = new recuperarMdl();
+                //ENCRIPTAMOS CORREO
                 $correo = sha1($infoUsuario['correo']);
                 $link = "dragonart.silverdragon.xyz/controlador=sesion&accion=recuperarcontrasena&dd=".$correo;
-                
-                if($recuperarMdl->alta($correo, $link)){
-                    $respuesta = $correoCtl->mandarCorreoRecuperacion($infoUsuario['nombre'],$infoUsuario['correo'],$link);
+                if($recuperarMdl->existe($infoUsuario['id'])){
+                    $rectmp = $recuperarMdl->obtenerInfo($correo);
+                    if($rectmp !== false && !empty($rectmp)){
+                        if($rectmp['status'] === 0){
+                            if($recuperarMdl->modificar($correo, 1)){
+                                $respuesta = $correoCtl->mandarCorreoRecuperacion($infoUsuario['nombre'],$infoUsuario['correo'],$link);
+                            }else{
+                                $respuesta = 'Hubo un problema al solicitar su petición.';
+                            }
+                        }else{
+                            $respuesta = 'Ya se mandó un correo de recuperación de contraseña. Por favor, revise su bandeja de correos.';
+                        }
+                    }else{
+                        $respuesta = 'Hubo un problema al solicitar su petición.';
+                    }
+                }else{
+                    if($recuperarMdl->alta($infoUsuario['id'], $correo, $link)){
+                        $respuesta = $correoCtl->mandarCorreoRecuperacion($infoUsuario['nombre'],$infoUsuario['correo'],$link);
+                    }else{
+                        $respuesta = 'Hubo un problema al solicitar su petición.';
+                    }
                 }
             }else{
                 $respuesta = 'No existe el correo en la base de datos.';
@@ -225,22 +244,44 @@ class sesionCtl {
     function recuperarcontrasena() {
         require_once('app/controladores/procesadorPlantillas.php');
         $procesador = new procesadorPlantillas();
-        require_once('app/controladores/procesadorPlantillas.php');
-        $procesador = new procesadorPlantillas();
+        require_once('app/modelos/recuperarMdl.php');
+        $recuperarMdl = new recuperarMdl();
+        require_once('app/controladores/validador.php');
+        $validador = new validador();
         require_once('app/modelos/usuarioMdl.php');
         $usrMdl = new usuarioMdl();
 
         if(isset($_SESSION['correo']) && isset($_SESSION['logPass'])){
-            header('Location: http://localhost/Dragonart/index.php');
+            header('Location: http://dragonart.silverdragon.xyz/index.php');
         }else{
-            if(isset($_GET['w']) && strlen($_GET['w']) > 0){
-                $vista = file_get_contents('app/vistas/formularioRecuperarContrasena.html');
-                $mensaje = '';
-                $vista = $procesador->vistaRecuperarContrasena($this->doctype, $this->header, $vista, $this->footer, $mensaje);
+            if(isset($_GET['dd']) && strlen($_GET['dd']) > 0){
+                if($recuperarMdl->existeCorreo($_GET['dd'])){
+                    $rectmp = $recuperarMdl->obtenerInfo($_GET['dd']);
+                    if(!empty($_POST)){
+                        $error = $validador->validarContrasena($_POST);
+                        if($error === true){
+                            if($usrMdl->cambiarContrasenaCorreo($rectmp['usuario'], $_POST['contrasena'])){
+                                $recuperarMdl->modificar($_GET['dd'], 0);
+                                header('Location: http://dragonart.silverdragon.xyz/index.php?controlador=sesion&accion=iniciarsesion');
+                            }
+                        }else{
+                            $vista = file_get_contents('app/vistas/formularioRecuperarContrasena.html');
+                            $mensaje = '<div class="alert alert-danger">'. $error .'</div>';
+                            $vista = $procesador->vistaRecuperarContrasena($this->doctype, $this->header, $vista, $this->footer, $rectmp['link'], $mensaje);
+                            echo $vista;
+                        }
+                    }else{
+                        $vista = file_get_contents('app/vistas/formularioRecuperarContrasena.html');
+                        $mensaje = '';
+                        $vista = $procesador->vistaRecuperarContrasena($this->doctype, $this->header, $vista, $this->footer, $rectmp['link'], $mensaje);
+                        echo $vista;
+                    }
+                }else{
+                    header('Location: http://dragonart.silverdragon.xyz/index.php');
+                }
                 
-                echo $vista;
             }else{
-                header('Location: http://localhost/Dragonart/index.php');
+                header('Location: http://dragonart.silverdragon.xyz/index.php');
             }
         }
     }

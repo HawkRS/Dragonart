@@ -163,6 +163,24 @@
 			return $bandera;
 		}
 
+		function cambiarContrasenaCorreo($id, $nuevoPass){
+			$bandera = false;
+
+			if($stmt = $this->db->prepare('UPDATE usuario SET contrasenaUsuario=PASSWORD(?) WHERE idUsuario=?')){
+
+				$stmt->bind_param("si", $nuevoPass, $id);
+
+				$bandera = $stmt->execute();
+
+				$stmt->fetch();
+				
+				$stmt->close();
+
+			}
+
+			return $bandera;
+		}
+
 		function existeNombre($nombre){
 			if($stmt = $this->db->prepare('SELECT * FROM usuario WHERE nombreUsuario=?')){
 
@@ -260,17 +278,18 @@
 		}
         
         function existeCorreoNombre($correo){
-			if($stmt = $this->db->prepare('SELECT nombreUsuario, correoUsuario, contrasenaUsuario FROM usuario WHERE correoUsuario=?')){
+			if($stmt = $this->db->prepare('SELECT idUsuario, nombreUsuario, correoUsuario, contrasenaUsuario FROM usuario WHERE correoUsuario=?')){
 
 				$stmt->bind_param("s", $correo);
 
 				$stmt->execute();
                 
-                $stmt->bind_result($nombreUsuario, $correoUsuario, $contrasenaUsuario);
+                $stmt->bind_result($idUsuario, $nombreUsuario, $correoUsuario, $contrasenaUsuario);
                 
 				$stmt->fetch();
                 
                 $array = array(
+                	'id' => $idUsuario,
                     'nombre' => $nombreUsuario,
                     'correo' => $correoUsuario,
                     'pass' => $contrasenaUsuario

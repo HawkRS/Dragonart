@@ -104,6 +104,30 @@
 	    	return true;
 	    }
 
+	    function validarContrasena($array){
+	    	if(isset($array['contrasena'])){
+		    	$contrasena = $array['contrasena'];
+		    	if(validador::estaVacio($contrasena) || strlen($contrasena) < 8){
+		    		return 'La contraseña es erronea.';
+		    	}
+		    }
+	    	else{
+	    		return 'Debe escribir una contraseña.';
+	    	}
+
+	    	if(isset($array['contrasenaConfirmacion'])){
+		    	$contrasenaConfirmacion = $array['contrasenaConfirmacion'];
+		    	if(validador::estaVacio($contrasenaConfirmacion) || strcmp($contrasena, $contrasenaConfirmacion) !== 0){
+		    		return 'Las contraseñas escritas no son iguales.';
+		    	}
+		    }
+	    	else{
+	    		return 'Debe repetir su contraseña.';
+	    	}
+
+	    	return true;
+	    }
+
 	    function validarRegistroUsuarioAdmon($array){
 	    	if(isset($array['nombre'])){
 		    	$nombre = $array['nombre'];

@@ -949,11 +949,12 @@
             return $vista;
         }
         
-        function vistaRecuperarContrasena($doctype, $header, $vista, $footer, $mensaje){
+        function vistaRecuperarContrasena($doctype, $header, $vista, $footer, $recuperar, $mensaje){
             $header = procesadorPlantillas::generarHeader($header);
 			$vista = procesadorPlantillas::generarFooter($vista, $footer);
             
             $vista = str_replace('%error%', $mensaje, $vista);
+            $vista = str_replace('%url%', $recuperar, $vista);
             $vista = $doctype.$header.$vista;
             
             return $vista;
