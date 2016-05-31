@@ -9,7 +9,7 @@ class backendCtl {
 
     function __construct() {
     	session_start();
-        echo 'Soy backendCtl';
+        
         $this->doctype = file_get_contents('app/vistas/doctype.html');
         $this->header = file_get_contents('app/vistas/header.html');
         $this->footer = file_get_contents('app/vistas/footer.html');
@@ -29,14 +29,23 @@ class backendCtl {
     }
 
     function mostrar() {
-        $vista = file_get_contents('app/vistas/backend.html');
-        $inicioFooter = strpos($vista, '<!--inicioFooter-->');
-        $finFooter = strpos($vista, '<!--finFooter-->')+16;
-        $remplazar = substr($vista,$inicioFooter,$finFooter-$inicioFooter);
-        
-        $vista = str_replace($remplazar, $this->footer, $vista);
-        $vista = $this->doctype.$this->header.$vista;
-        echo $vista;
+        require_once('app/controladores/procesadorPlantillas.php');
+        $procesador = new procesadorPlantillas();
+        require_once('app/modelos/imagenMdl.php');
+        $imgMdl = new imagenMdl();
+
+        if(isset($_SESSION['admin']) && $_SESSION['admin'] === 0){
+            $infoImagen = $imgMdl->backend(0, 10);
+
+            $vista = file_get_contents('app/vistas/backend.html');
+            $vista = $procesador->vistaBackend($this->doctype, $this->header, $vista, $this->footer, $infoImagen);
+            echo $vista;
+        }else{
+            $vista = file_get_contents('app/vistas/404.html');
+            $mensaje = 'La página que solicitaste no existe.';
+            $vista = $procesador->vistaError404($this->doctype, $this->header, $vista, $this->footer, $mensaje);
+            echo $vista;
+        }
     }
 }
 ?>

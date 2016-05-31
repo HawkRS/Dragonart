@@ -914,6 +914,59 @@
             
             return $vista;
         }
+
+        function vistaBackend($doctype, $header, $vista, $footer, $infoImagen){
+        	$header = procesadorPlantillas::generarHeader($header);
+			$vista = procesadorPlantillas::generarFooter($vista, $footer);
+            
+			require_once('app/modelos/usuarioMdl.php');
+        	$usrMdl = new usuarioMdl();
+        	$usrTmp = array();
+
+			$thumbnails = '';
+	        $inicio = strpos($vista,'<!--iniFila-->');
+	        $fin = strpos($vista, '<!--finFila-->')+14;
+	        $thumbnail = substr($vista,$inicio,$fin-$inicio);
+
+			//Generamos la galería
+	        if(is_array($infoImagen) && count($infoImagen) > 0){
+
+	            for($x=0; $x<count($infoImagen); $x++){
+
+	                $new_thumbnail = $thumbnail;
+	                $usrTmp = $usrMdl->obtenerInfoPorID($infoImagen[$x]['idUsuario']);
+
+	                if($infoImagen[$x]['status'] === 1){
+	                	$status = 'Activo';
+	                }else{
+	                	$status = 'Inactivo';
+	                }
+
+	                $diccionarioImagen = array (
+	                	'%conteo%' => $x,
+	                	'%idImagen%' => $infoImagen[$x]['id'],
+	                	'%urlImagen%' => str_replace('/var/www/html/Dragonart/uploads/img', 'uploads/thumb', $infoImagen[$x]['url']),
+	                	'%tituloImagen%' => $infoImagen[$x]['titulo'],
+	                	'%aliasUsuario%' => $usrTmp['alias'],
+	                	'%statusImagen%' => $status,
+	                	'%promedioImagen%' => $infoImagen[$x]['promedio']
+	                );
+	                
+	                $new_thumbnail = procesadorPlantillas::aplicaDiccionario($new_thumbnail,$diccionarioImagen);
+	                $thumbnails .= $new_thumbnail;
+	            }
+
+	        }
+	        else{
+	            $thumbnails = '<i>No hay resultados...</i>';
+	        }
+	        
+	        $vista = str_replace($thumbnail, $thumbnails, $vista);
+
+            $vista = $doctype.$header.$vista;
+            
+            return $vista;
+        }
 	}
 
 ?>

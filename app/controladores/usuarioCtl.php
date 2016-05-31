@@ -65,6 +65,14 @@ class usuarioCtl {
                 case 'buscarAlias':
                     echo json_encode($this->buscarAlias());
                     break;
+
+                case 'backend':
+                    echo json_encode($this->backend());
+                    break;
+
+                case 'cambiarEstado':
+                    echo $this->cambiarEstado();
+                    break;
             }
         }
         else {
@@ -488,6 +496,81 @@ class usuarioCtl {
         }
 
         return $infoUsuarios;
+    }
+
+    function backend(){
+        require_once('app/modelos/usuarioMdl.php');
+        $usrMdl = new usuarioMdl();
+        $resultados = array();
+
+        if(isset($_POST['offset']) && isset($_POST['limit'])){
+            $infoUsuario = $usrMdl->backend($_POST['offset'], $_POST['limit']);
+            if($infoUsuario !== false){
+                for($x = 0; $x < count($infoUsuario); $x++){
+                    if($infoUsuario[$x]['correo'] !== $_SESSION['correo']){
+                        $infoUsuario[$x]['avatar'] = str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/', '', $infoUsuario[$x]['avatar']);
+                        if($infoUsuario[$x]['status'] === 1){
+                            $infoUsuario[$x]['status'] = 'Activo';
+                        }else{
+                            $infoUsuario[$x]['status'] = 'Inactivo';
+                        }
+                        if($infoUsuario[$x]['tipo'] === 1){
+                            $infoUsuario[$x]['tipo'] = 'Usuario';
+                        }else{
+                            $infoUsuario[$x]['tipo'] = 'Administrador';
+                        }
+                        $resultados[] = $infoUsuario[$x];
+                    }
+                }
+                return $resultados;
+            }else{
+                return array();
+            }
+        }else{
+            return array();
+        }
+    }
+
+    function cambiarEstado(){
+        require_once('app/modelos/usuarioMdl.php');
+        $usrMdl = new usuarioMdl();
+        require_once('app/modelos/imagenMdl.php');
+        $imgMdl = new imagenMdl();
+        require_once('app/modelos/comentarioMdl.php');
+        $comMdl = new comentarioMdl();
+        require_once('app/modelos/seguidorMdl.php');
+        $segMdl = new seguidorMdl();
+        require_once('app/modelos/notificacionMdl.php');
+        $ntfMdl = new notificacionMdl();
+
+        $infoUsuario = $usrMdl->obtenerInfoPorID($_POST['id']);
+
+        if(isset($_POST['id']) && strlen($_POST['id']) > 0){
+            if($infoUsuario['status'] === 1){
+                if($usrMdl->baja($_POST['id'])){
+                    $imgMdl->bajaPorUsuario($_POST['id']);
+                    $comMdl->bajaPorUsuario($_POST['id']);
+                    $segMdl->bajaPorUsuario($_POST['id']);
+                    $ntfMdl->bajaPorUsuario($_POST['id']);
+                    return 'Inactivo';
+                }else{
+                    return false;
+                }
+            }else{
+                if($usrMdl->reactivar($_POST['id'])){
+                    $imgMdl->reactivarPorUsuario($_POST['id']);
+                    $comMdl->reactivarPorUsuario($_POST['id']);
+                    $segMdl->reactivar($_POST['id']);
+                    return 'Activo';
+                }else{
+                    return false;
+                }
+            }
+        }else{
+            return false;
+        }
+
+
     }
 
 }

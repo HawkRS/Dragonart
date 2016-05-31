@@ -202,5 +202,23 @@
 			return false;
 		}
 
+		function reactivar($id){
+			$bandera = false;
+
+			if($stmt = $this->db->prepare('UPDATE seguidor SET statusSeguidor=1 WHERE idUsuarioSeguidor=? OR idUsuarioSeguido=?')){
+
+				$stmt->bind_param("ii", $id, $id);
+
+				$bandera = $stmt->execute();
+
+				$stmt->fetch();
+				
+				$stmt->close();
+
+			}
+
+			return $bandera;
+		}
+
 	}
 ?>

@@ -266,5 +266,74 @@
 			return false;
         }
 
+        function reactivar($id){
+        	$bandera = false;
+
+			if($stmt = $this->db->prepare('UPDATE imagen SET statusImagen=1 WHERE idImagen=?')){
+
+				$stmt->bind_param("i", $id);
+
+				$bandera = $stmt->execute();
+
+				$stmt->fetch();
+				
+				$stmt->close();
+
+			}
+
+			return $bandera;
+        }
+
+        function reactivarPorUsuario($id){
+        	$bandera = false;
+
+			if($stmt = $this->db->prepare('UPDATE imagen SET statusImagen=1 WHERE idUsuarioPropietario=?')){
+
+				$stmt->bind_param("i", $id);
+
+				$bandera = $stmt->execute();
+
+				$stmt->fetch();
+				
+				$stmt->close();
+
+			}
+
+			return $bandera;
+        }
+
+        function backend($offset, $limit){
+        	if($stmt = $this->db->prepare('SELECT * FROM imagen ORDER BY idImagen DESC LIMIT ?,?')){
+
+				$stmt->bind_param("ii", $offset, $limit);
+
+				$stmt->execute();
+
+				$stmt->bind_result($idImagen, $idUsuario, $urlImagen, $tituloImagen, $descripcionImagen, $fechaImagen, $statusImagen, $calificacionPromedioImagen, $tipoImagen);
+
+				$array = array();
+
+				while($stmt->fetch()){
+					$array[] = array(
+						'id' => $idImagen,
+						'idUsuario' => $idUsuario,
+						'url' => $urlImagen,
+						'titulo' => $tituloImagen,
+						'descripcion' => $descripcionImagen,
+						'fecha' => $fechaImagen,
+						'status' => $statusImagen,
+						'promedio' => $calificacionPromedioImagen,
+						'tipo' => $tipoImagen
+					);
+				}
+				
+				$stmt->close();
+
+				return $array;
+			}
+
+			return false;
+        }
+
 	}
 ?>

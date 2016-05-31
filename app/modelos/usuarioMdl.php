@@ -49,6 +49,24 @@
 			return $bandera;
 		}
 
+		function reactivar($id){
+			$bandera = false;
+
+			if($stmt = $this->db->prepare('UPDATE usuario SET statusUsuario=1 WHERE idUsuario=?')){
+
+				$stmt->bind_param("i", $id);
+
+				$bandera = $stmt->execute();
+
+				$stmt->fetch();
+				
+				$stmt->close();
+
+			}
+
+			return $bandera;
+		}
+
 		function modificar($id, $alias, $contrasena, $biografia, $avatar){
 			$bandera = false;
 
@@ -397,6 +415,39 @@
 						'status' => $statusUsuario
 					);
 				}
+
+				return $array;
+			}
+
+			return false;
+        }
+
+        function backend($offset, $limit){
+        	if($stmt = $this->db->prepare('SELECT * FROM usuario ORDER BY idUsuario DESC LIMIT ?,?')){
+
+				$stmt->bind_param("ii", $offset, $limit);
+
+				$stmt->execute();
+
+				$stmt->bind_result($idUsuario, $nombreUsuario, $aliasUsuario, $correoUsuario, $contrasenaUsuario, $biografiaUsuario, $avatarUsuario, $tipoUsuario, $statusUsuario);
+
+				$array = array();
+
+				while($stmt->fetch()){
+					$array[] = array(
+						'id' => $idUsuario,
+						'nombre' => $nombreUsuario,
+						'alias' => $aliasUsuario,
+						'correo' => $correoUsuario,
+						'contrasena' => $contrasenaUsuario,
+						'biografia' => $biografiaUsuario,
+						'avatar' => $avatarUsuario,
+						'tipo' => $tipoUsuario,
+						'status' => $statusUsuario
+					);
+				}
+
+				$stmt->close();
 
 				return $array;
 			}

@@ -65,6 +65,22 @@ class imagenCtl {
                 case 'altaFavorito':
                     echo $this->altaFavorito();
                     break;
+
+                case 'backend':
+                    echo json_encode($this->backend());
+                    break;
+
+                case 'cambiarEstado':
+                    echo $this->cambiarEstado();
+                    break;
+
+                case 'backendComentarios':
+                    echo json_encode($this->backendComentarios());
+                    break;
+
+                case 'cambiarEstadoComentarios':
+                    echo $this->cambiarEstadoComentarios();
+                    break;
             }
         }
         else {
@@ -635,7 +651,7 @@ class imagenCtl {
 
     function crearThumbnail($ruta, $nombre){
 		$inFile = $ruta;
-		$outFile = '/var/www/html/Dragonart/uploads/thumb/'.$nombre;
+		$outFile = $_SERVER['DOCUMENT_ROOT'].'/Dragonart/uploads/thumb/'.$nombre;
 		$image = new Imagick($inFile);
 		$image->scaleImage(400, 300, true);
 		if($image->getImageWidth() < 400){
@@ -647,6 +663,108 @@ class imagenCtl {
 			$image->borderImage('#EEF2F2',0, $alto);
 		}
 		$image->writeImage($outFile);
+    }
+
+    function backend(){
+        require_once('app/modelos/imagenMdl.php');
+        $imgMdl = new imagenMdl();
+        require_once('app/modelos/usuarioMdl.php');
+        $usrMdl = new usuarioMdl();
+
+        if(isset($_POST['offset']) && isset($_POST['limit'])){
+            $infoImagen = $imgMdl->backend($_POST['offset'], $_POST['limit']);
+            if($infoImagen !== false){
+                for($x = 0; $x < count($infoImagen); $x++){
+                    $infoImagen[$x]['url'] = str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/uploads/img', 'uploads/thumb', $infoImagen[$x]['url']);
+                    $usrTmp = $usrMdl->obtenerInfoPorID($infoImagen[$x]['idUsuario']);
+                    $infoImagen[$x]['alias'] = $usrTmp['alias'];
+                    if($infoImagen[$x]['status'] === 1){
+                        $infoImagen[$x]['status'] = 'Activo';
+                    }else{
+                        $infoImagen[$x]['status'] = 'Inactivo';
+                    }
+                }
+                return $infoImagen;
+            }else{
+                return array();
+            }
+        }else{
+            return array();
+        }
+    }
+
+    function cambiarEstado(){
+        require_once('app/modelos/imagenMdl.php');
+        $imgMdl = new imagenMdl();
+        require_once('app/modelos/comentarioMdl.php');
+        $comMdl = new comentarioMdl();
+
+        $infoImagen = $imgMdl->obtenerInfo($_POST['id']);
+
+        if($infoImagen['status'] === 1){
+            if($imgMdl->baja($_POST['id']) && $comMdl->baja($_POST['id'])){
+                return 'Inactivo';
+            }else{
+                return false;
+            }
+        }else{
+            if($imgMdl->reactivar($_POST['id']) && $comMdl->reactivar($_POST['id'])){
+                return 'Activo';
+            }else{
+                return false;
+            }
+        }
+
+    }
+
+    function backendComentarios(){
+        require_once('app/modelos/comentarioMdl.php');
+        $comMdl = new comentarioMdl();
+        require_once('app/modelos/usuarioMdl.php');
+        $usrMdl = new usuarioMdl();
+
+        if(isset($_POST['offset']) && isset($_POST['limit'])){
+            $infoComentario = $comMdl->backendPorImagen($_POST['id'], $_POST['offset'], $_POST['limit']);
+            if($infoComentario !== false){
+                for($x = 0; $x < count($infoComentario); $x++){
+                    $usrTmp = $usrMdl->obtenerInfoPorID($infoComentario[$x]['usuario']);
+                    $infoComentario[$x]['avatar'] = str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/', '', $usrTmp['avatar']);
+                    $infoComentario[$x]['nombre'] = $usrTmp['nombre'];
+                    if($infoComentario[$x]['status'] === 1){
+                        $infoComentario[$x]['status'] = 'Activo';
+                    }else{
+                        $infoComentario[$x]['status'] = 'Inactivo';
+                    }
+                }
+                return $infoComentario;
+            }else{
+                return array();
+            }
+        }else{
+            return array();
+        }
+    }
+
+    function cambiarEstadoComentarios(){
+        require_once('app/modelos/comentarioMdl.php');
+        $comMdl = new comentarioMdl();
+
+        $infoComentario = $comMdl->obtenerInfo($_POST['id']);
+
+        if($infoComentario['status'] === 1){
+            if($comMdl->bajaPorComentario($_POST['id'])){
+                return 'Inactivo';
+            }else{
+                return false;
+            }
+        }else{
+            if($comMdl->reactivarPorComentario($_POST['id'])){
+                return 'Activo';
+            }else{
+                return false;
+            }
+        }
+
     }
 }   
 ?>
