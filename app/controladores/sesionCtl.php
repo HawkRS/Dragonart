@@ -206,8 +206,15 @@ class sesionCtl {
             $infoUsuario = $usrMdl->existeCorreoNombre($_POST['correo']);
             if($infoUsuario !== false && !empty($infoUsuario)){
                 require_once('app/controladores/correoCtl.php');
+                require_once('app/modelos/recuperarMdl.php');
                 $correoCtl = new correoCtl();
-                $respuesta = $correoCtl->mandarCorreoRecuperacion($infoUsuario['nombre'],$infoUsuario['correo'],$infoUsuario['pass']);
+                $recuperarMdl = new recuperarMdl();
+                $correo = sha1($infoUsuario['correo']);
+                $link = "dragonart.silverdragon.xyz/controlador=sesion&accion=recuperarcontrasena&dd=".$correo;
+                
+                if($recuperarMdl->alta($correo, $link)){
+                    $respuesta = $correoCtl->mandarCorreoRecuperacion($infoUsuario['nombre'],$infoUsuario['correo'],$link);
+                }
             }else{
                 $respuesta = 'No existe el correo en la base de datos.';
             }
