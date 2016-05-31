@@ -85,6 +85,24 @@
 			return $bandera;
 		}
 
+		function modificarAdmon($id, $nombre, $alias, $correo, $biografia){
+			$bandera = false;
+
+			if($stmt = $this->db->prepare('UPDATE usuario SET nombreUsuario=?, aliasUsuario=?, correoUsuario=?, biografiaUsuario=? WHERE idUsuario=?')){
+
+				$stmt->bind_param("ssssi", $nombre, $alias, $correo, $biografia, $id);
+
+				$bandera = $stmt->execute();
+
+				$stmt->fetch();
+				
+				$stmt->close();
+
+			}
+
+			return $bandera;
+		}
+
 		function modificarSinContrasena($id, $alias, $biografia, $avatar){
 			$bandera = false;
 
@@ -173,6 +191,54 @@
 			if($stmt = $this->db->prepare('SELECT * FROM usuario WHERE correoUsuario=?')){
 
 				$stmt->bind_param("s", $correo);
+
+				$stmt->execute();
+
+				$stmt->store_result();
+
+				$stmt->fetch();
+				$numFilas = $stmt->num_rows;
+
+				$stmt->close();
+
+				if($numFilas === 0){
+					return false;
+				}
+				else{
+					return true;
+				}
+			}
+			return true;
+		}
+
+		function existeNombreExcepto($nombre, $id){
+			if($stmt = $this->db->prepare('SELECT * FROM usuario WHERE nombreUsuario=? AND NOT idUsuario=?')){
+
+				$stmt->bind_param("si", $nombre, $id);
+
+				$stmt->execute();
+
+				$stmt->store_result();
+
+				$stmt->fetch();
+				$numFilas = $stmt->num_rows;
+
+				$stmt->close();
+
+				if($numFilas === 0){
+					return false;
+				}
+				else{
+					return true;
+				}
+			}
+			return true;
+		}
+
+		function existeCorreoExcepto($correo, $id){
+			if($stmt = $this->db->prepare('SELECT * FROM usuario WHERE correoUsuario=? AND NOT idUsuario=?')){
+
+				$stmt->bind_param("si", $correo, $id);
 
 				$stmt->execute();
 

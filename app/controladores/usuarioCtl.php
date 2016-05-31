@@ -25,6 +25,10 @@ class usuarioCtl {
                 case 'altaAdmin':
                     $this->altaAdmin();
                     break;
+
+                case 'editarAdmin':
+                    $this->editarAdmin();
+                    break;
                     
                 case 'modificar':
                     $this->modificar();
@@ -130,6 +134,53 @@ class usuarioCtl {
 		}
     }
     
+    function altaAdmin(){
+        require_once('app/controladores/procesadorPlantillas.php');
+        $procesador = new procesadorPlantillas();
+
+        if(isset($_SESSION['correo']) && isset($_SESSION['logPass']) && isset($_SESSION['admin']) && $_SESSION['admin'] === 0){
+            if(!empty($_POST)){
+                require_once('app/controladores/validador.php');
+                $validador = new validador();
+                $error = $validador->validarRegistroUsuarioAdmon($_POST);
+
+                if($error === true){
+                    require_once('app/modelos/usuarioMdl.php');
+                    $usrMdl = new usuarioMdl();
+                    if($usrMdl->alta($_POST['nombre'],$_POST['alias'],$_POST['correo'],$_POST['contrasena'], $_POST['tipo'])){
+                        $vista = file_get_contents('app/vistas/formularioRegistrarUsuarioAdmon.html');
+                        $mensaje = '<div class="alert alert-success">Usuario registrado con éxito</div>';
+                        $vista = $procesador->vistaRegistrarUsuarioAdmon($this->doctype, $this->header, $vista, $this->footer, $mensaje);
+                        echo $vista;
+                    }else{
+                        $vista = file_get_contents('app/vistas/formularioRegistrarUsuarioAdmon.html');
+                        $mensaje = '<div class="alert alert-danger">'.$usrMdl->getError().'</div>';
+                        $vista = $procesador->vistaRegistrarUsuarioAdmon($this->doctype, $this->header, $vista, $this->footer, $mensaje);
+                        echo $vista;
+                    }
+                }
+                else{
+                    $vista = file_get_contents('app/vistas/formularioRegistrarUsuarioAdmon.html');
+                    $mensaje = '<div class="alert alert-danger">'.$error.'</div>';
+                    $vista = $procesador->vistaRegistrarUsuarioAdmon($this->doctype, $this->header, $vista, $this->footer, $mensaje);
+                    echo $vista;
+                }
+            }
+            else{
+                $vista = file_get_contents('app/vistas/formularioRegistrarUsuarioAdmon.html');
+                $mensaje = '';
+                $vista = $procesador->vistaRegistrarUsuarioAdmon($this->doctype, $this->header, $vista, $this->footer, $mensaje);
+                echo $vista;
+            }
+        }else{
+            $vista = file_get_contents('app/vistas/404.html');
+            $mensaje = 'La página solicitada no existe.';
+            $vista = $procesador->vistaError404($this->doctype, $this->header, $vista, $this->footer, $mensaje);
+            echo $vista;
+        }
+
+    }
+
     function modificar() {
 
         require_once('app/controladores/procesadorPlantillas.php');
@@ -216,6 +267,76 @@ class usuarioCtl {
             }
         }
 
+    }
+
+    function editarAdmin(){
+        require_once('app/modelos/usuarioMdl.php');
+        $usrMdl = new usuarioMdl();
+        require_once('app/controladores/procesadorPlantillas.php');
+        $procesador = new procesadorPlantillas();
+
+        if(isset($_SESSION['correo']) && isset($_SESSION['logPass']) && isset($_SESSION['admin']) && $_SESSION['admin'] === 0){
+            if(!empty($_POST)){
+                $infoUsuario = $usrMdl->obtenerInfoPorID($_GET['usr']);
+                require_once('app/controladores/validador.php');
+                $validador = new validador();
+                $error = $validador->validarModificacionUsuario($_POST);
+
+                if($error === true){
+                    if(!$usrMdl->existeNombreExcepto($_POST['nombre'], $_GET['usr'])){
+                        if(!$usrMdl->existeCorreoExcepto($_POST['correo'], $_GET['usr'])){
+                            if($usrMdl->modificarAdmon($_GET['usr'], $_POST['nombre'], $_POST['alias'], $_POST['correo'], $_POST['biografia'])){
+                                $infoUsuario = $usrMdl->obtenerInfoPorID($_GET['usr']);
+                                $vista = file_get_contents('app/vistas/formularioConfiguracionUsuarioAdmon.html');
+                                $mensaje = '<div class="alert alert-success">Los cambios han sido realizados.</div>';
+                                $vista = $procesador->vistaModificarUsuarioAdmon($this->doctype, $this->header, $vista, $this->footer, $infoUsuario, $mensaje);
+                                echo $vista;
+                            }else{
+                                $vista = file_get_contents('app/vistas/formularioConfiguracionUsuarioAdmon.html');
+                                $mensaje = '<div class="alert alert-danger">'.$usrMdl->getError().'</div>';
+                                $vista = $procesador->vistaModificarUsuarioAdmon($this->doctype, $this->header, $vista, $this->footer, $infoUsuario, $mensaje);
+                                echo $vista;
+                            }
+                        }else{
+                            $vista = file_get_contents('app/vistas/formularioConfiguracionUsuarioAdmon.html');
+                            $mensaje = '<div class="alert alert-danger">El correo ingresado ya existe.</div>';
+                            $vista = $procesador->vistaModificarUsuarioAdmon($this->doctype, $this->header, $vista, $this->footer, $infoUsuario, $mensaje);
+                            echo $vista;
+                        }
+                    }else{
+                        $vista = file_get_contents('app/vistas/formularioConfiguracionUsuarioAdmon.html');
+                        $mensaje = '<div class="alert alert-danger">El nombre ingresado ya existe.</div>';
+                        $vista = $procesador->vistaModificarUsuarioAdmon($this->doctype, $this->header, $vista, $this->footer, $infoUsuario, $mensaje);
+                        echo $vista;
+                    }
+                }else{
+                    $vista = file_get_contents('app/vistas/formularioConfiguracionUsuarioAdmon.html');
+                    $mensaje = '<div class="alert alert-danger">'.$error.'</div>';
+                    $vista = $procesador->vistaModificarUsuarioAdmon($this->doctype, $this->header, $vista, $this->footer, $infoUsuario, $mensaje);
+                    echo $vista;
+                }
+
+            } 
+            else {
+                $infoUsuario = $usrMdl->obtenerInfoPorID($_GET['usr']);
+                if($infoUsuario !== false){
+                    $vista = file_get_contents('app/vistas/formularioConfiguracionUsuarioAdmon.html');
+                    $mensaje = '';
+                    $vista = $procesador->vistaModificarUsuarioAdmon($this->doctype, $this->header, $vista, $this->footer, $infoUsuario, $mensaje);
+                    echo $vista;
+                }else{
+                    $vista = file_get_contents('app/vistas/404.html');
+                    $mensaje = 'La página solicitada no existe.';
+                    $vista = $procesador->vistaError404($this->doctype, $this->header, $vista, $this->footer, $mensaje);
+                    echo $vista;
+                }
+            }
+        }else{
+            $vista = file_get_contents('app/vistas/404.html');
+            $mensaje = 'La página solicitada no existe.';
+            $vista = $procesador->vistaError404($this->doctype, $this->header, $vista, $this->footer, $mensaje);
+            echo $vista;
+        }
     }
     
     function eliminar(){

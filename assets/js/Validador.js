@@ -131,7 +131,7 @@ function validarInputs(inputs, cantidad){
 				}
 				else{
 					quitarError(tempId, temp.attr('id'));
-					bandera = /^[a-zA-Z0-9_-]$/.test(temp.val());
+					bandera = /^[a-zA-Z][a-zA-Z0-9_-]*$/.test(temp.val());
 					if(!bandera){
 						tempId = tempId + temp.attr('id');
 						ponerError(tempId, temp.attr('id'), 'Solo letras, números y guiones.');
@@ -279,7 +279,7 @@ function validarInputsModUsuario(inputs, cantidad){
 				}
 				else{
 					quitarError(tempId, temp.attr('id'));
-					bandera = /^[a-zA-Z0-9_-]$/.test(temp.val());
+					bandera = /^[a-zA-Z][a-zA-Z0-9_-]*$/.test(temp.val());
 					if(!bandera){
 						tempId = tempId + temp.attr('id');
 						ponerError(tempId, temp.attr('id'), 'Solo letras, números y guiones.');

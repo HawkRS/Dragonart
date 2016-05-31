@@ -75,6 +75,16 @@
 	        return $vista;
 		}
 
+		function vistaRegistrarUsuarioAdmon($doctype, $header, $vista, $footer, $mensaje){
+			$header = procesadorPlantillas::generarHeader($header);
+			$vista = procesadorPlantillas::generarFooter($vista, $footer);
+
+			$vista = str_replace('%error%', $mensaje, $vista);
+			$vista = $doctype.$header.$vista;
+
+	        return $vista;
+		}
+
 		function vistaIniciarSesion($doctype, $header, $vista, $footer, $mensaje){
 			$header = procesadorPlantillas::generarHeader($header);
 			$vista = procesadorPlantillas::generarFooter($vista, $footer);
@@ -314,6 +324,24 @@
 				'%descripcionUsuario%' => $infoUsuario['biografia'],
 				'%avatarUsuario%' => str_replace($_SERVER['DOCUMENT_ROOT'].'/Dragonart/', '', $infoUsuario['avatar']),
 				'%idUsuario%' => $infoUsuario['id']
+			);
+			$vista = procesadorPlantillas::aplicaDiccionario($vista, $diccionario);
+			$vista = $doctype.$header.$vista;
+
+	        return $vista;			
+		}
+
+		function vistaModificarUsuarioAdmon($doctype, $header, $vista, $footer, $infoUsuario, $mensaje){
+			$header = procesadorPlantillas::generarHeader($header);
+			$vista = procesadorPlantillas::generarFooter($vista, $footer);
+
+			$vista = str_replace('%error%', $mensaje, $vista);
+			$diccionario = array(
+				'%idUsuario%' => $infoUsuario['id'],
+				'%nombreUsuario%' => $infoUsuario['nombre'],
+				'%aliasUsuario%' => $infoUsuario['alias'],
+				'%correoUsuario%' => $infoUsuario['correo'],
+				'%descripcionUsuario%' => $infoUsuario['biografia']
 			);
 			$vista = procesadorPlantillas::aplicaDiccionario($vista, $diccionario);
 			$vista = $doctype.$header.$vista;

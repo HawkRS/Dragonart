@@ -52,7 +52,7 @@
 
 	    	if(isset($array['alias'])){
 		    	$alias = $array['alias'];
-		    	if(validador::estaVacio($alias) || !preg_match("/^[a-zA-Z0-9_-]{3,16}$/", $alias)){
+		    	if(validador::estaVacio($alias) || !preg_match("/^[a-zA-Z][a-zA-Z0-9_-]*$/", $alias)){
 		    		return 'El alias ingresado es erroneo.';
 		    	}
 	    	}
@@ -88,6 +88,80 @@
 		    }
 	    	else{
 	    		return 'Debe repetir su contraseña.';
+	    	}
+
+	        require_once('app/modelos/usuarioMdl.php');
+	        $usrMdl = new usuarioMdl();
+
+	        if($usrMdl->existeNombre($array['nombre'])){
+	            return 'El nombre ingresado ya existe.';
+	        }
+
+	        if($usrMdl->existeCorreo($array['correo'])){
+	            return 'El correo ingresado ya existe.';
+	        }
+
+	    	return true;
+	    }
+
+	    function validarRegistroUsuarioAdmon($array){
+	    	if(isset($array['nombre'])){
+		    	$nombre = $array['nombre'];
+		    	if(validador::estaVacio($nombre) || !preg_match("/^([a-zA-Z]+\s)*[a-zA-Z]+$/", $nombre)){
+		    		return 'El nombre ingresado es erroneo.';
+		    	}
+	    	}
+	    	else{
+	    		return 'Debe escribir un nombre.';
+	    	}
+
+	    	if(isset($array['alias'])){
+		    	$alias = $array['alias'];
+		    	if(validador::estaVacio($alias) || !preg_match("/^[a-zA-Z][a-zA-Z0-9_-]*$/", $alias)){
+		    		return 'El alias ingresado es erroneo.';
+		    	}
+	    	}
+	    	else{
+	    		return 'Debe escribir un alias.';
+	    	}
+
+	    	if(isset($array['correo'])){
+		    	$correo = $array['correo'];
+		    	if(validador::estaVacio($correo) || !filter_var($correo, FILTER_VALIDATE_EMAIL)){
+		    		return 'El correo ingresado es erroneo.';
+		    	}
+		    }
+	    	else{
+	    		return 'Debe escribir un correo.';
+	    	}
+
+	    	if(isset($array['contrasena'])){
+		    	$contrasena = $array['contrasena'];
+		    	if(validador::estaVacio($contrasena) || strlen($contrasena) < 8){
+		    		return 'La contraseña es erronea.';
+		    	}
+		    }
+	    	else{
+	    		return 'Debe escribir una contraseña.';
+	    	}
+
+	    	if(isset($array['contrasenaConfirmacion'])){
+		    	$contrasenaConfirmacion = $array['contrasenaConfirmacion'];
+		    	if(validador::estaVacio($contrasenaConfirmacion) || strcmp($contrasena, $contrasenaConfirmacion) !== 0){
+		    		return 'Las contraseñas escritas no son iguales.';
+		    	}
+		    }
+	    	else{
+	    		return 'Debe repetir su contraseña.';
+	    	}
+
+	    	if(isset($array['tipo'])){
+		    	if($array['tipo'] < 0 || $array['tipo'] > 1){
+		    		return 'Debe elegir un tipo válido de usuario.';
+		    	}
+		    }
+	    	else{
+	    		return 'Debe elegir un tipo de usuario.';
 	    	}
 
 	        require_once('app/modelos/usuarioMdl.php');
@@ -216,7 +290,7 @@
 
 	    	if(isset($array['alias'])){
 		    	$alias = $array['alias'];
-		    	if(validador::estaVacio($alias) || !preg_match("/^[a-zA-Z0-9_-]$/", $alias)){
+		    	if(validador::estaVacio($alias) || !preg_match("/^[a-zA-Z][a-zA-Z0-9_-]*$/", $alias)){
 		    		return 'El alias ingresado es erroneo.';
 		    	}
 	    	}
